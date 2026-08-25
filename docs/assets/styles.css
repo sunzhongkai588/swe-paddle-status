@@ -1121,6 +1121,11 @@ tbody tr:last-child td {
   background: var(--purple-soft);
 }
 
+.type-chip.refactor {
+  color: #2f6699;
+  background: #e8f3ff;
+}
+
 .status-chip.passed {
   color: #237c62;
   background: var(--mint-soft);
@@ -1129,6 +1134,11 @@ tbody tr:last-child td {
 .status-chip.failed {
   color: #b65146;
   background: var(--coral-soft);
+}
+
+.status-chip.notice {
+  color: #8a651c;
+  background: var(--amber-soft);
 }
 
 .author-cell {

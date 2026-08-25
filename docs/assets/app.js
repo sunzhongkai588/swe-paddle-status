@@ -9,7 +9,15 @@
   const failureById = new Map(
     Object.entries(data.failures).map(([id, detail]) => [Number(id), detail]),
   );
+  const noticeById = new Map(
+    Object.entries(data.notices || {}).map(([id, detail]) => [Number(id), detail]),
+  );
   const taskById = new Map(data.tasks.map((task) => [task.id, task]));
+  const typeLabels = {
+    bugfix: "Bugfix",
+    feature: "Feature",
+    refactor: "Refactor",
+  };
   const categoryThemes = {
     gold: { color: "#c95e53", background: "#fff0ed" },
     roles: { color: "#ae791d", background: "#fff5dc" },
@@ -30,11 +38,13 @@
     metricFailed: document.querySelector("#metric-failed"),
     metricBugfix: document.querySelector("#metric-bugfix"),
     metricFeature: document.querySelector("#metric-feature"),
+    metricRefactor: document.querySelector("#metric-refactor"),
     categorySummary: document.querySelector("#category-summary"),
     issueGrid: document.querySelector("#issue-grid"),
     correctionTitle: document.querySelector("#correction-title"),
     correctionSummary: document.querySelector("#correction-summary"),
     correctionCaveat: document.querySelector("#correction-caveat"),
+    correctionButton: document.querySelector("#correction-banner [data-task-id]"),
     search: document.querySelector("#search-input"),
     status: document.querySelector("#status-filter"),
     type: document.querySelector("#type-filter"),
@@ -79,6 +89,7 @@
       passed: total - failed,
       bugfix: data.tasks.filter((task) => task.type === "bugfix").length,
       feature: data.tasks.filter((task) => task.type === "feature").length,
+      refactor: data.tasks.filter((task) => task.type === "refactor").length,
     };
   }
 
@@ -101,6 +112,7 @@
     elements.metricFailed.textContent = counts.failed;
     elements.metricBugfix.textContent = counts.bugfix;
     elements.metricFeature.textContent = counts.feature;
+    elements.metricRefactor.textContent = counts.refactor;
   }
 
   function renderCategorySummary() {
@@ -166,6 +178,8 @@
     elements.correctionTitle.textContent = data.correction.title;
     elements.correctionSummary.textContent = data.correction.summary;
     elements.correctionCaveat.textContent = data.correction.caveat;
+    elements.correctionButton.dataset.taskId = data.correction.id;
+    elements.correctionButton.textContent = `查看 ${data.correction.id}`;
   }
 
   function populateAuthors() {
@@ -186,8 +200,8 @@
 
   function readFiltersFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const validStatus = ["all", "passed", "failed"];
-    const validType = ["all", "bugfix", "feature"];
+    const validStatus = ["all", "passed", "notice", "failed"];
+    const validType = ["all", "bugfix", "feature", "refactor"];
     const validAuthors = ["all", ...Object.keys(data.authors)];
 
     elements.search.value = params.get("q") || "";
@@ -216,6 +230,7 @@
     const search = elements.search.value.trim().toLocaleLowerCase("zh-CN");
     return data.tasks.filter((task) => {
       const failed = failureById.has(task.id);
+      const hasNotice = noticeById.has(task.id);
       const haystack = `${task.id} ${task.title} ${task.author} ${authorLabel(task.author)}`.toLocaleLowerCase(
         "zh-CN",
       );
@@ -223,6 +238,7 @@
       const matchesStatus =
         elements.status.value === "all" ||
         (elements.status.value === "failed" && failed) ||
+        (elements.status.value === "notice" && !failed && hasNotice) ||
         (elements.status.value === "passed" && !failed);
       const matchesType = elements.type.value === "all" || elements.type.value === task.type;
       const matchesAuthor = elements.author.value === "all" || elements.author.value === task.author;
@@ -239,8 +255,9 @@
     elements.taskBody.innerHTML = tasks
       .map((task) => {
         const failed = failureById.has(task.id);
-        const status = failed ? "failed" : "passed";
-        const statusLabel = failed ? "待处理" : "验证通过";
+        const hasNotice = noticeById.has(task.id);
+        const status = failed ? "failed" : hasNotice ? "notice" : "passed";
+        const statusLabel = failed ? "待处理" : hasNotice ? "Core 通过 · 待修" : "验证通过";
         const statusColor = failed ? "#d76b60" : "#42b894";
         const label = authorLabel(task.author);
 
@@ -250,7 +267,7 @@
               <span class="task-cell" style="--status-color: ${statusColor}">#${task.id}</span>
             </td>
             <td class="topic-cell">${escapeHtml(task.title)}</td>
-            <td><span class="type-chip ${task.type}">${task.type === "bugfix" ? "Bugfix" : "Feature"}</span></td>
+            <td><span class="type-chip ${task.type}">${escapeHtml(typeLabels[task.type] || task.type)}</span></td>
             <td>
               <a class="author-cell" href="${escapeHtml(authorProfile(task.author))}" target="_blank" rel="noreferrer">
                 <span class="avatar" aria-hidden="true">${escapeHtml(initials(label))}</span>
@@ -273,42 +290,46 @@
 
   function renderDialog(task) {
     const failure = failureById.get(task.id);
+    const notice = noticeById.get(task.id);
     const isCorrection = task.id === data.correction.id;
     const category = failure ? data.categories[failure.category] : null;
     const theme = failure
       ? categoryThemes[failure.category]
       : { color: "#237c62", background: "#ebf8f3" };
     const label = authorLabel(task.author);
-    const contributionPr = failure?.contributionPr || (isCorrection ? data.correction.contributionPr : null);
+    const contributionPr =
+      failure?.contributionPr || notice?.contributionPr || (isCorrection ? data.correction.contributionPr : null);
     const sourceAuthor = failure?.sourceAuthor;
 
     const matrix = failure
       ? failure.matrix
-      : isCorrection
-        ? "Base 5P / 2F → Gold 7P · F2P 2 · P2P 5"
+      : notice
+        ? notice.matrix
         : "Core F2P/P2P 已验证通过";
     const explanation = failure
       ? failure.reason
-      : isCorrection
-        ? data.correction.summary
+      : notice
+        ? notice.reason
         : "该任务已经满足当前 Core 最低门槛：Base 有有效失败、Gold 对应转绿，并保留至少一个有意义的 P2P。";
     const nextStep = failure
       ? failure.action
-      : isCorrection
-        ? data.correction.caveat
-        : "Core 层面无需修改。正式上线前仍建议继续检查 judge 覆盖、题面契约与原始 runner 可复现性。";
+      : notice
+        ? notice.action
+        : "Core 结论已经通过；是否可直接评测仍需以原始 runner、资源、judge 覆盖和题面契约门禁为准。";
+    const statusClass = failure ? "failed" : notice ? "notice" : "passed";
+    const statusLabel = failure ? "待处理" : notice ? "Core 通过 · 待修" : "验证通过";
 
     elements.dialog.style.setProperty("--dialog-color", theme.color);
     elements.dialog.style.setProperty("--dialog-bg", theme.background);
     elements.dialogContent.innerHTML = `
-      <span class="dialog-eyebrow">${failure ? "ACTION REQUIRED" : "CORE VERIFIED"}</span>
+      <span class="dialog-eyebrow">${failure ? "ACTION REQUIRED" : notice ? "CORE PASS · RUNNER UPDATE" : "CORE VERIFIED"}</span>
       <div class="dialog-title-row">
         <h2 id="dialog-title">Task #${task.id}</h2>
-        <span class="status-chip ${failure ? "failed" : "passed"}">${failure ? "待处理" : "验证通过"}</span>
+        <span class="status-chip ${statusClass}">${statusLabel}</span>
       </div>
       <p class="dialog-topic">${escapeHtml(task.title)}</p>
       <div class="dialog-meta">
-        <span class="type-chip ${task.type}">${task.type === "bugfix" ? "Bugfix" : "Feature"}</span>
+        <span class="type-chip ${task.type}">${escapeHtml(typeLabels[task.type] || task.type)}</span>
         <a class="author-cell" href="${escapeHtml(authorProfile(task.author))}" target="_blank" rel="noreferrer">
           <span class="avatar" aria-hidden="true">${escapeHtml(initials(label))}</span>
           样本作者：${escapeHtml(label)}
@@ -329,7 +350,7 @@
         <p>${escapeHtml(explanation)}</p>
       </div>
       <div class="dialog-section action-box">
-        <small>${failure ? "建议动作" : isCorrection ? "仍需修整" : "后续门禁"}</small>
+        <small>${failure ? "建议动作" : notice ? "进入直接评测前" : "后续门禁"}</small>
         <p>${escapeHtml(nextStep)}</p>
       </div>
       <div class="dialog-links">
