@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="SWE-Paddle 78 条社区任务的 F2P/P2P 验证状态、问题定位与协作入口。"
+      content="SWE-Paddle 96 条社区任务的 F2P/P2P 验证状态、问题定位与协作入口。"
     />
     <meta name="theme-color" content="#10213a" />
     <title>SWE-Paddle 可评测性雷达</title>
@@ -30,11 +30,11 @@
         <div class="nav-actions">
           <span class="snapshot-chip">
             <span class="live-dot" aria-hidden="true"></span>
-            Snapshot <code id="snapshot-short">8db0e409</code>
+            Snapshot <code id="snapshot-short">c9e46547</code>
           </span>
           <a
             class="ghost-button"
-            href="https://github.com/PaddlePaddle/community/tree/8db0e409d8a753c596eb1e124fcd9f37b6d217e1/swe-paddle/tasks"
+            href="https://github.com/PaddlePaddle/community/tree/c9e46547a1f8dce934a8c454a9b4afd6cce1d384/swe-paddle/tasks"
             target="_blank"
             rel="noreferrer"
           >
@@ -46,7 +46,7 @@
 
       <div class="hero-content shell" id="top">
         <div class="hero-copy">
-          <p class="eyebrow"><span>F2P</span><i></i><span>P2P</span><i></i><span>78 TASKS</span></p>
+          <p class="eyebrow"><span>F2P</span><i></i><span>P2P</span><i></i><span>96 TASKS</span></p>
           <h1>把每一条样本，<br />推进到<strong>可评测</strong>。</h1>
           <p class="hero-lead">
             追踪 SWE-Paddle 社区任务的最低可评测门槛：Base 上暴露真实缺陷，Gold
@@ -54,23 +54,23 @@
           </p>
           <div class="hero-buttons">
             <a class="primary-button" href="#issues">查看待处理任务</a>
-            <a class="text-button" href="#all-tasks">浏览全部 78 条 <span>↓</span></a>
+            <a class="text-button" href="#all-tasks">浏览全部 96 条 <span>↓</span></a>
           </div>
           <p class="updated-line">
             <span class="updated-icon" aria-hidden="true">✓</span>
-            数据更新于 <time id="updated-at" datetime="2026-08-25">2026-08-25</time>
+            数据更新于 <time id="updated-at" datetime="2026-09-02">2026-09-02</time>
           </p>
         </div>
 
         <aside class="readiness-card" aria-label="验证通过率">
           <div class="readiness-head">
             <span>Core readiness</span>
-            <span class="trend-chip">+15 tasks · 22 rechecked</span>
+            <span class="trend-chip">+18 tasks · 32 rechecked</span>
           </div>
           <div class="progress-wrap">
-            <div class="progress-ring" id="progress-ring" role="img" aria-label="通过率 84.6%">
+            <div class="progress-ring" id="progress-ring" role="img" aria-label="通过率 82.3%">
               <div class="progress-center">
-                <strong id="pass-rate">84.6%</strong>
+                <strong id="pass-rate">82.3%</strong>
                 <span>验证通过率</span>
               </div>
             </div>
@@ -79,12 +79,12 @@
             <div>
               <span class="number-dot pass-dot"></span>
               <span>已通过</span>
-              <strong id="hero-passed">66</strong>
+              <strong id="hero-passed">79</strong>
             </div>
             <div>
               <span class="number-dot fail-dot"></span>
               <span>待处理</span>
-              <strong id="hero-failed">12</strong>
+              <strong id="hero-failed">17</strong>
             </div>
           </div>
           <p class="readiness-note">当前统计只反映 Core F2P/P2P，不等同于原始任务包可直接上线。</p>
@@ -98,7 +98,7 @@
         <div class="metric-card metric-primary">
           <span class="metric-icon" aria-hidden="true">∑</span>
           <div>
-            <strong id="metric-total">78</strong>
+            <strong id="metric-total">96</strong>
             <span>完整任务包</span>
           </div>
           <small>100% 已有结论或定位</small>
@@ -106,7 +106,7 @@
         <div class="metric-card">
           <span class="metric-icon success-icon" aria-hidden="true">✓</span>
           <div>
-            <strong id="metric-passed">66</strong>
+            <strong id="metric-passed">79</strong>
             <span>Core 验证通过</span>
           </div>
           <small class="success-text">Base → Gold 闭环</small>
@@ -114,7 +114,7 @@
         <div class="metric-card">
           <span class="metric-icon danger-icon" aria-hidden="true">!</span>
           <div>
-            <strong id="metric-failed">12</strong>
+            <strong id="metric-failed">17</strong>
             <span>仍需处理</span>
           </div>
           <small class="danger-text">4 类明确阻塞</small>
@@ -122,7 +122,7 @@
         <div class="metric-card">
           <span class="metric-icon split-icon" aria-hidden="true">◇</span>
           <div>
-            <strong><span id="metric-bugfix">42</span><em>/</em><span id="metric-feature">35</span><em>/</em><span id="metric-refactor">1</span></strong>
+            <strong><span id="metric-bugfix">48</span><em>/</em><span id="metric-feature">47</span><em>/</em><span id="metric-refactor">1</span></strong>
             <span>Bugfix / Feature / Refactor</span>
           </div>
           <small>三类任务均已纳入筛选</small>
@@ -169,8 +169,8 @@
           <div class="section-heading">
             <div>
               <span class="section-kicker">ACTION REQUIRED</span>
-              <h2 id="issues-title">12 条 Core 待处理</h2>
-              <p>按主阻塞归类；另有 8 条标记为“Core 通过 · 待修”，需先修 runner 或角色标注。</p>
+              <h2 id="issues-title">17 条 Core 待处理</h2>
+              <p>按主阻塞归类；另有 11 条标记为“Core 通过 · 待修”，需先修 runner、patch 或断言。</p>
             </div>
             <div class="category-summary" id="category-summary" aria-label="问题分类汇总"></div>
           </div>
@@ -181,11 +181,11 @@
             <div class="correction-icon" aria-hidden="true">✓</div>
             <div>
               <span class="correction-label">本轮同步</span>
-              <h3 id="correction-title">本轮 22 条增量验证已完成</h3>
+              <h3 id="correction-title">本轮 32 条增量验证已完成</h3>
               <p id="correction-summary"></p>
               <p class="correction-caveat" id="correction-caveat"></p>
             </div>
-            <button class="secondary-button" type="button" data-task-id="52948">查看 52948</button>
+            <button class="secondary-button" type="button" data-task-id="73691">查看 73691</button>
           </aside>
         </div>
       </section>
@@ -197,7 +197,7 @@
             <h2 id="all-title">全部任务</h2>
             <p>搜索 PR、主题或作者；筛选结果可直接分享给对应贡献者。</p>
           </div>
-          <p class="result-count" aria-live="polite"><strong id="visible-count">78</strong> / 78 条</p>
+          <p class="result-count" aria-live="polite"><strong id="visible-count">96</strong> / 96 条</p>
         </div>
 
         <div class="filter-bar" aria-label="任务筛选器">
@@ -260,13 +260,13 @@
       <div class="shell footer-inner">
         <div>
           <strong>SWE-Paddle 可评测性雷达</strong>
-          <p>社区协作视图 · 数据快照 <code id="footer-snapshot">8db0e409</code></p>
+          <p>社区协作视图 · 数据快照 <code id="footer-snapshot">c9e46547</code></p>
         </div>
         <div class="footer-links">
           <a href="#criterion-title">验证口径</a>
           <a href="#issues">待处理任务</a>
           <a
-            href="https://github.com/PaddlePaddle/community/tree/8db0e409d8a753c596eb1e124fcd9f37b6d217e1/swe-paddle/tasks"
+            href="https://github.com/PaddlePaddle/community/tree/c9e46547a1f8dce934a8c454a9b4afd6cce1d384/swe-paddle/tasks"
             target="_blank"
             rel="noreferrer"
           >数据源 ↗</a>

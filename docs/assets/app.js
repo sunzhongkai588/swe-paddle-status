@@ -66,7 +66,10 @@
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
 
-  const taskUrl = (id) => `${data.meta.taskBase}${id}`;
+  const taskUrl = (task) =>
+    task.taskPath
+      ? `${data.meta.repository}/tree/${data.meta.snapshot}/swe-paddle/tasks/${task.taskPath}`
+      : `${data.meta.taskBase}${task.id}`;
   const sourcePrUrl = (id) => `${data.meta.sourcePrBase}${id}`;
   const contributionPrUrl = (id) => `${data.meta.repository}/pull/${id}`;
   const authorLabel = (author) => data.authors[author]?.label || author;
@@ -354,7 +357,7 @@
         <p>${escapeHtml(nextStep)}</p>
       </div>
       <div class="dialog-links">
-        <a href="${escapeHtml(taskUrl(task.id))}" target="_blank" rel="noreferrer">打开任务包 ↗</a>
+        <a href="${escapeHtml(taskUrl(task))}" target="_blank" rel="noreferrer">打开任务包 ↗</a>
         <a href="${escapeHtml(sourcePrUrl(task.id))}" target="_blank" rel="noreferrer">源 Paddle PR ↗</a>
         ${contributionPr ? `<a href="${escapeHtml(contributionPrUrl(contributionPr))}" target="_blank" rel="noreferrer">社区 PR #${contributionPr} ↗</a>` : ""}
       </div>
