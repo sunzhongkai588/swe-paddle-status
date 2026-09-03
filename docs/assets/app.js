@@ -24,6 +24,11 @@
     package: { color: "#735ac7", background: "#f1edff" },
     evidence: { color: "#3972f6", background: "#eaf0ff" },
   };
+  const fixKinds = {
+    runner: { label: "Runner / 测试入口", shortLabel: "Runner", color: "#b47713" },
+    patch: { label: "Patch 格式", shortLabel: "Patch", color: "#735ac7" },
+    assertion: { label: "断言覆盖", shortLabel: "断言", color: "#3972f6" },
+  };
 
   const elements = {
     snapshotShort: document.querySelector("#snapshot-short"),
@@ -31,14 +36,15 @@
     updatedAt: document.querySelector("#updated-at"),
     progressRing: document.querySelector("#progress-ring"),
     passRate: document.querySelector("#pass-rate"),
-    heroPassed: document.querySelector("#hero-passed"),
-    heroFailed: document.querySelector("#hero-failed"),
+    heroDirect: document.querySelector("#hero-direct"),
+    heroNeedsFix: document.querySelector("#hero-needs-fix"),
+    heroCoreFailed: document.querySelector("#hero-core-failed"),
     metricTotal: document.querySelector("#metric-total"),
-    metricPassed: document.querySelector("#metric-passed"),
-    metricFailed: document.querySelector("#metric-failed"),
-    metricBugfix: document.querySelector("#metric-bugfix"),
-    metricFeature: document.querySelector("#metric-feature"),
-    metricRefactor: document.querySelector("#metric-refactor"),
+    metricDirect: document.querySelector("#metric-direct"),
+    metricNeedsFix: document.querySelector("#metric-needs-fix"),
+    metricCoreFailed: document.querySelector("#metric-core-failed"),
+    fixSummary: document.querySelector("#fix-summary"),
+    fixGrid: document.querySelector("#fix-grid"),
     categorySummary: document.querySelector("#category-summary"),
     issueGrid: document.querySelector("#issue-grid"),
     correctionTitle: document.querySelector("#correction-title"),
@@ -85,11 +91,16 @@
 
   function getComputedCounts() {
     const total = data.tasks.length;
-    const failed = data.tasks.filter((task) => failureById.has(task.id)).length;
+    const coreFailed = data.tasks.filter((task) => failureById.has(task.id)).length;
+    const needsFix = data.tasks.filter(
+      (task) => !failureById.has(task.id) && noticeById.has(task.id),
+    ).length;
+    const direct = total - coreFailed - needsFix;
     return {
       total,
-      failed,
-      passed: total - failed,
+      direct,
+      needsFix,
+      coreFailed,
       bugfix: data.tasks.filter((task) => task.type === "bugfix").length,
       feature: data.tasks.filter((task) => task.type === "feature").length,
       refactor: data.tasks.filter((task) => task.type === "refactor").length,
@@ -98,7 +109,7 @@
 
   function renderOverview() {
     const counts = getComputedCounts();
-    const rate = (counts.passed / counts.total) * 100;
+    const rate = (counts.direct / counts.total) * 100;
     const shortSnapshot = data.meta.snapshot.slice(0, 8);
 
     elements.snapshotShort.textContent = shortSnapshot;
@@ -106,16 +117,75 @@
     elements.updatedAt.textContent = data.meta.updatedAt;
     elements.updatedAt.dateTime = data.meta.updatedAt;
     elements.progressRing.style.setProperty("--progress", `${(rate / 100) * 360}deg`);
-    elements.progressRing.setAttribute("aria-label", `通过率 ${rate.toFixed(1)}%`);
+    elements.progressRing.setAttribute("aria-label", `直接可评测率 ${rate.toFixed(1)}%`);
     elements.passRate.textContent = `${rate.toFixed(1)}%`;
-    elements.heroPassed.textContent = counts.passed;
-    elements.heroFailed.textContent = counts.failed;
+    elements.heroDirect.textContent = counts.direct;
+    elements.heroNeedsFix.textContent = counts.needsFix;
+    elements.heroCoreFailed.textContent = counts.coreFailed;
     elements.metricTotal.textContent = counts.total;
-    elements.metricPassed.textContent = counts.passed;
-    elements.metricFailed.textContent = counts.failed;
-    elements.metricBugfix.textContent = counts.bugfix;
-    elements.metricFeature.textContent = counts.feature;
-    elements.metricRefactor.textContent = counts.refactor;
+    elements.metricDirect.textContent = counts.direct;
+    elements.metricNeedsFix.textContent = counts.needsFix;
+    elements.metricCoreFailed.textContent = counts.coreFailed;
+  }
+
+  function renderFixSummary() {
+    const counts = [...noticeById.values()].reduce((result, notice) => {
+      result[notice.kind] = (result[notice.kind] || 0) + 1;
+      return result;
+    }, {});
+
+    elements.fixSummary.innerHTML = Object.entries(fixKinds)
+      .map(([key, kind]) => `
+        <span class="category-pill" style="--category-color: ${kind.color}">
+          <i aria-hidden="true"></i>
+          ${escapeHtml(kind.label)}
+          <strong>${counts[key] || 0}</strong>
+        </span>
+      `)
+      .join("");
+  }
+
+  function renderPackageFixes() {
+    elements.fixGrid.innerHTML = [...noticeById.entries()]
+      .map(([id, notice]) => {
+        const task = taskById.get(id);
+        const kind = fixKinds[notice.kind] || fixKinds.runner;
+        const label = authorLabel(task.author);
+
+        return `
+          <article
+            class="fix-card"
+            role="button"
+            tabindex="0"
+            data-task-id="${id}"
+            aria-label="查看 Task ${id} 评测包待修详情"
+            style="--fix-color: ${kind.color}"
+          >
+            <div class="issue-top">
+              <span class="issue-id">#${id}</span>
+              <span class="fix-kind">${escapeHtml(kind.label)}</span>
+            </div>
+            <h3>${escapeHtml(task.title)}</h3>
+            <p class="matrix-line">${escapeHtml(notice.matrix)}</p>
+            <div class="fix-detail">
+              <small>为什么不能原样直接评测</small>
+              <p>${escapeHtml(notice.reason)}</p>
+            </div>
+            <div class="fix-detail fix-action">
+              <small>需要修改</small>
+              <p>${escapeHtml(notice.action)}</p>
+            </div>
+            <div class="issue-footer">
+              <span class="author-mini">
+                <span class="avatar" aria-hidden="true">${escapeHtml(initials(label))}</span>
+                ${escapeHtml(label)}
+              </span>
+              <span class="view-link">查看任务 →</span>
+            </div>
+          </article>
+        `;
+      })
+      .join("");
   }
 
   function renderCategorySummary() {
@@ -242,7 +312,7 @@
         elements.status.value === "all" ||
         (elements.status.value === "failed" && failed) ||
         (elements.status.value === "notice" && !failed && hasNotice) ||
-        (elements.status.value === "passed" && !failed);
+        (elements.status.value === "passed" && !failed && !hasNotice);
       const matchesType = elements.type.value === "all" || elements.type.value === task.type;
       const matchesAuthor = elements.author.value === "all" || elements.author.value === task.author;
       return matchesSearch && matchesStatus && matchesType && matchesAuthor;
@@ -260,8 +330,12 @@
         const failed = failureById.has(task.id);
         const hasNotice = noticeById.has(task.id);
         const status = failed ? "failed" : hasNotice ? "notice" : "passed";
-        const statusLabel = failed ? "待处理" : hasNotice ? "Core 通过 · 待修" : "验证通过";
-        const statusColor = failed ? "#d76b60" : "#42b894";
+        const statusLabel = failed
+          ? "核心验证未通过"
+          : hasNotice
+            ? "目标成立 · 仍需修改"
+            : "可直接评测";
+        const statusColor = failed ? "#d76b60" : hasNotice ? "#d89928" : "#42b894";
         const label = authorLabel(task.author);
 
         return `
@@ -308,24 +382,28 @@
       ? failure.matrix
       : notice
         ? notice.matrix
-        : "Core F2P/P2P 已验证通过";
+        : "F2P/P2P 与原始任务包均已验证通过";
     const explanation = failure
       ? failure.reason
       : notice
         ? notice.reason
-        : "该任务已经满足当前 Core 最低门槛：Base 有有效失败、Gold 对应转绿，并保留至少一个有意义的 P2P。";
+        : "该任务的目标 F2P、回归 P2P 和原始任务包端到端执行均已通过，可无需修改直接进入评测。";
     const nextStep = failure
       ? failure.action
       : notice
         ? notice.action
-        : "Core 结论已经通过；是否可直接评测仍需以原始 runner、资源、judge 覆盖和题面契约门禁为准。";
+        : "F2P/P2P 与任务包入口已经通过；judge 覆盖和题面契约仍属于后续质量门禁。";
     const statusClass = failure ? "failed" : notice ? "notice" : "passed";
-    const statusLabel = failure ? "待处理" : notice ? "Core 通过 · 待修" : "验证通过";
+    const statusLabel = failure
+      ? "核心验证未通过"
+      : notice
+        ? "目标成立 · 仍需修改"
+        : "可直接评测";
 
     elements.dialog.style.setProperty("--dialog-color", theme.color);
     elements.dialog.style.setProperty("--dialog-bg", theme.background);
     elements.dialogContent.innerHTML = `
-      <span class="dialog-eyebrow">${failure ? "ACTION REQUIRED" : notice ? "CORE PASS · RUNNER UPDATE" : "CORE VERIFIED"}</span>
+      <span class="dialog-eyebrow">${failure ? "CORE VALIDATION INCOMPLETE" : notice ? "TARGET VERIFIED · PACKAGE NOT READY" : "DIRECTLY EVALUABLE"}</span>
       <div class="dialog-title-row">
         <h2 id="dialog-title">Task #${task.id}</h2>
         <span class="status-chip ${statusClass}">${statusLabel}</span>
@@ -349,11 +427,11 @@
         <strong>${escapeHtml(matrix)}</strong>
       </div>
       <div class="dialog-section">
-        <small>${failure ? "未通过原因" : "结论"}</small>
+        <small>${failure ? "未通过原因" : notice ? "为什么不能原样直接评测" : "结论"}</small>
         <p>${escapeHtml(explanation)}</p>
       </div>
       <div class="dialog-section action-box">
-        <small>${failure ? "建议动作" : notice ? "进入直接评测前" : "后续门禁"}</small>
+        <small>${failure ? "建议动作" : notice ? "需要修改" : "后续门禁"}</small>
         <p>${escapeHtml(nextStep)}</p>
       </div>
       <div class="dialog-links">
@@ -394,12 +472,14 @@
       if (trigger) openTask(trigger.dataset.taskId);
     });
 
-    elements.issueGrid.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      const trigger = event.target.closest("[data-task-id]");
-      if (!trigger) return;
-      event.preventDefault();
-      openTask(trigger.dataset.taskId);
+    [elements.fixGrid, elements.issueGrid].forEach((grid) => {
+      grid.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        const trigger = event.target.closest("[data-task-id]");
+        if (!trigger) return;
+        event.preventDefault();
+        openTask(trigger.dataset.taskId);
+      });
     });
 
     elements.dialogClose.addEventListener("click", () => elements.dialog.close());
@@ -409,6 +489,8 @@
   }
 
   renderOverview();
+  renderFixSummary();
+  renderPackageFixes();
   renderCategorySummary();
   renderIssues();
   renderCorrection();

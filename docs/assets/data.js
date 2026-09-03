@@ -1,15 +1,16 @@
 window.SWE_PADDLE_DATA = {
   meta: {
     title: "SWE-Paddle 可评测性雷达",
-    updatedAt: "2026-09-02",
+    updatedAt: "2026-09-03",
     snapshot: "c9e46547a1f8dce934a8c454a9b4afd6cce1d384",
     repository: "https://github.com/PaddlePaddle/community",
     taskBase:
       "https://github.com/PaddlePaddle/community/tree/c9e46547a1f8dce934a8c454a9b4afd6cce1d384/swe-paddle/tasks/PaddlePaddle__Paddle-",
     sourcePrBase: "https://github.com/PaddlePaddle/Paddle/pull/",
     total: 96,
-    passed: 79,
-    failed: 17,
+    directlyEvaluable: 68,
+    packageFixRequired: 11,
+    coreFailed: 17,
     bugfix: 48,
     feature: 47,
     refactor: 1,
@@ -337,29 +338,33 @@ window.SWE_PADDLE_DATA = {
 
   notices: {
     52948: {
-      matrix: "F2P 5 / P2P 2 · Core 通过",
+      kind: "runner",
+      matrix: "F2P 5 / P2P 2 · 目标行为成立 · 原包未通过",
       reason:
-        "修订测试已真实触发 static / dy2static register_hook；精确 Base / Gold 两轮均形成稳定目标转换，旧假绿问题已消除。",
+        "修订测试已真实触发 static / dy2static register_hook，精确 Base / Gold 两轮均形成稳定目标转换；但原始运行布局会从源码包路径误导入 python.paddle，不能原样执行。",
       action:
         "修正 pytest 从源码包路径误导入 python.paddle 的运行布局；保留两组测试后重新确认原始 test.sh。",
       contributionPr: 1541,
     },
     58917: {
-      matrix: "F2P 15 / P2P 3 · Core 通过",
+      kind: "runner",
+      matrix: "F2P 15 / P2P 3 · 目标行为成立 · 原包未通过",
       reason:
         "排除 imported helper 伪节点后，15 个目标节点稳定 Base-red / Gold-green，3 个 P2P 在两态均通过；当前 raw Base、Gold 都被 helper fixture error 置为 RC 1。",
       action: "将 test_with_pir_api 以非 test_ 名称导入，或在 runner 中明确排除该 helper 伪节点。",
       contributionPr: 1508,
     },
     59127: {
-      matrix: "F2P 84 / P2P 42 · Core 通过",
+      kind: "runner",
+      matrix: "F2P 84 / P2P 42 · 目标行为成立 · 原包未通过",
       reason:
         "受控 runner 下 84 个目标节点和 42 个 P2P 均稳定闭环；原脚本缺少 legacy test 路径，并会误收集 imported helper，因此 Base、Gold raw 均在 P2P collection 阶段停止。",
       action: "在 tests/test.sh 中补齐 legacy-test PYTHONPATH，并避免收集导入的 test_with_pir_api helper。",
       contributionPr: 1509,
     },
     59973: {
-      matrix: "F2P 47 / P2P 23 · Core 通过",
+      kind: "runner",
+      matrix: "F2P 47 / P2P 23 · 目标行为成立 · 原包未通过",
       reason:
         "47 个 slice_scatter 目标节点稳定 Base-red / Gold-green，另有 23 个真实 P2P；当前 raw P2P 还包含 2 个双态红 static 节点、2 个 CPU no-op、29 个 skip 和 imported helper。",
       action:
@@ -367,7 +372,8 @@ window.SWE_PADDLE_DATA = {
       contributionPr: 1506,
     },
     64881: {
-      matrix: "F2P 6 / P2P 5 · Core 通过",
+      kind: "runner",
+      matrix: "F2P 6 / P2P 5 · 目标行为成立 · 原包未通过",
       reason:
         "目标 alpha_dropout 文件中 6 个 FeatureAlphaDropout 节点形成稳定转换，5 个现有行为节点两态通过；raw runner 先执行整份 test_dropout_op.py，双态均有 6F 和 1 个 helper error，导致 Gold 不绿。",
       action:
@@ -375,43 +381,50 @@ window.SWE_PADDLE_DATA = {
       contributionPr: 1501,
     },
     73582: {
-      matrix: "F2P 2 / P2P 3 · Core 通过",
+      kind: "runner",
+      matrix: "F2P 2 / P2P 3 · 目标行为成立 · 原包未通过",
       reason:
         "补齐 legacy-test 路径后，两个 zero-size 目标节点稳定 Base-red / Gold-green，三个现有行为节点两态全绿；原始脚本在两态均因导入路径返回 RC 4。",
       action: "在 tests/test.sh 中加入 test/legacy_test 和仓库根目录的 PYTHONPATH。",
       contributionPr: 1512,
     },
     73691: {
-      matrix: "F2P 3 / P2P 3 · Core 通过",
+      kind: "patch",
+      matrix: "F2P 3 / P2P 3 · 目标行为成立 · 原包未通过",
       reason:
         "exact CPU Base / Gold 原生编译及逐节点双轮验证均闭环；但仓库中的 solution/code.patch 缺少末尾换行，原样 git apply 报 corrupt patch at line 274，仅补该换行后才能构建 Gold。",
       action: "重新导出 solution/code.patch 或补齐文件末尾换行，确保仓库原始 patch 可直接应用。",
       contributionPr: 1514,
     },
     73821: {
-      matrix: "F2P 3 / P2P 2 · Core 通过",
+      kind: "runner",
+      matrix: "F2P 3 / P2P 2 · 目标行为成立 · 原包未通过",
       reason:
         "exact CPU Base / Gold 原生编译及逐节点双轮验证均闭环；当前原始 test.sh 在两态都因缺少 legacy-test 路径而无法导入 op_test，返回 RC 4。",
       action: "在 tests/test.sh 中加入 test/legacy_test 和仓库根目录的 PYTHONPATH。",
       contributionPr: 1519,
     },
     78932: {
-      matrix: "F2P 3 / P2P 3 · Core 通过",
+      kind: "assertion",
+      matrix: "F2P 3 / P2P 3 · 目标行为成立 · 断言待加强",
       reason:
         "两个 TensorDataset varargs 行为节点和一个公开 alias 存在性节点形成转换，三个旧行为节点保持通过；但 alias 测试只检查对象 truthiness，未验证三个导出入口身份一致。",
       action: "把 assertTrue(pairs[0], pairs[n]) 改为 assertIs 或显式 identity 断言。",
       contributionPr: 1523,
     },
     79197: {
-      matrix: "F2P 6 / P2P 1 · Core 通过",
+      kind: "runner",
+      matrix: "F2P 6 / P2P 1 · 目标行为成立 · 原包未通过",
       reason:
         "补齐 legacy-test 路径后，六个 optimizer 参数目标节点稳定转换，一个现有 scheduler 节点两态通过；原始脚本因 op_test 导入失败在两态均返回 RC 4。",
       action: "在 tests/test.sh 中加入 test/legacy_test 和仓库根目录的 PYTHONPATH。",
       contributionPr: 1522,
     },
     79276: {
-      matrix: "F2P 1 / P2P 2 · Core 通过",
-      reason: "精确原生 Base / Gold 库已重建并加载，目标转换连续两轮稳定。",
+      kind: "runner",
+      matrix: "F2P 1 / P2P 2 · 目标行为成立 · 原包未通过",
+      reason:
+        "精确原生 Base / Gold 库已重建并加载，目标转换连续两轮稳定；但原始 test.sh 缺少 test/legacy_test 的 PYTHONPATH，不能原样完成验证。",
       action: "在 tests/test.sh 中加入 test/legacy_test 的 PYTHONPATH。",
       contributionPr: 1498,
     },
@@ -421,9 +434,9 @@ window.SWE_PADDLE_DATA = {
     id: 73691,
     title: "本轮 32 条增量验证已完成",
     summary:
-      "18 条新增完整任务加 14 条修改任务复验：19 条 Core 通过，13 条当前不通过。全量看板现为 96 条，其中 79 条 Core 通过、17 条待处理。",
+      "18 条新增完整任务加 14 条修改任务复验：10 条可直接评测，9 条目标行为成立但仍需修改，13 条核心验证未通过。",
     caveat:
-      "本轮 19 条通过中，10 条可零修改直评、9 条仍需修 runner、patch 或断言；全量 79 条通过中共有 11 条待修，因此目前可直接评测 68 条。",
+      "全量 96 条按三个互斥状态展示：68 条可直接评测、11 条目标行为成立但仍需修改、17 条核心验证未通过。",
     contributionPr: 1514,
   },
 };

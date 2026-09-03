@@ -53,41 +53,46 @@
             修复后转绿，同时保留有意义的回归护栏。
           </p>
           <div class="hero-buttons">
-            <a class="primary-button" href="#issues">查看待处理任务</a>
+            <a class="primary-button" href="#package-fixes">查看 11 条评测包待修</a>
             <a class="text-button" href="#all-tasks">浏览全部 96 条 <span>↓</span></a>
           </div>
           <p class="updated-line">
             <span class="updated-icon" aria-hidden="true">✓</span>
-            数据更新于 <time id="updated-at" datetime="2026-09-02">2026-09-02</time>
+            页面口径更新于 <time id="updated-at" datetime="2026-09-03">2026-09-03</time>
           </p>
         </div>
 
-        <aside class="readiness-card" aria-label="验证通过率">
+        <aside class="readiness-card" aria-label="直接可评测率">
           <div class="readiness-head">
-            <span>Core readiness</span>
+            <span>Direct readiness</span>
             <span class="trend-chip">+18 tasks · 32 rechecked</span>
           </div>
           <div class="progress-wrap">
-            <div class="progress-ring" id="progress-ring" role="img" aria-label="通过率 82.3%">
+            <div class="progress-ring" id="progress-ring" role="img" aria-label="直接可评测率 70.8%">
               <div class="progress-center">
-                <strong id="pass-rate">82.3%</strong>
-                <span>验证通过率</span>
+                <strong id="pass-rate">70.8%</strong>
+                <span>直接可评测率</span>
               </div>
             </div>
           </div>
           <div class="readiness-numbers">
             <div>
               <span class="number-dot pass-dot"></span>
-              <span>已通过</span>
-              <strong id="hero-passed">79</strong>
+              <span>可直接评测</span>
+              <strong id="hero-direct">68</strong>
+            </div>
+            <div>
+              <span class="number-dot fix-dot"></span>
+              <span>评测包待修</span>
+              <strong id="hero-needs-fix">11</strong>
             </div>
             <div>
               <span class="number-dot fail-dot"></span>
-              <span>待处理</span>
-              <strong id="hero-failed">17</strong>
+              <span>核心未通过</span>
+              <strong id="hero-core-failed">17</strong>
             </div>
           </div>
-          <p class="readiness-note">当前统计只反映 Core F2P/P2P，不等同于原始任务包可直接上线。</p>
+          <p class="readiness-note">三个状态互斥且合计 96 条；只有“可直接评测”表示任务包无需修改。</p>
         </aside>
       </div>
     </header>
@@ -106,35 +111,35 @@
         <div class="metric-card">
           <span class="metric-icon success-icon" aria-hidden="true">✓</span>
           <div>
-            <strong id="metric-passed">79</strong>
-            <span>Core 验证通过</span>
+            <strong id="metric-direct">68</strong>
+            <span>可直接评测</span>
           </div>
-          <small class="success-text">Base → Gold 闭环</small>
+          <small class="success-text">原始任务包端到端通过</small>
+        </div>
+        <div class="metric-card">
+          <span class="metric-icon warning-icon" aria-hidden="true">↻</span>
+          <div>
+            <strong id="metric-needs-fix">11</strong>
+            <span>目标成立 · 仍需修改</span>
+          </div>
+          <small class="warning-text">runner / patch / 断言需修改</small>
         </div>
         <div class="metric-card">
           <span class="metric-icon danger-icon" aria-hidden="true">!</span>
           <div>
-            <strong id="metric-failed">17</strong>
-            <span>仍需处理</span>
+            <strong id="metric-core-failed">17</strong>
+            <span>核心验证未通过</span>
           </div>
           <small class="danger-text">4 类明确阻塞</small>
-        </div>
-        <div class="metric-card">
-          <span class="metric-icon split-icon" aria-hidden="true">◇</span>
-          <div>
-            <strong><span id="metric-bugfix">48</span><em>/</em><span id="metric-feature">47</span><em>/</em><span id="metric-refactor">1</span></strong>
-            <span>Bugfix / Feature / Refactor</span>
-          </div>
-          <small>三类任务均已纳入筛选</small>
         </div>
       </section>
 
       <section class="criterion-section shell" aria-labelledby="criterion-title">
         <div class="criterion-label">
           <span class="section-kicker">判定口径</span>
-          <h2 id="criterion-title">什么叫 Core 通过？</h2>
+          <h2 id="criterion-title">什么叫可直接评测？</h2>
         </div>
-        <div class="criterion-flow" aria-label="Core 通过的三个条件">
+        <div class="criterion-flow" aria-label="可直接评测的四个条件">
           <div class="flow-step">
             <span class="flow-index">01</span>
             <div>
@@ -158,10 +163,33 @@
               <p>至少一个有意义的旧行为在两态均绿。</p>
             </div>
           </div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-step">
+            <span class="flow-index">04</span>
+            <div>
+              <strong>原始任务包可直接使用</strong>
+              <p>patch 可应用，raw runner 可执行，选择器和断言能真实覆盖目标行为。</p>
+            </div>
+          </div>
         </div>
         <p class="criterion-footnote">
-          本页暂不把 judge 覆盖、题面契约和 raw runner 可用性纳入 Core 二元结论；这些仍是正式上线前的后续门禁。
+          前三项仅证明目标行为成立；四项全部满足才计入 68 条“可直接评测”。另有 11 条目标行为成立、但任务包仍不满足直接评测条件，逐条列在下方。
         </p>
+      </section>
+
+      <section class="fixes-section" id="package-fixes" aria-labelledby="fixes-title">
+        <div class="shell">
+          <div class="section-heading">
+            <div>
+              <span class="section-kicker">PACKAGE NOT READY</span>
+              <h2 id="fixes-title">11 条目标行为成立，但不能原样直接评测</h2>
+              <p>每条均列出受控验证结果、当前阻塞和需要修改的内容。</p>
+            </div>
+            <div class="category-summary" id="fix-summary" aria-label="原包待修分类汇总"></div>
+          </div>
+
+          <div class="fix-grid" id="fix-grid"></div>
+        </div>
       </section>
 
       <section class="issues-section" id="issues" aria-labelledby="issues-title">
@@ -169,8 +197,8 @@
           <div class="section-heading">
             <div>
               <span class="section-kicker">ACTION REQUIRED</span>
-              <h2 id="issues-title">17 条 Core 待处理</h2>
-              <p>按主阻塞归类；另有 11 条标记为“Core 通过 · 待修”，需先修 runner、patch 或断言。</p>
+              <h2 id="issues-title">17 条核心验证未通过</h2>
+              <p>这些任务尚未形成完整、有效的 F2P/P2P 闭环，按主阻塞归类。</p>
             </div>
             <div class="category-summary" id="category-summary" aria-label="问题分类汇总"></div>
           </div>
@@ -210,9 +238,9 @@
             <span class="sr-only">验证状态</span>
             <select id="status-filter">
               <option value="all">全部状态</option>
-              <option value="passed">Core 通过（含待修）</option>
-              <option value="notice">Core 通过 · 待修</option>
-              <option value="failed">待处理</option>
+              <option value="passed">可直接评测（68）</option>
+              <option value="notice">目标成立 · 仍需修改（11）</option>
+              <option value="failed">核心验证未通过（17）</option>
             </select>
           </label>
           <label>
@@ -241,7 +269,7 @@
                 <th scope="col">主题</th>
                 <th scope="col">类型</th>
                 <th scope="col">样本作者</th>
-                <th scope="col">Core 状态</th>
+                <th scope="col">可评测状态</th>
                 <th scope="col"><span class="sr-only">操作</span></th>
               </tr>
             </thead>
@@ -264,7 +292,8 @@
         </div>
         <div class="footer-links">
           <a href="#criterion-title">验证口径</a>
-          <a href="#issues">待处理任务</a>
+          <a href="#package-fixes">评测包待修</a>
+          <a href="#issues">核心未通过</a>
           <a
             href="https://github.com/PaddlePaddle/community/tree/c9e46547a1f8dce934a8c454a9b4afd6cce1d384/swe-paddle/tasks"
             target="_blank"
