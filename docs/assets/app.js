@@ -166,6 +166,10 @@
               <span class="fix-kind">${escapeHtml(kind.label)}</span>
             </div>
             <h3>${escapeHtml(task.title)}</h3>
+            <div class="validation-split" aria-label="核心验证通过，Task 包不通过">
+              <span class="validation-pass">核心验证 <strong>通过</strong></span>
+              <span class="validation-fail">Task 包 <strong>不通过</strong></span>
+            </div>
             <p class="matrix-line">${escapeHtml(notice.matrix)}</p>
             <div class="fix-detail">
               <small>为什么不能原样直接评测</small>
@@ -333,8 +337,8 @@
         const statusLabel = failed
           ? "核心验证未通过"
           : hasNotice
-            ? "目标成立 · 仍需修改"
-            : "可直接评测";
+            ? "核心通过 · Task 包不通过"
+            : "核心与 Task 包均通过";
         const statusColor = failed ? "#d76b60" : hasNotice ? "#d89928" : "#42b894";
         const label = authorLabel(task.author);
 
@@ -382,7 +386,7 @@
       ? failure.matrix
       : notice
         ? notice.matrix
-        : "F2P/P2P 与原始任务包均已验证通过";
+        : "核心验证通过 · Task 包通过 · 可直接评测";
     const explanation = failure
       ? failure.reason
       : notice
@@ -397,13 +401,13 @@
     const statusLabel = failure
       ? "核心验证未通过"
       : notice
-        ? "目标成立 · 仍需修改"
-        : "可直接评测";
+        ? "核心通过 · Task 包不通过"
+        : "核心与 Task 包均通过";
 
     elements.dialog.style.setProperty("--dialog-color", theme.color);
     elements.dialog.style.setProperty("--dialog-bg", theme.background);
     elements.dialogContent.innerHTML = `
-      <span class="dialog-eyebrow">${failure ? "CORE VALIDATION INCOMPLETE" : notice ? "TARGET VERIFIED · PACKAGE NOT READY" : "DIRECTLY EVALUABLE"}</span>
+      <span class="dialog-eyebrow">${failure ? "CORE VALIDATION INCOMPLETE" : notice ? "CORE PASSED · TASK PACKAGE FAILED" : "CORE & TASK PACKAGE PASSED"}</span>
       <div class="dialog-title-row">
         <h2 id="dialog-title">Task #${task.id}</h2>
         <span class="status-chip ${statusClass}">${statusLabel}</span>

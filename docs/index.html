@@ -78,21 +78,21 @@
           <div class="readiness-numbers">
             <div>
               <span class="number-dot pass-dot"></span>
-              <span>可直接评测</span>
+              <span>核心过 · Task 包过</span>
               <strong id="hero-direct">68</strong>
             </div>
             <div>
               <span class="number-dot fix-dot"></span>
-              <span>评测包待修</span>
+              <span>核心过 · Task 包不过</span>
               <strong id="hero-needs-fix">11</strong>
             </div>
             <div>
               <span class="number-dot fail-dot"></span>
-              <span>核心未通过</span>
+              <span>核心验证未通过</span>
               <strong id="hero-core-failed">17</strong>
             </div>
           </div>
-          <p class="readiness-note">三个状态互斥且合计 96 条；只有“可直接评测”表示任务包无需修改。</p>
+          <p class="readiness-note">68 = 核心通过且 Task 包通过；11 = 核心通过但 Task 包不通过；17 = 核心验证未通过。</p>
         </aside>
       </div>
     </header>
@@ -112,17 +112,17 @@
           <span class="metric-icon success-icon" aria-hidden="true">✓</span>
           <div>
             <strong id="metric-direct">68</strong>
-            <span>可直接评测</span>
+            <span>核心通过，Task 包通过</span>
           </div>
-          <small class="success-text">原始任务包端到端通过</small>
+          <small class="success-text">可直接评测</small>
         </div>
         <div class="metric-card">
           <span class="metric-icon warning-icon" aria-hidden="true">↻</span>
           <div>
             <strong id="metric-needs-fix">11</strong>
-            <span>目标成立 · 仍需修改</span>
+            <span>核心通过，Task 包不通过</span>
           </div>
-          <small class="warning-text">runner / patch / 断言需修改</small>
+          <small class="warning-text">需修改 runner / patch / 断言</small>
         </div>
         <div class="metric-card">
           <span class="metric-icon danger-icon" aria-hidden="true">!</span>
@@ -137,7 +137,7 @@
       <section class="criterion-section shell" aria-labelledby="criterion-title">
         <div class="criterion-label">
           <span class="section-kicker">判定口径</span>
-          <h2 id="criterion-title">什么叫可直接评测？</h2>
+          <h2 id="criterion-title">两层验证，三个最终状态</h2>
         </div>
         <div class="criterion-flow" aria-label="可直接评测的四个条件">
           <div class="flow-step">
@@ -173,7 +173,7 @@
           </div>
         </div>
         <p class="criterion-footnote">
-          前三项仅证明目标行为成立；四项全部满足才计入 68 条“可直接评测”。另有 11 条目标行为成立、但任务包仍不满足直接评测条件，逐条列在下方。
+          前三项组成“核心验证”；第四项是“Task 包验证”。68 条两层都通过，11 条仅核心验证通过，17 条连核心验证都未通过。
         </p>
       </section>
 
@@ -182,10 +182,10 @@
           <div class="section-heading">
             <div>
               <span class="section-kicker">PACKAGE NOT READY</span>
-              <h2 id="fixes-title">11 条目标行为成立，但不能原样直接评测</h2>
-              <p>每条均列出受控验证结果、当前阻塞和需要修改的内容。</p>
+              <h2 id="fixes-title">11 条核心验证通过，但 Task 包不通过</h2>
+              <p>核心 F2P/P2P 已成立，但当前 Task 包不能原样直接评测；以下逐条列出阻塞和修改建议。</p>
             </div>
-            <div class="category-summary" id="fix-summary" aria-label="原包待修分类汇总"></div>
+            <div class="category-summary" id="fix-summary" aria-label="Task 包不通过分类汇总"></div>
           </div>
 
           <div class="fix-grid" id="fix-grid"></div>
@@ -238,8 +238,8 @@
             <span class="sr-only">验证状态</span>
             <select id="status-filter">
               <option value="all">全部状态</option>
-              <option value="passed">可直接评测（68）</option>
-              <option value="notice">目标成立 · 仍需修改（11）</option>
+              <option value="passed">核心通过 + Task 包通过（68）</option>
+              <option value="notice">核心通过 + Task 包不通过（11）</option>
               <option value="failed">核心验证未通过（17）</option>
             </select>
           </label>
@@ -292,7 +292,7 @@
         </div>
         <div class="footer-links">
           <a href="#criterion-title">验证口径</a>
-          <a href="#package-fixes">评测包待修</a>
+          <a href="#package-fixes">Task 包不通过</a>
           <a href="#issues">核心未通过</a>
           <a
             href="https://github.com/PaddlePaddle/community/tree/c9e46547a1f8dce934a8c454a9b4afd6cce1d384/swe-paddle/tasks"

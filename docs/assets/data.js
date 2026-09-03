@@ -8,8 +8,8 @@ window.SWE_PADDLE_DATA = {
       "https://github.com/PaddlePaddle/community/tree/c9e46547a1f8dce934a8c454a9b4afd6cce1d384/swe-paddle/tasks/PaddlePaddle__Paddle-",
     sourcePrBase: "https://github.com/PaddlePaddle/Paddle/pull/",
     total: 96,
-    directlyEvaluable: 68,
-    packageFixRequired: 11,
+    corePassedTaskPackagePassed: 68,
+    corePassedTaskPackageFailed: 11,
     coreFailed: 17,
     bugfix: 48,
     feature: 47,
@@ -339,93 +339,101 @@ window.SWE_PADDLE_DATA = {
   notices: {
     52948: {
       kind: "runner",
-      matrix: "F2P 5 / P2P 2 · 目标行为成立 · 原包未通过",
+      matrix: "F2P 5 / P2P 2",
       reason:
         "修订测试已真实触发 static / dy2static register_hook，精确 Base / Gold 两轮均形成稳定目标转换；但原始运行布局会从源码包路径误导入 python.paddle，不能原样执行。",
       action:
-        "修正 pytest 从源码包路径误导入 python.paddle 的运行布局；保留两组测试后重新确认原始 test.sh。",
+        "在 tests/test.sh 中固定从仓库根目录启动，避免源码树 python/ 抢占导入路径；启动时确认 paddle.__file__ 指向当前 Base / Gold 安装产物，再保留两组测试完成原始脚本双轮复跑。",
       contributionPr: 1541,
     },
     58917: {
       kind: "runner",
-      matrix: "F2P 15 / P2P 3 · 目标行为成立 · 原包未通过",
+      matrix: "F2P 15 / P2P 3",
       reason:
         "排除 imported helper 伪节点后，15 个目标节点稳定 Base-red / Gold-green，3 个 P2P 在两态均通过；当前 raw Base、Gold 都被 helper fixture error 置为 RC 1。",
-      action: "将 test_with_pir_api 以非 test_ 名称导入，或在 runner 中明确排除该 helper 伪节点。",
+      action:
+        "将 test_with_pir_api 改为非 test_ 别名导入，或显式设置为不可收集；先用 pytest --collect-only 确认 helper 已排除，再按原始 test.sh 复跑 Base / Gold 两轮并保证 Gold 返回 0。",
       contributionPr: 1508,
     },
     59127: {
       kind: "runner",
-      matrix: "F2P 84 / P2P 42 · 目标行为成立 · 原包未通过",
+      matrix: "F2P 84 / P2P 42",
       reason:
         "受控 runner 下 84 个目标节点和 42 个 P2P 均稳定闭环；原脚本缺少 legacy test 路径，并会误收集 imported helper，因此 Base、Gold raw 均在 P2P collection 阶段停止。",
-      action: "在 tests/test.sh 中补齐 legacy-test PYTHONPATH，并避免收集导入的 test_with_pir_api helper。",
+      action:
+        "在 tests/test.sh 中基于仓库根目录补齐 PYTHONPATH 的根目录与 test/legacy_test，同时把 test_with_pir_api 改为非测试别名；用 --collect-only 核对节点后，再完成原始 Base / Gold 双轮复跑。",
       contributionPr: 1509,
     },
     59973: {
       kind: "runner",
-      matrix: "F2P 47 / P2P 23 · 目标行为成立 · 原包未通过",
+      matrix: "F2P 47 / P2P 23",
       reason:
         "47 个 slice_scatter 目标节点稳定 Base-red / Gold-green，另有 23 个真实 P2P；当前 raw P2P 还包含 2 个双态红 static 节点、2 个 CPU no-op、29 个 skip 和 imported helper。",
       action:
-        "收窄 P2P selector 至已验证的 23 个 meaningful 节点，或修复两个 static 测试的模式初始化；同时排除 helper、no-op 与 skip。",
+        "将 P2P selector 明确收窄到已验证的 23 个 meaningful 节点，或先修复两个 static 测试的模式初始化；从角色集合中排除 imported helper、CPU no-op 与 skip，并确认原始 Gold 全程返回 0。",
       contributionPr: 1506,
     },
     64881: {
       kind: "runner",
-      matrix: "F2P 6 / P2P 5 · 目标行为成立 · 原包未通过",
+      matrix: "F2P 6 / P2P 5",
       reason:
         "目标 alpha_dropout 文件中 6 个 FeatureAlphaDropout 节点形成稳定转换，5 个现有行为节点两态通过；raw runner 先执行整份 test_dropout_op.py，双态均有 6F 和 1 个 helper error，导致 Gold 不绿。",
       action:
-        "将 P2P selector 收窄到目标文件中已验证的 5 个 meaningful 节点，并避免收集 imported helper。",
+        "不要运行整份 test_dropout_op.py；在 test.sh 中显式选择已验证的 6 个 F2P 与 5 个 meaningful P2P 节点，并把 imported helper 改为不可收集，最后确认原始 Gold 无无关失败且返回 0。",
       contributionPr: 1501,
     },
     73582: {
       kind: "runner",
-      matrix: "F2P 2 / P2P 3 · 目标行为成立 · 原包未通过",
+      matrix: "F2P 2 / P2P 3",
       reason:
         "补齐 legacy-test 路径后，两个 zero-size 目标节点稳定 Base-red / Gold-green，三个现有行为节点两态全绿；原始脚本在两态均因导入路径返回 RC 4。",
-      action: "在 tests/test.sh 中加入 test/legacy_test 和仓库根目录的 PYTHONPATH。",
+      action:
+        "让 tests/test.sh 先解析仓库根目录，再把根目录与 test/legacy_test 加入 PYTHONPATH；用 --collect-only 确认 op_test 可导入，随后原样复跑两轮并核对 2 个 F2P、3 个 P2P。",
       contributionPr: 1512,
     },
     73691: {
       kind: "patch",
-      matrix: "F2P 3 / P2P 3 · 目标行为成立 · 原包未通过",
+      matrix: "F2P 3 / P2P 3",
       reason:
         "exact CPU Base / Gold 原生编译及逐节点双轮验证均闭环；但仓库中的 solution/code.patch 缺少末尾换行，原样 git apply 报 corrupt patch at line 274，仅补该换行后才能构建 Gold。",
-      action: "重新导出 solution/code.patch 或补齐文件末尾换行，确保仓库原始 patch 可直接应用。",
+      action:
+        "基于声明的 exact Base 重新导出 solution/code.patch，并确保文件末尾换行完整；提交前先执行 git apply --check，再实际应用、编译 Gold，并用原始任务包复跑 3 个 F2P 与 3 个 P2P。",
       contributionPr: 1514,
     },
     73821: {
       kind: "runner",
-      matrix: "F2P 3 / P2P 2 · 目标行为成立 · 原包未通过",
+      matrix: "F2P 3 / P2P 2",
       reason:
         "exact CPU Base / Gold 原生编译及逐节点双轮验证均闭环；当前原始 test.sh 在两态都因缺少 legacy-test 路径而无法导入 op_test，返回 RC 4。",
-      action: "在 tests/test.sh 中加入 test/legacy_test 和仓库根目录的 PYTHONPATH。",
+      action:
+        "在 tests/test.sh 中按实际仓库根目录设置 PYTHONPATH，至少包含根目录与 test/legacy_test；先确认 op_test 能在 Base / Gold 收集，再用未改动的脚本复跑两轮，核对 3 个 F2P、2 个 P2P。",
       contributionPr: 1519,
     },
     78932: {
       kind: "assertion",
-      matrix: "F2P 3 / P2P 3 · 目标行为成立 · 断言待加强",
+      matrix: "F2P 3 / P2P 3",
       reason:
         "两个 TensorDataset varargs 行为节点和一个公开 alias 存在性节点形成转换，三个旧行为节点保持通过；但 alias 测试只检查对象 truthiness，未验证三个导出入口身份一致。",
-      action: "把 assertTrue(pairs[0], pairs[n]) 改为 assertIs 或显式 identity 断言。",
+      action:
+        "把 assertTrue(pairs[0], pairs[n]) 改为逐对 assertIs(left, right)，明确验证三个公开导出入口对象身份一致；修改后在 Base / Gold 各复跑两轮，确认 identity 节点仍形成 F2P 且其余 P2P 不回退。",
       contributionPr: 1523,
     },
     79197: {
       kind: "runner",
-      matrix: "F2P 6 / P2P 1 · 目标行为成立 · 原包未通过",
+      matrix: "F2P 6 / P2P 1",
       reason:
         "补齐 legacy-test 路径后，六个 optimizer 参数目标节点稳定转换，一个现有 scheduler 节点两态通过；原始脚本因 op_test 导入失败在两态均返回 RC 4。",
-      action: "在 tests/test.sh 中加入 test/legacy_test 和仓库根目录的 PYTHONPATH。",
+      action:
+        "在 tests/test.sh 中从仓库根目录构造 PYTHONPATH，加入根目录与 test/legacy_test；先做 collection 检查，再按原始入口完成 Base / Gold 双轮运行并核对 6 个 F2P、1 个 P2P。",
       contributionPr: 1522,
     },
     79276: {
       kind: "runner",
-      matrix: "F2P 1 / P2P 2 · 目标行为成立 · 原包未通过",
+      matrix: "F2P 1 / P2P 2",
       reason:
         "精确原生 Base / Gold 库已重建并加载，目标转换连续两轮稳定；但原始 test.sh 缺少 test/legacy_test 的 PYTHONPATH，不能原样完成验证。",
-      action: "在 tests/test.sh 中加入 test/legacy_test 的 PYTHONPATH。",
+      action:
+        "在 tests/test.sh 中按仓库根目录补入 test/legacy_test 的 PYTHONPATH，并增加 collection 检查避免再次出现入口失败；随后用原始任务包复跑 Base / Gold 两轮，确认 1 个 F2P、2 个 P2P。",
       contributionPr: 1498,
     },
   },
@@ -434,9 +442,9 @@ window.SWE_PADDLE_DATA = {
     id: 73691,
     title: "本轮 32 条增量验证已完成",
     summary:
-      "18 条新增完整任务加 14 条修改任务复验：10 条可直接评测，9 条目标行为成立但仍需修改，13 条核心验证未通过。",
+      "18 条新增完整任务加 14 条修改任务复验：10 条核心验证与 Task 包均通过，9 条核心验证通过但 Task 包不通过，13 条核心验证未通过。",
     caveat:
-      "全量 96 条按三个互斥状态展示：68 条可直接评测、11 条目标行为成立但仍需修改、17 条核心验证未通过。",
+      "全量 96 条按三个互斥状态展示：68 条核心验证与 Task 包均通过，可直接评测；11 条核心验证通过但 Task 包不通过；17 条核心验证未通过。",
     contributionPr: 1514,
   },
 };

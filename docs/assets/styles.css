@@ -775,6 +775,36 @@ main {
   color: var(--fix-color, #8a651c);
 }
 
+.validation-split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 12px 0 9px;
+}
+
+.validation-split span {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  padding: 5px 8px;
+  border-radius: 7px;
+  font-size: 9px;
+}
+
+.validation-split strong {
+  font-size: 9px;
+}
+
+.validation-pass {
+  color: #237c62;
+  background: var(--mint-soft);
+}
+
+.validation-fail {
+  color: #8a651c;
+  background: var(--amber-soft);
+}
+
 .fix-detail {
   margin-top: 17px;
   padding-top: 15px;
