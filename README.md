@@ -35,10 +35,3 @@ raw runner 可执行，而且选择器和断言有效。只有两层都通过才
 11 条核心验证通过但 Task 包不通过的任务，会在页面逐条展开阻塞原因与修改建议。
 
 judge 覆盖和题面契约不在本页当前门槛内，仍属于正式上线前的后续质量门禁。
-
-模型资格与上述任务状态独立展示。当前通过正式 qualification 的模型为
-`gpt-5.6-sol`、`deepseek-v4-pro`、`qwen3.8-max` 和 `ernie-5.1`；
-`claude-opus-5-kiro` 与 `kimi-k3` 的本轮 canary 未通过。首批计划矩阵为
-67 条 CPU 任务 × 4 个 qualified 模型，共 268 个 Attempt；正式 Task Attempt
-尚未启动，因为净化 instruction 的人工审阅确认和正式启动绑定仍未完成。
-68 条可直接评测任务中的 `78823` 需要 CUDA/XPU，将另行排期。
