@@ -43,6 +43,17 @@
     metricDirect: document.querySelector("#metric-direct"),
     metricNeedsFix: document.querySelector("#metric-needs-fix"),
     metricCoreFailed: document.querySelector("#metric-core-failed"),
+    evaluationHarness: document.querySelector("#evaluation-harness"),
+    modelStatusSummary: document.querySelector("#model-status-summary"),
+    evaluationCpuTasks: document.querySelector("#evaluation-cpu-tasks"),
+    evaluationQualifiedModels: document.querySelector("#evaluation-qualified-models"),
+    evaluationPlannedAttempts: document.querySelector("#evaluation-planned-attempts"),
+    evaluationStartedAttempts: document.querySelector("#evaluation-started-attempts"),
+    evaluationLaunchReason: document.querySelector("#evaluation-launch-reason"),
+    evaluationScope: document.querySelector("#evaluation-scope"),
+    evaluationModels: document.querySelector("#evaluation-models"),
+    evaluationManifestHash: document.querySelector("#evaluation-manifest-hash"),
+    evaluationFrozenAt: document.querySelector("#evaluation-frozen-at"),
     fixSummary: document.querySelector("#fix-summary"),
     fixGrid: document.querySelector("#fix-grid"),
     categorySummary: document.querySelector("#category-summary"),
@@ -126,6 +137,74 @@
     elements.metricDirect.textContent = counts.direct;
     elements.metricNeedsFix.textContent = counts.needsFix;
     elements.metricCoreFailed.textContent = counts.coreFailed;
+  }
+
+  function renderEvaluation() {
+    const evaluation = data.evaluation;
+    if (!evaluation) return;
+
+    const qualified = evaluation.models.filter((model) => model.status === "qualified");
+    const canaryFailed = evaluation.models.filter((model) => model.status === "canary_failed");
+    const computedAttempts = evaluation.cpuTaskCount * qualified.length;
+
+    if (
+      qualified.length !== evaluation.qualifiedModelCount ||
+      canaryFailed.length !== evaluation.canaryFailedModelCount ||
+      computedAttempts !== evaluation.plannedAttemptCount
+    ) {
+      throw new Error("SWE-Paddle evaluation matrix is inconsistent.");
+    }
+
+    elements.evaluationHarness.textContent = evaluation.harness;
+    elements.evaluationCpuTasks.textContent = evaluation.cpuTaskCount;
+    elements.evaluationQualifiedModels.textContent = qualified.length;
+    elements.evaluationPlannedAttempts.textContent = computedAttempts;
+    elements.evaluationStartedAttempts.textContent = evaluation.startedTaskAttemptCount;
+    elements.evaluationLaunchReason.textContent = evaluation.launchReason;
+    elements.evaluationScope.textContent = evaluation.scope;
+    elements.evaluationManifestHash.textContent = evaluation.qualificationManifestSha256;
+    elements.evaluationFrozenAt.textContent = evaluation.frozenLabel;
+    elements.evaluationFrozenAt.dateTime = evaluation.frozenAt;
+
+    elements.modelStatusSummary.innerHTML = `
+      <span class="category-pill" style="--category-color: var(--mint)">
+        <i aria-hidden="true"></i>
+        正式 Qualified
+        <strong>${qualified.length}</strong>
+      </span>
+      <span class="category-pill" style="--category-color: var(--coral)">
+        <i aria-hidden="true"></i>
+        Canary 未通过
+        <strong>${canaryFailed.length}</strong>
+      </span>
+    `;
+
+    elements.evaluationModels.innerHTML = evaluation.models
+      .map((model) => {
+        const isQualified = model.status === "qualified";
+        const resolved =
+          model.resolvedId && model.resolvedId !== model.id
+            ? `<p class="model-resolved">Resolved ID · <code>${escapeHtml(model.resolvedId)}</code></p>`
+            : "";
+
+        return `
+          <article class="model-card ${isQualified ? "qualified" : "canary-failed"}">
+            <div class="model-card-top">
+              <span class="model-status">${isQualified ? "正式 Qualified" : "Canary 未通过"}</span>
+              <span class="model-status-icon" aria-hidden="true">${isQualified ? "✓" : "!"}</span>
+            </div>
+            <h3>${escapeHtml(model.label)}</h3>
+            <p class="model-id"><code>${escapeHtml(model.id)}</code></p>
+            ${resolved}
+            <p class="model-outcome">${escapeHtml(model.outcome)}</p>
+            <div class="model-evidence">
+              <span>Public canary summary SHA-256</span>
+              <code>${escapeHtml(model.canarySummarySha256)}</code>
+            </div>
+          </article>
+        `;
+      })
+      .join("");
   }
 
   function renderFixSummary() {
@@ -493,6 +572,7 @@
   }
 
   renderOverview();
+  renderEvaluation();
   renderFixSummary();
   renderPackageFixes();
   renderCategorySummary();

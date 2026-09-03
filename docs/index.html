@@ -177,6 +177,64 @@
         </p>
       </section>
 
+      <section class="evaluation-section" id="evaluation" aria-labelledby="evaluation-title">
+        <div class="shell evaluation-shell">
+          <div class="section-heading evaluation-heading">
+            <div>
+              <span class="section-kicker">LIVE EVALUATION</span>
+              <h2 id="evaluation-title">4 个模型已通过正式资格</h2>
+              <p>
+                模型资格独立于样本 F2P/P2P 状态；本轮统一使用
+                <strong id="evaluation-harness">Claude Code harness · libinfer-neo</strong>。
+              </p>
+            </div>
+            <div class="category-summary" id="model-status-summary" aria-label="模型资格汇总"></div>
+          </div>
+
+          <div class="launch-panel" aria-label="计划评测矩阵">
+            <div class="launch-equation">
+              <div>
+                <strong id="evaluation-cpu-tasks">67</strong>
+                <span>CPU 任务</span>
+              </div>
+              <span class="equation-symbol" aria-hidden="true">×</span>
+              <div>
+                <strong id="evaluation-qualified-models">4</strong>
+                <span>Qualified 模型</span>
+              </div>
+              <span class="equation-symbol" aria-hidden="true">=</span>
+              <div class="launch-total">
+                <strong id="evaluation-planned-attempts">268</strong>
+                <span>Planned Attempts</span>
+              </div>
+              <div class="launch-started">
+                <strong id="evaluation-started-attempts">0</strong>
+                <span>Task Attempts 已启动</span>
+              </div>
+            </div>
+            <div class="launch-blocker">
+              <span>尚未启动</span>
+              <p id="evaluation-launch-reason"></p>
+            </div>
+          </div>
+
+          <p class="evaluation-scope" id="evaluation-scope"></p>
+          <div class="model-grid" id="evaluation-models"></div>
+
+          <div class="evaluation-evidence">
+            <span>
+              Qualification manifest SHA-256
+              <code id="evaluation-manifest-hash"></code>
+            </span>
+            <span>
+              状态冻结于
+              <time id="evaluation-frozen-at" datetime="2026-09-03T19:01:04+08:00">2026-09-03 19:01 CST</time>
+            </span>
+          </div>
+          <p class="evaluation-caveat">Canary 未通过仅代表本轮证据，不等同于模型永久不可用。</p>
+        </div>
+      </section>
+
       <section class="fixes-section" id="package-fixes" aria-labelledby="fixes-title">
         <div class="shell">
           <div class="section-heading">
@@ -292,6 +350,7 @@
         </div>
         <div class="footer-links">
           <a href="#criterion-title">验证口径</a>
+          <a href="#evaluation">模型资格</a>
           <a href="#package-fixes">Task 包不通过</a>
           <a href="#issues">核心未通过</a>
           <a

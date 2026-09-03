@@ -78,6 +78,82 @@ window.SWE_PADDLE_DATA = {
     },
   },
 
+  evaluation: {
+    frozenAt: "2026-09-03T19:01:04+08:00",
+    frozenLabel: "2026-09-03 19:01 CST",
+    harness: "Claude Code harness · libinfer-neo",
+    qualificationManifestSha256:
+      "2c320a95351d110bd3d0bf7c0c6a5552b9cd503e11cab4569bd4c7a4410f1d66",
+    qualifiedModelCount: 4,
+    canaryFailedModelCount: 2,
+    cpuTaskCount: 67,
+    acceleratorTaskCount: 1,
+    acceleratorTaskIds: [78823],
+    plannedAttemptCount: 268,
+    startedTaskAttemptCount: 0,
+    launchStatus: "not_started",
+    launchReason:
+      "68 条净化 instruction 的人工审阅确认尚未完成；正式任务所需的 source image、projection、task qualification 与 launch binding 也尚未齐备。",
+    scope:
+      "68 条可直接评测任务中，67 条进入本批 CPU 计划；#78823 需要 CUDA/XPU，另行排期。#76259 仍属于核心验证未通过，不在本批。",
+    models: [
+      {
+        id: "gpt-5.6-sol",
+        label: "GPT-5.6 Sol",
+        resolvedId: "gpt-5.6-sol",
+        status: "qualified",
+        outcome: "正式 qualification 通过，可进入本批 CPU 评测矩阵。",
+        canarySummarySha256:
+          "29710199748b9f1442b36004127fbcc0069a519b54c1124e2074c09709caeb9b",
+      },
+      {
+        id: "deepseek-v4-pro",
+        label: "DeepSeek V4 Pro",
+        resolvedId: "deepseek-v4-pro-202606",
+        status: "qualified",
+        outcome: "正式 qualification 通过，可进入本批 CPU 评测矩阵。",
+        canarySummarySha256:
+          "4bfa2bbb359498c73e0a7ce45e3f3bf760f6aa8f92efee9442441fc733351ec0",
+      },
+      {
+        id: "qwen3.8-max",
+        label: "Qwen3.8 Max",
+        resolvedId: "qwen3.8-max",
+        status: "qualified",
+        outcome: "正式 qualification 通过，可进入本批 CPU 评测矩阵。",
+        canarySummarySha256:
+          "edef2d261a42090aa346db69f6628ae2165a61b30be94f26b32e30bca9be13e1",
+      },
+      {
+        id: "ernie-5.1",
+        label: "ERNIE 5.1",
+        resolvedId: "ernie-5.1",
+        status: "qualified",
+        outcome: "正式 qualification 通过，可进入本批 CPU 评测矩阵。",
+        canarySummarySha256:
+          "c1b32aeedb4ea6ebc1280350e3b4535b3767956e3e43956d4fef85f78768cee5",
+      },
+      {
+        id: "claude-opus-5-kiro",
+        label: "Claude Opus 5 Kiro",
+        status: "canary_failed",
+        outcome:
+          "同一请求的首次调用和 5 次退避重试均返回 HTTP 503；本轮 canary 未通过，未获得正式资格。",
+        canarySummarySha256:
+          "27b7fd521aa298512312263a49f4f02ea0cf8b03d44b8e2e51bb2fa08a657ba3",
+      },
+      {
+        id: "kimi-k3",
+        label: "Kimi K3",
+        status: "canary_failed",
+        outcome:
+          "同一请求的首次调用和 5 次退避重试均返回 HTTP 400，且流身份协议门禁未通过；本轮未获得正式资格。",
+        canarySummarySha256:
+          "d71f9f98a3159128a437e6b22780bddf0d6588f6ca0020872638e5be309dbb76",
+      },
+    ],
+  },
+
   tasks: [
     { id: 41202, type: "feature", author: "Echo-Nie", title: "DataLoader reader AutoTune" },
     { id: 50086, type: "bugfix", author: "Echo-Nie", title: "ConditionalBlock scope validation" },
