@@ -53,24 +53,24 @@
             修复后转绿，同时保留有意义的回归护栏。
           </p>
           <div class="hero-buttons">
-            <a class="primary-button" href="#package-fixes">查看 11 条评测包待修</a>
+            <a class="primary-button" id="package-fixes-link" href="#package-fixes">查看 21 条评测包待修</a>
             <a class="text-button" href="#all-tasks">浏览全部 96 条 <span>↓</span></a>
           </div>
           <p class="updated-line">
             <span class="updated-icon" aria-hidden="true">✓</span>
-            页面口径更新于 <time id="updated-at" datetime="2026-09-03">2026-09-03</time>
+            页面口径更新于 <time id="updated-at" datetime="2026-09-07">2026-09-07</time>
           </p>
         </div>
 
         <aside class="readiness-card" aria-label="直接可评测率">
           <div class="readiness-head">
             <span>Direct readiness</span>
-            <span class="trend-chip">+18 tasks · 32 rechecked</span>
+            <span class="trend-chip">历史验证结果纠错</span>
           </div>
           <div class="progress-wrap">
-            <div class="progress-ring" id="progress-ring" role="img" aria-label="直接可评测率 70.8%">
+            <div class="progress-ring" id="progress-ring" role="img" aria-label="直接可评测率 57.3%">
               <div class="progress-center">
-                <strong id="pass-rate">70.8%</strong>
+                <strong id="pass-rate">57.3%</strong>
                 <span>直接可评测率</span>
               </div>
             </div>
@@ -79,20 +79,20 @@
             <div>
               <span class="number-dot pass-dot"></span>
               <span>核心过 · Task 包过</span>
-              <strong id="hero-direct">68</strong>
+              <strong id="hero-direct">55</strong>
             </div>
             <div>
               <span class="number-dot fix-dot"></span>
               <span>核心过 · Task 包不过</span>
-              <strong id="hero-needs-fix">11</strong>
+              <strong id="hero-needs-fix">21</strong>
             </div>
             <div>
               <span class="number-dot fail-dot"></span>
-              <span>核心验证未通过</span>
-              <strong id="hero-core-failed">17</strong>
+              <span>核心未通过或未完成</span>
+              <strong id="hero-core-failed">20</strong>
             </div>
           </div>
-          <p class="readiness-note">68 = 核心通过且 Task 包通过；11 = 核心通过但 Task 包不通过；17 = 核心验证未通过。</p>
+          <p class="readiness-note" id="readiness-note">55 条核心与 Task 包均通过；21 条核心通过但 Task 包待修；20 条核心未通过或未完成。</p>
         </aside>
       </div>
     </header>
@@ -104,14 +104,14 @@
           <span class="metric-icon" aria-hidden="true">∑</span>
           <div>
             <strong id="metric-total">96</strong>
-            <span>完整任务包</span>
+            <span>文件齐全的任务包</span>
           </div>
-          <small>100% 已有结论或定位</small>
+          <small>文件齐全不等于验证通过</small>
         </div>
         <div class="metric-card">
           <span class="metric-icon success-icon" aria-hidden="true">✓</span>
           <div>
-            <strong id="metric-direct">68</strong>
+            <strong id="metric-direct">55</strong>
             <span>核心通过，Task 包通过</span>
           </div>
           <small class="success-text">可直接评测</small>
@@ -119,7 +119,7 @@
         <div class="metric-card">
           <span class="metric-icon warning-icon" aria-hidden="true">↻</span>
           <div>
-            <strong id="metric-needs-fix">11</strong>
+            <strong id="metric-needs-fix">21</strong>
             <span>核心通过，Task 包不通过</span>
           </div>
           <small class="warning-text">需修改 runner / patch / 断言</small>
@@ -127,17 +127,17 @@
         <div class="metric-card">
           <span class="metric-icon danger-icon" aria-hidden="true">!</span>
           <div>
-            <strong id="metric-core-failed">17</strong>
-            <span>核心验证未通过</span>
+            <strong id="metric-core-failed">20</strong>
+            <span>核心未通过或未完成</span>
           </div>
-          <small class="danger-text">4 类明确阻塞</small>
+          <small class="danger-text">含待复验与缺加速器证据</small>
         </div>
       </section>
 
       <section class="criterion-section shell" aria-labelledby="criterion-title">
         <div class="criterion-label">
           <span class="section-kicker">判定口径</span>
-          <h2 id="criterion-title">两层验证，三个最终状态</h2>
+          <h2 id="criterion-title">两层验证，三个当前状态</h2>
         </div>
         <div class="criterion-flow" aria-label="可直接评测的四个条件">
           <div class="flow-step">
@@ -172,8 +172,8 @@
             </div>
           </div>
         </div>
-        <p class="criterion-footnote">
-          前三项组成“核心验证”；第四项是“Task 包验证”。68 条两层都通过，11 条仅核心验证通过，17 条连核心验证都未通过。
+        <p class="criterion-footnote" id="criterion-footnote">
+          前三项组成“核心验证”；第四项是“Task 包验证”。55 条两层通过，21 条核心通过但任务包待修，20 条核心未通过或证据尚未闭环。“文件齐全”不等于“测试通过”。
         </p>
       </section>
 
@@ -182,7 +182,7 @@
           <div class="section-heading">
             <div>
               <span class="section-kicker">PACKAGE NOT READY</span>
-              <h2 id="fixes-title">11 条核心验证通过，但 Task 包不通过</h2>
+              <h2 id="fixes-title">21 条核心验证通过，但 Task 包不通过</h2>
               <p>核心 F2P/P2P 已成立，但当前 Task 包不能原样直接评测；以下逐条列出阻塞和修改建议。</p>
             </div>
             <div class="category-summary" id="fix-summary" aria-label="Task 包不通过分类汇总"></div>
@@ -197,8 +197,8 @@
           <div class="section-heading">
             <div>
               <span class="section-kicker">ACTION REQUIRED</span>
-              <h2 id="issues-title">17 条核心验证未通过</h2>
-              <p>这些任务尚未形成完整、有效的 F2P/P2P 闭环，按主阻塞归类。</p>
+              <h2 id="issues-title">20 条核心验证未通过或未完成</h2>
+              <p>包含实际测试失败与验证证据尚未闭环的任务；待验证不代表已经证明目标行为失败，详情逐条说明。</p>
             </div>
             <div class="category-summary" id="category-summary" aria-label="问题分类汇总"></div>
           </div>
@@ -208,12 +208,12 @@
           <aside class="correction-banner" id="correction-banner">
             <div class="correction-icon" aria-hidden="true">✓</div>
             <div>
-              <span class="correction-label">本轮同步</span>
-              <h3 id="correction-title">本轮 32 条增量验证已完成</h3>
+              <span class="correction-label">2026-09-07 统计更正</span>
+              <h3 id="correction-title">纠正历史汇总：13 条移出可直接评测</h3>
               <p id="correction-summary"></p>
               <p class="correction-caveat" id="correction-caveat"></p>
             </div>
-            <button class="secondary-button" type="button" data-task-id="73691">查看 73691</button>
+            <button class="secondary-button" type="button" data-task-id="57827">查看 57827</button>
           </aside>
         </div>
       </section>
@@ -238,9 +238,9 @@
             <span class="sr-only">验证状态</span>
             <select id="status-filter">
               <option value="all">全部状态</option>
-              <option value="passed">核心通过 + Task 包通过（68）</option>
-              <option value="notice">核心通过 + Task 包不通过（11）</option>
-              <option value="failed">核心验证未通过（17）</option>
+              <option value="passed">核心通过 + Task 包通过（55）</option>
+              <option value="notice">核心通过 + Task 包不通过（21）</option>
+              <option value="failed">核心未通过或未完成（20）</option>
             </select>
           </label>
           <label>
@@ -293,7 +293,8 @@
         <div class="footer-links">
           <a href="#criterion-title">验证口径</a>
           <a href="#package-fixes">Task 包不通过</a>
-          <a href="#issues">核心未通过</a>
+          <a href="#issues">核心未通过或未完成</a>
+          <a href="validation-correction-20260907.md">统计更正依据</a>
           <a
             href="https://github.com/PaddlePaddle/community/tree/c9e46547a1f8dce934a8c454a9b4afd6cce1d384/swe-paddle/tasks"
             target="_blank"

@@ -13,6 +13,21 @@
     Object.entries(data.notices || {}).map(([id, detail]) => [Number(id), detail]),
   );
   const taskById = new Map(data.tasks.map((task) => [task.id, task]));
+  const directTaskIds = new Set(data.directTaskIds);
+  const classifiedIds = [...directTaskIds, ...noticeById.keys(), ...failureById.keys()];
+  if (
+    taskById.size !== data.tasks.length ||
+    directTaskIds.size !== data.directTaskIds.length ||
+    new Set(classifiedIds).size !== classifiedIds.length ||
+    classifiedIds.length !== data.tasks.length ||
+    classifiedIds.some((id) => !taskById.has(id)) ||
+    data.meta.total !== data.tasks.length ||
+    data.meta.corePassedTaskPackagePassed !== directTaskIds.size ||
+    data.meta.corePassedTaskPackageFailed !== noticeById.size ||
+    data.meta.coreFailed !== failureById.size
+  ) {
+    throw new Error("SWE-Paddle task classifications are incomplete or inconsistent.");
+  }
   const typeLabels = {
     bugfix: "Bugfix",
     feature: "Feature",
@@ -91,11 +106,9 @@
 
   function getComputedCounts() {
     const total = data.tasks.length;
-    const coreFailed = data.tasks.filter((task) => failureById.has(task.id)).length;
-    const needsFix = data.tasks.filter(
-      (task) => !failureById.has(task.id) && noticeById.has(task.id),
-    ).length;
-    const direct = total - coreFailed - needsFix;
+    const coreFailed = failureById.size;
+    const needsFix = noticeById.size;
+    const direct = directTaskIds.size;
     return {
       total,
       direct,
@@ -126,6 +139,14 @@
     elements.metricDirect.textContent = counts.direct;
     elements.metricNeedsFix.textContent = counts.needsFix;
     elements.metricCoreFailed.textContent = counts.coreFailed;
+    document.querySelector("#package-fixes-link").textContent = `查看 ${counts.needsFix} 条评测包待修`;
+    document.querySelector("#fixes-title").textContent = `${counts.needsFix} 条核心验证通过，但 Task 包不通过`;
+    document.querySelector("#issues-title").textContent = `${counts.coreFailed} 条核心验证未通过或未完成`;
+    document.querySelector("#readiness-note").textContent = `${counts.direct} 条核心与 Task 包均通过；${counts.needsFix} 条核心通过但 Task 包待修；${counts.coreFailed} 条核心未通过或未完成。`;
+    document.querySelector("#criterion-footnote").textContent = `前三项组成“核心验证”；第四项是“Task 包验证”。${counts.direct} 条两层通过，${counts.needsFix} 条核心通过但任务包待修，${counts.coreFailed} 条核心未通过或证据尚未闭环。“文件齐全”不等于“测试通过”。`;
+    elements.status.querySelector('[value="passed"]').textContent = `核心通过 + Task 包通过（${counts.direct}）`;
+    elements.status.querySelector('[value="notice"]').textContent = `核心通过 + Task 包不通过（${counts.needsFix}）`;
+    elements.status.querySelector('[value="failed"]').textContent = `核心未通过或未完成（${counts.coreFailed}）`;
   }
 
   function renderFixSummary() {
@@ -316,7 +337,7 @@
         elements.status.value === "all" ||
         (elements.status.value === "failed" && failed) ||
         (elements.status.value === "notice" && !failed && hasNotice) ||
-        (elements.status.value === "passed" && !failed && !hasNotice);
+        (elements.status.value === "passed" && directTaskIds.has(task.id));
       const matchesType = elements.type.value === "all" || elements.type.value === task.type;
       const matchesAuthor = elements.author.value === "all" || elements.author.value === task.author;
       return matchesSearch && matchesStatus && matchesType && matchesAuthor;
@@ -335,7 +356,7 @@
         const hasNotice = noticeById.has(task.id);
         const status = failed ? "failed" : hasNotice ? "notice" : "passed";
         const statusLabel = failed
-          ? "核心验证未通过"
+          ? failureById.get(task.id).coreStatus === "pending" ? "核心验证待完成" : "核心验证未通过"
           : hasNotice
             ? "核心通过 · Task 包不通过"
             : "核心与 Task 包均通过";
@@ -399,7 +420,7 @@
         : "F2P/P2P 与任务包入口已经通过；judge 覆盖和题面契约仍属于后续质量门禁。";
     const statusClass = failure ? "failed" : notice ? "notice" : "passed";
     const statusLabel = failure
-      ? "核心验证未通过"
+      ? failure.coreStatus === "pending" ? "核心验证待完成" : "核心验证未通过"
       : notice
         ? "核心通过 · Task 包不通过"
         : "核心与 Task 包均通过";

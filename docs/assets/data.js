@@ -1,20 +1,31 @@
 window.SWE_PADDLE_DATA = {
   meta: {
     title: "SWE-Paddle 可评测性雷达",
-    updatedAt: "2026-09-03",
+    updatedAt: "2026-09-07",
     snapshot: "c9e46547a1f8dce934a8c454a9b4afd6cce1d384",
     repository: "https://github.com/PaddlePaddle/community",
     taskBase:
       "https://github.com/PaddlePaddle/community/tree/c9e46547a1f8dce934a8c454a9b4afd6cce1d384/swe-paddle/tasks/PaddlePaddle__Paddle-",
     sourcePrBase: "https://github.com/PaddlePaddle/Paddle/pull/",
     total: 96,
-    corePassedTaskPackagePassed: 68,
-    corePassedTaskPackageFailed: 11,
-    coreFailed: 17,
+    corePassedTaskPackagePassed: 55,
+    corePassedTaskPackageFailed: 21,
+    coreFailed: 20,
     bugfix: 48,
     feature: 47,
     refactor: 1,
   },
+
+  // Explicit positive evidence: 33 original-entry historical pairs + 22 reruns.
+  // A task absent from the exception lists must never default to a pass.
+  directTaskIds: [
+    50086, 53534, 54625, 55890, 56135, 56470, 56705, 58219, 59909, 60417,
+    60808, 65724, 67195, 68432, 70469, 73535, 73570, 73702, 73776, 73850,
+    73854, 73855, 73880, 74212, 74421, 74439, 74444, 74491, 74586, 74594,
+    75274, 76522, 76736, 77064, 77078, 77150, 78082, 78104, 78138, 78238,
+    78301, 78342, 78440, 78570, 78911, 78922, 79035, 79057, 79161, 79167,
+    79268, 79275, 79310, 79353, 79369,
+  ],
 
   authors: {
     "Echo-Nie": {
@@ -184,6 +195,33 @@ window.SWE_PADDLE_DATA = {
   ],
 
   failures: {
+    74221: {
+      category: "evidence",
+      coreStatus: "pending",
+      matrix: "历史受控单轮 F2P 1 / P2P 2 · 双轮待复验",
+      reason:
+        "原始入口存在 op_test 导入/收集失败。外部补齐路径后曾观测到 Base 2P / 1F、Gold 3P，但尚缺完整双轮对照，不能认定原始任务包已通过。",
+      action:
+        "修正测试导入路径和收集入口，确认 Base / Gold 都能执行到预期节点，再完成双轮 F2P / P2P 验证。",
+    },
+    74305: {
+      category: "evidence",
+      coreStatus: "pending",
+      matrix: "历史受控单轮 F2P 1 / P2P 1 · 双轮待复验",
+      reason:
+        "原始入口存在 op_test 导入/收集失败。外部补齐路径后曾观测到 Base 1P / 1F、Gold 2P，但完整双轮对照仍待完成。",
+      action:
+        "补齐测试所需导入路径，校验实际收集节点和退出码，再用原始任务入口完成 Base / Gold 双轮验证。",
+    },
+    78823: {
+      category: "evidence",
+      coreStatus: "pending",
+      matrix: "仅 CPU 诊断：Base 导入失败 · Gold 147P / 4S",
+      reason:
+        "现有记录只有 CPU 运行：Base 在首个文件导入时失败，Gold 的通过和跳过不能证明 CUDA / XPU 目标行为。尚无任务要求的加速器 F2P / P2P 正证据。",
+      action:
+        "在 README 要求的 CUDA 或 XPU 环境中修复测试入口，排除吞异常、空返回和跳过造成的假绿，再对真实目标节点及回归节点完成 Base / Gold 双轮验证。",
+    },
     41202: {
       category: "roles",
       matrix: "F2P 0 · P2P 0 · Base 无法 collection",
@@ -337,6 +375,86 @@ window.SWE_PADDLE_DATA = {
   },
 
   notices: {
+    59021: {
+      kind: "runner",
+      matrix: "受控入口 F2P 3 / P2P 6 · 原始两态 RC 139",
+      reason:
+        "历史精确 Base / Gold 双轮已验证 3 个 F2P、6 个有效 P2P；原始脚本却在两态都触发无关崩溃，另一组测试还缺少静态模式初始化。",
+      action:
+        "明确选择目标与回归节点，补齐必要的执行模式设置和静态初始化，先运行 P2P 以免被 Base 的目标失败中断，再完成任务包原始入口双轮复验。",
+    },
+    73569: {
+      kind: "runner",
+      matrix: "受控入口 F2P 1 / P2P 2 · 原始两态 RC 4",
+      reason:
+        "补齐 legacy-test 路径后，Base 两轮均为 2P / 1F、Gold 两轮均为 3P，目标与回归验证成立；原始 test.sh 在两态均因 op_test 导入失败返回 RC 4。",
+      action:
+        "在 tests/test.sh 中基于仓库根目录补齐 test/legacy_test 的 PYTHONPATH，确认测试可收集，再以任务包入口复跑 Base / Gold 两轮。",
+    },
+    57827: {
+      kind: "runner",
+      matrix: "受控入口 F2P 2 / P2P 2 · 原始脚本不通过",
+      reason:
+        "指定目标节点后，2 个 F2P 与 2 个 P2P 双轮成立；原始脚本整文件收集了 decorator helper 和无关失败节点，正确修复后的 Gold 仍不能全绿。",
+      action:
+        "将 tests/test.sh 收窄到已验证的目标及回归节点，排除 helper 和无关失败，再用修改后的任务包完成 Base / Gold 双轮复验。",
+    },
+    59348: {
+      kind: "runner",
+      matrix: "受控入口 F2P 13 / P2P 2 · 原始脚本收集失败",
+      reason:
+        "修正 legacy 导入路径和执行模式初始化后，13 个 F2P 与 2 个 P2P 双轮成立；原始 test.sh 在 Base / Gold 都会因 op_test 导入问题停止收集。",
+      action:
+        "补齐 PYTHONPATH 并显式初始化测试执行模式，保持测试断言不变，用任务包原始入口复跑 Base / Gold 两轮。",
+    },
+    59374: {
+      kind: "runner",
+      matrix: "原始入口 F2P 5 / P2P 0 · 扩展入口 P2P 1",
+      reason:
+        "原选择器只有 5 个 F2P 和一个 CUDA skip，没有有效 P2P；另行选择已有回归节点后，才验证得到 5 个 F2P 与 1 个 P2P。",
+      action:
+        "把已验证的独立既有回归节点加入 tests/test.sh，跳过的 CUDA 节点不计入 P2P，再完成修改后入口的双轮验证。",
+    },
+    72800: {
+      kind: "runner",
+      matrix: "受控入口 F2P 4 / P2P 4 · 原始两态 RC 4",
+      reason:
+        "补齐 legacy-test 导入路径后，4 个 F2P 与 4 个 P2P 双轮成立；原始测试入口在 Base / Gold 均因路径问题返回 RC 4。",
+      action:
+        "在 tests/test.sh 中基于仓库根目录补入 test/legacy_test 的 PYTHONPATH，先检查收集结果，再双轮复验全部目标与回归节点。",
+    },
+    73125: {
+      kind: "runner",
+      matrix: "受控入口 F2P 2 / P2P 4 · 原始两态 RC 4",
+      reason:
+        "受控入口下 2 个 F2P 与 4 个 P2P 成立，但原始 test.sh 在 Base / Gold 两轮均返回 RC 4，测试收集没有正常完成。",
+      action:
+        "修正测试导入路径，增加非空收集和退出码检查，再使用修改后的任务入口完成 Base / Gold 双轮验证。",
+    },
+    73385: {
+      kind: "runner",
+      matrix: "受控入口 F2P 2 / P2P 4 · 原始入口待修",
+      reason:
+        "修正路径并明确选择目标节点后，2 个 F2P 与 4 个 P2P 成立；原始入口存在收集失败及选择器未严格约束的问题。",
+      action:
+        "补齐 legacy-test 导入路径，明确目标和回归节点列表；对空选择、收集错误或节点缺失返回失败，再完成双轮复验。",
+    },
+    73387: {
+      kind: "runner",
+      matrix: "受控入口 F2P 2 / P2P 1 · 原始两态 RC 4",
+      reason:
+        "补齐 PYTHONPATH 后，2 个 F2P 与 1 个 P2P 双轮成立；原始 test.sh 在两态均因收集问题返回 RC 4。",
+      action:
+        "将必要的仓库和 legacy-test 路径写入 tests/test.sh，再用任务包入口完成 Base / Gold 双轮验证。",
+    },
+    74184: {
+      kind: "runner",
+      matrix: "受控入口 F2P 2 / P2P 5 · 原始两态 RC 4",
+      reason:
+        "受控选择和收集方式下，2 个 F2P 与 5 个 P2P 成立；原始入口存在收集错误及 P2P 选择不完整的问题，不能原样直接评测。",
+      action:
+        "修正收集入口并明确纳入已验证的 P2P 节点，确保空选择和收集错误会失败，再双轮复验修改后的任务包。",
+    },
     52948: {
       kind: "runner",
       matrix: "F2P 5 / P2P 2",
@@ -439,12 +557,11 @@ window.SWE_PADDLE_DATA = {
   },
 
   correction: {
-    id: 73691,
-    title: "本轮 32 条增量验证已完成",
+    id: 57827,
+    title: "纠正历史汇总：13 条移出可直接评测",
     summary:
-      "18 条新增完整任务加 14 条修改任务复验：10 条核心验证与 Task 包均通过，9 条核心验证通过但 Task 包不通过，13 条核心验证未通过。",
+      "10 条仅在修正测试入口后完成双轮验证，改列任务包待修；2 条仅有受控单轮记录，另有 1 条缺加速器验证，改列待验证。",
     caveat:
-      "全量 96 条按三个互斥状态展示：68 条核心验证与 Task 包均通过，可直接评测；11 条核心验证通过但 Task 包不通过；17 条核心验证未通过。",
-    contributionPr: 1514,
+      "同一 c9e46547 快照现为：55 条可直接评测、21 条核心通过但任务包待修、20 条核心未通过或未完成。此次是证据核对与统计纠错，不是新增一轮全量测试。",
   },
 };

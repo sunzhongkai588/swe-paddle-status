@@ -415,7 +415,7 @@ code {
 }
 
 .progress-ring {
-  --progress: 285.8deg;
+  --progress: 206.25deg;
   position: relative;
   display: grid;
   width: 185px;
@@ -1169,6 +1169,7 @@ main {
 }
 
 .table-wrap {
+  position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
