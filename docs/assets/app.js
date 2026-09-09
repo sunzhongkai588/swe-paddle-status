@@ -1,523 +1,303 @@
 (() => {
   "use strict";
 
-  const data = window.SWE_PADDLE_DATA;
-  if (!data) {
-    throw new Error("SWE-Paddle data is unavailable.");
+  const history = window.SWE_PADDLE_DATA;
+  const update = window.SWE_PADDLE_UPDATE;
+  if (!history || !update || update.schemaVersion !== 1) {
+    throw new Error("SWE-Paddle historical data or current validation update is unavailable.");
   }
+  const failureById = new Map(Object.entries(history.failures).map(([id, value]) => [Number(id), value]));
+  const noticeById = new Map(Object.entries(history.notices || {}).map(([id, value]) => [Number(id), value]));
+  const directIds = new Set(history.directTaskIds);
+  const historicalById = new Map(history.tasks.map((task) => [task.id, task]));
+  const classified = [...directIds, ...noticeById.keys(), ...failureById.keys()];
+  const currentById = new Map(update.tasks.map((task) => [task.id, task]));
+  const currentStatuses = ["strict_pass", "compatible_pass", "needs_fix", "failed", "incomplete"];
+  const evidenceKinds = ["exact_native", "exact_python", "compatible_native", "incomplete"];
+  const changedIds = [...update.meta.newTaskIds, ...update.meta.modifiedTaskIds];
+  const unchangedIds = new Set(update.meta.unchangedTaskIds);
+  const sameIds = (left, right) => left.length === right.length && new Set(left).size === left.length && left.every((id) => right.includes(id));
 
-  const failureById = new Map(
-    Object.entries(data.failures).map(([id, detail]) => [Number(id), detail]),
-  );
-  const noticeById = new Map(
-    Object.entries(data.notices || {}).map(([id, detail]) => [Number(id), detail]),
-  );
-  const taskById = new Map(data.tasks.map((task) => [task.id, task]));
-  const directTaskIds = new Set(data.directTaskIds);
-  const classifiedIds = [...directTaskIds, ...noticeById.keys(), ...failureById.keys()];
+  // Missing evidence never defaults to a pass in either snapshot.
   if (
-    taskById.size !== data.tasks.length ||
-    directTaskIds.size !== data.directTaskIds.length ||
-    new Set(classifiedIds).size !== classifiedIds.length ||
-    classifiedIds.length !== data.tasks.length ||
-    classifiedIds.some((id) => !taskById.has(id)) ||
-    data.meta.total !== data.tasks.length ||
-    data.meta.corePassedTaskPackagePassed !== directTaskIds.size ||
-    data.meta.corePassedTaskPackageFailed !== noticeById.size ||
-    data.meta.coreFailed !== failureById.size
+    historicalById.size !== history.tasks.length || directIds.size !== history.directTaskIds.length ||
+    !sameIds(classified, history.tasks.map((task) => task.id)) ||
+    history.meta.total !== history.tasks.length ||
+    history.meta.corePassedTaskPackagePassed !== directIds.size ||
+    history.meta.corePassedTaskPackageFailed !== noticeById.size ||
+    history.meta.coreFailed !== failureById.size ||
+    update.meta.baselineSnapshot !== history.meta.snapshot ||
+    currentById.size !== update.tasks.length ||
+    !sameIds(changedIds, update.tasks.map((task) => task.id)) ||
+    unchangedIds.size !== update.meta.unchangedTaskIds.length ||
+    !sameIds(update.meta.modifiedTaskIds, update.tasks.filter((task) => task.changeKind === "modified").map((task) => task.id)) ||
+    !sameIds(update.meta.newTaskIds, update.tasks.filter((task) => task.changeKind === "new").map((task) => task.id)) ||
+    update.meta.newTaskIds.some((id) => historicalById.has(id)) ||
+    update.meta.modifiedTaskIds.some((id) => !historicalById.has(id)) ||
+    !sameIds([...unchangedIds], history.tasks.filter((task) => !currentById.has(task.id)).map((task) => task.id)) ||
+    update.tasks.some((task) => !Number.isInteger(task.id) || !currentStatuses.includes(task.status) ||
+      !evidenceKinds.includes(task.evidence) || !task.reason || !task.action ||
+      (task.status === "needs_fix" && (task.packageChangeRequired !== true || task.evidence !== "compatible_native")) ||
+      (task.status === "incomplete" && (task.f2p !== null || task.p2p !== null ||
+        task.packageChangeRequired !== null || task.evidence !== "incomplete")) ||
+      (["strict_pass", "compatible_pass"].includes(task.status) && task.packageChangeRequired !== false) ||
+      (task.status === "strict_pass" && !["exact_native", "exact_python"].includes(task.evidence)) ||
+      (task.status === "compatible_pass" && task.evidence !== "compatible_native") ||
+      (["strict_pass", "compatible_pass", "needs_fix"].includes(task.status) &&
+        (!Number.isInteger(task.f2p) || task.f2p < 1 || !Number.isInteger(task.p2p) || task.p2p < 1)))
   ) {
-    throw new Error("SWE-Paddle task classifications are incomplete or inconsistent.");
+    throw new Error("SWE-Paddle snapshot inventories or explicit classifications are inconsistent.");
   }
-  const typeLabels = {
-    bugfix: "Bugfix",
-    feature: "Feature",
-    refactor: "Refactor",
-  };
-  const categoryThemes = {
-    gold: { color: "#c95e53", background: "#fff0ed" },
-    roles: { color: "#ae791d", background: "#fff5dc" },
-    package: { color: "#735ac7", background: "#f1edff" },
-    evidence: { color: "#3972f6", background: "#eaf0ff" },
-  };
-  const fixKinds = {
-    runner: { label: "Runner / 测试入口", shortLabel: "Runner", color: "#b47713" },
-    patch: { label: "Patch 格式", shortLabel: "Patch", color: "#735ac7" },
-    assertion: { label: "断言覆盖", shortLabel: "断言", color: "#3972f6" },
-  };
 
-  const elements = {
-    snapshotShort: document.querySelector("#snapshot-short"),
-    footerSnapshot: document.querySelector("#footer-snapshot"),
-    updatedAt: document.querySelector("#updated-at"),
-    progressRing: document.querySelector("#progress-ring"),
-    passRate: document.querySelector("#pass-rate"),
-    heroDirect: document.querySelector("#hero-direct"),
-    heroNeedsFix: document.querySelector("#hero-needs-fix"),
-    heroCoreFailed: document.querySelector("#hero-core-failed"),
-    metricTotal: document.querySelector("#metric-total"),
-    metricDirect: document.querySelector("#metric-direct"),
-    metricNeedsFix: document.querySelector("#metric-needs-fix"),
-    metricCoreFailed: document.querySelector("#metric-core-failed"),
-    fixSummary: document.querySelector("#fix-summary"),
-    fixGrid: document.querySelector("#fix-grid"),
-    categorySummary: document.querySelector("#category-summary"),
-    issueGrid: document.querySelector("#issue-grid"),
-    correctionTitle: document.querySelector("#correction-title"),
-    correctionSummary: document.querySelector("#correction-summary"),
-    correctionCaveat: document.querySelector("#correction-caveat"),
-    correctionButton: document.querySelector("#correction-banner [data-task-id]"),
-    search: document.querySelector("#search-input"),
-    status: document.querySelector("#status-filter"),
-    type: document.querySelector("#type-filter"),
-    author: document.querySelector("#author-filter"),
-    clear: document.querySelector("#clear-filters"),
-    visibleCount: document.querySelector("#visible-count"),
-    taskBody: document.querySelector("#task-table-body"),
-    emptyState: document.querySelector("#empty-state"),
-    dialog: document.querySelector("#task-dialog"),
-    dialogContent: document.querySelector("#dialog-content"),
-    dialogClose: document.querySelector(".dialog-close"),
+  const tasks = [
+    ...history.tasks.filter((task) => unchangedIds.has(task.id)).map((task) => ({ ...task, status: "historical" })),
+    ...update.tasks.map((task) => ({ ...historicalById.get(task.id), ...task })),
+  ].sort((left, right) => left.id - right.id);
+  const taskById = new Map(tasks.map((task) => [task.id, task]));
+  const statusCounts = Object.fromEntries([...currentStatuses, "historical"].map((status) => [status, tasks.filter((task) => task.status === status).length]));
+  const reproduced = update.tasks.filter((task) => ["strict_pass", "compatible_pass", "needs_fix"].includes(task.status));
+  const counts = {
+    examined: update.tasks.length,
+    reproducedPassed: reproduced.length,
+    packageUnchanged: reproduced.filter((task) => task.packageChangeRequired === false).length,
+    packageNeedsFix: statusCounts.needs_fix,
+    notPassed: statusCounts.failed,
+    environmentIncomplete: statusCounts.incomplete,
+    strictPassed: reproduced.filter((task) => ["exact_native", "exact_python"].includes(task.evidence)).length,
+    compatiblePassed: reproduced.filter((task) => task.evidence === "compatible_native").length,
   };
+  if (tasks.length !== update.meta.total || taskById.size !== tasks.length ||
+    new Set(update.meta.proposalOnlyIds).size !== update.meta.proposalOnlyIds.length ||
+    update.meta.proposalOnlyIds.some((id) => taskById.has(id)) ||
+    Object.entries(counts).some(([key, value]) => update.counts[key] !== value) ||
+    counts.reproducedPassed !== counts.strictPassed + counts.compatiblePassed ||
+    counts.examined !== counts.reproducedPassed + counts.notPassed + counts.environmentIncomplete) {
+    throw new Error("SWE-Paddle current validation counts do not match their task evidence.");
+  }
 
-  const escapeHtml = (value) =>
-    String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+  const typeLabels = { bugfix: "Bugfix", feature: "Feature", refactor: "Refactor", unknown: "类型未确认" };
+  const statusLabels = {
+    strict_pass: "本轮通过 · 严格证据",
+    compatible_pass: "本轮通过 · 兼容诊断",
+    needs_fix: "本轮兼容复现 · 入口待修",
+    failed: "本轮验证未通过",
+    incomplete: "本轮环境未完成",
+    historical: "历史记录 · 本轮未重跑",
+  };
+  const themes = {
+    strict_pass: { color: "#237c62", background: "#e3f7f0" },
+    compatible_pass: { color: "#366ac9", background: "#eaf0ff" },
+    needs_fix: { color: "#946414", background: "#fff5dc" },
+    failed: { color: "#b65146", background: "#fff0ed" },
+    incomplete: { color: "#735ac7", background: "#f1edff" },
+    historical: { color: "#637188", background: "#edf1f6" },
+  };
+  const evidenceLabels = {
+    exact_native: "严格证据：精确 Base / Gold 原生编译",
+    exact_python: "严格证据：精确被测 Python 源码",
+    compatible_native: "兼容环境诊断：非精确原生构建",
+    incomplete: "环境证据未完成",
+  };
+  const elements = Object.fromEntries([
+    "snapshot-short", "footer-snapshot", "updated-at", "progress-ring", "pass-rate", "hero-direct",
+    "hero-needs-fix", "hero-core-failed", "metric-total", "metric-direct", "metric-needs-fix",
+    "metric-core-failed", "fix-summary", "fix-grid", "category-summary", "issue-grid",
+    "correction-title", "correction-summary", "correction-caveat", "search-input", "status-filter",
+    "type-filter", "author-filter", "clear-filters", "visible-count", "inventory-total",
+    "task-table-body", "empty-state", "task-dialog", "dialog-content", "evidence-strict", "evidence-compatible",
+  ].map((id) => [id, document.getElementById(id)]));
+  const escapeHtml = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+  const authorLabel = (author) => author === "unknown" || !author ? "作者未确认" : history.authors[author]?.label || author;
+  const authorProfile = (author) => author === "unknown" || !author ? null : history.authors[author]?.profile || `https://github.com/${encodeURIComponent(author)}`;
+  const initials = (name) => String(name).split(/[\s_-]+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join("").toUpperCase();
+  const taskUrl = (task, snapshot = update.meta.snapshot) => `${history.meta.repository}/tree/${snapshot}/swe-paddle/tasks/${task.taskPath || `PaddlePaddle__Paddle-${task.id}`}`;
+  const sourcePrUrl = (id) => `${history.meta.sourcePrBase}${id}`;
+  const contributionPrUrl = (id) => `${history.meta.repository}/pull/${id}`;
+  const matrix = (task) => `F2P ${task.f2p === null || task.f2p === undefined ? "未完成" : task.f2p} / P2P ${task.p2p === null || task.p2p === undefined ? "未完成" : task.p2p}`;
+  const packageLabel = (task) => task.packageChangeRequired === true ? "原包需要修改" : task.packageChangeRequired === false ? "原包未发现必须修改项" : "原包修改需求尚未确定";
 
-  const taskUrl = (task) =>
-    task.taskPath
-      ? `${data.meta.repository}/tree/${data.meta.snapshot}/swe-paddle/tasks/${task.taskPath}`
-      : `${data.meta.taskBase}${task.id}`;
-  const sourcePrUrl = (id) => `${data.meta.sourcePrBase}${id}`;
-  const contributionPrUrl = (id) => `${data.meta.repository}/pull/${id}`;
-  const authorLabel = (author) => data.authors[author]?.label || author;
-  const authorProfile = (author) => data.authors[author]?.profile || "#";
-  const initials = (name) =>
-    String(name)
-      .split(/[\s_-]+/)
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((part) => part[0])
-      .join("")
-      .toUpperCase();
+  function authorMarkup(task, prefix = "") {
+    const label = authorLabel(task.author);
+    const profile = authorProfile(task.author);
+    const body = `<span class="avatar" aria-hidden="true">${escapeHtml(initials(label))}</span>${escapeHtml(prefix + label)}`;
+    return profile ? `<a class="author-cell" href="${escapeHtml(profile)}" target="_blank" rel="noreferrer">${body}</a>` : `<span class="author-cell">${body}</span>`;
+  }
 
-  function getComputedCounts() {
-    const total = data.tasks.length;
-    const coreFailed = failureById.size;
-    const needsFix = noticeById.size;
-    const direct = directTaskIds.size;
-    return {
-      total,
-      direct,
-      needsFix,
-      coreFailed,
-      bugfix: data.tasks.filter((task) => task.type === "bugfix").length,
-      feature: data.tasks.filter((task) => task.type === "feature").length,
-      refactor: data.tasks.filter((task) => task.type === "refactor").length,
-    };
+  function historicalLabel(task) {
+    if (failureById.has(task.id)) return failureById.get(task.id).coreStatus === "pending" ? "历史：核心验证待完成" : "历史：核心验证未通过";
+    if (noticeById.has(task.id)) return "历史：核心通过 · Task 包待修";
+    if (directIds.has(task.id)) return "历史两层通过 · 本轮未重跑";
+    throw new Error(`Historical task ${task.id} has no explicit classification.`);
   }
 
   function renderOverview() {
-    const counts = getComputedCounts();
-    const rate = (counts.direct / counts.total) * 100;
-    const shortSnapshot = data.meta.snapshot.slice(0, 8);
-
-    elements.snapshotShort.textContent = shortSnapshot;
-    elements.footerSnapshot.textContent = shortSnapshot;
-    elements.updatedAt.textContent = data.meta.updatedAt;
-    elements.updatedAt.dateTime = data.meta.updatedAt;
-    elements.progressRing.style.setProperty("--progress", `${(rate / 100) * 360}deg`);
-    elements.progressRing.setAttribute("aria-label", `直接可评测率 ${rate.toFixed(1)}%`);
-    elements.passRate.textContent = `${rate.toFixed(1)}%`;
-    elements.heroDirect.textContent = counts.direct;
-    elements.heroNeedsFix.textContent = counts.needsFix;
-    elements.heroCoreFailed.textContent = counts.coreFailed;
-    elements.metricTotal.textContent = counts.total;
-    elements.metricDirect.textContent = counts.direct;
-    elements.metricNeedsFix.textContent = counts.needsFix;
-    elements.metricCoreFailed.textContent = counts.coreFailed;
-    document.querySelector("#package-fixes-link").textContent = `查看 ${counts.needsFix} 条评测包待修`;
-    document.querySelector("#fixes-title").textContent = `${counts.needsFix} 条核心验证通过，但 Task 包不通过`;
-    document.querySelector("#issues-title").textContent = `${counts.coreFailed} 条核心验证未通过或未完成`;
-    document.querySelector("#readiness-note").textContent = `${counts.direct} 条核心与 Task 包均通过；${counts.needsFix} 条核心通过但 Task 包待修；${counts.coreFailed} 条核心未通过或未完成。`;
-    document.querySelector("#criterion-footnote").textContent = `前三项组成“核心验证”；第四项是“Task 包验证”。${counts.direct} 条两层通过，${counts.needsFix} 条核心通过但任务包待修，${counts.coreFailed} 条核心未通过或证据尚未闭环。“文件齐全”不等于“测试通过”。`;
-    elements.status.querySelector('[value="passed"]').textContent = `核心通过 + Task 包通过（${counts.direct}）`;
-    elements.status.querySelector('[value="notice"]').textContent = `核心通过 + Task 包不通过（${counts.needsFix}）`;
-    elements.status.querySelector('[value="failed"]').textContent = `核心未通过或未完成（${counts.coreFailed}）`;
+    const rate = counts.reproducedPassed / counts.examined * 100;
+    for (const id of ["snapshot-short", "footer-snapshot"]) elements[id].textContent = update.meta.snapshot.slice(0, 8);
+    elements["updated-at"].textContent = update.meta.updatedAt;
+    elements["updated-at"].dateTime = update.meta.updatedAt;
+    elements["progress-ring"].style.setProperty("--progress", `${rate * 3.6}deg`);
+    elements["progress-ring"].setAttribute("aria-label", `本轮 F2P/P2P 复现通过 ${counts.reproducedPassed} / ${counts.examined}，${rate.toFixed(1)}%；含兼容环境，不是正式可评测率`);
+    elements["pass-rate"].textContent = `${rate.toFixed(1)}%`;
+    document.querySelector(".progress-center span").textContent = `复现通过 · ${counts.reproducedPassed} / ${counts.examined}`;
+    for (const [id, value] of Object.entries({
+      "hero-direct": counts.reproducedPassed, "hero-needs-fix": counts.notPassed,
+      "hero-core-failed": counts.environmentIncomplete, "metric-total": tasks.length,
+      "metric-direct": counts.examined, "metric-needs-fix": counts.reproducedPassed,
+      "metric-core-failed": counts.notPassed + counts.environmentIncomplete,
+      "evidence-strict": counts.strictPassed, "evidence-compatible": counts.compatiblePassed,
+      "inventory-total": tasks.length,
+    })) elements[id].textContent = value;
+    document.getElementById("readiness-note").textContent = `${counts.reproducedPassed} 条中，${counts.packageUnchanged} 条原包无必改项，${counts.packageNeedsFix} 条需修入口；包含兼容环境诊断，不代表 ${counts.reproducedPassed} 条均可正式评测。`;
+    document.getElementById("latest-report-link").href = update.meta.reportUrl;
+    for (const [status, count] of Object.entries(statusCounts)) elements["status-filter"].querySelector(`[value="${status}"]`).textContent = `${statusLabels[status]}（${count}）`;
   }
 
-  function renderFixSummary() {
-    const counts = [...noticeById.values()].reduce((result, notice) => {
-      result[notice.kind] = (result[notice.kind] || 0) + 1;
-      return result;
-    }, {});
-
-    elements.fixSummary.innerHTML = Object.entries(fixKinds)
-      .map(([key, kind]) => `
-        <span class="category-pill" style="--category-color: ${kind.color}">
-          <i aria-hidden="true"></i>
-          ${escapeHtml(kind.label)}
-          <strong>${counts[key] || 0}</strong>
-        </span>
-      `)
-      .join("");
-  }
-
-  function renderPackageFixes() {
-    elements.fixGrid.innerHTML = [...noticeById.entries()]
-      .map(([id, notice]) => {
-        const task = taskById.get(id);
-        const kind = fixKinds[notice.kind] || fixKinds.runner;
-        const label = authorLabel(task.author);
-
-        return `
-          <article
-            class="fix-card"
-            role="button"
-            tabindex="0"
-            data-task-id="${id}"
-            aria-label="查看 Task ${id} 评测包待修详情"
-            style="--fix-color: ${kind.color}"
-          >
-            <div class="issue-top">
-              <span class="issue-id">#${id}</span>
-              <span class="fix-kind">${escapeHtml(kind.label)}</span>
-            </div>
-            <h3>${escapeHtml(task.title)}</h3>
-            <div class="validation-split" aria-label="核心验证通过，Task 包不通过">
-              <span class="validation-pass">核心验证 <strong>通过</strong></span>
-              <span class="validation-fail">Task 包 <strong>不通过</strong></span>
-            </div>
-            <p class="matrix-line">${escapeHtml(notice.matrix)}</p>
-            <div class="fix-detail">
-              <small>为什么不能原样直接评测</small>
-              <p>${escapeHtml(notice.reason)}</p>
-            </div>
-            <div class="fix-detail fix-action">
-              <small>需要修改</small>
-              <p>${escapeHtml(notice.action)}</p>
-            </div>
-            <div class="issue-footer">
-              <span class="author-mini">
-                <span class="avatar" aria-hidden="true">${escapeHtml(initials(label))}</span>
-                ${escapeHtml(label)}
-              </span>
-              <span class="view-link">查看任务 →</span>
-            </div>
-          </article>
-        `;
-      })
-      .join("");
-  }
-
-  function renderCategorySummary() {
-    const counts = Object.keys(data.categories).reduce((result, category) => {
-      result[category] = [...failureById.values()].filter(
-        (failure) => failure.category === category,
-      ).length;
-      return result;
-    }, {});
-
-    elements.categorySummary.innerHTML = Object.entries(data.categories)
-      .map(([key, category]) => {
-        const theme = categoryThemes[key];
-        return `
-          <span class="category-pill" style="--category-color: ${theme.color}">
-            <i aria-hidden="true"></i>
-            ${escapeHtml(category.shortLabel)}
-            <strong>${counts[key]}</strong>
-          </span>
-        `;
-      })
-      .join("");
-  }
-
-  function renderIssues() {
-    elements.issueGrid.innerHTML = [...failureById.entries()]
-      .map(([id, failure]) => {
-        const task = taskById.get(id);
-        const category = data.categories[failure.category];
-        const theme = categoryThemes[failure.category];
-        const label = authorLabel(task.author);
-
-        return `
-          <article
-            class="issue-card"
-            role="button"
-            tabindex="0"
-            data-task-id="${id}"
-            aria-label="查看 Task ${id} 详情"
-            style="--category-color: ${theme.color}; --category-bg: ${theme.background}"
-          >
-            <div class="issue-top">
-              <span class="issue-id">#${id}</span>
-              <span class="issue-category">${escapeHtml(category.shortLabel)}</span>
-            </div>
-            <h3>${escapeHtml(task.title)}</h3>
-            <p class="matrix-line">${escapeHtml(failure.matrix)}</p>
-            <p class="issue-reason">${escapeHtml(failure.reason)}</p>
-            <div class="issue-footer">
-              <span class="author-mini">
-                <span class="avatar" aria-hidden="true">${escapeHtml(initials(label))}</span>
-                ${escapeHtml(label)}
-              </span>
-              <span class="view-link">查看定位 →</span>
-            </div>
-          </article>
-        `;
-      })
-      .join("");
+  function renderCards() {
+    elements["fix-summary"].innerHTML = `<span class="category-pill" style="--category-color: #946414"><i aria-hidden="true"></i>测试入口 / 导入路径 <strong>${counts.packageNeedsFix}</strong></span>`;
+    elements["category-summary"].innerHTML = ["failed", "incomplete"].map((status) => `<span class="category-pill" style="--category-color: ${themes[status].color}"><i aria-hidden="true"></i>${escapeHtml(statusLabels[status])} <strong>${statusCounts[status]}</strong></span>`).join("");
+    for (const [id, statuses] of [["fix-grid", ["needs_fix"]], ["issue-grid", ["failed", "incomplete"]]]) {
+      elements[id].innerHTML = update.tasks.filter((task) => statuses.includes(task.status)).map((task) => {
+        const theme = themes[task.status];
+        return `<article class="${task.status === "needs_fix" ? "fix-card" : "issue-card"}" role="button" tabindex="0" data-task-id="${task.id}" aria-label="查看 Task ${task.id} 验证详情" style="--fix-color: ${theme.color}; --category-color: ${theme.color}; --category-bg: ${theme.background}">
+          <div class="issue-top"><span class="issue-id">#${task.id}</span><span class="issue-category">${escapeHtml(statusLabels[task.status])}</span></div>
+          <h3>${escapeHtml(task.title)}</h3><p class="matrix-line">${escapeHtml(matrix(task))}</p>
+          <p class="card-evidence">${escapeHtml(evidenceLabels[task.evidence])}</p>
+          <div class="fix-detail"><small>当前问题</small><p>${escapeHtml(task.reason)}</p></div>
+          <div class="fix-detail fix-action"><small>下一步</small><p>${escapeHtml(task.action)}</p></div>
+          <div class="issue-footer"><span class="author-mini">${escapeHtml(authorLabel(task.author))}</span><span class="view-link">查看证据 →</span></div>
+        </article>`;
+      }).join("");
+    }
   }
 
   function renderCorrection() {
-    elements.correctionTitle.textContent = data.correction.title;
-    elements.correctionSummary.textContent = data.correction.summary;
-    elements.correctionCaveat.textContent = data.correction.caveat;
-    elements.correctionButton.dataset.taskId = data.correction.id;
-    elements.correctionButton.textContent = `查看 ${data.correction.id}`;
+    elements["correction-title"].textContent = history.correction.title;
+    elements["correction-summary"].textContent = history.correction.summary;
+    elements["correction-caveat"].textContent = `以下为 ${history.meta.snapshot.slice(0, 8)} 的历史说明，不覆盖本轮结果。${history.correction.caveat}`;
+    const button = document.querySelector("#correction-banner [data-task-id]");
+    button.dataset.taskId = history.correction.id;
+    button.textContent = `查看历史 ${history.correction.id}`;
   }
 
   function populateAuthors() {
-    const counts = data.tasks.reduce((result, task) => {
-      result[task.author] = (result[task.author] || 0) + 1;
-      return result;
-    }, {});
-
-    Object.entries(counts)
-      .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
-      .forEach(([author, count]) => {
-        const option = document.createElement("option");
-        option.value = author;
-        option.textContent = `${authorLabel(author)} (${count})`;
-        elements.author.append(option);
-      });
+    const authors = tasks.reduce((result, task) => { result[task.author || "unknown"] = (result[task.author || "unknown"] || 0) + 1; return result; }, {});
+    Object.entries(authors).sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0])).forEach(([author, count]) => {
+      const option = document.createElement("option");
+      option.value = author;
+      option.textContent = `${authorLabel(author)} (${count})`;
+      elements["author-filter"].append(option);
+    });
   }
 
   function readFiltersFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const validStatus = ["all", "passed", "notice", "failed"];
-    const validType = ["all", "bugfix", "feature", "refactor"];
-    const validAuthors = ["all", ...Object.keys(data.authors)];
-
-    elements.search.value = params.get("q") || "";
-    elements.status.value = validStatus.includes(params.get("status"))
-      ? params.get("status")
-      : "all";
-    elements.type.value = validType.includes(params.get("type")) ? params.get("type") : "all";
-    elements.author.value = validAuthors.includes(params.get("author"))
-      ? params.get("author")
-      : "all";
+    elements["search-input"].value = params.get("q") || "";
+    for (const [id, key] of [["status-filter", "status"], ["type-filter", "type"], ["author-filter", "author"]]) {
+      const value = params.get(key);
+      elements[id].value = [...elements[id].options].some((option) => option.value === value) ? value : "all";
+    }
   }
 
   function updateFilterUrl() {
     const params = new URLSearchParams();
-    if (elements.search.value.trim()) params.set("q", elements.search.value.trim());
-    if (elements.status.value !== "all") params.set("status", elements.status.value);
-    if (elements.type.value !== "all") params.set("type", elements.type.value);
-    if (elements.author.value !== "all") params.set("author", elements.author.value);
-
+    if (elements["search-input"].value.trim()) params.set("q", elements["search-input"].value.trim());
+    for (const [id, key] of [["status-filter", "status"], ["type-filter", "type"], ["author-filter", "author"]]) if (elements[id].value !== "all") params.set(key, elements[id].value);
     const query = params.toString();
-    const nextUrl = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
-    window.history.replaceState(null, "", nextUrl);
-  }
-
-  function filteredTasks() {
-    const search = elements.search.value.trim().toLocaleLowerCase("zh-CN");
-    return data.tasks.filter((task) => {
-      const failed = failureById.has(task.id);
-      const hasNotice = noticeById.has(task.id);
-      const haystack = `${task.id} ${task.title} ${task.author} ${authorLabel(task.author)}`.toLocaleLowerCase(
-        "zh-CN",
-      );
-      const matchesSearch = !search || haystack.includes(search);
-      const matchesStatus =
-        elements.status.value === "all" ||
-        (elements.status.value === "failed" && failed) ||
-        (elements.status.value === "notice" && !failed && hasNotice) ||
-        (elements.status.value === "passed" && directTaskIds.has(task.id));
-      const matchesType = elements.type.value === "all" || elements.type.value === task.type;
-      const matchesAuthor = elements.author.value === "all" || elements.author.value === task.author;
-      return matchesSearch && matchesStatus && matchesType && matchesAuthor;
-    });
+    window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`);
   }
 
   function renderTable() {
-    const tasks = filteredTasks();
-    elements.visibleCount.textContent = tasks.length;
-    elements.emptyState.hidden = tasks.length !== 0;
-    elements.taskBody.hidden = tasks.length === 0;
-
-    elements.taskBody.innerHTML = tasks
-      .map((task) => {
-        const failed = failureById.has(task.id);
-        const hasNotice = noticeById.has(task.id);
-        const status = failed ? "failed" : hasNotice ? "notice" : "passed";
-        const statusLabel = failed
-          ? failureById.get(task.id).coreStatus === "pending" ? "核心验证待完成" : "核心验证未通过"
-          : hasNotice
-            ? "核心通过 · Task 包不通过"
-            : "核心与 Task 包均通过";
-        const statusColor = failed ? "#d76b60" : hasNotice ? "#d89928" : "#42b894";
-        const label = authorLabel(task.author);
-
-        return `
-          <tr>
-            <td>
-              <span class="task-cell" style="--status-color: ${statusColor}">#${task.id}</span>
-            </td>
-            <td class="topic-cell">${escapeHtml(task.title)}</td>
-            <td><span class="type-chip ${task.type}">${escapeHtml(typeLabels[task.type] || task.type)}</span></td>
-            <td>
-              <a class="author-cell" href="${escapeHtml(authorProfile(task.author))}" target="_blank" rel="noreferrer">
-                <span class="avatar" aria-hidden="true">${escapeHtml(initials(label))}</span>
-                ${escapeHtml(label)}
-              </a>
-            </td>
-            <td><span class="status-chip ${status}">${statusLabel}</span></td>
-            <td>
-              <button class="table-action" type="button" data-task-id="${task.id}">
-                详情 <span aria-hidden="true">→</span>
-              </button>
-            </td>
-          </tr>
-        `;
-      })
-      .join("");
-
+    const query = elements["search-input"].value.trim().toLocaleLowerCase("zh-CN");
+    const visible = tasks.filter((task) => {
+      const haystack = `${task.id} ${task.title} ${task.author} ${authorLabel(task.author)}`.toLocaleLowerCase("zh-CN");
+      return (!query || haystack.includes(query)) &&
+        (elements["status-filter"].value === "all" || elements["status-filter"].value === task.status) &&
+        (elements["type-filter"].value === "all" || elements["type-filter"].value === (task.type || "unknown")) &&
+        (elements["author-filter"].value === "all" || elements["author-filter"].value === (task.author || "unknown"));
+    });
+    elements["visible-count"].textContent = visible.length;
+    elements["empty-state"].hidden = visible.length !== 0;
+    elements["task-table-body"].hidden = visible.length === 0;
+    elements["task-table-body"].innerHTML = visible.map((task) => {
+      const historical = task.status === "historical";
+      const detail = historical ? historicalLabel(task) : `${task.changeKind === "new" ? "新增" : "修改"} · ${matrix(task)}`;
+      return `<tr data-validation-status="${task.status}">
+        <td><span class="task-cell" style="--status-color: ${themes[task.status].color}">#${task.id}</span></td>
+        <td class="topic-cell">${escapeHtml(task.title)}</td>
+        <td><span class="type-chip ${escapeHtml(task.type || "unknown")}">${escapeHtml(typeLabels[task.type] || typeLabels.unknown)}</span></td>
+        <td>${authorMarkup(task)}</td>
+        <td><span class="status-chip ${task.status}">${escapeHtml(statusLabels[task.status])}</span><small class="status-detail${historical && !directIds.has(task.id) ? " historical-attention" : ""}">${escapeHtml(detail)}</small></td>
+        <td><button class="table-action" type="button" data-task-id="${task.id}">详情 <span aria-hidden="true">→</span></button></td>
+      </tr>`;
+    }).join("");
     updateFilterUrl();
   }
 
   function renderDialog(task) {
-    const failure = failureById.get(task.id);
-    const notice = noticeById.get(task.id);
-    const isCorrection = task.id === data.correction.id;
-    const category = failure ? data.categories[failure.category] : null;
-    const theme = failure
-      ? categoryThemes[failure.category]
-      : { color: "#237c62", background: "#ebf8f3" };
-    const label = authorLabel(task.author);
-    const contributionPr =
-      failure?.contributionPr || notice?.contributionPr || (isCorrection ? data.correction.contributionPr : null);
-    const sourceAuthor = failure?.sourceAuthor;
-
-    const matrix = failure
-      ? failure.matrix
-      : notice
-        ? notice.matrix
-        : "核心验证通过 · Task 包通过 · 可直接评测";
-    const explanation = failure
-      ? failure.reason
-      : notice
-        ? notice.reason
-        : "该任务的目标 F2P、回归 P2P 和原始任务包端到端执行均已通过，可无需修改直接进入评测。";
-    const nextStep = failure
-      ? failure.action
-      : notice
-        ? notice.action
-        : "F2P/P2P 与任务包入口已经通过；judge 覆盖和题面契约仍属于后续质量门禁。";
-    const statusClass = failure ? "failed" : notice ? "notice" : "passed";
-    const statusLabel = failure
-      ? failure.coreStatus === "pending" ? "核心验证待完成" : "核心验证未通过"
-      : notice
-        ? "核心通过 · Task 包不通过"
-        : "核心与 Task 包均通过";
-
-    elements.dialog.style.setProperty("--dialog-color", theme.color);
-    elements.dialog.style.setProperty("--dialog-bg", theme.background);
-    elements.dialogContent.innerHTML = `
-      <span class="dialog-eyebrow">${failure ? "CORE VALIDATION INCOMPLETE" : notice ? "CORE PASSED · TASK PACKAGE FAILED" : "CORE & TASK PACKAGE PASSED"}</span>
-      <div class="dialog-title-row">
-        <h2 id="dialog-title">Task #${task.id}</h2>
-        <span class="status-chip ${statusClass}">${statusLabel}</span>
-      </div>
+    const historical = task.status === "historical";
+    const failure = historical ? failureById.get(task.id) : null;
+    const notice = historical ? noticeById.get(task.id) : null;
+    const prior = failure || notice;
+    const historicalPass = historical && directIds.has(task.id);
+    if (historical && !prior && !historicalPass) throw new Error(`Historical task ${task.id} has no evidence record.`);
+    const snapshot = historical ? history.meta.snapshot : update.meta.snapshot;
+    const theme = themes[task.status];
+    const contributionPr = prior?.contributionPr || (historical && task.id === history.correction.id ? history.correction.contributionPr : null);
+    const result = historical ? prior?.matrix || (historicalPass ? "历史核心验证通过 · 历史 Task 包通过" : "历史证据未确定") : matrix(task);
+    const reason = historical ? prior ? prior.reason : "历史记录显示核心 F2P/P2P 与原始任务包均通过；该任务未在本轮重新执行。" : task.reason;
+    const action = historical ? prior?.action || "保留历史结论；进入新的正式评测前仍需按目标方案确认环境、题面和其他质量门禁。" : task.action;
+    elements["task-dialog"].style.setProperty("--dialog-color", theme.color);
+    elements["task-dialog"].style.setProperty("--dialog-bg", theme.background);
+    elements["dialog-content"].innerHTML = `
+      <span class="dialog-eyebrow">${historical ? "HISTORICAL RECORD · NOT RERUN" : "CURRENT F2P / P2P VALIDATION"}</span>
+      <div class="dialog-title-row"><h2 id="dialog-title">Task #${task.id}</h2><span class="status-chip ${task.status}">${escapeHtml(statusLabels[task.status])}</span></div>
       <p class="dialog-topic">${escapeHtml(task.title)}</p>
-      <div class="dialog-meta">
-        <span class="type-chip ${task.type}">${escapeHtml(typeLabels[task.type] || task.type)}</span>
-        <a class="author-cell" href="${escapeHtml(authorProfile(task.author))}" target="_blank" rel="noreferrer">
-          <span class="avatar" aria-hidden="true">${escapeHtml(initials(label))}</span>
-          样本作者：${escapeHtml(label)}
-        </a>
-        ${
-          sourceAuthor
-            ? `<a class="author-cell" href="${escapeHtml(failure.sourceAuthorProfile)}" target="_blank" rel="noreferrer">源 PR 作者：${escapeHtml(sourceAuthor)}</a>`
-            : ""
-        }
-        ${failure ? `<span class="issue-category" style="--category-color: ${theme.color}; --category-bg: ${theme.background}">${escapeHtml(category.label)}</span>` : ""}
+      <div class="dialog-meta"><span class="type-chip ${escapeHtml(task.type || "unknown")}">${escapeHtml(typeLabels[task.type] || typeLabels.unknown)}</span>${authorMarkup(task, "样本作者：")}
+        ${failure?.sourceAuthor ? `<a class="author-cell" href="${escapeHtml(failure.sourceAuthorProfile)}" target="_blank" rel="noreferrer">源 PR 作者：${escapeHtml(failure.sourceAuthor)}</a>` : ""}
       </div>
-      <div class="dialog-panel matrix-panel">
-        <small>验证矩阵</small>
-        <strong>${escapeHtml(matrix)}</strong>
-      </div>
-      <div class="dialog-section">
-        <small>${failure ? "未通过原因" : notice ? "为什么不能原样直接评测" : "结论"}</small>
-        <p>${escapeHtml(explanation)}</p>
-      </div>
-      <div class="dialog-section action-box">
-        <small>${failure ? "建议动作" : notice ? "需要修改" : "后续门禁"}</small>
-        <p>${escapeHtml(nextStep)}</p>
-      </div>
+      <p class="scope-note">${historical ? `历史证据快照 ${escapeHtml(snapshot.slice(0, 8))}；本轮未重跑，不作为当前验证通过。${escapeHtml(historicalLabel(task))}。` : `本轮${task.changeKind === "new" ? "新增" : "修改"}任务；输入快照 ${escapeHtml(snapshot.slice(0, 8))}。本轮验证不构成正式评测资格确认。`}</p>
+      <div class="dialog-panel matrix-panel"><small>${historical ? "历史验证矩阵（原记录）" : "本轮验证矩阵"}</small><strong>${escapeHtml(result)}</strong>${!historical && task.countsNote ? `<p class="matrix-note">${escapeHtml(task.countsNote)}</p>` : ""}</div>
+      ${!historical ? `<div class="dialog-section"><small>证据层级与原始任务包</small><p>${escapeHtml(evidenceLabels[task.evidence])}；${escapeHtml(packageLabel(task))}。</p></div>` : ""}
+      <div class="dialog-section"><small>${historical ? "历史结论 / 原因（保留原记录）" : "本轮结论 / 原因"}</small><p>${escapeHtml(reason)}</p></div>
+      <div class="dialog-section action-box"><small>${historical ? "历史建议（本轮未复验）" : "下一步"}</small><p>${escapeHtml(action)}</p></div>
       <div class="dialog-links">
-        <a href="${escapeHtml(taskUrl(task))}" target="_blank" rel="noreferrer">打开任务包 ↗</a>
+        <a href="${escapeHtml(taskUrl(task))}" target="_blank" rel="noreferrer">最新快照任务包 ↗</a>
+        ${historical ? `<a href="${escapeHtml(taskUrl(task, history.meta.snapshot))}" target="_blank" rel="noreferrer">历史证据对应任务包 ↗</a>` : `<a href="${escapeHtml(update.meta.reportUrl)}">本轮逐题报告 ↗</a>`}
         <a href="${escapeHtml(sourcePrUrl(task.id))}" target="_blank" rel="noreferrer">源 Paddle PR ↗</a>
         ${contributionPr ? `<a href="${escapeHtml(contributionPrUrl(contributionPr))}" target="_blank" rel="noreferrer">社区 PR #${contributionPr} ↗</a>` : ""}
-      </div>
-    `;
+      </div>`;
   }
 
   function openTask(id) {
     const task = taskById.get(Number(id));
     if (!task) return;
     renderDialog(task);
-    if (typeof elements.dialog.showModal === "function") {
-      elements.dialog.showModal();
-    } else {
-      elements.dialog.setAttribute("open", "");
-    }
+    if (typeof elements["task-dialog"].showModal === "function") elements["task-dialog"].showModal();
+    else elements["task-dialog"].setAttribute("open", "");
   }
 
   function bindEvents() {
-    [elements.search, elements.status, elements.type, elements.author].forEach((control) => {
-      control.addEventListener(control === elements.search ? "input" : "change", renderTable);
-    });
-
-    elements.clear.addEventListener("click", () => {
-      elements.search.value = "";
-      elements.status.value = "all";
-      elements.type.value = "all";
-      elements.author.value = "all";
+    for (const id of ["search-input", "status-filter", "type-filter", "author-filter"]) elements[id].addEventListener(id === "search-input" ? "input" : "change", renderTable);
+    elements["clear-filters"].addEventListener("click", () => {
+      elements["search-input"].value = "";
+      for (const id of ["status-filter", "type-filter", "author-filter"]) elements[id].value = "all";
       renderTable();
-      elements.search.focus();
+      elements["search-input"].focus();
     });
-
-    document.addEventListener("click", (event) => {
+    document.addEventListener("click", (event) => { const trigger = event.target.closest("[data-task-id]"); if (trigger) openTask(trigger.dataset.taskId); });
+    for (const id of ["fix-grid", "issue-grid"]) elements[id].addEventListener("keydown", (event) => {
+      if (!["Enter", " "].includes(event.key)) return;
       const trigger = event.target.closest("[data-task-id]");
-      if (trigger) openTask(trigger.dataset.taskId);
+      if (trigger) { event.preventDefault(); openTask(trigger.dataset.taskId); }
     });
-
-    [elements.fixGrid, elements.issueGrid].forEach((grid) => {
-      grid.addEventListener("keydown", (event) => {
-        if (event.key !== "Enter" && event.key !== " ") return;
-        const trigger = event.target.closest("[data-task-id]");
-        if (!trigger) return;
-        event.preventDefault();
-        openTask(trigger.dataset.taskId);
-      });
-    });
-
-    elements.dialogClose.addEventListener("click", () => elements.dialog.close());
-    elements.dialog.addEventListener("click", (event) => {
-      if (event.target === elements.dialog) elements.dialog.close();
-    });
+    document.querySelector(".dialog-close").addEventListener("click", () => elements["task-dialog"].close());
+    elements["task-dialog"].addEventListener("click", (event) => { if (event.target === elements["task-dialog"]) elements["task-dialog"].close(); });
+    window.addEventListener("popstate", () => { readFiltersFromUrl(); renderTable(); });
   }
 
   renderOverview();
-  renderFixSummary();
-  renderPackageFixes();
-  renderCategorySummary();
-  renderIssues();
+  renderCards();
   renderCorrection();
   populateAuthors();
   readFiltersFromUrl();

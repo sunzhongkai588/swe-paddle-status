@@ -703,6 +703,83 @@ main {
   font-size: 11px;
 }
 
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 27px;
+}
+
+.evidence-card {
+  display: flex;
+  gap: 23px;
+  align-items: center;
+  padding: 23px;
+  border: 1px solid #c4e4d8;
+  border-radius: var(--radius-md);
+  background: #f0fbf6;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.evidence-card:hover {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.evidence-card > strong {
+  color: #237c62;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.evidence-card b {
+  font-size: 14px;
+}
+
+.evidence-card p {
+  margin: 6px 0 0;
+  color: var(--ink-soft);
+  font-size: 11px;
+}
+
+.compatible-evidence {
+  border-color: #d2def7;
+  background: #edf3ff;
+}
+
+.compatible-evidence > strong {
+  color: #366ac9;
+}
+
+.history-note,
+.scope-note {
+  padding: 13px 16px;
+  border-left: 3px solid #a6b2c4;
+  border-radius: 0 8px 8px 0;
+  color: #53647c;
+  background: #edf1f6;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.card-evidence {
+  margin: 7px 0 0;
+  color: var(--ink-soft);
+  font-size: 10px;
+}
+
+.fix-detail p,
+.dialog-section p,
+.matrix-note {
+  overflow-wrap: anywhere;
+}
+
+.matrix-note {
+  margin: 9px 0 0;
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
 .fixes-section {
   padding: 90px 0 100px;
   border-top: 1px solid #e1e7ef;
@@ -1107,7 +1184,7 @@ main {
 
 .filter-bar {
   display: grid;
-  grid-template-columns: minmax(240px, 1fr) repeat(3, 155px) auto;
+  grid-template-columns: minmax(200px, 1fr) 235px 125px 165px auto;
   gap: 9px;
   margin-bottom: 15px;
 }
@@ -1279,6 +1356,43 @@ tbody tr:last-child td {
 .status-chip.notice {
   color: #8a651c;
   background: var(--amber-soft);
+}
+
+.status-chip.strict_pass {
+  color: #237c62;
+  background: var(--mint-soft);
+}
+
+.status-chip.compatible_pass {
+  color: #366ac9;
+  background: var(--blue-soft);
+}
+
+.status-chip.needs_fix {
+  color: #8a651c;
+  background: var(--amber-soft);
+}
+
+.status-chip.incomplete {
+  color: #735ac7;
+  background: var(--purple-soft);
+}
+
+.status-chip.historical,
+.type-chip.unknown {
+  color: #637188;
+  background: #edf1f6;
+}
+
+.status-detail {
+  display: block;
+  margin-top: 5px;
+  color: #738198;
+  font-size: 9px;
+}
+
+.historical-attention {
+  color: #946414;
 }
 
 .author-cell {
@@ -1677,6 +1791,7 @@ footer {
   }
 
   .metrics-section,
+  .evidence-grid,
   .fix-grid,
   .issue-grid {
     grid-template-columns: 1fr;
