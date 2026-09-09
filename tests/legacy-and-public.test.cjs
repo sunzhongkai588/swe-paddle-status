@@ -41,17 +41,31 @@ test("public assets contain no private runtime, credential, native-image or raw 
   }
 });
 
-test("page loads immutable history, current update, then application in order", () => {
+test("page loads immutable inputs, overall projection, then application in order", () => {
   const html = readPublic("index.html");
   const scripts = [...html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/g)]
     .map((match) => new URL(match[1], "https://public.invalid/").pathname.slice(1));
-  assert.deepEqual(scripts, ["assets/data.js", "assets/validation-update.js", "assets/app.js"]);
+  assert.deepEqual(scripts, ["assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "assets/app.js"]);
   assert.match(html, /105/);
-  assert.match(html, /77/);
 });
 
-test("public release digest manifest binds exactly the eight published entities", () => {
-  const manifest = readPublic("validation-update-20260909.sha256");
+test("previous published records and their historical manifest retain their original bytes", () => {
+  const immutable = {
+    "assets/data.js": "e70903974cabc3e483b23e903332cc050f2e504ae92354acbc55e5282a0539ec",
+    "assets/validation-update.js": "210090c36c031003e865580cf790d97de4852fbf8b4ea4875737370cae190415",
+    "validation-update-20260909.md": "ce330050a235a5bf3c5f0b2f8b0fe095657856e01147a760362ae5f6b7cedc5f",
+    "validation-correction-20260907.md": "1af6cd4407aca129e6c5534e2fe4fc9076a1ec65f8ba43bdc3e5b3265272b2f5",
+    "validation-update-20260909.sha256": "991f8fc0a737d66452af3a2fb47f4c031c4596b37e0fb43af709af73a7480276",
+  };
+  for (const [relative, expected] of Object.entries(immutable)) {
+    const actual = crypto.createHash("sha256").update(fs.readFileSync(path.join(docs, relative))).digest("hex");
+    assert.equal(actual, expected, relative);
+  }
+  // The old manifest binds the previous UI revision, not the current index/app/CSS.
+});
+
+test("current overall release manifest binds exactly the current published entities", () => {
+  const manifest = readPublic("overall-status-20260909.sha256");
   const lines = manifest.trim().split(/\r?\n/);
   const filenames = [];
   for (const line of lines) {
@@ -63,5 +77,5 @@ test("public release digest manifest binds exactly the eight published entities"
     assert.equal(crypto.createHash("sha256").update(bytes).digest("hex"), expected, relative);
     filenames.push(relative);
   }
-  assert.deepEqual(filenames.sort(), [".nojekyll", "index.html", "assets/app.js", "assets/styles.css", "assets/data.js", "assets/validation-update.js", "validation-correction-20260907.md", "validation-update-20260909.md"].sort());
+  assert.deepEqual(filenames.sort(), [".nojekyll", "index.html", "assets/app.js", "assets/styles.css", "assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "validation-correction-20260907.md", "validation-update-20260909.md", "validation-update-20260909.sha256", "overall-status-20260909.md"].sort());
 });

@@ -25,6 +25,24 @@ function loadData() {
   };
 }
 
+function loadOverall() {
+  const context = vm.createContext({ window: {} });
+  for (const filename of ["assets/data.js", "assets/validation-update.js"]) {
+    vm.runInContext(readPublic(filename), context, { timeout: 1000 });
+  }
+  const before = JSON.stringify(context.window);
+  vm.runInContext(readPublic("assets/overall-status.js"), context, { timeout: 1000 });
+  const { SWE_PADDLE_STATUS, ...inputs } = context.window;
+  return {
+    legacy: JSON.parse(JSON.stringify(context.window.SWE_PADDLE_DATA)),
+    update: JSON.parse(JSON.stringify(context.window.SWE_PADDLE_UPDATE)),
+    overall: JSON.parse(JSON.stringify(SWE_PADDLE_STATUS)),
+    inputsBefore: before,
+    inputsAfter: JSON.stringify(inputs),
+    globals: Object.keys(context.window).sort(),
+  };
+}
+
 function publicFiles(directory = docs) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const filename = path.join(directory, entry.name);
@@ -32,4 +50,4 @@ function publicFiles(directory = docs) {
   });
 }
 
-module.exports = { root, docs, readPublic, loadData, publicFiles };
+module.exports = { root, docs, readPublic, loadData, loadOverall, publicFiles };

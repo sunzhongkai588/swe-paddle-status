@@ -7,17 +7,14 @@ const fs = require("node:fs/promises");
 const http = require("node:http");
 const path = require("node:path");
 const { chromium } = require("playwright");
-const { docs, loadData } = require("./helpers.cjs");
+const { docs, loadOverall } = require("./helpers.cjs");
 
 const externalUrl = process.env.SWE_PADDLE_STATUS_URL;
 const screenshotDir = process.env.SWE_PADDLE_SCREENSHOT_DIR;
 const executablePath = process.env.SWE_PADDLE_BROWSER_EXECUTABLE;
 const report = { checks: [], screenshots: [], consoleErrors: [], failedRequests: [], badResponses: [] };
-const { legacy, update } = loadData();
-const inventory = [
-  ...update.tasks,
-  ...legacy.tasks.filter((task) => update.meta.unchangedTaskIds.includes(task.id)).map((task) => ({ ...task, status: "historical" })),
-];
+const { legacy, update, overall } = loadOverall();
+const inventory = overall.tasks;
 const sorted = (values) => [...values].sort((a, b) => a - b);
 let server;
 let browser;
@@ -113,19 +110,34 @@ async function main() {
   assert.equal(response.status(), 200);
   await page.locator("#task-table-body tr").first().waitFor();
 
-  await check("desktop: all 105 explicit tasks and correct snapshot loaded", async () => {
+  await check("desktop: overall 90/105 conclusion, 17 required repairs and 15 issues", async () => {
     assert.deepEqual(sorted(await tableIds(page)), sorted(inventory.map((task) => task.id)));
     assert.equal(await page.locator("#task-table-body tr").count(), 105);
     assert.match(await page.locator("#inventory-total").innerText(), /105/);
     assert.equal(await page.evaluate(() => window.SWE_PADDLE_UPDATE.meta.snapshot), update.meta.snapshot);
+    assert.equal(await page.evaluate(() => window.SWE_PADDLE_STATUS.counts.passed), 90);
     assert.equal(await page.evaluate(() => window.SWE_PADDLE_DATA.tasks.length), 96);
     assert.equal(await page.evaluate(() => window.SWE_PADDLE_DATA.directTaskIds.length), 55);
+    assert.equal(await page.locator("#hero-direct").innerText(), "90");
+    assert.equal(await page.locator("#hero-needs-fix").innerText(), "8");
+    assert.equal(await page.locator("#hero-core-failed").innerText(), "7");
+    assert.equal(await page.locator("#metric-direct").innerText(), "73");
+    assert.equal(await page.locator("#metric-needs-fix").innerText(), "17");
+    assert.equal(await page.locator("#metric-core-failed").innerText(), "15");
+    assert.equal(await page.locator("#evidence-strict").innerText(), "8");
+    assert.equal(await page.locator("#evidence-compatible").innerText(), "13");
+    assert.equal(await page.locator("#evidence-retained").innerText(), "69");
+    assert.equal(await page.locator("#pass-rate").innerText(), "85.7%");
+    assert.match(await page.locator(".progress-center").innerText(), /90\s*\/\s*105/);
+    assert.equal(await page.locator("#fix-grid .fix-card").count(), 17);
+    assert.equal(await page.locator("#issue-grid .issue-card").count(), 15);
+    assert.doesNotMatch(await page.locator("header.hero").innerText(), /仅本轮\s*28|仅针对\s*28/);
     await noPageOverflow(page);
     await page.evaluate(() => window.scrollTo(0, 0));
     await screenshot(page, "desktop.png");
   });
 
-  for (const [status, count] of Object.entries({ strict_pass: 8, compatible_pass: 10, needs_fix: 3, failed: 5, incomplete: 2, historical: 77 })) {
+  for (const [status, count] of Object.entries({ passed: 73, needs_fix: 17, failed: 8, incomplete: 7 })) {
     await check(`status filter: ${status} = ${count}`, async () => {
       await reset(page);
       await page.locator("#status-filter").selectOption(status);
@@ -133,6 +145,29 @@ async function main() {
       assert.equal(await page.locator("#task-table-body tr").count(), count);
     });
   }
+
+  await check("the 28-task delta is a collapsed update log, not the primary status view", async () => {
+    const panel = page.locator("#update-history");
+    assert.equal(await panel.evaluate((element) => element.tagName), "DETAILS");
+    assert.equal(await panel.evaluate((element) => element.open), false);
+    assert.match(await panel.textContent(), /28/);
+    await panel.locator("summary").click();
+    assert.equal(await panel.evaluate((element) => element.open), true);
+    await panel.locator("summary").click();
+    assert.equal(await panel.evaluate((element) => element.open), false);
+  });
+
+  await check("record source filter is orthogonal to the four current outcomes", async () => {
+    for (const [source, count] of [["latest", 28], ["retained", 77]]) {
+      await reset(page);
+      await page.locator("#source-filter").selectOption(source);
+      assert.equal(await page.locator("#task-table-body tr").count(), count);
+      assert.deepEqual(sorted(await tableIds(page)), sorted(inventory.filter((task) => task.recordSource === source).map((task) => task.id)));
+      await page.locator("#status-filter").selectOption("passed");
+      assert.deepEqual(sorted(await tableIds(page)), sorted(inventory.filter((task) => task.recordSource === source && task.status === "passed").map((task) => task.id)));
+    }
+    await reset(page);
+  });
 
   await check("search, author, type and clear filters are composable", async () => {
     await reset(page);
@@ -148,8 +183,8 @@ async function main() {
     assert.deepEqual(sorted(await tableIds(page)), sorted(inventory.filter((task) => task.author === "Echo-Nie").map((task) => task.id)));
     await page.locator("#type-filter").selectOption("bugfix");
     assert.deepEqual(sorted(await tableIds(page)), sorted(inventory.filter((task) => task.author === "Echo-Nie" && task.type === "bugfix").map((task) => task.id)));
-    await page.locator("#status-filter").selectOption("strict_pass");
-    assert.deepEqual(sorted(await tableIds(page)), sorted(inventory.filter((task) => task.author === "Echo-Nie" && task.type === "bugfix" && task.status === "strict_pass").map((task) => task.id)));
+    await page.locator("#status-filter").selectOption("passed");
+    assert.deepEqual(sorted(await tableIds(page)), sorted(inventory.filter((task) => task.author === "Echo-Nie" && task.type === "bugfix" && task.status === "passed").map((task) => task.id)));
     await reset(page);
     await page.locator("#search-input").fill("no-such-task-xyz-987654321");
     assert.equal(await page.locator("#task-table-body tr").count(), 0);
@@ -163,7 +198,7 @@ async function main() {
   for (const id of [79386, 64881]) {
     await check(`task ${id}: environment incomplete, not semantic failure or measured zero`, async () => {
       const text = await openTask(page, id);
-      assert.match(text, /环境未完成/);
+      assert.match(text, /未完成/);
       assert.match(text, /未完成|未执行|留空/);
       assert.match(text, /不是任务语义失败|不等同任务语义失败|不等同于任务语义失败/);
       assert.ok(text.includes(update.tasks.find((task) => task.id === id).reason));
@@ -187,15 +222,45 @@ async function main() {
     await closeTask(page);
   });
 
-  await check("historical Windows task 76259 retains its old reason and is explicitly not rerun", async () => {
+  await check("retained Windows task 76259 remains failed with its original reason", async () => {
     const text = await openTask(page, 76259);
-    assert.match(text, /历史/);
-    assert.match(text, /未重跑/);
+    assert.match(text, /验证未通过|验证不通过/);
+    assert.match(text, /保留|既有|历史|沿用/);
     assert.ok(text.includes(legacy.failures[76259].reason));
     assert.ok(text.includes(legacy.failures[76259].action));
     assert.match(text, /c9e46547/);
     await closeTask(page);
   });
+
+  await check("retained 50086 remains passed and is not downgraded merely because it was not rerun", async () => {
+    const text = await openTask(page, 50086);
+    assert.match(text, /验证通过/);
+    assert.match(text, /保留|既有|历史|沿用/);
+    assert.ok(text.includes(overall.tasks.find((task) => task.id === 50086).reason));
+    await closeTask(page);
+  });
+
+  for (const id of [52948, 57827]) {
+    await check(`retained ${id}: existing required package repairs remain visible`, async () => {
+      const text = await openTask(page, id);
+      assert.match(text, /需修改|需要修改|需修|待修/);
+      assert.ok(text.includes(legacy.notices[id].matrix));
+      assert.ok(text.includes(legacy.notices[id].reason));
+      assert.ok(text.includes(legacy.notices[id].action));
+      await closeTask(page);
+    });
+  }
+
+  for (const id of [59847, 64320]) {
+    await check(`retained GPU ${id}: unexecuted accelerator evidence remains incomplete, not failed`, async () => {
+      const text = await openTask(page, id);
+      assert.match(text, /验证未完成|环境未完成/);
+      assert.match(text, /GPU/);
+      assert.ok(text.includes(legacy.failures[id].matrix));
+      assert.ok(text.includes(legacy.failures[id].reason));
+      await closeTask(page);
+    });
+  }
 
   await check("task 79633: full Python-module match remains compatible native evidence", async () => {
     const text = await openTask(page, 79633);
@@ -232,7 +297,7 @@ async function main() {
   }
 
   await check("all page static assets return 200; browser console and requests are clean", async () => {
-    for (const asset of ["data.js", "validation-update.js", "app.js", "styles.css"]) {
+    for (const asset of ["data.js", "validation-update.js", "overall-status.js", "app.js", "styles.css"]) {
       const matches = responses.filter((item) => new URL(item.url).pathname.endsWith("/assets/" + asset));
       assert.ok(matches.length > 0, `asset was not loaded: ${asset}`);
       assert.ok(matches.every((item) => item.status === 200), `${asset}: ${JSON.stringify(matches)}`);
@@ -241,13 +306,15 @@ async function main() {
     assert.deepEqual(report.failedRequests, []);
     assert.deepEqual(report.consoleErrors, []);
   });
-  await check("same-origin current report, historical correction and public digest manifest return 200", async () => {
+  await check("same-origin overall report and retained update/report archives return 200", async () => {
     const reportLinks = await page.locator("a[href]").evaluateAll((anchors) => anchors.map((anchor) => anchor.href));
     const targetOrigin = new URL(url).origin;
     const publicReports = [...new Set(reportLinks.filter((href) => new URL(href).origin === targetOrigin && new URL(href).pathname.endsWith(".md")))];
     assert.ok(publicReports.some((href) => new URL(href).pathname.endsWith("/validation-update-20260909.md")));
     assert.ok(publicReports.some((href) => new URL(href).pathname.endsWith("/validation-correction-20260907.md")));
+    assert.ok(publicReports.some((href) => new URL(href).pathname.endsWith("/overall-status-20260909.md")));
     publicReports.push(new URL("validation-update-20260909.sha256", url).href);
+    publicReports.push(new URL("overall-status-20260909.sha256", url).href);
     report.publicReports = [];
     for (const href of publicReports) {
       const result = await context.request.get(href);
