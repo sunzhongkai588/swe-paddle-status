@@ -4,6 +4,7 @@
   const history = window.SWE_PADDLE_DATA;
   const update = window.SWE_PADDLE_UPDATE;
   const data = window.SWE_PADDLE_ACCEPTANCE;
+  const issueExplanations = window.SWE_PADDLE_ISSUE_EXPLANATIONS;
   if (!history || !update || !data || data.schemaVersion !== 1 || !Array.isArray(data.tasks) || !data.meta || !data.counts || !data.evidenceCounts) {
     throw new Error("SWE-Paddle source records or full acceptance are unavailable.");
   }
@@ -64,6 +65,20 @@
     counts.total !== counts.passed + counts.failed + counts.incomplete) {
     throw new Error("SWE-Paddle acceptance counts do not match explicit task records.");
   }
+
+  // Explanations supplement the frozen result; they never change its status or evidence.
+  const needsFixIds = tasks.filter((task) => task.status === "needs_fix").map((task) => task.id);
+  if (!issueExplanations || issueExplanations.schemaVersion !== 1 || !issueExplanations.meta ||
+    !Array.isArray(issueExplanations.tasks) ||
+    issueExplanations.meta.snapshot !== data.meta.snapshot ||
+    issueExplanations.meta.sourceReportSha256 !== data.meta.sourceReportSha256 ||
+    typeof issueExplanations.meta.reportUrl !== "string" || !issueExplanations.meta.reportUrl.trim() ||
+    !sameIds(issueExplanations.tasks.map((task) => task.id), needsFixIds) ||
+    issueExplanations.tasks.some((task) => !Number.isInteger(task.id) ||
+      typeof task.explanation !== "string" || !task.explanation.trim())) {
+    throw new Error("SWE-Paddle issue explanations do not match the frozen acceptance.");
+  }
+  const explanationById = new Map(issueExplanations.tasks.map((task) => [task.id, task.explanation]));
 
   const typeLabels = { bugfix: "Bugfix", feature: "Feature", refactor: "Refactor", unknown: "类型未确认" };
   const statusLabels = {
@@ -138,6 +153,7 @@
     })) elements[id].textContent = value;
     document.getElementById("readiness-note").textContent = `${counts.passed} 条核心通过 = ${counts.packageUnchanged} 条原包无必改项 + ${counts.packageNeedsFix} 条待修。${counts.packageUnchanged} 条可在各自记录的环境范围内原样使用，不代表全部是精确原生编译。`;
     document.getElementById("latest-report-link").href = data.meta.reportUrl;
+    document.getElementById("issue-explanations-link").href = issueExplanations.meta.reportUrl;
     for (const kind of evidenceKinds) {
       const option = elements["source-filter"].querySelector(`[value="${kind}"]`);
       option.textContent = `${sourceLabel({ evidence: kind })}（${tasks.filter((task) => task.evidence === kind).length}）`;
@@ -156,6 +172,7 @@
           <h3>${escapeHtml(task.title)}</h3><p class="matrix-line">${escapeHtml(matrix(task))}</p>
           <p class="card-evidence">${escapeHtml(evidenceLabels[task.evidence])}</p>
           <div class="fix-detail"><small>当前问题</small><p>${escapeHtml(task.reason)}</p></div>
+          ${explanationById.has(task.id) ? `<div class="fix-detail issue-explanation"><small>影响说明</small><p>${escapeHtml(explanationById.get(task.id))}</p></div>` : ""}
           <div class="fix-detail fix-action"><small>下一步</small><p>${escapeHtml(task.action)}</p></div>
           <div class="issue-footer"><span class="author-mini">${escapeHtml(authorLabel(task.author))}</span><span class="view-link">查看证据 →</span></div>
         </article>`;
@@ -239,6 +256,7 @@
       <div class="dialog-panel matrix-panel"><small>核心 F2P / P2P 验证矩阵</small><strong>${escapeHtml(matrix(task))}</strong>${task.countsNote ? `<p class="matrix-note">${escapeHtml(task.countsNote)}</p>` : ""}</div>
       <div class="dialog-section"><small>运行证据与原始任务包</small><p>${escapeHtml(evidenceLabels[task.evidence])}；${escapeHtml(packageLabel(task))}。</p></div>
       <div class="dialog-section"><small>结论 / 原因</small><p>${escapeHtml(task.reason)}</p></div>
+      ${explanationById.has(task.id) ? `<div class="dialog-section issue-explanation"><small>影响说明</small><p>${escapeHtml(explanationById.get(task.id))}</p></div>` : ""}
       <div class="dialog-section action-box"><small>下一步</small><p>${escapeHtml(task.action)}</p></div>
       <div class="dialog-links">
         <a href="${escapeHtml(taskUrl(task))}" target="_blank" rel="noreferrer">验收快照任务包 ↗</a>

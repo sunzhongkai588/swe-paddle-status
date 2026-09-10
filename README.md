@@ -27,6 +27,8 @@ skip、空返回和缺失节点不计有效 P2P；失败任务有正 F/P 数量�
 也没有生成或变更模型成绩。
 
 当前报告：[全量 105 条验收及问题清单](docs/acceptance-20260910.md)。
+另有 [18 条待修改任务的通俗说明](docs/issue-explanations-20260910.md)，
+同步显示在问题卡片和详情中；仅补充解释，不改变原始验收结果。
 旧的 [2026-09-09 全量汇总](docs/overall-status-20260909.md)、
 [增量报告](docs/validation-update-20260909.md)和
 [2026-09-07 更正说明](docs/validation-correction-20260907.md)保留为历史记录。
@@ -52,7 +54,8 @@ python3 -m http.server 4173
 - 页面与交互：`docs/index.html`、`docs/assets/app.js`、`docs/assets/styles.css`。
 - 当前全量公开投影：`docs/assets/acceptance-20260910.js`。
 - 当前公开报告：`docs/acceptance-20260910.md`。
-- 当前发布清单：`docs/acceptance-20260910.sha256`。
+- 问题补充说明：`docs/assets/issue-explanations-20260910.js`、`docs/issue-explanations-20260910.md`。
+- 当前发布清单：`docs/acceptance-20260910-r2.sha256`。
 - 历史输入：`docs/assets/data.js`、`validation-update.js`、`overall-status.js`。
 
 历史数据、报告与旧发布清单保持字节不变，新增版本而非覆盖旧证据。
@@ -82,5 +85,5 @@ node tests/browser-smoke.cjs
 旧增量的 `SWE_PADDLE_SEALED_RESULT` 仍只接受旧 28 条封存报告，不能传入新
 105 条报告。具体校验门禁见 acceptance 测试，不提交私有源文件。
 
-在 `docs` 目录运行 `sha256sum -c acceptance-20260910.sha256` 可核对当前
+在 `docs` 目录运行 `sha256sum -c acceptance-20260910-r2.sha256` 可核对当前
 发布资源。发布前还需检查状态/证据筛选、任务详情、移动布局、控制台及资源加载。

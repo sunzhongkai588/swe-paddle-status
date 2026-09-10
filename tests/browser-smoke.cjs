@@ -6,14 +6,18 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs/promises");
 const http = require("node:http");
 const path = require("node:path");
+const vm = require("node:vm");
 const { chromium } = require("playwright");
-const { docs, loadAcceptance } = require("./helpers.cjs");
+const { docs, loadAcceptance, readPublic } = require("./helpers.cjs");
 
 const externalUrl = process.env.SWE_PADDLE_STATUS_URL;
 const screenshotDir = process.env.SWE_PADDLE_SCREENSHOT_DIR;
 const executablePath = process.env.SWE_PADDLE_BROWSER_EXECUTABLE;
 const report = { checks: [], screenshots: [], consoleErrors: [], failedRequests: [], badResponses: [], notFoundRequests: [] };
 const { acceptance } = loadAcceptance();
+const explanationsWindow = { SWE_PADDLE_ACCEPTANCE: acceptance };
+vm.runInNewContext(readPublic("assets/issue-explanations-20260910.js"), { window: explanationsWindow }, { timeout: 1000 });
+const explanations = JSON.parse(JSON.stringify(explanationsWindow.SWE_PADDLE_ISSUE_EXPLANATIONS));
 const inventory = acceptance.tasks;
 const sorted = (values) => [...values].sort((a, b) => a - b);
 let server;
@@ -290,6 +294,60 @@ async function main() {
     await closeTask(page);
   });
 
+  await check("all 18 repair cards and dialogs show their exact supplemental explanation", async () => {
+    const expected = inventory.filter((task) => task.status === "needs_fix");
+    assert.deepEqual(sorted(explanations.tasks.map((task) => task.id)), sorted(expected.map((task) => task.id)));
+    assert.equal(await page.locator("#fix-grid .issue-explanation").count(), 18);
+    assert.equal(await page.locator("#issue-grid .issue-explanation").count(), 0);
+    for (const note of explanations.tasks) {
+      const task = inventory.find((task) => task.id === note.id);
+      const card = page.locator(`#fix-grid [data-task-id="${note.id}"]`);
+      assert.equal(await card.locator(".issue-explanation p").textContent(), note.explanation);
+      assert.ok((await card.innerText()).includes(task.reason));
+      assert.ok((await card.innerText()).includes(task.action));
+      const text = await openTask(page, note.id);
+      assert.equal(await page.locator("#dialog-content .issue-explanation p").textContent(), note.explanation);
+      assert.ok(text.includes(task.reason));
+      assert.ok(text.includes(task.action));
+      assert.match(text, /影响说明/);
+      await closeTask(page);
+    }
+  });
+
+  await check("the other 87 task dialogs do not inherit repair explanations", async () => {
+    await reset(page);
+    const otherIds = inventory.filter((task) => task.status !== "needs_fix").map((task) => task.id);
+    assert.equal(otherIds.length, 87);
+    const rendered = await page.evaluate((ids) => ids.map((id) => {
+      document.querySelector(`#task-table-body [data-task-id="${id}"]`).click();
+      const dialog = document.getElementById("task-dialog");
+      const row = { id, open: dialog.open, title: document.getElementById("dialog-title").textContent,
+        explanationCount: document.querySelectorAll("#dialog-content .issue-explanation").length };
+      dialog.close();
+      return row;
+    }), otherIds);
+    for (const task of rendered) {
+      assert.equal(task.open, true);
+      assert.equal(task.title, `Task #${task.id}`);
+      assert.equal(task.explanationCount, 0);
+    }
+  });
+
+  await check("60808 is documentation-only; 78441 explains empty gradient checks", async () => {
+    const section = await page.locator("#package-fixes .section-heading").innerText();
+    assert.match(section, /16 条原入口仍失败/);
+    assert.match(section, /60808 与 78441 原入口已通过/);
+    for (const id of [60808, 78441]) {
+      assert.equal(inventory.find((task) => task.id === id).originalEntryPassed, true);
+      await openTask(page, id);
+      const note = await page.locator("#dialog-content .issue-explanation").innerText();
+      assert.match(note, id === 60808 ? /只是 README|只是文档/ : /空.*梯度|梯度.*空/);
+      if (id === 60808) assert.match(note, /不是修复运行故障/);
+      if (id === 78441) assert.match(note, /7 个附带清理错误发生在 Base/);
+      await closeTask(page);
+    }
+  });
+
   for (const width of [390, 360]) {
     await check(`mobile ${width}px: filters, modal and layout have no page-wide horizontal overflow`, async () => {
       await page.setViewportSize({ width, height: 844 });
@@ -305,17 +363,27 @@ async function main() {
       const bounds = await page.locator("#task-dialog").boundingBox();
       assert.ok(bounds.x >= -1 && bounds.x + bounds.width <= width + 1, JSON.stringify(bounds));
       await closeTask(page);
+      await openTask(page, 78441);
+      assert.equal(await page.locator("#dialog-content .issue-explanation p").textContent(), explanations.tasks.find((task) => task.id === 78441).explanation);
+      await page.locator("#dialog-content .issue-explanation").scrollIntoViewIfNeeded();
+      assert.equal(await page.locator("#dialog-content .issue-explanation").isVisible(), true);
+      await noPageOverflow(page);
+      if (width === 390) await screenshot(page, "mobile-issue-explanation.png");
+      await closeTask(page);
     });
   }
 
   await check("all page static assets return 200; browser console and requests are clean", async () => {
-    for (const asset of ["data.js", "validation-update.js", "overall-status.js", "acceptance-20260910.js", "app.js", "styles.css"]) {
+    for (const asset of ["data.js", "validation-update.js", "overall-status.js", "acceptance-20260910.js", "issue-explanations-20260910.js", "app.js", "styles.css"]) {
       const matches = responses.filter((item) => new URL(item.url).pathname.endsWith("/assets/" + asset));
       assert.ok(matches.length > 0, `asset was not loaded: ${asset}`);
       assert.ok(matches.every((item) => item.status === 200), `${asset}: ${JSON.stringify(matches)}`);
     }
     for (const asset of ["acceptance-20260910.js", "app.js", "styles.css"]) {
       assert.ok(responses.some((item) => new URL(item.url).pathname.endsWith("/assets/" + asset) && new URL(item.url).search.includes("20260910")), asset);
+    }
+    for (const asset of ["issue-explanations-20260910.js", "app.js"]) {
+      assert.ok(responses.some((item) => new URL(item.url).pathname.endsWith("/assets/" + asset) && new URL(item.url).search.includes("20260910-r2")), asset);
     }
     assert.deepEqual(report.badResponses, []);
     assert.deepEqual(report.failedRequests, []);
@@ -330,6 +398,7 @@ async function main() {
     assert.ok(publicReports.some((href) => new URL(href).pathname.endsWith("/validation-correction-20260907.md")));
     assert.ok(publicReports.some((href) => new URL(href).pathname.endsWith("/overall-status-20260909.md")));
     assert.ok(publicReports.some((href) => new URL(href).pathname.endsWith("/acceptance-20260910.md")));
+    assert.ok(publicReports.some((href) => new URL(href).pathname.endsWith("/issue-explanations-20260910.md")));
     publicReports.push(new URL("validation-update-20260909.sha256", url).href);
     publicReports.push(new URL("overall-status-20260909.sha256", url).href);
     report.publicReports = [];

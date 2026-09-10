@@ -67,4 +67,21 @@ function loadAcceptance() {
   };
 }
 
-module.exports = { root, docs, readPublic, loadData, loadOverall, loadAcceptance, publicFiles };
+function loadIssueExplanations() {
+  const context = vm.createContext({ window: {} });
+  for (const filename of ["assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "assets/acceptance-20260910.js"]) {
+    vm.runInContext(readPublic(filename), context, { timeout: 1000 });
+  }
+  const before = JSON.stringify(context.window);
+  vm.runInContext(readPublic("assets/issue-explanations-20260910.js"), context, { timeout: 1000 });
+  const { SWE_PADDLE_ISSUE_EXPLANATIONS, ...inputs } = context.window;
+  return {
+    explanations: JSON.parse(JSON.stringify(SWE_PADDLE_ISSUE_EXPLANATIONS)),
+    acceptance: JSON.parse(JSON.stringify(context.window.SWE_PADDLE_ACCEPTANCE)),
+    inputsBefore: before,
+    inputsAfter: JSON.stringify(inputs),
+    globals: Object.keys(context.window).sort(),
+  };
+}
+
+module.exports = { root, docs, readPublic, loadData, loadOverall, loadAcceptance, loadIssueExplanations, publicFiles };

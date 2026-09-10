@@ -10,6 +10,8 @@ function validateBeforeRendering(mutate) {
   const window = { SWE_PADDLE_DATA: legacy, SWE_PADDLE_UPDATE: update, SWE_PADDLE_STATUS: overall };
   vm.runInNewContext(readPublic("assets/acceptance-20260910.js"), { window }, { timeout: 1000 });
   window.SWE_PADDLE_ACCEPTANCE = JSON.parse(JSON.stringify(window.SWE_PADDLE_ACCEPTANCE));
+  vm.runInNewContext(readPublic("assets/issue-explanations-20260910.js"), { window }, { timeout: 1000 });
+  window.SWE_PADDLE_ISSUE_EXPLANATIONS = JSON.parse(JSON.stringify(window.SWE_PADDLE_ISSUE_EXPLANATIONS));
   mutate(window);
   const document = { getElementById() { throw new Error("Reached DOM after validated inventory"); } };
   vm.runInNewContext(readPublic("assets/app.js"), { window, document }, { timeout: 1000 });
@@ -53,5 +55,23 @@ for (const [index, [name, mutate]] of invalidCases.entries()) {
   test(`application fails closed: ${name}`, () => {
     assert.throws(() => validateBeforeRendering((window) => mutate(index === 0 ? window : window.SWE_PADDLE_ACCEPTANCE)),
       /SWE-Paddle (?:source records|acceptance inventory|acceptance counts)/);
+  });
+}
+
+const invalidExplanations = [
+  ["missing supplemental module", (window) => { delete window.SWE_PADDLE_ISSUE_EXPLANATIONS; }],
+  ["missing needs-fix explanation", ({ SWE_PADDLE_ISSUE_EXPLANATIONS: notes }) => { notes.tasks.pop(); }],
+  ["duplicate explanation ID", ({ SWE_PADDLE_ISSUE_EXPLANATIONS: notes }) => { notes.tasks[1].id = notes.tasks[0].id; }],
+  ["explanation for an unrelated task", ({ SWE_PADDLE_ISSUE_EXPLANATIONS: notes }) => { notes.tasks[0].id = 18687; }],
+  ["extra explanation for a passed task", ({ SWE_PADDLE_ISSUE_EXPLANATIONS: notes }) => { notes.tasks.push({ id: 18687, explanation: "not a repair" }); }],
+  ["wrong snapshot", ({ SWE_PADDLE_ISSUE_EXPLANATIONS: notes }) => { notes.meta.snapshot = "0".repeat(40); }],
+  ["wrong source report digest", ({ SWE_PADDLE_ISSUE_EXPLANATIONS: notes }) => { notes.meta.sourceReportSha256 = "0".repeat(64); }],
+  ["empty explanation text", ({ SWE_PADDLE_ISSUE_EXPLANATIONS: notes }) => { notes.tasks[0].explanation = "  "; }],
+  ["non-text explanation", ({ SWE_PADDLE_ISSUE_EXPLANATIONS: notes }) => { notes.tasks[0].explanation = {}; }],
+];
+
+for (const [name, mutate] of invalidExplanations) {
+  test(`application rejects issue explanations: ${name}`, () => {
+    assert.throws(() => validateBeforeRendering(mutate), /SWE-Paddle issue explanations/);
   });
 }

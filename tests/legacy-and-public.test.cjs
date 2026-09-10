@@ -45,7 +45,7 @@ test("page loads immutable history, full acceptance projection, then application
   const html = readPublic("index.html");
   const scripts = [...html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/g)]
     .map((match) => new URL(match[1], "https://public.invalid/").pathname.slice(1));
-  assert.deepEqual(scripts, ["assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "assets/acceptance-20260910.js", "assets/app.js"]);
+  assert.deepEqual(scripts, ["assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "assets/acceptance-20260910.js", "assets/issue-explanations-20260910.js", "assets/app.js"]);
   assert.match(html, /105/);
 });
 
@@ -59,6 +59,9 @@ test("previous published records and their historical manifest retain their orig
     "assets/overall-status.js": "384b3f11c041350342cd3018f9de920f65fa43ab056cfa08ecd6cc1eebc55aed",
     "overall-status-20260909.md": "09fc3fec7913a0d35f6e9ba4ee771f57c1317e6d057bf01e4ce94edaaef4c986",
     "overall-status-20260909.sha256": "04d0c26184323d179c35bfa9f9dd8b2f57595b07a2bf68f38f70566e74acb155",
+    "assets/acceptance-20260910.js": "7df403b776340c5b8276df8aed8b2f4f3be5b46fe87c4275705d4f5722a44800",
+    "acceptance-20260910.md": "9b1340ff8f023f8feccbb08f25d890785d9fb2381bcacc145e483e11b087b542",
+    "acceptance-20260910.sha256": "8d2aef5f6aeaa24942fb05b31d1b9ed3e18722f6b79fe929c0b1e65dec323d67",
   };
   for (const [relative, expected] of Object.entries(immutable)) {
     const actual = crypto.createHash("sha256").update(fs.readFileSync(path.join(docs, relative))).digest("hex");
@@ -68,7 +71,7 @@ test("previous published records and their historical manifest retain their orig
 });
 
 test("current acceptance release manifest binds exactly the current published entities", () => {
-  const manifest = readPublic("acceptance-20260910.sha256");
+  const manifest = readPublic("acceptance-20260910-r2.sha256");
   const lines = manifest.trim().split(/\r?\n/);
   const filenames = [];
   for (const line of lines) {
@@ -80,5 +83,5 @@ test("current acceptance release manifest binds exactly the current published en
     assert.equal(crypto.createHash("sha256").update(bytes).digest("hex"), expected, relative);
     filenames.push(relative);
   }
-  assert.deepEqual(filenames.sort(), [".nojekyll", "index.html", "assets/app.js", "assets/styles.css", "assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "assets/acceptance-20260910.js", "validation-correction-20260907.md", "validation-update-20260909.md", "validation-update-20260909.sha256", "overall-status-20260909.md", "overall-status-20260909.sha256", "acceptance-20260910.md"].sort());
+  assert.deepEqual(filenames.sort(), [".nojekyll", "index.html", "assets/app.js", "assets/styles.css", "assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "assets/acceptance-20260910.js", "assets/issue-explanations-20260910.js", "validation-correction-20260907.md", "validation-update-20260909.md", "validation-update-20260909.sha256", "overall-status-20260909.md", "overall-status-20260909.sha256", "acceptance-20260910.md", "acceptance-20260910.sha256", "issue-explanations-20260910.md"].sort());
 });
