@@ -415,7 +415,7 @@ code {
 }
 
 .progress-ring {
-  --progress: 206.25deg;
+  --progress: 305.142857deg;
   position: relative;
   display: grid;
   width: 185px;
@@ -751,12 +751,12 @@ main {
   color: #366ac9;
 }
 
-.retained-evidence {
+.lightweight-evidence {
   border-color: #d2dce9;
   background: #f1f4f8;
 }
 
-.retained-evidence > strong {
+.lightweight-evidence > strong {
   color: #637188;
 }
 
@@ -1193,7 +1193,7 @@ main {
 
 .filter-bar {
   display: grid;
-  grid-template-columns: minmax(170px, 1fr) 205px 140px 110px 160px auto;
+  grid-template-columns: minmax(170px, 1fr) 205px 205px 110px 160px auto;
   gap: 9px;
   margin-bottom: 15px;
 }
