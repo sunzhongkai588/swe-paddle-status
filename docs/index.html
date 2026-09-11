@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="SWE-Paddle 105 条完整任务的整体状态：89 条核心验证通过，其中 71 条原包无必改项、18 条待修；13 条未通过，3 条硬件未完成。"
+      content="SWE-Paddle 105 条任务证据核对：59348 已恢复核心通过，57827 与 59021 已复现目标子集但原包仍有故障。当前 90 条核心通过，其中 71 条原包无必改项、19 条待修；12 条未通过，3 条硬件未完成。"
     />
     <meta name="theme-color" content="#10213a" />
     <title>SWE-Paddle 可评测性雷达</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310213a'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='14' fill='%23ffffff'%3ESP%3C/text%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="assets/styles.css?v=acceptance-207998d-20260910" />
+    <link rel="stylesheet" href="assets/styles.css?v=audit-207998d-20260911" />
   </head>
   <body>
     <a class="skip-link" href="#main">跳到主要内容</a>
@@ -50,17 +50,19 @@
           <p class="eyebrow"><span>F2P</span><i></i><span>P2P</span><i></i><span>105 TASKS</span></p>
           <h1>把每一条样本，<br />推进到<strong>可评测</strong>。</h1>
           <p class="hero-lead">
-            全量验收 105 条完整任务：89 条核心 F2P/P2P 通过，其中
-            71 条原包无必改项、18 条需要修改；13 条未通过，3 条硬件未完成。
+            核对全部 105 条完整任务：90 条核心 F2P/P2P 通过，其中
+            71 条原包无必改项、19 条需要修改；12 条未通过，3 条硬件未完成。
           </p>
+          <p class="audit-correction-note"><strong>59348 已恢复核心通过，入口仍待修。</strong><br />2026-09-11 复验还确认 57827、59021 的目标子集可通过；完整原包仍有其他故障，这两条继续保留“验证未通过”。详情列出复验节点和历史差异。</p>
           <div class="hero-buttons">
-            <a class="primary-button" id="package-fixes-link" href="#package-fixes">查看 18 条任务包待修</a>
+            <a class="primary-button" id="package-fixes-link" href="#package-fixes">查看 19 条任务包待修</a>
             <a class="text-button" href="#all-tasks">浏览全部 105 条 <span>↓</span></a>
           </div>
           <p class="updated-line">
             <span class="updated-icon" aria-hidden="true">✓</span>
-            页面口径更新于 <time id="updated-at" datetime="2026-09-10">2026-09-10</time>
+            原验收发布于 <time id="updated-at" datetime="2026-09-10">2026-09-10</time>
           </p>
+          <p class="audit-update-line">核对日期 <time id="reviewed-at" datetime="2026-09-11">2026-09-11</time> · <a id="verification-audit-link" href="verification-audit-20260911.md">查看全部 105 条核对报告 ↗</a><br /><span>原验证记录为 2026-09-09；核对日期不代表 105 条重新执行。原封存记录保留，当前状态已纳入上述复验结论。</span></p>
         </div>
 
         <aside class="readiness-card" aria-label="全部 105 条任务的验证通过率，含兼容环境与 README 轻量路线">
@@ -69,23 +71,23 @@
             <span class="trend-chip">全部 105 条</span>
           </div>
           <div class="progress-wrap">
-            <div class="progress-ring" id="progress-ring" role="img" aria-label="核心验证通过 89 / 105，84.8%">
+            <div class="progress-ring" id="progress-ring" role="img" aria-label="核心验证通过 90 / 105，85.7%">
               <div class="progress-center">
-                <strong id="pass-rate">84.8%</strong>
-                <span>核心通过 · 89 / 105</span>
+                <strong id="pass-rate">85.7%</strong>
+                <span>核心通过 · 90 / 105</span>
               </div>
             </div>
           </div>
           <div class="readiness-numbers">
             <div>
               <span class="number-dot pass-dot"></span>
-              <span>核心通过（含 18 条待修）</span>
-              <strong id="hero-direct">89</strong>
+              <span>核心通过（含 19 条待修）</span>
+              <strong id="hero-direct">90</strong>
             </div>
             <div>
               <span class="number-dot fix-dot"></span>
               <span>验证未通过</span>
-              <strong id="hero-needs-fix">13</strong>
+              <strong id="hero-needs-fix">12</strong>
             </div>
             <div>
               <span class="number-dot fail-dot"></span>
@@ -93,7 +95,7 @@
               <strong id="hero-core-failed">3</strong>
             </div>
           </div>
-          <p class="readiness-note" id="readiness-note">89 条核心通过 = 71 条原包无必改项 + 18 条待修。71 条可在各自记录的环境范围内原样使用，不代表全部是精确原生编译。</p>
+          <p class="readiness-note" id="readiness-note">90 条核心通过 = 71 条原包无必改项 + 19 条待修。71 条可在各自记录的环境范围内原样使用，不代表全部是精确原生编译。</p>
         </aside>
       </div>
     </header>
@@ -120,7 +122,7 @@
         <div class="metric-card">
           <span class="metric-icon warning-icon" aria-hidden="true">↻</span>
           <div>
-            <strong id="metric-needs-fix">18</strong>
+            <strong id="metric-needs-fix">19</strong>
             <span>验证通过 · 任务包待修</span>
           </div>
           <small class="warning-text">入口 / 描述 / fixture 等问题需修改后复验</small>
@@ -128,10 +130,10 @@
         <div class="metric-card">
           <span class="metric-icon danger-icon" aria-hidden="true">!</span>
           <div>
-            <strong id="metric-core-failed">16</strong>
+            <strong id="metric-core-failed">15</strong>
             <span>验证未通过 / 未完成</span>
           </div>
-          <small class="danger-text">13 条未通过 + 3 条硬件未完成</small>
+          <small class="danger-text">12 条未通过 + 3 条硬件未完成</small>
         </div>
       </section>
 
@@ -174,11 +176,12 @@
           </div>
         </div>
         <p class="criterion-footnote" id="criterion-footnote">
-          本次覆盖全部 105 条的任务包与 F2P/P2P 基础验收，验证记录日期为 2026-09-09。核心通过不等于原入口通过；失败、跳过、未配对节点及硬件限制保留在逐题详情。以下按运行证据划分 89 条核心通过任务，不是额外的通过数。
+          原全量 105 条验收记录日期为 2026-09-09；当前状态纳入 2026-09-11 对 3 条争议任务的复验结论。核心通过不等于原入口通过；已通过子集不等于整题通过。失败、跳过、未配对节点及硬件限制保留在详情。以下按运行证据划分当前 90 条核心通过任务，不是额外的通过数。
         </p>
-        <div class="evidence-grid" aria-label="89 条核心通过任务的运行证据">
+        <p class="criterion-footnote">Base = 未打修复补丁；Gold = 已打参考修复补丁。F2P（Fail to Pass）是同一测试在修复前失败、修复后通过；P2P（Pass to Pass）是在修复前后都通过。详情可展开完整测试节点及两轮结果；“未执行”表示没有该轮记录，不算通过或失败。</p>
+        <div class="evidence-grid" aria-label="90 条核心通过任务的运行证据">
           <a class="evidence-card" href="#all-tasks">
-            <strong id="evidence-strict">36</strong>
+            <strong id="evidence-strict">37</strong>
             <div><b>精确原生 / 精确 Python</b><p>两类证据分别标记。精确 Python 验证不等于已精确编译整个原生运行时。</p></div>
           </a>
           <a class="evidence-card compatible-evidence" href="?evidence=exact_python_compatible_native#all-tasks">
@@ -198,9 +201,9 @@
           <div class="section-heading">
             <div>
               <span class="section-kicker">PACKAGE NOT READY</span>
-              <h2 id="fixes-title">18 条核心验证通过，但原始任务包需要修改</h2>
+              <h2 id="fixes-title">19 条核心验证通过，但原始任务包需要修改</h2>
               <p>核心 F2P/P2P 已成立，但入口、描述或 fixture 等仍需修正；原脚本结果与独立诊断结果分开记录。</p>
-              <p>其中 16 条原入口仍失败；60808 与 78441 原入口已通过，需要修改的分别是文档说明和测试质量。</p>
+              <p>包含本次纠正的 59348：全部 15 个测试节点已验证，原入口仍需修改。60808 与 78441 原入口已通过，需要修改的分别是文档说明和测试质量。</p>
             </div>
             <div class="category-summary" id="fix-summary" aria-label="Task 包不通过分类汇总"></div>
           </div>
@@ -214,7 +217,7 @@
           <div class="section-heading">
             <div>
               <span class="section-kicker">ACTION REQUIRED</span>
-              <h2 id="issues-title">13 条验证未通过，3 条硬件未完成</h2>
+              <h2 id="issues-title">12 条验证未通过，3 条硬件未完成</h2>
               <p>实际失败与缺 CUDA / XPU 的未完成分开记录；补丁预检失败也不冒充已经动态运行。</p>
             </div>
             <div class="category-summary" id="category-summary" aria-label="问题分类汇总"></div>
@@ -224,6 +227,7 @@
 
           <details class="update-history" id="update-history">
             <summary>更新记录与历史统计说明</summary>
+            <p>2026-09-11：核对全部 105 条；复验后 59348 恢复核心通过，57827、59021 已复现目标子集但完整原包仍有故障。当前 90 条核心通过（71 条原包无必改项、19 条待修），12 条未通过、3 条硬件未完成。原封存记录保留，核对日期不等于全量重跑日期。<a href="verification-audit-20260911.md">查看核对报告 ↗</a></p>
             <p>2026-09-10：发布全量 105 条基础验收，89 条核心通过（71 条原包无必改项、18 条待修），13 条未通过、3 条硬件未完成；验证记录日期为 2026-09-09。</p>
             <p>历史增量记录：2026-09-09 曾验证 9 条新增、19 条修改任务，共 28 条（21 条通过、5 条未通过、2 条未完成）。这不是当前全量结论；原历史资料保留备查。</p>
             <p><a href="validation-update-20260909.md">查看历史增量验证报告 ↗</a> · <a href="overall-status-20260909.md">查看历史整体汇总 ↗</a></p>
@@ -246,7 +250,7 @@
           <div>
             <span class="section-kicker">FULL INVENTORY</span>
             <h2 id="all-title">全部任务</h2>
-            <p>全部 105 条任务均纳入本次验收；可组合筛选验证状态与运行证据，查看核心矩阵和原包问题。</p>
+            <p>全部 105 条任务均纳入原验收及本次证据核对；可组合筛选状态与运行证据，查看具体测试、问题原因和历史差异。</p>
           </div>
           <p class="result-count" aria-live="polite"><strong id="visible-count">105</strong> / <span id="inventory-total">105</span> 条</p>
         </div>
@@ -255,15 +259,15 @@
           <label class="search-field">
             <span class="sr-only">搜索任务</span>
             <span aria-hidden="true">⌕</span>
-            <input id="search-input" type="search" placeholder="搜索 PR、主题或作者…" autocomplete="off" />
+            <input id="search-input" type="search" placeholder="搜索 PR、主题、作者或测试节点…" autocomplete="off" />
           </label>
           <label>
             <span class="sr-only">验证状态</span>
             <select id="status-filter">
               <option value="all">全部状态</option>
               <option value="passed">通过 · 原包无必改项（71）</option>
-              <option value="needs_fix">通过 · 任务包待修（18）</option>
-              <option value="failed">验证未通过（13）</option>
+              <option value="needs_fix">通过 · 任务包待修（19）</option>
+              <option value="failed">验证未通过（12）</option>
               <option value="incomplete">硬件未完成（3）</option>
             </select>
           </label>
@@ -333,7 +337,8 @@
           <a href="#package-fixes">任务包待修</a>
           <a href="#issues">未通过 / 未完成</a>
           <a id="latest-report-link" href="acceptance-20260910.md">全量逐题验收报告</a>
-          <a id="issue-explanations-link" href="issue-explanations-20260910.md">18 条待修问题说明</a>
+          <a href="verification-audit-20260911.md">105 条证据核对报告</a>
+          <a id="issue-explanations-link" href="issue-explanations-20260910.md">历史 18 条待修说明</a>
           <a href="#update-history">更新记录</a>
           <a href="validation-correction-20260907.md">历史统计更正</a>
           <a
@@ -357,6 +362,8 @@
     <script src="assets/overall-status.js?v=overall-207998d-20260909"></script>
     <script src="assets/acceptance-20260910.js?v=acceptance-207998d-20260910"></script>
     <script src="assets/issue-explanations-20260910.js?v=acceptance-207998d-20260910-r2"></script>
-    <script src="assets/app.js?v=acceptance-207998d-20260910-r2"></script>
+    <script src="assets/acceptance-recheck-20260911.js?v=audit-207998d-20260911"></script>
+    <script src="assets/verification-audit-20260911.js?v=audit-207998d-20260911"></script>
+    <script src="assets/app.js?v=audit-207998d-20260911"></script>
   </body>
 </html>

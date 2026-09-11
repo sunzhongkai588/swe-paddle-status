@@ -3,9 +3,11 @@
 
   const history = window.SWE_PADDLE_DATA;
   const update = window.SWE_PADDLE_UPDATE;
-  const data = window.SWE_PADDLE_ACCEPTANCE;
+  const frozenData = window.SWE_PADDLE_ACCEPTANCE;
+  const data = window.SWE_PADDLE_CURRENT_ACCEPTANCE;
   const issueExplanations = window.SWE_PADDLE_ISSUE_EXPLANATIONS;
-  if (!history || !update || !data || data.schemaVersion !== 1 || !Array.isArray(data.tasks) || !data.meta || !data.counts || !data.evidenceCounts) {
+  const verificationAudit = window.SWE_PADDLE_VERIFICATION_AUDIT;
+  if (!history || !update || !frozenData || !data || data.schemaVersion !== 1 || !Array.isArray(data.tasks) || !data.meta || !data.counts || !data.evidenceCounts) {
     throw new Error("SWE-Paddle source records or full acceptance are unavailable.");
   }
   const statuses = ["passed", "needs_fix", "failed", "incomplete"];
@@ -67,18 +69,35 @@
   }
 
   // Explanations supplement the frozen result; they never change its status or evidence.
-  const needsFixIds = tasks.filter((task) => task.status === "needs_fix").map((task) => task.id);
+  const needsFixIds = frozenData.tasks.filter((task) => task.status === "needs_fix").map((task) => task.id);
   if (!issueExplanations || issueExplanations.schemaVersion !== 1 || !issueExplanations.meta ||
     !Array.isArray(issueExplanations.tasks) ||
-    issueExplanations.meta.snapshot !== data.meta.snapshot ||
-    issueExplanations.meta.sourceReportSha256 !== data.meta.sourceReportSha256 ||
+    issueExplanations.meta.snapshot !== frozenData.meta.snapshot ||
+    issueExplanations.meta.sourceReportSha256 !== frozenData.meta.sourceReportSha256 ||
     typeof issueExplanations.meta.reportUrl !== "string" || !issueExplanations.meta.reportUrl.trim() ||
     !sameIds(issueExplanations.tasks.map((task) => task.id), needsFixIds) ||
     issueExplanations.tasks.some((task) => !Number.isInteger(task.id) ||
       typeof task.explanation !== "string" || !task.explanation.trim())) {
     throw new Error("SWE-Paddle issue explanations do not match the frozen acceptance.");
   }
-  const explanationById = new Map(issueExplanations.tasks.map((task) => [task.id, task.explanation]));
+  const hasText = (value) => typeof value === "string" && value.trim().length > 0;
+  const validRounds = (rounds) => Array.isArray(rounds) && rounds.length === 2 &&
+    rounds.every((status) => status === null || typeof status === "string");
+  if (!verificationAudit || verificationAudit.schemaVersion !== 1 || !verificationAudit.meta ||
+    !Array.isArray(verificationAudit.tasks) || verificationAudit.tasks.length !== 105 ||
+    verificationAudit.meta.snapshot !== data.meta.snapshot ||
+    verificationAudit.meta.sourceReportSha256 !== data.meta.sourceReportSha256 ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(verificationAudit.meta.reviewedAt || "") ||
+    Number.isNaN(Date.parse(verificationAudit.meta.reviewedAt)) ||
+    verificationAudit.meta.reportUrl !== "verification-audit-20260911.md" ||
+    !sameIds(verificationAudit.tasks.map((task) => task.id), tasks.map((task) => task.id)) ||
+    verificationAudit.tasks.some((task) => !Number.isInteger(task.id) ||
+      ![task.summary, task.category, task.history, task.action, task.evidenceNote].every(hasText) ||
+      !Array.isArray(task.checks) || task.checks.some((check) => !check ||
+        !hasText(check.name) || !hasText(check.explanation) || !validRounds(check.base) || !validRounds(check.gold)))) {
+    throw new Error("SWE-Paddle verification audit does not match the frozen 105-task acceptance.");
+  }
+  const auditById = new Map(verificationAudit.tasks.map((task) => [task.id, task]));
 
   const typeLabels = { bugfix: "Bugfix", feature: "Feature", refactor: "Refactor", unknown: "类型未确认" };
   const statusLabels = {
@@ -103,7 +122,7 @@
     environment_incomplete: "硬件环境未完成：CPU 局部观察不代替所需加速器验收",
   };
   const elements = Object.fromEntries([
-    "snapshot-short", "footer-snapshot", "updated-at", "progress-ring", "pass-rate", "hero-direct",
+    "snapshot-short", "footer-snapshot", "updated-at", "reviewed-at", "verification-audit-link", "progress-ring", "pass-rate", "hero-direct",
     "hero-needs-fix", "hero-core-failed", "metric-total", "metric-direct", "metric-needs-fix",
     "metric-core-failed", "fix-summary", "fix-grid", "category-summary", "issue-grid",
     "correction-title", "correction-summary", "correction-caveat", "search-input", "status-filter",
@@ -125,6 +144,34 @@
     patch_preflight: "补丁预检", environment_incomplete: "硬件未完成",
   })[task.evidence];
   const packageLabel = (task) => task.packageChangeRequired === true ? "原包需要修改" : task.packageChangeRequired === false ? "原包未发现必须修改项" : "原包修改需求尚未确定";
+  const checkStatusLabels = {
+    passed: "通过", failed: "失败", setup_error: "准备阶段报错", teardown_error: "清理阶段报错",
+    collection_error: "收集测试时报错", error: "执行报错", aborted: "运行中断", skipped: "跳过",
+    missing: "未执行", not_run: "未执行", xfailed: "预期失败", xpassed: "意外通过",
+    target_sigabrt: "目标缺陷导致崩溃",
+  };
+  function checkStatusMarkup(status) {
+    const raw = status === null || !status.trim() ? "missing" : status;
+    const label = checkStatusLabels[raw] || `未识别状态（${raw}）`;
+    const tone = raw === "passed" ? "pass" : ["failed", "target_sigabrt"].includes(raw) ? "fail" :
+      ["setup_error", "teardown_error", "collection_error", "error", "aborted"].includes(raw) ? "error" : "other";
+    return `<span class="check-status check-status-${tone}" title="${escapeHtml(raw)}">${escapeHtml(label)}</span>`;
+  }
+
+  function checkDetailsMarkup(audit) {
+    return `<details class="check-details">
+      <summary>查看全部 ${audit.checks.length} 项检查及两轮结果</summary>
+      <p class="check-legend">Base = 未打修复补丁；Gold = 已打参考修复补丁。F2P：同一测试从 Base 失败变为 Gold 通过；P2P：同一测试在 Base 和 Gold 都通过。准备报错、跳过、中断和未执行需结合原因判断，不能直接当作有效 F2P。</p>
+      <p class="check-legend">每一列对应保留记录中的一轮；没有记录显示“未执行”，不计为通过或失败。完整节点名可用于定位测试，窄屏可横向滚动表格。</p>
+      ${audit.checks.length ? `<div class="check-table-wrap" role="region" aria-label="Task ${audit.id} 完整测试节点与两轮结果" tabindex="0">
+        <table class="check-table">
+          <caption>Task #${audit.id} · 逐项核对</caption>
+          <thead><tr><th scope="col">完整测试节点 / 入口</th><th scope="col">Base 第 1 轮</th><th scope="col">Base 第 2 轮</th><th scope="col">Gold 第 1 轮</th><th scope="col">Gold 第 2 轮</th><th scope="col">这项结果说明什么</th></tr></thead>
+          <tbody>${audit.checks.map((check) => `<tr><th scope="row"><code>${escapeHtml(check.name)}</code></th>${[...check.base, ...check.gold].map((status) => `<td>${checkStatusMarkup(status)}</td>`).join("")}<td class="check-explanation">${escapeHtml(check.explanation)}</td></tr>`).join("")}</tbody>
+        </table>
+      </div>` : `<p class="checks-empty">未执行：没有可展示的 Base / Gold 两轮测试节点记录。具体停在哪一步，见上方核对结论与证据范围。</p>`}
+    </details>`;
+  }
 
   function authorMarkup(task, prefix = "") {
     const label = authorLabel(task.author);
@@ -136,8 +183,11 @@
   function renderOverview() {
     const rate = counts.passed / counts.total * 100;
     for (const id of ["snapshot-short", "footer-snapshot"]) elements[id].textContent = data.meta.snapshot.slice(0, 8);
-    elements["updated-at"].textContent = data.meta.updatedAt;
-    elements["updated-at"].dateTime = data.meta.updatedAt;
+    elements["updated-at"].textContent = frozenData.meta.updatedAt;
+    elements["updated-at"].dateTime = frozenData.meta.updatedAt;
+    elements["reviewed-at"].textContent = verificationAudit.meta.reviewedAt;
+    elements["reviewed-at"].dateTime = verificationAudit.meta.reviewedAt;
+    elements["verification-audit-link"].href = verificationAudit.meta.reportUrl;
     elements["progress-ring"].style.setProperty("--progress", `${rate * 3.6}deg`);
     elements["progress-ring"].setAttribute("aria-label", `核心 F2P/P2P 验证通过 ${counts.passed} / ${counts.total}，${rate.toFixed(1)}%；含兼容环境与 README 轻量路线，不是模型评测成绩或原包通过率`);
     elements["pass-rate"].textContent = `${rate.toFixed(1)}%`;
@@ -152,7 +202,7 @@
       "inventory-total": tasks.length,
     })) elements[id].textContent = value;
     document.getElementById("readiness-note").textContent = `${counts.passed} 条核心通过 = ${counts.packageUnchanged} 条原包无必改项 + ${counts.packageNeedsFix} 条待修。${counts.packageUnchanged} 条可在各自记录的环境范围内原样使用，不代表全部是精确原生编译。`;
-    document.getElementById("latest-report-link").href = data.meta.reportUrl;
+    document.getElementById("latest-report-link").href = frozenData.meta.reportUrl;
     document.getElementById("issue-explanations-link").href = issueExplanations.meta.reportUrl;
     for (const kind of evidenceKinds) {
       const option = elements["source-filter"].querySelector(`[value="${kind}"]`);
@@ -167,14 +217,14 @@
     for (const [id, statuses] of [["fix-grid", ["needs_fix"]], ["issue-grid", ["failed", "incomplete"]]]) {
       elements[id].innerHTML = tasks.filter((task) => statuses.includes(task.status)).map((task) => {
         const theme = themes[task.status];
+        const audit = auditById.get(task.id);
         return `<article class="${task.status === "needs_fix" ? "fix-card" : "issue-card"}" role="button" tabindex="0" data-task-id="${task.id}" aria-label="查看 Task ${task.id} 验证详情" style="--fix-color: ${theme.color}; --category-color: ${theme.color}; --category-bg: ${theme.background}">
           <div class="issue-top"><span class="issue-id">#${task.id}</span><span class="issue-category">${escapeHtml(statusLabels[task.status])}</span></div>
           <h3>${escapeHtml(task.title)}</h3><p class="matrix-line">${escapeHtml(matrix(task))}</p>
           <p class="card-evidence">${escapeHtml(evidenceLabels[task.evidence])}</p>
-          <div class="fix-detail"><small>当前问题</small><p>${escapeHtml(task.reason)}</p></div>
-          ${explanationById.has(task.id) ? `<div class="fix-detail issue-explanation"><small>影响说明</small><p>${escapeHtml(explanationById.get(task.id))}</p></div>` : ""}
-          <div class="fix-detail fix-action"><small>下一步</small><p>${escapeHtml(task.action)}</p></div>
-          <div class="issue-footer"><span class="author-mini">${escapeHtml(authorLabel(task.author))}</span><span class="view-link">查看证据 →</span></div>
+          <div class="fix-detail audit-summary"><small>核对后说明</small><p>${escapeHtml(audit.summary)}</p></div>
+          <div class="fix-detail fix-action"><small>下一步</small><p>${escapeHtml(audit.action)}</p></div>
+          <div class="issue-footer"><span class="author-mini">${escapeHtml(authorLabel(task.author))}</span><span class="view-link">查看具体测试与历史差异 →</span></div>
         </article>`;
       }).join("");
     }
@@ -219,7 +269,8 @@
   function renderTable() {
     const query = elements["search-input"].value.trim().toLocaleLowerCase("zh-CN");
     const visible = tasks.filter((task) => {
-      const haystack = `${task.id} ${task.title} ${task.author} ${authorLabel(task.author)}`.toLocaleLowerCase("zh-CN");
+      const audit = auditById.get(task.id);
+      const haystack = `${task.id} ${task.title} ${task.author} ${authorLabel(task.author)} ${audit.summary} ${audit.category} ${audit.checks.map((check) => check.name).join(" ")}`.toLocaleLowerCase("zh-CN");
       return (!query || haystack.includes(query)) &&
         (elements["status-filter"].value === "all" || elements["status-filter"].value === task.status) &&
         (elements["source-filter"].value === "all" || elements["source-filter"].value === task.evidence) &&
@@ -245,22 +296,32 @@
 
   function renderDialog(task) {
     const theme = themes[task.status];
+    const audit = auditById.get(task.id);
     elements["task-dialog"].style.setProperty("--dialog-color", theme.color);
     elements["task-dialog"].style.setProperty("--dialog-bg", theme.background);
     elements["dialog-content"].innerHTML = `
       <span class="dialog-eyebrow">FULL TASK ACCEPTANCE · F2P / P2P</span>
       <div class="dialog-title-row"><h2 id="dialog-title">Task #${task.id}</h2><span class="status-chip ${task.status}">${escapeHtml(statusLabels[task.status])}</span></div>
       <p class="dialog-topic">${escapeHtml(task.title)}</p>
+      <div class="dialog-panel audit-conclusion"><small>核对后说明</small><p>${escapeHtml(audit.summary)}</p></div>
+      <div class="dialog-section audit-category"><small>失败或限制在哪</small><p>${escapeHtml(audit.category)}</p></div>
+      <div class="dialog-section action-box audit-action"><small>怎么处理</small><p>${escapeHtml(audit.action)}</p></div>
+      <div class="dialog-section audit-history"><small>与之前记录有什么差异</small><p>${escapeHtml(audit.history)}</p></div>
+      <p class="scope-note audit-scope">核对日期 ${escapeHtml(verificationAudit.meta.reviewedAt)}；105 条均核对证据，另对 3 条争议任务复验，仅 59348 恢复核心通过，不代表 105 条重新执行。${escapeHtml(audit.evidenceNote)}</p>
+      ${checkDetailsMarkup(audit)}
       <div class="dialog-meta"><span class="type-chip ${escapeHtml(task.type || "unknown")}">${escapeHtml(typeLabels[task.type] || typeLabels.unknown)}</span>${authorMarkup(task, "样本作者：")}</div>
-      <p class="scope-note">本次全量任务包与 F2P/P2P 基础验收。快照 ${escapeHtml(task.recordSnapshot.slice(0, 8))}；验证记录日期 ${escapeHtml(data.meta.validationRecordedAt.slice(0, 10))}；页面发布更新 ${escapeHtml(data.meta.updatedAt)}。运行范围以该条证据为准，兼容或轻量路线不扩展为精确原生结论。</p>
+      <p class="scope-note">原全量任务包与 F2P/P2P 基础验收。快照 ${escapeHtml(task.recordSnapshot.slice(0, 8))}；原验证记录日期 ${escapeHtml(frozenData.meta.validationRecordedAt.slice(0, 10))}；原页面发布更新 ${escapeHtml(frozenData.meta.updatedAt)}。本次复验结论与日期见上方核对说明；运行范围以该条证据为准。</p>
       <div class="dialog-panel matrix-panel"><small>核心 F2P / P2P 验证矩阵</small><strong>${escapeHtml(matrix(task))}</strong>${task.countsNote ? `<p class="matrix-note">${escapeHtml(task.countsNote)}</p>` : ""}</div>
       <div class="dialog-section"><small>运行证据与原始任务包</small><p>${escapeHtml(evidenceLabels[task.evidence])}；${escapeHtml(packageLabel(task))}。</p></div>
-      <div class="dialog-section"><small>结论 / 原因</small><p>${escapeHtml(task.reason)}</p></div>
-      ${explanationById.has(task.id) ? `<div class="dialog-section issue-explanation"><small>影响说明</small><p>${escapeHtml(explanationById.get(task.id))}</p></div>` : ""}
-      <div class="dialog-section action-box"><small>下一步</small><p>${escapeHtml(task.action)}</p></div>
+      <div class="dialog-section entry-acceptance"><small>原报告入口验收</small><p>${task.originalEntryPassed ? "通过" : "未通过"}。这是原报告的验收结论，不等同于脚本退出码；仍需结合目标测试是否有效、F2P/P2P 是否成立判断。</p></div>
+      <details class="historical-acceptance"><summary>查看原验收措辞（${escapeHtml(frozenData.meta.validationRecordedAt.slice(0, 10))} 记录）</summary>
+        <div class="dialog-section"><small>原结论 / 原因</small><p>${escapeHtml(frozenData.tasks.find((record) => record.id === task.id).reason)}</p></div>
+        <div class="dialog-section"><small>原处理建议</small><p>${escapeHtml(frozenData.tasks.find((record) => record.id === task.id).action)}</p></div>
+      </details>
       <div class="dialog-links">
+        <a href="${escapeHtml(verificationAudit.meta.reportUrl)}#task-${task.id}">本条核对报告 ↗</a>
         <a href="${escapeHtml(taskUrl(task))}" target="_blank" rel="noreferrer">验收快照任务包 ↗</a>
-        <a href="${escapeHtml(data.meta.reportUrl)}">全量逐题验收报告 ↗</a>
+        <a href="${escapeHtml(frozenData.meta.reportUrl)}">原全量逐题验收报告 ↗</a>
         <a href="${escapeHtml(sourcePrUrl(task.id))}" target="_blank" rel="noreferrer">源 Paddle PR ↗</a>
       </div>`;
   }
@@ -269,6 +330,7 @@
     const task = taskById.get(Number(id));
     if (!task) return;
     renderDialog(task);
+    elements["task-dialog"].scrollTop = 0;
     if (typeof elements["task-dialog"].showModal === "function") elements["task-dialog"].showModal();
     else elements["task-dialog"].setAttribute("open", "");
   }

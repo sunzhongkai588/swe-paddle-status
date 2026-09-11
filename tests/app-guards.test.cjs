@@ -12,6 +12,10 @@ function validateBeforeRendering(mutate) {
   window.SWE_PADDLE_ACCEPTANCE = JSON.parse(JSON.stringify(window.SWE_PADDLE_ACCEPTANCE));
   vm.runInNewContext(readPublic("assets/issue-explanations-20260910.js"), { window }, { timeout: 1000 });
   window.SWE_PADDLE_ISSUE_EXPLANATIONS = JSON.parse(JSON.stringify(window.SWE_PADDLE_ISSUE_EXPLANATIONS));
+  vm.runInNewContext(readPublic("assets/acceptance-recheck-20260911.js"), { window }, { timeout: 1000 });
+  window.SWE_PADDLE_CURRENT_ACCEPTANCE = JSON.parse(JSON.stringify(window.SWE_PADDLE_CURRENT_ACCEPTANCE));
+  vm.runInNewContext(readPublic("assets/verification-audit-20260911.js"), { window }, { timeout: 1000 });
+  window.SWE_PADDLE_VERIFICATION_AUDIT = JSON.parse(JSON.stringify(window.SWE_PADDLE_VERIFICATION_AUDIT));
   mutate(window);
   const document = { getElementById() { throw new Error("Reached DOM after validated inventory"); } };
   vm.runInNewContext(readPublic("assets/app.js"), { window, document }, { timeout: 1000 });
@@ -22,7 +26,7 @@ test("application accepts complete current acceptance before rendering", () => {
 });
 
 const invalidCases = [
-  ["missing current acceptance cannot fall back to historical status", (window) => { delete window.SWE_PADDLE_ACCEPTANCE; }],
+  ["missing current acceptance cannot fall back to historical status", (window) => { delete window.SWE_PADDLE_CURRENT_ACCEPTANCE; }],
   ["unknown status cannot default to pass", (data) => { data.tasks[0].status = "unclassified"; }],
   ["missing task cannot shrink the denominator", (data) => { data.tasks.pop(); }],
   ["duplicate IDs are rejected", (data) => { data.tasks.push({ ...data.tasks[0] }); }],
@@ -53,7 +57,7 @@ const invalidCases = [
 
 for (const [index, [name, mutate]] of invalidCases.entries()) {
   test(`application fails closed: ${name}`, () => {
-    assert.throws(() => validateBeforeRendering((window) => mutate(index === 0 ? window : window.SWE_PADDLE_ACCEPTANCE)),
+    assert.throws(() => validateBeforeRendering((window) => mutate(index === 0 ? window : window.SWE_PADDLE_CURRENT_ACCEPTANCE)),
       /SWE-Paddle (?:source records|acceptance inventory|acceptance counts)/);
   });
 }

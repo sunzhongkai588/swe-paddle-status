@@ -45,7 +45,7 @@ test("page loads immutable history, full acceptance projection, then application
   const html = readPublic("index.html");
   const scripts = [...html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/g)]
     .map((match) => new URL(match[1], "https://public.invalid/").pathname.slice(1));
-  assert.deepEqual(scripts, ["assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "assets/acceptance-20260910.js", "assets/issue-explanations-20260910.js", "assets/app.js"]);
+  assert.deepEqual(scripts, ["assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "assets/acceptance-20260910.js", "assets/issue-explanations-20260910.js", "assets/acceptance-recheck-20260911.js", "assets/verification-audit-20260911.js", "assets/app.js"]);
   assert.match(html, /105/);
 });
 
@@ -62,6 +62,9 @@ test("previous published records and their historical manifest retain their orig
     "assets/acceptance-20260910.js": "7df403b776340c5b8276df8aed8b2f4f3be5b46fe87c4275705d4f5722a44800",
     "acceptance-20260910.md": "9b1340ff8f023f8feccbb08f25d890785d9fb2381bcacc145e483e11b087b542",
     "acceptance-20260910.sha256": "8d2aef5f6aeaa24942fb05b31d1b9ed3e18722f6b79fe929c0b1e65dec323d67",
+    "assets/issue-explanations-20260910.js": "ea80206b6cd28621491e0be3767339bfeba6ab30c1e9f9adaf4efd733b536470",
+    "issue-explanations-20260910.md": "50ed7c7027769f1eca25373d560f56502301f5bc8a65754843667761b3d79a6e",
+    "acceptance-20260910-r2.sha256": "5b6ec19f70152119864382bd9150085151121ab7613157efb488f711fb80738b",
   };
   for (const [relative, expected] of Object.entries(immutable)) {
     const actual = crypto.createHash("sha256").update(fs.readFileSync(path.join(docs, relative))).digest("hex");
@@ -70,8 +73,8 @@ test("previous published records and their historical manifest retain their orig
   // The old manifest binds the previous UI revision, not the current index/app/CSS.
 });
 
-test("current acceptance release manifest binds exactly the current published entities", () => {
-  const manifest = readPublic("acceptance-20260910-r2.sha256");
+test("current audit release manifest binds exactly the current published entities", () => {
+  const manifest = readPublic("verification-audit-20260911.sha256");
   const lines = manifest.trim().split(/\r?\n/);
   const filenames = [];
   for (const line of lines) {
@@ -83,5 +86,5 @@ test("current acceptance release manifest binds exactly the current published en
     assert.equal(crypto.createHash("sha256").update(bytes).digest("hex"), expected, relative);
     filenames.push(relative);
   }
-  assert.deepEqual(filenames.sort(), [".nojekyll", "index.html", "assets/app.js", "assets/styles.css", "assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "assets/acceptance-20260910.js", "assets/issue-explanations-20260910.js", "validation-correction-20260907.md", "validation-update-20260909.md", "validation-update-20260909.sha256", "overall-status-20260909.md", "overall-status-20260909.sha256", "acceptance-20260910.md", "acceptance-20260910.sha256", "issue-explanations-20260910.md"].sort());
+  assert.deepEqual(filenames.sort(), [".nojekyll", "index.html", "assets/app.js", "assets/styles.css", "assets/data.js", "assets/validation-update.js", "assets/overall-status.js", "assets/acceptance-20260910.js", "assets/issue-explanations-20260910.js", "assets/acceptance-recheck-20260911.js", "assets/verification-audit-20260911.js", "verification-audit-20260911.md", "validation-correction-20260907.md", "validation-update-20260909.md", "validation-update-20260909.sha256", "overall-status-20260909.md", "overall-status-20260909.sha256", "acceptance-20260910.md", "acceptance-20260910.sha256", "acceptance-20260910-r2.sha256", "issue-explanations-20260910.md"].sort());
 });
