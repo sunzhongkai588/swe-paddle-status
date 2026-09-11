@@ -422,6 +422,7 @@ async function main() {
       await page.locator("#dialog-content .check-details summary").click();
       await page.locator("#dialog-content .check-table-wrap").scrollIntoViewIfNeeded();
       assert.equal(await page.locator("#dialog-content .check-table tbody th code").first().textContent(), auditById.get(78441).checks[0].name);
+      assert.equal(await page.locator("#dialog-content .check-table tbody th code").first().evaluate((element) => getComputedStyle(element).textTransform), "none", "test node names must preserve displayed letter case");
       const tableBounds = await page.locator(".check-table-wrap").evaluate((element) => ({ client: element.clientWidth, scroll: element.scrollWidth, overflow: getComputedStyle(element).overflowX }));
       assert.equal(tableBounds.overflow, "auto");
       assert.ok(tableBounds.scroll > tableBounds.client, JSON.stringify(tableBounds));

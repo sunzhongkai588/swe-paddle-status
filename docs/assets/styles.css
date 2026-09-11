@@ -1767,6 +1767,8 @@ footer {
   text-align: left;
   vertical-align: top;
   white-space: normal;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 .check-table thead th {
