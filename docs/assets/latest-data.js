@@ -1462,13 +1462,13 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 3,
       "evidence": "exact_native",
       "corePassed": false,
-      "cause": "mixed",
-      "summary": "入口误收集辅助函数，CPU 加速库的池化反向计算也会退出。",
-      "whatFailed": "test_ast_only、test_legacy_and_pir 不是测试，却被 pytest 当作测试收集，报缺少 fn。 TestResnetWithPass::test_in_static_mode_mkldnn__ast_legacy_ir 在修复前后均因 pool2d_grad 的 oneDNN 错误退出。",
-      "why": "原脚本使用 pytest 跑整个文件，将名称以 test_ 开头的两个装饰器误收集；这是任务入口问题。 真正退出的位置是旧 CPU 加速库 oneDNN 创建池化反向计算描述时失败。清空外部执行器设置、采用上游 CMake 环境、限制到 AVX2 后都仍复现；不是验证器额外开启了错误执行器，也不是进程被内存不足杀掉。 两个 PIR 目标测试能被参考补丁修复；旧加速路径的错误在 Base 和 Gold 都存在，不能据此断言补丁引入回归。 已定位故障发生在旧版 Paddle/oneDNN 的池化反向实现；目前还不能区分是库自身的问题，还是它与当前机器、构建方式不兼容。",
-      "fix": "修正辅助函数的收集方式；用另一份兼容的 CPU 构建对照池化反向测试，继续确定库自身故障与环境兼容性的边界，再跑完整范围。",
-      "proof": "核对全部原测试，并分别清空外部开关、采用上游设置、限制 CPU 指令集重跑；池化反向计算在两边仍退出。两个目标算子测试有明确的修复前异常、修复后通过记录。",
-      "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
+      "cause": "data",
+      "summary": "入口误收集辅助函数，还测到了旧版池化的数据排列错误。",
+      "whatFailed": "两个辅助函数被误当作测试，报缺少参数；最大池化的反向计算在修复前后都会退出。",
+      "why": "脚本把两个以 test_ 开头的辅助函数当成了测试。另一个最大池化测试在前向和反向使用不同的数据排列方式，但底层库要求两边一致，因此拒绝计算。这是旧版 Paddle 已有的调用问题，本题补丁没有处理它；不是机器缺硬件。",
+      "fix": "修正入口的测试收集方式；明确本题验收范围，另行处理这个旧池化问题后再完整复验。已通过的两个目标测试不能替代整题。",
+      "proof": "记录实际失败参数，并用同一个 oneDNN 3.2.1 做最小对照：只对齐前后数据排列，原先报错的计算准备步骤就能通过；限制 CPU 指令集后结果相同。源码也要求排列一致，确认是旧版调用问题。整题仍未通过。",
+      "requirements": "使用记录中的精确 CPU Paddle 运行库。该项验证的是 CPU 加速的最大池化反向计算，不需要 GPU。",
       "problemTests": [
         "test/dygraph_to_static/test_build_strategy.py::test_ast_only",
         "test/dygraph_to_static/test_build_strategy.py::test_legacy_and_pir",
@@ -1517,7 +1517,7 @@ window.SWE_PADDLE_LATEST = {
             "native_abort"
           ],
           "condition": "原完整文件的逐项控制；oneDNN另核上游CMake前提与AVX2，保持断言不变",
-          "explanation": "旧oneDNN pool2d_grad异常；Base/Gold均失败，不计F2P。",
+          "explanation": "最大池化反向需要沿用前向的数据排列；实际传入另一种排列，库不支持，所以修复前后都失败。最小对照中，只对齐排列就能通过原先失败的计算准备步骤。",
           "effective": true
         },
         {

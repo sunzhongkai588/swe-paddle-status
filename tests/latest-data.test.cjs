@@ -12,7 +12,7 @@ test('published root contains a single current dataset and current report',()=>{
  const files=walk(docs).map(p=>path.relative(docs,p)).sort();
  assert.deepEqual(files,['.nojekyll','assets/app.js','assets/latest-data.js','assets/styles.css','index.html','latest-report.md','latest.sha256']);
  const html=fs.readFileSync(path.join(docs,'index.html'),'utf8');
- assert.deepEqual([...html.matchAll(/<script src="([^"]+)"/g)].map(m=>m[1]),['assets/latest-data.js','assets/app.js']);
+ assert.deepEqual([...html.matchAll(/<script src="([^"]+)"/g)].map(m=>m[1].split('?')[0]),['assets/latest-data.js','assets/app.js']);
  assert.doesNotMatch(html,/历史|上一版|更新记录|复验前|原验收|封存/);
  for(const p of files){if(p.endsWith('.js')||p.endsWith('.html')||p.endsWith('.md'))assert.doesNotMatch(fs.readFileSync(path.join(docs,p),'utf8'),/\/data\/home\/|\/harness|container_id|libpaddle_sha256|历史记录|上一版结论/);}
 });
