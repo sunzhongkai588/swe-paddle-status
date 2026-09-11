@@ -1,369 +1,71 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="SWE-Paddle 105 条任务证据核对：59348 已恢复核心通过，57827 与 59021 已复现目标子集但原包仍有故障。当前 90 条核心通过，其中 71 条原包无必改项、19 条待修；12 条未通过，3 条硬件未完成。"
-    />
-    <meta name="theme-color" content="#10213a" />
-    <title>SWE-Paddle 可评测性雷达</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310213a'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='14' fill='%23ffffff'%3ESP%3C/text%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="assets/styles.css?v=audit-207998d-20260911" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main">跳到主要内容</a>
-
-    <header class="hero">
-      <div class="hero-grid" aria-hidden="true"></div>
-      <div class="orb orb-one" aria-hidden="true"></div>
-      <div class="orb orb-two" aria-hidden="true"></div>
-
-      <nav class="topbar shell" aria-label="主导航">
-        <a class="brand" href="#top" aria-label="SWE-Paddle 首页">
-          <span class="brand-mark" aria-hidden="true">SP</span>
-          <span>
-            <strong>SWE-Paddle</strong>
-            <small>Community readiness</small>
-          </span>
-        </a>
-        <div class="nav-actions">
-          <span class="snapshot-chip">
-            <span class="live-dot" aria-hidden="true"></span>
-            Snapshot <code id="snapshot-short">207998da</code>
-          </span>
-          <a
-            class="ghost-button"
-            href="https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks"
-            target="_blank"
-            rel="noreferrer"
-          >
-            查看数据源
-            <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </nav>
-
-      <div class="hero-content shell" id="top">
-        <div class="hero-copy">
-          <p class="eyebrow"><span>F2P</span><i></i><span>P2P</span><i></i><span>105 TASKS</span></p>
-          <h1>把每一条样本，<br />推进到<strong>可评测</strong>。</h1>
-          <p class="hero-lead">
-            核对全部 105 条完整任务：90 条核心 F2P/P2P 通过，其中
-            71 条原包无必改项、19 条需要修改；12 条未通过，3 条硬件未完成。
-          </p>
-          <p class="audit-correction-note"><strong>59348 已恢复核心通过，入口仍待修。</strong><br />2026-09-11 复验还确认 57827、59021 的目标子集可通过；完整原包仍有其他故障，这两条继续保留“验证未通过”。详情列出复验节点和历史差异。</p>
-          <div class="hero-buttons">
-            <a class="primary-button" id="package-fixes-link" href="#package-fixes">查看 19 条任务包待修</a>
-            <a class="text-button" href="#all-tasks">浏览全部 105 条 <span>↓</span></a>
-          </div>
-          <p class="updated-line">
-            <span class="updated-icon" aria-hidden="true">✓</span>
-            原验收发布于 <time id="updated-at" datetime="2026-09-10">2026-09-10</time>
-          </p>
-          <p class="audit-update-line">核对日期 <time id="reviewed-at" datetime="2026-09-11">2026-09-11</time> · <a id="verification-audit-link" href="verification-audit-20260911.md">查看全部 105 条核对报告 ↗</a><br /><span>原验证记录为 2026-09-09；核对日期不代表 105 条重新执行。原封存记录保留，当前状态已纳入上述复验结论。</span></p>
-        </div>
-
-        <aside class="readiness-card" aria-label="全部 105 条任务的验证通过率，含兼容环境与 README 轻量路线">
-          <div class="readiness-head">
-            <span>核心 F2P/P2P 验证通过率<br /><small>含兼容环境与 README 轻量路线</small></span>
-            <span class="trend-chip">全部 105 条</span>
-          </div>
-          <div class="progress-wrap">
-            <div class="progress-ring" id="progress-ring" role="img" aria-label="核心验证通过 90 / 105，85.7%">
-              <div class="progress-center">
-                <strong id="pass-rate">85.7%</strong>
-                <span>核心通过 · 90 / 105</span>
-              </div>
-            </div>
-          </div>
-          <div class="readiness-numbers">
-            <div>
-              <span class="number-dot pass-dot"></span>
-              <span>核心通过（含 19 条待修）</span>
-              <strong id="hero-direct">90</strong>
-            </div>
-            <div>
-              <span class="number-dot fix-dot"></span>
-              <span>验证未通过</span>
-              <strong id="hero-needs-fix">12</strong>
-            </div>
-            <div>
-              <span class="number-dot fail-dot"></span>
-              <span>硬件未完成</span>
-              <strong id="hero-core-failed">3</strong>
-            </div>
-          </div>
-          <p class="readiness-note" id="readiness-note">90 条核心通过 = 71 条原包无必改项 + 19 条待修。71 条可在各自记录的环境范围内原样使用，不代表全部是精确原生编译。</p>
-        </aside>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="SWE-Paddle 105 条任务的最新验证情况：逐题说明 F2P/P2P 结果、失败原因，以及问题来自任务数据还是运行环境。" />
+  <meta name="theme-color" content="#10213a" />
+  <title>SWE-Paddle · 最新验证情况</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310213a'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='14' fill='white'%3ESP%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="hero" id="top">
+    <nav class="topbar shell" aria-label="主导航">
+      <a class="brand" href="#top"><span class="brand-mark">SP</span><span><strong>SWE-Paddle</strong><small>任务验证看板</small></span></a>
+      <a class="ghost-button" href="latest-report.md">完整逐题报告 ↗</a>
+    </nav>
+    <div class="hero-content shell">
+      <div>
+        <p class="eyebrow">105 TASKS · F2P / P2P</p>
+        <h1>最新情况，<br /><strong>每条说清楚。</strong></h1>
+        <p class="hero-lead">哪些任务可用，哪些还没过，<br />问题出在任务数据，还是运行环境。</p>
+        <div class="hero-buttons"><a class="primary-button" href="#issues">查看有问题的任务 ↓</a><a class="text-button" href="#all-tasks">浏览全部任务</a></div>
+        <p class="updated-line">结论核对日期 <time id="updated-at">—</time> · 数据快照 <code id="snapshot-short">—</code></p>
       </div>
-    </header>
-
-    <main id="main">
-      <section class="metrics-section shell" aria-labelledby="metrics-title">
-        <h2 class="sr-only" id="metrics-title">数据概览</h2>
-        <div class="metric-card metric-primary">
-          <span class="metric-icon" aria-hidden="true">∑</span>
-          <div>
-            <strong id="metric-total">105</strong>
-            <span>文件齐全的任务包</span>
-          </div>
-          <small>另有 4 条仅 proposal，不计入完整任务</small>
-        </div>
-        <div class="metric-card">
-          <span class="metric-icon success-icon" aria-hidden="true">✓</span>
-          <div>
-            <strong id="metric-direct">71</strong>
-            <span>验证通过 · 原包无必改项</span>
-          </div>
-          <small class="success-text">在各条记录的运行环境范围内可原样使用</small>
-        </div>
-        <div class="metric-card">
-          <span class="metric-icon warning-icon" aria-hidden="true">↻</span>
-          <div>
-            <strong id="metric-needs-fix">19</strong>
-            <span>验证通过 · 任务包待修</span>
-          </div>
-          <small class="warning-text">入口 / 描述 / fixture 等问题需修改后复验</small>
-        </div>
-        <div class="metric-card">
-          <span class="metric-icon danger-icon" aria-hidden="true">!</span>
-          <div>
-            <strong id="metric-core-failed">15</strong>
-            <span>验证未通过 / 未完成</span>
-          </div>
-          <small class="danger-text">12 条未通过 + 3 条硬件未完成</small>
-        </div>
-      </section>
-
-      <section class="criterion-section shell" aria-labelledby="criterion-title">
-        <div class="criterion-label">
-          <span class="section-kicker">判定口径</span>
-          <h2 id="criterion-title">核心矩阵与原包入口，分别验收</h2>
-        </div>
-        <div class="criterion-flow" aria-label="验证检查的四个方面">
-          <div class="flow-step">
-            <span class="flow-index">01</span>
-            <div>
-              <strong>Base 有效失败</strong>
-              <p>至少一个目标测试真实暴露待修缺陷。</p>
-            </div>
-          </div>
-          <span class="flow-arrow" aria-hidden="true">→</span>
-          <div class="flow-step">
-            <span class="flow-index">02</span>
-            <div>
-              <strong>Gold 稳定转绿</strong>
-              <p>同一目标节点在修复态连续通过。</p>
-            </div>
-          </div>
-          <span class="flow-arrow" aria-hidden="true">→</span>
-          <div class="flow-step">
-            <span class="flow-index">03</span>
-            <div>
-              <strong>P2P 保持通过</strong>
-              <p>至少一个有意义的旧行为在两态均绿。</p>
-            </div>
-          </div>
-          <span class="flow-arrow" aria-hidden="true">→</span>
-          <div class="flow-step">
-            <span class="flow-index">04</span>
-            <div>
-              <strong>原包与环境证据</strong>
-              <p>原始脚本能否执行；精确、兼容与轻量路线分别标记。</p>
-            </div>
-          </div>
-        </div>
-        <p class="criterion-footnote" id="criterion-footnote">
-          原全量 105 条验收记录日期为 2026-09-09；当前状态纳入 2026-09-11 对 3 条争议任务的复验结论。核心通过不等于原入口通过；已通过子集不等于整题通过。失败、跳过、未配对节点及硬件限制保留在详情。以下按运行证据划分当前 90 条核心通过任务，不是额外的通过数。
-        </p>
-        <p class="criterion-footnote">Base = 未打修复补丁；Gold = 已打参考修复补丁。F2P（Fail to Pass）是同一测试在修复前失败、修复后通过；P2P（Pass to Pass）是在修复前后都通过。详情可展开完整测试节点及两轮结果；“未执行”表示没有该轮记录，不算通过或失败。</p>
-        <div class="evidence-grid" aria-label="90 条核心通过任务的运行证据">
-          <a class="evidence-card" href="#all-tasks">
-            <strong id="evidence-strict">37</strong>
-            <div><b>精确原生 / 精确 Python</b><p>两类证据分别标记。精确 Python 验证不等于已精确编译整个原生运行时。</p></div>
-          </a>
-          <a class="evidence-card compatible-evidence" href="?evidence=exact_python_compatible_native#all-tasks">
-            <strong id="evidence-compatible">28</strong>
-            <div><b>精确 Python + 兼容原生</b><p>按原任务复现核心矩阵，底层使用兼容载体；不可扩展为精确原生编译结论。</p></div>
-          </a>
-          <a class="evidence-card lightweight-evidence" href="#all-tasks">
-            <strong id="evidence-lightweight">25</strong>
-            <div><b>README 允许的轻量路线</b><p>按任务约定的源码或轻量 C++ 路线验证；不等于完整 Paddle 原生编译。</p></div>
-          </a>
-        </div>
-        <p class="history-note">这里仅展示任务包与 F2P/P2P 基础验收，不是模型评测成绩。71 条原包无必改项须在各自记录的环境与测试范围内使用，具体限制见详情。</p>
-      </section>
-
-      <section class="fixes-section" id="package-fixes" aria-labelledby="fixes-title">
-        <div class="shell">
-          <div class="section-heading">
-            <div>
-              <span class="section-kicker">PACKAGE NOT READY</span>
-              <h2 id="fixes-title">19 条核心验证通过，但原始任务包需要修改</h2>
-              <p>核心 F2P/P2P 已成立，但入口、描述或 fixture 等仍需修正；原脚本结果与独立诊断结果分开记录。</p>
-              <p>包含本次纠正的 59348：全部 15 个测试节点已验证，原入口仍需修改。60808 与 78441 原入口已通过，需要修改的分别是文档说明和测试质量。</p>
-            </div>
-            <div class="category-summary" id="fix-summary" aria-label="Task 包不通过分类汇总"></div>
-          </div>
-
-          <div class="fix-grid" id="fix-grid"></div>
-        </div>
-      </section>
-
-      <section class="issues-section" id="issues" aria-labelledby="issues-title">
-        <div class="shell">
-          <div class="section-heading">
-            <div>
-              <span class="section-kicker">ACTION REQUIRED</span>
-              <h2 id="issues-title">12 条验证未通过，3 条硬件未完成</h2>
-              <p>实际失败与缺 CUDA / XPU 的未完成分开记录；补丁预检失败也不冒充已经动态运行。</p>
-            </div>
-            <div class="category-summary" id="category-summary" aria-label="问题分类汇总"></div>
-          </div>
-
-          <div class="issue-grid" id="issue-grid"></div>
-
-          <details class="update-history" id="update-history">
-            <summary>更新记录与历史统计说明</summary>
-            <p>2026-09-11：核对全部 105 条；复验后 59348 恢复核心通过，57827、59021 已复现目标子集但完整原包仍有故障。当前 90 条核心通过（71 条原包无必改项、19 条待修），12 条未通过、3 条硬件未完成。原封存记录保留，核对日期不等于全量重跑日期。<a href="verification-audit-20260911.md">查看核对报告 ↗</a></p>
-            <p>2026-09-10：发布全量 105 条基础验收，89 条核心通过（71 条原包无必改项、18 条待修），13 条未通过、3 条硬件未完成；验证记录日期为 2026-09-09。</p>
-            <p>历史增量记录：2026-09-09 曾验证 9 条新增、19 条修改任务，共 28 条（21 条通过、5 条未通过、2 条未完成）。这不是当前全量结论；原历史资料保留备查。</p>
-            <p><a href="validation-update-20260909.md">查看历史增量验证报告 ↗</a> · <a href="overall-status-20260909.md">查看历史整体汇总 ↗</a></p>
-          <aside class="correction-banner" id="correction-banner">
-            <div class="correction-icon" aria-hidden="true">✓</div>
-            <div>
-              <span class="correction-label">历史记录 · 2026-09-07 统计更正 · 非本轮结果</span>
-              <h3 id="correction-title">纠正历史汇总：13 条移出可直接评测</h3>
-              <p id="correction-summary"></p>
-              <p class="correction-caveat" id="correction-caveat"></p>
-            </div>
-            <button class="secondary-button" type="button" data-task-id="57827">查看 57827</button>
-          </aside>
-          </details>
-        </div>
-      </section>
-
-      <section class="all-section shell" id="all-tasks" aria-labelledby="all-title">
-        <div class="section-heading all-heading">
-          <div>
-            <span class="section-kicker">FULL INVENTORY</span>
-            <h2 id="all-title">全部任务</h2>
-            <p>全部 105 条任务均纳入原验收及本次证据核对；可组合筛选状态与运行证据，查看具体测试、问题原因和历史差异。</p>
-          </div>
-          <p class="result-count" aria-live="polite"><strong id="visible-count">105</strong> / <span id="inventory-total">105</span> 条</p>
-        </div>
-
-        <div class="filter-bar" aria-label="任务筛选器">
-          <label class="search-field">
-            <span class="sr-only">搜索任务</span>
-            <span aria-hidden="true">⌕</span>
-            <input id="search-input" type="search" placeholder="搜索 PR、主题、作者或测试节点…" autocomplete="off" />
-          </label>
-          <label>
-            <span class="sr-only">验证状态</span>
-            <select id="status-filter">
-              <option value="all">全部状态</option>
-              <option value="passed">通过 · 原包无必改项（71）</option>
-              <option value="needs_fix">通过 · 任务包待修（19）</option>
-              <option value="failed">验证未通过（12）</option>
-              <option value="incomplete">硬件未完成（3）</option>
-            </select>
-          </label>
-          <label>
-            <span class="sr-only">运行证据</span>
-            <select id="source-filter">
-              <option value="all">全部运行证据</option>
-              <option value="exact_native">精确原生</option>
-              <option value="exact_python">精确 Python</option>
-              <option value="exact_python_compatible_native">精确 Python + 兼容原生</option>
-              <option value="lightweight_source">README 轻量源码</option>
-              <option value="lightweight_cpp">README 轻量 C++</option>
-              <option value="patch_preflight">补丁预检</option>
-              <option value="environment_incomplete">硬件未完成</option>
-            </select>
-          </label>
-          <label>
-            <span class="sr-only">任务类型</span>
-            <select id="type-filter">
-              <option value="all">全部类型</option>
-              <option value="bugfix">Bugfix</option>
-              <option value="feature">Feature</option>
-              <option value="refactor">Refactor</option>
-              <option value="unknown">类型未确认</option>
-            </select>
-          </label>
-          <label>
-            <span class="sr-only">样本作者</span>
-            <select id="author-filter">
-              <option value="all">全部作者</option>
-            </select>
-          </label>
-          <button class="clear-button" id="clear-filters" type="button">清除筛选</button>
-        </div>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Task</th>
-                <th scope="col">主题</th>
-                <th scope="col">类型</th>
-                <th scope="col">样本作者</th>
-                <th scope="col">验证状态 / 证据</th>
-                <th scope="col"><span class="sr-only">操作</span></th>
-              </tr>
-            </thead>
-            <tbody id="task-table-body"></tbody>
-          </table>
-          <div class="empty-state" id="empty-state" hidden>
-            <span aria-hidden="true">⌕</span>
-            <strong>没有匹配的任务</strong>
-            <p>换一个关键词或清除筛选条件试试。</p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="shell footer-inner">
-        <div>
-          <strong>SWE-Paddle 可评测性雷达</strong>
-          <p>社区协作视图 · 数据快照 <code id="footer-snapshot">207998da</code></p>
-        </div>
-        <div class="footer-links">
-          <a href="#criterion-title">验证口径</a>
-          <a href="#package-fixes">任务包待修</a>
-          <a href="#issues">未通过 / 未完成</a>
-          <a id="latest-report-link" href="acceptance-20260910.md">全量逐题验收报告</a>
-          <a href="verification-audit-20260911.md">105 条证据核对报告</a>
-          <a id="issue-explanations-link" href="issue-explanations-20260910.md">历史 18 条待修说明</a>
-          <a href="#update-history">更新记录</a>
-          <a href="validation-correction-20260907.md">历史统计更正</a>
-          <a
-            href="https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks"
-            target="_blank"
-            rel="noreferrer"
-          >数据源 ↗</a>
-        </div>
+      <aside class="readiness-card" aria-label="当前验证结果">
+        <div class="readiness-head"><span>核心 F2P/P2P 通过</span><span class="trend-chip">全部 105 条</span></div>
+        <div class="progress-ring" id="progress-ring" role="img"><div class="progress-center"><strong id="pass-rate">—</strong><span id="core-count">—</span></div></div>
+        <div class="readiness-numbers" id="hero-numbers"></div>
+        <p class="readiness-note">核心通过表示缺陷已复现并修好、回归测试也通过。任务包仍需修改的，会单独标明。</p>
+      </aside>
+    </div>
+  </header>
+  <main id="main">
+    <section class="metrics-section shell" id="metrics" aria-label="任务数量"></section>
+    <section class="criterion-section shell" aria-labelledby="criterion-title">
+      <div><span class="section-kicker">怎么看结果</span><h2 id="criterion-title">先看测试结果，再看问题在哪</h2></div>
+      <div class="criterion-grid">
+        <div><span class="step-index">01</span><h3>F2P：证明修好了</h3><p>同一个测试，修复前失败，修复后通过。</p></div>
+        <div><span class="step-index">02</span><h3>P2P：原有功能没坏</h3><p>回归测试在修复前和修复后都通过。</p></div>
+        <div><span class="step-index">03</span><h3>区分原因</h3><p>测试写错、验证配置漏项、机器缺组件，处理办法不同。</p></div>
       </div>
-    </footer>
-
-    <dialog class="task-dialog" id="task-dialog" aria-labelledby="dialog-title">
-      <div class="dialog-shell">
-        <button class="dialog-close" type="button" aria-label="关闭详情">×</button>
-        <div id="dialog-content"></div>
+      <p class="scope-note">通过结论只适用于每条任务注明的运行方式。部分任务按约定使用兼容运行时或轻量验证，并非都重新编译了整个 Paddle。核对日期不代表 105 条都在同一天重跑；逐题详情列出确认方法。</p>
+    </section>
+    <section class="issues-section" id="issues" aria-labelledby="issues-title">
+      <div class="shell">
+        <div class="section-heading"><div><span class="section-kicker">需要处理</span><h2 id="issues-title">有问题的任务</h2><p id="issues-description">逐题说明哪里出错、为什么、怎么处理。</p></div><div id="cause-summary" class="category-summary"></div></div>
+        <div id="issue-grid" class="issue-grid"></div>
       </div>
-    </dialog>
-
-    <script src="assets/data.js?v=c9e46547"></script>
-    <script src="assets/validation-update.js?v=207998d-20260909"></script>
-    <script src="assets/overall-status.js?v=overall-207998d-20260909"></script>
-    <script src="assets/acceptance-20260910.js?v=acceptance-207998d-20260910"></script>
-    <script src="assets/issue-explanations-20260910.js?v=acceptance-207998d-20260910-r2"></script>
-    <script src="assets/acceptance-recheck-20260911.js?v=audit-207998d-20260911"></script>
-    <script src="assets/verification-audit-20260911.js?v=audit-207998d-20260911"></script>
-    <script src="assets/app.js?v=audit-207998d-20260911"></script>
-  </body>
+    </section>
+    <section class="all-section shell" id="all-tasks" aria-labelledby="all-title">
+      <div class="section-heading"><div><span class="section-kicker">全部任务</span><h2 id="all-title">105 条任务，一处查清</h2><p>支持搜索任务编号、主题、作者和具体测试名。</p></div><p class="result-count" aria-live="polite"><strong id="visible-count">105</strong> / 105 条</p></div>
+      <div class="filter-bar" aria-label="任务筛选器">
+        <label class="search-field"><span class="sr-only">搜索任务</span><input id="search-input" type="search" placeholder="搜索编号、主题、作者、测试名…" autocomplete="off" /></label>
+        <label><span class="sr-only">验证状态</span><select id="status-filter"><option value="all">全部状态</option></select></label>
+        <label><span class="sr-only">问题来源</span><select id="cause-filter"><option value="all">全部问题来源</option></select></label>
+        <label><span class="sr-only">运行方式</span><select id="evidence-filter"><option value="all">全部运行方式</option></select></label>
+        <label><span class="sr-only">样本作者</span><select id="author-filter"><option value="all">全部作者</option></select></label>
+        <button class="clear-button" id="clear-filters" type="button">清除筛选</button>
+      </div>
+      <div class="table-wrap"><table class="inventory-table"><thead><tr><th>Task / 作者</th><th>主题 / 最新结论</th><th>验证状态</th><th>F2P / P2P</th><th><span class="sr-only">详情</span></th></tr></thead><tbody id="task-table-body"></tbody></table><div id="empty-state" class="empty-state" hidden>没有匹配的任务，请调整筛选条件。</div></div>
+    </section>
+  </main>
+  <footer><div class="shell footer-inner"><div><strong>SWE-Paddle · 最新验证情况</strong><p>105 条完整任务；另 4 条仅有提案，不计入验证统计。</p></div><div class="footer-links"><a href="#criterion-title">判定说明</a><a href="latest-report.md">逐题报告</a><a href="https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks" target="_blank" rel="noreferrer">任务数据源 ↗</a></div></div></footer>
+  <dialog class="task-dialog" id="task-dialog" aria-labelledby="dialog-title"><div class="dialog-shell"><button class="dialog-close" type="button" aria-label="关闭详情">×</button><div id="dialog-content"></div></div></dialog>
+  <noscript><p class="shell">查看交互看板需要启用 JavaScript，也可阅读<a href="latest-report.md">完整逐题报告</a>。</p></noscript>
+  <script src="assets/latest-data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
 </html>
