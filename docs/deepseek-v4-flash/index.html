@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DeepSeek V4 Flash 在 SWE-Paddle 86 条任务上的当前评测结果，逐题说明修复测试、回归测试、失败原因和待核查事项。">
+  <meta name="theme-color" content="#112a24">
+  <title>DeepSeek V4 Flash · 86 条任务评测</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23112a24'/%3E%3Cpath d='M12 12h17v4H16v5h10v4H16v7h-4z' fill='%23bce5ad'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css?v=ad7d3782e6ca">
+</head>
+<body>
+  <a class="skip" href="#tasks">跳到任务列表</a>
+  <header class="masthead">
+    <nav class="shell nav" aria-label="导航">
+      <a href="#top" class="brand"><span class="brand-icon">F<span>86</span></span><span>SWE-Paddle<span class="brand-sub">模型评测</span></span></a>
+      <div class="nav-links"><a href="#guide">判定说明</a><a href="results.json" download="deepseek-v4-flash-86.json">下载结果 <span aria-hidden="true">↗</span></a></div>
+    </nav>
+    <div class="shell hero" id="top">
+      <div class="hero-copy"><p class="eyebrow"><span class="status-dot"></span> 当前结果 · 固定 86 条任务</p><h1>DeepSeek V4 Flash<span>每条任务，看清结果与原因。</span></h1><p class="lead">哪些修好了，哪些还没过。<br>是模型答案、测试用例、评分程序，还是运行环境。</p><p class="timestamp">结论核对于 <time id="checked-at">加载中</time></p></div>
+      <aside class="pass-summary" aria-label="确认通过的任务占比"><div class="summary-top"><span>修复与回归均通过</span><span class="pill-light">流程试跑</span></div><div class="hero-number"><strong id="hero-passed">—</strong><span>/ 86</span></div><div class="segmented" id="segmented" role="img" aria-label="任务结果分布"></div><p>固定测试全部通过才计入。<br>待复核和未完成保留在 86 条总数中。</p></aside>
+    </div>
+  </header>
+  <main>
+    <section class="shell metrics" id="metrics" aria-label="结果概览"></section>
+    <section class="shell overview" aria-labelledby="cause-title">
+      <div class="section-intro"><p class="eyebrow green">未通过，要分清原因</p><h2 id="cause-title">同样没过，问题可能不同。</h2><p>点击原因，直接查看对应任务。</p></div>
+      <div class="cause-grid" id="cause-grid"></div>
+    </section>
+    <section class="shell guide" id="guide" aria-labelledby="guide-title">
+      <details><summary><span class="guide-icon" aria-hidden="true">?</span><span><strong id="guide-title">评分器不就是 F2P / P2P 验证吗？</strong><small>检查目标、测试代码、执行程序，是不同层次。</small></span><span class="expand-icon" aria-hidden="true">＋</span></summary><div class="guide-body"><p><b>F2P / P2P 是判定规则。</b>测试用例写出具体检查；评分器准备环境、加载模型修改、安排测试运行，再收集结果。用例写错和评分器执行错，都可能造成误判。</p><div class="flow"><div><span>01</span><b>模型交卷</b><p>是否按时完成修改？</p></div><div><span>02</span><b>准备测试</b><p>依赖、模拟对象是否完整？</p></div><div><span>03</span><b>执行 F2P / P2P</b><p>修复是否生效？旧功能是否正常？</p></div><div><span>04</span><b>评分器汇总</b><p>分组、结果采集与判定是否正确？</p></div></div><p><b>F2P（修复测试）：</b>原代码应失败，修复后应通过。<br><b>P2P（回归测试）：</b>原代码和修复后都应通过。</p><p>测试异常不直接等于模型能力失败；补充验证通过也不会自动替换固定评分。每条详情会说明当前证据、判断和还需做什么。</p></div></details>
+    </section>
+    <section class="shell spotlights" aria-label="需要特别区分的两条任务">
+      <button class="spotlight" type="button" data-task="64519"><span class="mini-label">#64519 · 模型与旧运行库</span><strong>题目验证成立，本次求导仍失败。 <span aria-hidden="true">↗</span></strong><p>参考修复 25 项全过；本次模型答案有 4 项求导崩溃。</p></button>
+      <button class="spotlight" type="button" data-task="72800"><span class="mini-label">#72800 · 评分程序</span><strong>原脚本通过，额外评分分组有误。 <span aria-hidden="true">↗</span></strong><p>同一类测试被拆到不同进程，需要修正评分器后重评。</p></button>
+    </section>
+    <section class="shell inventory" id="tasks" aria-labelledby="tasks-title">
+      <div class="inventory-heading"><div><p class="eyebrow green">逐题结果</p><h2 id="tasks-title">86 条，一个都不省略。</h2></div><p class="visible-label" aria-live="polite">显示 <b id="visible-count">86</b> / 86 条</p></div>
+      <div class="tabs" id="result-tabs" role="group" aria-label="按结果筛选"></div>
+      <div class="filters"><label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search" type="search" placeholder="搜索任务编号、主题、失败原因或测试名" aria-label="搜索任务" autocomplete="off"></label><label><span class="sr-only">问题来源</span><select id="cause-filter"><option value="all">全部问题来源</option></select></label><button id="clear" class="clear" type="button">重置</button></div>
+      <p class="table-note">F2P / P2P 显示当前固定测试的「通过数 / 总数」。橙色任务的失败记录需要结合归因理解。</p>
+      <div class="table-wrap"><table class="task-table"><thead><tr><th scope="col">任务 / 目标</th><th scope="col">当前结果</th><th scope="col">问题来源</th><th scope="col">F2P / P2P</th><th scope="col">逐题说明</th><th scope="col"><span class="sr-only">操作</span></th></tr></thead><tbody id="task-rows"></tbody></table><div class="empty" id="empty" hidden><strong>没有找到匹配任务</strong><p>试试其他编号或清除筛选条件。</p></div></div>
+    </section>
+    <section class="shell scope-note"><b>本页的判断范围</b><p>沿用每题 60 分钟、最多 512 轮的模型生成配置。候选修改采用对应版本运行时、兼容运行时或轻量行为测试验证；涉及原生代码的任务使用实际编译结果。通过只覆盖列出的固定检查，本页不作为正式榜单结论。页面展示核对时的结果快照，更新时间不代表后台仍在运行。</p></section>
+  </main>
+  <footer class="shell footer"><span><b>SWE-Paddle</b> · DeepSeek V4 Flash / 86</span><div><a href="results.json" download>下载逐题数据</a><a href="#top">回到顶部 ↑</a></div></footer>
+  <dialog id="task-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span id="dialog-number"></span><button type="button" id="close-dialog" aria-label="关闭任务详情">×</button></div><div id="dialog-content"></div></dialog>
+  <noscript><p class="shell">交互看板需要 JavaScript。可直接下载 <a href="results.json">86 条逐题数据</a>。</p></noscript>
+  <script src="assets/data.js?v=6de4c8417f44"></script><script src="assets/app.js?v=b334500e14bb"></script>
+</body>
+</html>
