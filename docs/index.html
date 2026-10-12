@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="SWE-Paddle 105 条任务的最新验证情况：逐题说明 F2P/P2P 结果、失败原因，以及问题来自任务数据还是运行环境。" />
+  <meta name="description" content="SWE-Paddle 111 条任务的实际 Oracle 验证结果、跳过项、失败原因和已有 F2P/P2P 配对。" />
   <meta name="theme-color" content="#10213a" />
   <title>SWE-Paddle · 最新验证情况</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310213a'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='14' fill='white'%3ESP%3C/text%3E%3C/svg%3E" />
@@ -18,17 +18,17 @@
     </nav>
     <div class="hero-content shell">
       <div>
-        <p class="eyebrow">105 TASKS · F2P / P2P</p>
+        <p class="eyebrow">111 TASKS · ORACLE / GOLD</p>
         <h1>最新情况，<br /><strong>每条说清楚。</strong></h1>
         <p class="hero-lead">哪些任务可用，哪些还没过，<br />问题出在任务数据，还是运行环境。</p>
         <div class="hero-buttons"><a class="primary-button" href="#issues">查看有问题的任务 ↓</a><a class="text-button" href="#all-tasks">浏览全部任务</a></div>
         <p class="updated-line">结论核对日期 <time id="updated-at">—</time> · 数据快照 <code id="snapshot-short">—</code></p>
       </div>
       <aside class="readiness-card" aria-label="当前验证结果">
-        <div class="readiness-head"><span>核心 F2P/P2P 通过</span><span class="trend-chip">全部 105 条</span></div>
+        <div class="readiness-head"><span>Oracle 测试累计通过</span><span class="trend-chip">全部 111 条</span></div>
         <div class="progress-ring" id="progress-ring" role="img"><div class="progress-center"><strong id="pass-rate">—</strong><span id="core-count">—</span></div></div>
         <div class="readiness-numbers" id="hero-numbers"></div>
-        <p class="readiness-note">核心通过表示缺陷已复现并修好、回归测试也通过。任务包仍需修改的，会单独标明。</p>
+        <p class="readiness-note">按题号保留完整 Gold 测试通过记录；修正入口后的结果纳入，硬件跳过仍单独显示。</p>
       </aside>
     </div>
   </header>
@@ -41,7 +41,7 @@
         <div><span class="step-index">02</span><h3>P2P：原有功能没坏</h3><p>回归测试在修复前和修复后都通过。</p></div>
         <div><span class="step-index">03</span><h3>区分原因</h3><p>测试写错、验证配置漏项、机器缺组件，处理办法不同。</p></div>
       </div>
-      <p class="scope-note">通过结论只适用于每条任务注明的运行方式。部分任务按约定使用兼容运行时或轻量验证，并非都重新编译了整个 Paddle。核对日期不代表 105 条都在同一天重跑；逐题详情列出确认方法。</p>
+      <p class="scope-note">Oracle 通过只适用于各题注明的入口和测试范围；两轮完整测试零失败、零错误，跳过项不作为通过。已有 F2P/P2P 配对保留确认日期，不能由 Gold 通过推定新的配对。核对日期不代表所有题同日重跑。</p>
     </section>
     <section class="issues-section" id="issues" aria-labelledby="issues-title">
       <div class="shell">
@@ -50,7 +50,7 @@
       </div>
     </section>
     <section class="all-section shell" id="all-tasks" aria-labelledby="all-title">
-      <div class="section-heading"><div><span class="section-kicker">全部任务</span><h2 id="all-title">105 条任务，一处查清</h2><p>支持搜索任务编号、主题、作者和具体测试名。</p></div><p class="result-count" aria-live="polite"><strong id="visible-count">105</strong> / 105 条</p></div>
+      <div class="section-heading"><div><span class="section-kicker">全部任务</span><h2 id="all-title">111 条任务，一处查清</h2><p>支持搜索任务编号、主题、作者和具体测试名。</p></div><p class="result-count" aria-live="polite"><strong id="visible-count">111</strong> / 111 条</p></div>
       <div class="filter-bar" aria-label="任务筛选器">
         <label class="search-field"><span class="sr-only">搜索任务</span><input id="search-input" type="search" placeholder="搜索编号、主题、作者、测试名…" autocomplete="off" /></label>
         <label><span class="sr-only">验证状态</span><select id="status-filter"><option value="all">全部状态</option></select></label>
@@ -59,13 +59,13 @@
         <label><span class="sr-only">样本作者</span><select id="author-filter"><option value="all">全部作者</option></select></label>
         <button class="clear-button" id="clear-filters" type="button">清除筛选</button>
       </div>
-      <div class="table-wrap"><table class="inventory-table"><thead><tr><th>Task / 作者</th><th>主题 / 最新结论</th><th>验证状态</th><th>F2P / P2P</th><th><span class="sr-only">详情</span></th></tr></thead><tbody id="task-table-body"></tbody></table><div id="empty-state" class="empty-state" hidden>没有匹配的任务，请调整筛选条件。</div></div>
+      <div class="table-wrap"><table class="inventory-table"><thead><tr><th>Task / 作者</th><th>主题 / 最新结论</th><th>验证状态</th><th>Oracle 结果 / 已有配对</th><th><span class="sr-only">详情</span></th></tr></thead><tbody id="task-table-body"></tbody></table><div id="empty-state" class="empty-state" hidden>没有匹配的任务，请调整筛选条件。</div></div>
     </section>
   </main>
-  <footer><div class="shell footer-inner"><div><strong>SWE-Paddle · 最新验证情况</strong><p>105 条完整任务；另 4 条仅有提案，不计入验证统计。</p></div><div class="footer-links"><a href="#criterion-title">判定说明</a><a href="latest-report.md">逐题报告</a><a href="https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks" target="_blank" rel="noreferrer">任务数据源 ↗</a></div></div></footer>
+  <footer><div class="shell footer-inner"><div><strong>SWE-Paddle · 最新验证情况</strong><p>111 条任务逐题记录；跳过和未完成项单独显示。</p></div><div class="footer-links"><a href="#criterion-title">判定说明</a><a href="latest-report.md">逐题报告</a><a href="https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks" target="_blank" rel="noreferrer">任务数据源 ↗</a></div></div></footer>
   <dialog class="task-dialog" id="task-dialog" aria-labelledby="dialog-title"><div class="dialog-shell"><button class="dialog-close" type="button" aria-label="关闭详情">×</button><div id="dialog-content"></div></div></dialog>
   <noscript><p class="shell">查看交互看板需要启用 JavaScript，也可阅读<a href="latest-report.md">完整逐题报告</a>。</p></noscript>
-  <script src="assets/latest-data.js?v=41cf7c6ca5bc"></script>
-  <script src="assets/app.js?v=d490584a0690"></script>
+  <script src="assets/latest-data.js?v=0e96069acd6a"></script>
+  <script src="assets/app.js?v=75b751aa0ea7"></script>
 </body>
 </html>

@@ -1,1908 +1,5358 @@
 # SWE-Paddle 最新验证情况
 
-结论核对日期：2026-09-11。105 条完整任务；另 4 条仅有提案，不计入统计。
+结果截至：2026-10-12T17:04:13.797588Z。
 
-86 条原包可用，7 条核心通过但任务包待修，8 条验证未通过，4 条环境不满足、未完成。
+**Oracle 累计通过 98 / 111 题（88.3%）；其余 13 题尚未确认通过。**
 
-F2P：同一测试修复前失败、修复后通过。P2P：修复前后都通过的回归测试。只计实际执行、有意义且配对完整的节点。
+累计通过按已有完整 Gold 测试记录去重；修正入口后的完整结果纳入，跳过仍单独显示。已有通过不会因缺少构建复核证据扣减。
 
-各题通过结论限于注明的运行方式。核对日期不代表全部任务同日重新执行；确认方法见各题。
+Oracle 通过适用于各题注明的测试范围；硬件跳过不代表该分支通过。Gold 通过不自动证明 F2P/P2P 配对。已有配对明细保留其确认日期。
+
+| 任务 | Oracle 状态 | 两轮结果 |
+| --- | --- | --- |
+| #18687 | Oracle 通过 | 两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #27247 | Oracle 通过 | 两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #33369 | Oracle 未通过 | 两轮各 2 通过 / 2 失败 / 0 错误 / 0 跳过 |
+| #36684 | Oracle 通过 | 两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #41202 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #50086 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #52948 | Oracle 通过 | 两轮各 19 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #53534 | Oracle 通过 | 两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #54435 | Oracle 未通过 | 两轮各 4 通过 / 1 失败 / 0 错误 / 0 跳过 |
+| #54625 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #55890 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #56135 | Oracle 通过 | 两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #56470 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #56705 | Oracle 通过 | 两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #57741 | Oracle 通过，使用修正入口 | 两轮各 2 通过 / 0 失败 / 0 错误 / 3 跳过 |
+| #57827 | Oracle 未通过 | 测试异常退出（SIGABRT），完整测试计数未闭合 |
+| #58219 | Oracle 通过 | 两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #58323 | Oracle 通过，使用修正入口 | 两轮各 89 通过 / 0 失败 / 0 错误 / 2 跳过 |
+| #58343 | Oracle 通过 | 两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #58917 | Oracle 未通过 | 两轮各 8 通过 / 10 失败 / 0 错误 / 0 跳过 |
+| #59021 | Oracle 未通过 | 测试崩溃（SIGSEGV），完整测试计数未闭合 |
+| #59127 | Oracle 未通过 | 测试崩溃（SIGSEGV），完整测试计数未闭合 |
+| #59348 | Oracle 通过 | 两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #59374 | Oracle 通过 | 两轮各 5 通过 / 0 失败 / 0 错误 / 1 跳过 |
+| #59383 | Oracle 通过 | 两轮各 708 通过 / 0 失败 / 0 错误 / 16 跳过 |
+| #59715 | Oracle 通过 | 两轮各 108 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #59847 | Oracle 通过 | 两轮各 43 通过 / 0 失败 / 0 错误 / 32 跳过 |
+| #59909 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #59910 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #59973 | Oracle 通过，使用修正入口 | 两轮各 74 通过 / 0 失败 / 0 错误 / 29 跳过 |
+| #60346 | Oracle 通过 | 两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #60417 | Oracle 通过 | 两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #60808 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #62012 | Oracle 通过 | 两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #64320 | Oracle 通过 | 两轮各 33 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #64519 | Oracle 通过 | 两轮各 27 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #64881 | Oracle 未通过 | 两轮各 123 通过 / 1 失败 / 6 错误 / 4 跳过 |
+| #65724 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #67195 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #68432 | Oracle 通过 | 两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #70469 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #72800 | Oracle 通过 | 两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73122 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73125 | Oracle 通过 | 两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73385 | Oracle 通过 | 两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73387 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73535 | Oracle 通过 | 两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73569 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73570 | Oracle 通过 | 两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73582 | Oracle 通过 | 两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73691 | Oracle 通过 | 两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73702 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73776 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73821 | Oracle 通过 | 两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73850 | Oracle 通过 | 两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73854 | Oracle 通过 | 两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73855 | Oracle 通过 | 两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73880 | Oracle 通过 | 两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #74184 | Oracle 通过 | 两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #74212 | Oracle 通过 | 两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #74221 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #74305 | Oracle 通过 | 两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #74421 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #74439 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #74444 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #74491 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #74586 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #74594 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #75274 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #76259 | Oracle 尚未完成 | 完整测试结果尚未确认 |
+| #76522 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #76736 | Oracle 通过 | 两轮各 10 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #76873 | Oracle 尚未完成 | 完整测试结果尚未确认 |
+| #77064 | Oracle 通过 | 两轮各 23 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #77078 | Oracle 未通过 | 两轮各 32 通过 / 0 失败 / 4 错误 / 0 跳过 |
+| #77150 | Oracle 通过 | 两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #77495 | Oracle 通过 | 两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #77749 | Oracle 通过 | 两轮各 22 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78048 | Oracle 通过 | 两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78082 | Oracle 通过 | 两轮各 32 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78085 | Oracle 通过 | 两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78104 | Oracle 通过 | 两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78138 | Oracle 通过 | 两轮各 17 通过 / 0 失败 / 0 错误 / 2 跳过 |
+| #78238 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78301 | Oracle 通过 | 两轮各 34 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78342 | Oracle 通过 | 两轮各 31 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78440 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78441 | Oracle 通过 | 两轮各 30 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78452 | Oracle 通过 | 两轮各 43 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78522 | Oracle 通过 | 两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78570 | Oracle 通过 | 两轮各 9 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78728 | Oracle 通过 | 两轮各 14 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78823 | Oracle 尚未完成 | 完整测试结果尚未确认 |
+| #78911 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78922 | Oracle 通过 | 两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #78932 | Oracle 通过 | 两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79035 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79057 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79161 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79167 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79197 | Oracle 通过 | 两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79268 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79275 | Oracle 通过 | 两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79276 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79310 | Oracle 通过 | 两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79321 | Oracle 通过 | 两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79353 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79369 | Oracle 未通过 | 两轮各 0 通过 / 2 失败 / 0 错误 / 0 跳过 |
+| #79386 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79633 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #79657 | Oracle 尚未完成 | 完整测试结果尚未确认 |
 
 <a id="task-18687"></a>
+
 ## #18687 · Parameter-server launch
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用选定版本的 Python 源码，按任务约定的入口和依赖运行。
-- 有效 F2P / P2P：3 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-18687)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用选定版本的 Python 源码，按任务约定的入口和依赖运行。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:08:05Z
+
+**已有 F2P/P2P 配对记录：** 3 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr18687_launch_ps.py::test_f2p_failed_child_process_is_reported_to_the_launcher | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr18687_launch_ps.py::test_f2p_parameter_server_parser_accepts_counts_and_script_arguments | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr18687_launch_ps.py::test_f2p_server_and_worker_roles_receive_consistent_environment | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr18687_launch_ps.py::test_p2p_existing_collective_parser_forwards_training_arguments | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-27247"></a>
+
 ## #27247 · DataLoader spawn worker serialization
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 4 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用选定版本的 Python 源码，按任务约定的入口和依赖运行。
-- 有效 F2P / P2P：2 / 4。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-27247)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用选定版本的 Python 源码，按任务约定的入口和依赖运行。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:23:54Z
+
+**已有 F2P/P2P 配对记录：** 2 / 4，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr27247_dataloader_spawn_pickle.py::test_reader_loop_keeps_batch_handoff_behavior | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr27247_dataloader_spawn_pickle.py::test_reader_process_and_consumer_thread_are_started | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr27247_dataloader_spawn_pickle.py::test_reader_target_can_be_serialized_for_spawn | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr27247_dataloader_spawn_pickle.py::test_worker_loop_keeps_batch_handoff_behavior | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr27247_dataloader_spawn_pickle.py::test_worker_processes_are_started_and_registered | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr27247_dataloader_spawn_pickle.py::test_worker_target_can_be_serialized_for_spawn | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-33369"></a>
+
 ## #33369 · Fleet elastic fault tolerance
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 未通过：两轮各 2 通过 / 2 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 1 项均有稳定配对，原入口可运行。
+测试仍有失败或错误。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用选定版本的 Python 源码，按任务约定的入口和依赖运行。
-- 有效 F2P / P2P：3 / 1。
+**原因：** 保留失败结果，继续逐项诊断。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-33369)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
+
+**确认方法：** 当前 Oracle 实际观察：两轮各 2 通过 / 2 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用选定版本的 Python 源码，按任务约定的入口和依赖运行。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:19:54Z
+
+**已有 F2P/P2P 配对记录：** 3 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr33369_elastic_fault_tolerance.py::test_collective_launch_is_managed_by_the_elastic_lifecycle | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr33369_elastic_fault_tolerance.py::test_failed_training_requests_an_elastic_restart | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr33369_elastic_fault_tolerance.py::test_membership_change_holds_the_current_training_group | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr33369_elastic_fault_tolerance.py::test_parameter_server_mode_is_preserved | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-36684"></a>
+
 ## #36684 · Fleet elastic scale up / down
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 8 项、回归测试 2 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用选定版本的 Python 源码，按任务约定的入口和依赖运行。
-- 有效 F2P / P2P：8 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-36684)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用选定版本的 Python 源码，按任务约定的入口和依赖运行。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T19:16:54Z
+
+**已有 F2P/P2P 配对记录：** 8 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr36684_elastic_scale.py::UPSTREAM_INIT_CASE::test_enable_elastic | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr36684_elastic_scale.py::UPSTREAM_INIT_CASE::test_launch_elastic | passed / passed | passed / passed | 原AST加载器把launch_elastic注入为literal no-op，原方法无断言；保留raw通过但不计有效P2P |
+| test/swe_paddle/test_pr36684_elastic_scale.py::UPSTREAM_MANAGER_CASE::test_elastic_manager_init | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr36684_elastic_scale.py::UPSTREAM_MANAGER_CASE::test_exit | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr36684_elastic_scale.py::UPSTREAM_MANAGER_CASE::test_match_elastic | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr36684_elastic_scale.py::UPSTREAM_MANAGER_CASE::test_match_faulttolerance | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr36684_elastic_scale.py::UPSTREAM_MANAGER_CASE::test_update_hosts_for_elastic | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr36684_elastic_scale.py::UPSTREAM_MANAGER_CASE::test_update_hosts_for_faulttolerance | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr36684_elastic_scale.py::test_f2p_scale_out_and_scale_in_update_training_hosts | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr36684_elastic_scale.py::test_f2p_variable_host_range_is_matched | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr36684_elastic_scale.py::test_p2p_existing_elastic_enablement_is_preserved | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-41202"></a>
+
 ## #41202 · DataLoader reader AutoTune
 
-**核心通过 · 任务包待修｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-DataLoader 自动调节进程数的测试启动命令有问题：收集测试时重复加载 Paddle，尚未执行断言。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：DataLoader 自动调节进程数的测试启动命令有问题：收集测试时重复加载 Paddle，尚未执行断言。
-- 为什么：test.sh 用 pytest 从源码路径收集这份旧版测试，导致同一份 Paddle 被按 paddle 和 python.paddle 两个名字加载，原生模块重复初始化。切换 pytest 导入模式仍失败；直接执行测试文件自带入口则通过。
-- 怎么处理：将 test.sh 改为按顺序直接执行测试文件：python python/paddle/fluid/tests/unittests/test_dataloader_autotune.py。保留测试内容和完整范围。
-- 怎么确认：原入口复现失败；只改启动方式，原 3 项测试全部两轮通过。断言、测试文件和参考补丁均未修改。核心确认 2F/1P。
-- 运行方式：从 Paddle 源码根目录运行，保证该 task 的 Paddle Python 包和原生运行库可导入。；使用每个测试文件自带的 unittest 入口，避免 pytest 再按 python.paddle 导入同一份库。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `python/paddle/fluid/tests/unittests/test_dataloader_autotune.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-41202)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行，保证该 task 的 Paddle Python 包和原生运行库可导入。；使用每个测试文件自带的 unittest 入口，避免 pytest 再按 python.paddle 导入同一份库。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T17:56:58Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| python/paddle/fluid/tests/unittests/test_dataloader_autotune.py::TestAutoTune::test_dataloader_disable_autotune | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_dataloader_autotune.py::TestAutoTune::test_dataloader_use_autotune | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| python/paddle/fluid/tests/unittests/test_dataloader_autotune.py::TestAutoTune::test_distributer_batch_sampler_autotune | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-50086"></a>
+
 ## #50086 · ConditionalBlock scope validation
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定编译、运行轻量 C++ 测试，不代表完整 Paddle 构建通过。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-50086)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定编译、运行轻量 C++ 测试，不代表完整 Paddle 构建通过。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T19:23:47Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_conditional_block_scope_lifecycle.py::test_first_run_and_legacy_executor_behavior_remain_valid | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_conditional_block_scope_lifecycle.py::test_new_executor_repeated_run_uses_fresh_child_scope | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_conditional_block_scope_lifecycle.py::test_stale_cached_scope_is_not_reused | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-52948"></a>
+
 ## #52948 · Static / dy2static Tensor.register_hook
 
-**核心通过 · 任务包待修｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 19 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-静态图和动转静梯度 hook的测试启动命令有问题：收集测试时重复加载 Paddle，尚未执行断言。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：静态图和动转静梯度 hook的测试启动命令有问题：收集测试时重复加载 Paddle，尚未执行断言。
-- 为什么：test.sh 用 pytest 从源码路径收集这份旧版测试，导致同一份 Paddle 被按 paddle 和 python.paddle 两个名字加载，原生模块重复初始化。切换 pytest 导入模式仍失败；直接执行测试文件自带入口则通过。
-- 怎么处理：将 test.sh 改为按顺序直接执行测试文件：python test/dygraph_to_static/test_tensor_hook.py；python python/paddle/fluid/tests/unittests/test_tensor_register_hook.py。保留测试内容和完整范围。
-- 怎么确认：原入口复现失败；只改启动方式，原 19 项测试全部两轮通过。断言、测试文件和参考补丁均未修改。核心确认 5F/14P。
-- 运行方式：从 Paddle 源码根目录运行，保证该 task 的 Paddle Python 包和原生运行库可导入。；使用每个测试文件自带的 unittest 入口，避免 pytest 再按 python.paddle 导入同一份库。
-- 有效 F2P / P2P：5 / 14。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/dygraph_to_static/test_tensor_hook.py`
-- `python/paddle/fluid/tests/unittests/test_tensor_register_hook.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 19 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-52948)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行，保证该 task 的 Paddle Python 包和原生运行库可导入。；使用每个测试文件自带的 unittest 入口，避免 pytest 再按 python.paddle 导入同一份库。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:09:51Z
+
+**已有 F2P/P2P 配对记录：** 5 / 14，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/dygraph_to_static/test_tensor_hook.py::TestStaticAnalysis::test_hook_for_different_parameter | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/dygraph_to_static/test_tensor_hook.py::TestStaticAnalysis::test_hook_for_reassignment_parameter | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/dygraph_to_static/test_tensor_hook.py::TestStaticAnalysis::test_hook_for_repeat_register | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/dygraph_to_static/test_tensor_hook.py::TestStaticAnalysis::test_hook_in_init_for_layer | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_hook_for_accumulated_grad_interior_var | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_hook_for_accumulated_grad_leaf_var | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_hook_for_interior_var | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_hook_for_leaf_var | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_hook_in_double_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_hook_in_model | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_multiple_hooks_for_interior_var | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_register_hook_for_stop_gradient_var | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_register_hook_in_dy2static_mode | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_register_hook_in_static_mode | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterHook::test_remove_one_hook_multiple_times | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterBackwardHook::test_register_backward_hook | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterBackwardHook::test_register_backward_hook_for_interior_var | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestTensorRegisterBackwardHook::test_register_backward_hook_for_var_without_gradient | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| python/paddle/fluid/tests/unittests/test_tensor_register_hook.py::TestRegsiterBackwardFinalHook::test_register_backward_hook | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-53534"></a>
+
 ## #53534 · to_tensor compatibility with NumPy
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 2 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-53534)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:08:51Z
+
+**已有 F2P/P2P 配对记录：** 2 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_to_tensor_numpy124_contract.py::test_nested_variable_sequence_uses_recursive_conversion | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_to_tensor_numpy124_contract.py::test_numeric_sequence_behavior_remains_valid | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_to_tensor_numpy124_contract.py::test_unsupported_mapping_has_clear_error | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_to_tensor_numpy124_contract.py::test_variable_passthrough_and_explicit_cast_remain_valid | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-54435"></a>
+
 ## #54435 · Distributed launch numeric IP ordering
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 未通过：两轮各 4 通过 / 1 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 2 项均有稳定配对，原入口可运行。
+测试仍有失败或错误。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用选定版本的 Python 源码，按任务约定的入口和依赖运行。
-- 有效 F2P / P2P：3 / 2。
+**原因：** 保留失败结果，继续逐项诊断。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-54435)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
+
+**确认方法：** 当前 Oracle 实际观察：两轮各 4 通过 / 1 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用选定版本的 Python 源码，按任务约定的入口和依赖运行。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:09:21Z
+
+**已有 F2P/P2P 配对记录：** 3 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr54435_sort_ip.py::test_disabled_sort_keeps_existing_key_order | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr54435_sort_ip.py::test_etcd_master_assigns_rank_by_numeric_ip | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr54435_sort_ip.py::test_existing_rank_argument_is_unchanged | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr54435_sort_ip.py::test_http_master_assigns_rank_by_numeric_ip | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr54435_sort_ip.py::test_sort_ip_option_and_environment_mapping | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-54625"></a>
+
 ## #54625 · Pipeline output release state
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-54625)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:11:32Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr54625_pipeline_output_release.py::test_initialized_pristine_outputs_are_released | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr54625_pipeline_output_release.py::test_inplace_modified_outputs_are_not_released | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr54625_pipeline_output_release.py::test_uninitialized_outputs_are_not_released | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-55890"></a>
+
 ## #55890 · VPP + sharding overlap scheduling
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-55890)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:25:37Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr55890_vpp_overlap_schedule.py::test_aligned_legacy_schedule_keeps_existing_chunk_selection | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr55890_vpp_overlap_schedule.py::test_nonzero_stage_flushes_first_chunk_at_model_chunk_boundary | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr55890_vpp_overlap_schedule.py::test_overlap_communication_uses_pipeline_stage_cadence | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-56135"></a>
+
 ## #56135 · BMM dynamic-shape infermeta
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 2 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定编译、运行轻量 C++ 测试，不代表完整 Paddle 构建通过。
-- 有效 F2P / P2P：2 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-56135)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定编译、运行轻量 C++ 测试，不代表完整 Paddle 构建通过。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T19:04:13Z
+
+**已有 F2P/P2P 配对记录：** 2 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_bmm_dynamic_shape_contract.py::test_cpp_infermeta_resolves_unknown_dimensions | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_bmm_dynamic_shape_contract.py::test_known_incompatible_shapes_are_rejected | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_bmm_dynamic_shape_contract.py::test_known_shape_behavior_remains_valid | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_bmm_dynamic_shape_contract.py::test_python_static_bmm_accepts_unknown_dimensions | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-56470"></a>
+
 ## #56470 · Upsampling accepts integer size
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-56470)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:23:20Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr56470_upsampling_single_int.py::test_bilinear_2d_accepts_single_integer_size | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr56470_upsampling_single_int.py::test_existing_sequence_and_scale_factor_behavior_remains_valid | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr56470_upsampling_single_int.py::test_nearest_2d_accepts_single_integer_size | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-56705"></a>
+
 ## #56705 · Model-parallel memory leak
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 2 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-56705)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:21:42Z
+
+**已有 F2P/P2P 配对记录：** 2 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr56705_mp_ops_pylayer_lifecycle.py::test_c_identity_forward_backward_contract | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr56705_mp_ops_pylayer_lifecycle.py::test_c_identity_reuses_pylayer_class_across_calls | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr56705_mp_ops_pylayer_lifecycle.py::test_mp_allreduce_forward_backward_contract | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr56705_mp_ops_pylayer_lifecycle.py::test_mp_allreduce_reuses_pylayer_class_across_calls | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-57741"></a>
+
 ## #57741 · PIR memcpy
 
-**验证未通过｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 3 跳过。
 
-脚本写错测试名、漏了运行模式，还缺一条独立 P2P。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：原入口找不到 TestTensorCopyToCudaOnDefaultCPU、TestTensorCopyToCudaOnDefaultGPU；实际名称中的 CUDA 必须全部大写。 默认运行方式下 CPU 测试在修复前也通过，无法验证修复；3 项 GPU 测试属于题目允许的可选跳过。 改正名称并设置 ENABLE_FALL_BACK=False 后，CPU 测试才复现缺少 pd_op.memcpy；现有任务只有这 1 个 CPU 测试，没有独立 P2P。
-- 为什么：任务要测的是旧静态图转成新执行图时的内存复制。默认的另一种转换方式绕过了这个缺陷，测试虽然执行了，未经过出错的代码。 新控制保持 Base/Gold 原生库及测试断言不变，仅改变运行方式。Base 两轮明确报缺 pd_op.memcpy，Gold 两轮通过，说明不是机器缺 CPU 能力。
-- 怎么处理：修正两个 CUDA 类名，并在测试入口固定 ENABLE_FALL_BACK=False。 补选至少一个修复前后都能真正执行并通过的 CPU 回归测试，再按完整入口复验。
-- 怎么确认：核对完整测试清单，并只调整运行方式做修复前后各两轮对照：CPU 测试稳定暴露缺少 memcpy 算子的问题、修复后通过；3 条可选 GPU 测试跳过，未找到独立 P2P。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：1 / 0（仅已确认部分，不代表整题通过）。
+**原因：** 原 pytest 入口遗漏初始化或运行模式；已按注明的入口执行完整原测试，保留原失败记录。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-57741)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 将已验证的入口和必要运行设置纳入任务说明；不改测试断言。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 3 跳过；入口：FLAGS_enable_new_ir_in_executor=1 + 原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** FLAGS_enable_new_ir_in_executor=1 + 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-12T01:04:31Z
+
+**已有 F2P/P2P 配对记录：** 1 / 0，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/dygraph_to_static/test_tensor_memcpy_on_cpu.py::TestTensorCopyToCpuOnDefaultCPU::test_tensor_cpu_on_default_cpu | target_abort / target_abort | passed / passed | Base明确缺少本题修复的pd_op.memcpy；参考补丁修复，1个目标修复信号。 |
+| test/dygraph_to_static/test_tensor_memcpy_on_cpu.py::TestTensorCopyToCUDAOnDefaultCPU::test_tensor_cuda_on_default_cpu | skipped / skipped | skipped / skipped | 无CUDA构建，原skipIf条件跳过，不计F/P。 |
+| test/dygraph_to_static/test_tensor_memcpy_on_gpu.py::TestTensorCopyToCpuOnDefaultGPU::test_tensor_cpu_on_default_gpu | skipped / skipped | skipped / skipped | 无CUDA构建，原skipIf条件跳过，不计F/P。 |
+| test/dygraph_to_static/test_tensor_memcpy_on_gpu.py::TestTensorCopyToCUDAOnDefaultGPU::test_tensor_cuda_on_default_gpu | skipped / skipped | skipped / skipped | 无CUDA构建，原skipIf条件跳过，不计F/P。 |
 
 <a id="task-57827"></a>
+
 ## #57827 · PIR fused_elemwise_add_activation
 
-**验证未通过｜问题来源：任务数据**
+Oracle 未通过：测试异常退出（SIGABRT），完整测试计数未闭合。
 
-入口误收集辅助函数，还测到了旧版池化的数据排列错误。
+oneDNN pooling backward 描述符创建失败，测试异常退出。
 
-- 哪里有问题：两个辅助函数被误当作测试，报缺少参数；最大池化的反向计算在修复前后都会退出。
-- 为什么：脚本把两个以 test_ 开头的辅助函数当成了测试。另一个最大池化测试在前向和反向使用不同的数据排列方式，但底层库要求两边一致，因此拒绝计算。这是旧版 Paddle 已有的调用问题，本题补丁没有处理它；不是机器缺硬件。
-- 怎么处理：修正入口的测试收集方式；明确本题验收范围，另行处理这个旧池化问题后再完整复验。已通过的两个目标测试不能替代整题。
-- 怎么确认：记录实际失败参数，并用同一个 oneDNN 3.2.1 做最小对照：只对齐前后数据排列，原先报错的计算准备步骤就能通过；限制 CPU 指令集后结果相同。源码也要求排列一致，确认是旧版调用问题。整题仍未通过。
-- 运行方式：使用记录中的精确 CPU Paddle 运行库。该项验证的是 CPU 加速的最大池化反向计算，不需要 GPU。
-- 有效 F2P / P2P：2 / 3（仅已确认部分，不代表整题通过）。
+**原因：** 已定位首次异常；实际失败的池化节点、描述符参数和唯一根因仍需继续诊断。
 
-涉及的测试或文件：
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
 
-- `test/dygraph_to_static/test_build_strategy.py::test_ast_only`
-- `test/dygraph_to_static/test_build_strategy.py::test_legacy_and_pir`
-- `test/dygraph_to_static/test_build_strategy.py::TestResnetWithPass::test_in_static_mode_mkldnn__ast_legacy_ir`
-- `test/dygraph_to_static/test_build_strategy.py::TestResnetWithPass::test_in_static_mode_mkldnn__ast_pir_exe`
-- `test/dygraph_to_static/test_build_strategy.py::TestResnetWithPass::test_resnet__ast_pir_exe`
+**确认方法：** 当前 Oracle 实际观察：测试异常退出（SIGABRT），完整测试计数未闭合；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-57827)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 使用记录中的精确 CPU Paddle 运行库。该项验证的是 CPU 加速的最大池化反向计算，不需要 GPU。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-11T20:33:05Z
+
+**已有 F2P/P2P 配对记录：** 2 / 3，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/dygraph_to_static/test_build_strategy.py::test_ast_only | setup_error / setup_error | setup_error / setup_error | pytest误收集辅助装饰器，缺少fn；不计F/P。 |
+| test/dygraph_to_static/test_build_strategy.py::test_legacy_and_pir | setup_error / setup_error | setup_error / setup_error | pytest误收集辅助装饰器，缺少fn；不计F/P。 |
+| test/dygraph_to_static/test_build_strategy.py::TestResnetWithPass::test_in_static_mode_mkldnn__ast_legacy_ir | native_abort / native_abort | native_abort / native_abort | 最大池化反向需要沿用前向的数据排列；实际传入另一种排列，库不支持，所以修复前后都失败。最小对照中，只对齐排列就能通过原先失败的计算准备步骤。 |
+| test/dygraph_to_static/test_build_strategy.py::TestResnetWithPass::test_in_static_mode_mkldnn__ast_pir_exe | target_abort / target_abort | passed / passed | 已由不捕获stderr的控制日志定位为缺少本题要补的PIR算子；与普通native abort区分。 |
+| test/dygraph_to_static/test_build_strategy.py::TestResnetWithPass::test_resnet__ast_legacy_ir | passed / passed | passed / passed | 原范围独立回归测试。 |
+| test/dygraph_to_static/test_build_strategy.py::TestResnetWithPass::test_resnet__ast_pir_exe | target_abort / target_abort | passed / passed | 已由不捕获stderr的控制日志定位为缺少本题要补的PIR算子；与普通native abort区分。 |
+| test/dygraph_to_static/test_build_strategy.py::TestError::test_type_error__ast_legacy_ir | passed / passed | passed / passed | 原范围独立回归测试。 |
+| test/dygraph_to_static/test_build_strategy.py::TestError::test_type_error__sot_legacy_ir | passed / passed | passed / passed | 原范围独立回归测试。 |
 
 <a id="task-58219"></a>
+
 ## #58219 · PIR floor_divide / remainder operations
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 4 项、回归测试 4 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：4 / 4。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-58219)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:19:57Z
+
+**已有 F2P/P2P 配对记录：** 4 / 4，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_math_op_patch_pir.TestMathOpPatchesPir::test_floordiv | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_math_op_patch_pir.TestMathOpPatchesPir::test_item | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_math_op_patch_pir.TestMathOpPatchesPir::test_math_exists | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_math_op_patch_pir.TestMathOpPatchesPir::test_matmul | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_math_op_patch_pir.TestMathOpPatchesPir::test_mod | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_math_op_patch_pir.TestMathOpPatchesPir::test_place | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_math_op_patch_pir.TestMathOpPatchesPir::test_pow | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_math_op_patch_pir.TestMathOpPatchesPir::test_some_dim | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-58323"></a>
+
 ## #58323 · atleast_1d / atleast_2d / atleast_3d APIs
 
-**核心通过 · 任务包待修｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 89 通过 / 0 失败 / 0 错误 / 2 跳过。
 
-测试加载和模式设置有误；调整测试准备后，完整范围通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：41 条新接口测试在修复前无法启动；修复后另有一条 Tensor 方法测试用错了运行模式。
-- 为什么：测试文件一加载就查询尚不存在的新接口，导致整组测试退出。另一条测试在创建输入后才切回动态图，输入类型因此不对。
-- 怎么处理：把新接口查询放到具体测试执行时，并在创建输入前切回动态图；保留全部测试和断言。
-- 怎么确认：在临时测试副本中只调整加载时机和模式准备，完整两个测试文件在修复前后各跑两轮：41 条 F2P、48 条 P2P，另 2 条按 CPU 条件跳过。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：41 / 48。
+**原因：** 原 pytest 入口遗漏初始化或运行模式；已按注明的入口执行完整原测试，保留原失败记录。
 
-涉及的测试或文件：
+**处理：** 将已验证的入口和必要运行设置纳入任务说明；不改测试断言。
 
-- `test/legacy_test/test_atleast_nd.py::<module>`
-- `test/legacy_test/test_atleast_nd.py::TestAtleastAsTensorMethod::test_as_tensor_method`
-- `tests/test.sh`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 89 通过 / 0 失败 / 0 错误 / 2 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-58323)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** python 直接运行原测试文件（执行 __main__ 初始化）
+
+**Oracle 确认时间：** 2026-10-11T18:59:35Z
+
+**已有 F2P/P2P 配对记录：** 41 / 48，确认日期 2026-09-11。
+
+上述 F2P/P2P 来自修正测试准备后的完整范围对照；任务包仍需正式修改。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_atleast_nd.py::TestAtleastAsTensorMethod::test_as_tensor_method | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_0::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_10::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_11::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_12::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_13::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_14::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_1::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_2::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_3::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_4::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_5::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_6::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_7::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_8::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDimMoreInputs_9::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_0::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_10::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_11::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_12::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_13::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_14::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_1::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_2::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_3::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_4::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_5::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_6::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_7::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_8::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastDim_9::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastErrorCombineInputs_0::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastErrorCombineInputs_1::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastErrorCombineInputs_2::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastMixData_0::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastMixData_1::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastMixData_2::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastMixData_3::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastMixData_4::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastMixDim_0::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_atleast_nd.py::TestAtleastMixDtypes_0::test_all | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_reshape_op.py::TestDygraphReshapeAPI::test_out | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestDygraphReshapeAPI::test_out_float32 | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestDygraphReshapeAPI::test_out_uint8 | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestDygraphReshapeInplaceAPI::test_out | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestDygraphReshapeInplaceAPI::test_out_float32 | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestDygraphReshapeInplaceAPI::test_out_uint8 | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeAPI::test_imperative | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeAPI::test_paddle_api | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeAPI_ZeroDim::test_dygraph | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeAPI_ZeroDim::test_static | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeBF16Op::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeBF16Op::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeFP16Op::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeFP16Op::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeInt8Op::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeInt8Op::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOp::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOp::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpBool::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpBool::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer1::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer1::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer1_attr_OnlyShape::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer1_attr_OnlyShape::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer1_attr_ShapeTensor::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer1_attr_ShapeTensor::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer2::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer2::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer2_attr_OnlyShape::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer2_attr_OnlyShape::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer2_attr_ShapeTensor::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpDimInfer2_attr_ShapeTensor::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpError::test_paddle_api_error | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpWithInputShape::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOpWithInputShape::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOp_ZeroDim1::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOp_ZeroDim1::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOp_ZeroDim2::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOp_ZeroDim2::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOp_attr_OnlyShape::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOp_attr_OnlyShape::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOp_attr_ShapeTensor::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeOp_attr_ShapeTensor::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapePirOpResultListShape::test_opresult_list_shape | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeUint8Op::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeUint8Op::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeZeroTensor::test_reshape_zero_tensor_error | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestReshapeZeroTensor::test_reshape_zero_tensor_success | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestStaticReshape_::test_imperative | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_reshape_op.py::TestStaticReshape_::test_paddle_api | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
 
 <a id="task-58343"></a>
+
 ## #58343 · PIR logical, bitwise and scalar-power methods
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 6 项、回归测试 9 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：6 / 9。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-58343)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:18:03Z
+
+**已有 F2P/P2P 配对记录：** 6 / 9，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_bitwise_and | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_bitwise_not | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_bitwise_or | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_bitwise_xor | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_equal_and_nequal | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_floordiv | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_greater | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_item | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_less | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_math_exists | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_matmul | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_mod | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_place | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_pow | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_math_op_patch_pir.py::TestMathOpPatchesPir::test_some_dim | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-58917"></a>
+
 ## #58917 · tensor_split / hsplit / dsplit APIs
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 未通过：两轮各 8 通过 / 10 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 15 项、回归测试 3 项均有稳定配对，原入口可运行。
+测试仍有失败或错误。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：15 / 3。
+**原因：** 保留失败结果，继续逐项诊断。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-58917)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
+
+**确认方法：** 当前 Oracle 实际观察：两轮各 8 通过 / 10 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:23:52Z
+
+**已有 F2P/P2P 配对记录：** 15 / 3，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_splits_api.py::TestDSplit::test_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestDSplit::test_error_dim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestDSplit::test_error_split | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestDSplit::test_split_dim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestHSplit::test_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestHSplit::test_error_dim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestHSplit::test_error_split | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestHSplit::test_split_dim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestTensorSplit::test_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestTensorSplit::test_error_dim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestTensorSplit::test_error_split | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestTensorSplit::test_special_indices | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestTensorSplit::test_split_axis | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestTensorSplit::test_split_dim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_splits_api.py::TestVSplit::test_dtype | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_splits_api.py::TestVSplit::test_error_dim | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_splits_api.py::TestVSplit::test_error_split | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_splits_api.py::TestVSplit::test_split_dim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-59021"></a>
+
 ## #59021 · PIR test_len
 
-**验证未通过｜问题来源：任务数据**
+Oracle 未通过：测试崩溃（SIGSEGV），完整测试计数未闭合。
 
-入口漏了运行设置；还需分开验证两种执行模式。
+TensorArray 测试发生 SIGSEGV，完整原测试尚未通过。
 
-- 哪里有问题：TestLenWithTensorArray::test_len__ast_legacy_ir 默认进入不受支持的新图转换路径而崩溃。 TestMNIST 的两个融合测试，以及 TestFuseActElewiseAddInplaceGradPass::test_fuse_act_add_grad_pass_cpu，没有先开启静态模式而失败。 3 个 TestLenWithSelectedRows 测试在原入口未开启 PIR 执行器，修复前后都通过，缺 F2P 信号。
-- 为什么：指定 Base 的 CMakeLists.txt 明确把 test_len 加入 DISABLE_PIR_PT_MODES，并设置 FLAGS_enable_pir_with_pt_in_dy2st=0。task 的 pytest 入口漏抄了这个前提。 融合文件把 paddle.enable_static() 写在直接运行文件才会执行的入口中，改用 pytest 导入时没有执行。 只给 SelectedRows 开启 PIR 执行器就能重现并验证参考修复；对整个 test_len 强开 PIR 则会再次导致 TensorArray 崩溃，所以不能用一个全局开关混跑两种测试。
-- 怎么处理：test_len 按上游要求关闭 PIR 自动转换，保留全部 9 项回归；融合测试先开启静态模式。 为 SelectedRows 单独补一组开启 PIR 执行器的验证入口，保留完整原有回归范围后再验收。
-- 怎么确认：按上游设置完整跑 13 个节点，修复前后各两轮均通过，其中 1 条在 CPU 上直接返回、不计回归。另将 3 条 SelectedRows 单独用 PIR 执行器运行，可复现修复前失败、修复后通过。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：3 / 12（仅已确认部分，不代表整题通过）。
+**原因：** 已定位到静态图转换的切片处理边界；不能认定仅更换入口就能解决。
 
-涉及的测试或文件：
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
 
-- `test.legacy_test.test_fuse_elewise_add_act_pass.TestMNIST::test_batchnorm_fc_with_fuse_op`
-- `test.legacy_test.test_fuse_elewise_add_act_pass.TestMNIST::test_simple_fc_with_fuse_op`
-- `test.legacy_test.test_fuse_elewise_add_act_pass.TestFuseActElewiseAddInplaceGradPass::test_fuse_act_add_grad_pass_cpu`
-- `test.dygraph_to_static.test_len.TestLenWithTensorArray::test_len__ast_legacy_ir`
+**确认方法：** 当前 Oracle 实际观察：测试崩溃（SIGSEGV），完整测试计数未闭合；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-59021)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-10T01:23:15Z
+
+**已有 F2P/P2P 配对记录：** 3 / 12，确认日期 2026-09-11。
+
+3 条 F2P 在单独的 PIR 执行条件下确认；12 条 P2P 来自完整回归范围。条件不同，不能冒充原脚本已通过。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_fuse_elewise_add_act_pass.TestMNIST::test_batchnorm_fc_with_fuse_op | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.legacy_test.test_fuse_elewise_add_act_pass.TestMNIST::test_simple_fc_with_fuse_op | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.legacy_test.test_fuse_elewise_add_act_pass.TestFuseActElewiseAddInplaceGradPass::test_fuse_act_add_grad_pass_cpu | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.legacy_test.test_fuse_elewise_add_act_pass.TestFuseActElewiseAddInplaceGradPass::test_fuse_act_add_grad_pass_cuda | empty_return / empty_return | empty_return / empty_return | 无CUDA时方法直接返回，不能计P2P。 |
+| test.dygraph_to_static.test_len.TestLenWithTensorArray::test_len__ast_legacy_ir | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.dygraph_to_static.test_len.TestLen::test_len__ast_legacy_ir | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.dygraph_to_static.test_len.TestLen::test_len__sot_legacy_ir | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.dygraph_to_static.test_len.TestLen::test_len__sot_mgs10_legacy_ir | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.dygraph_to_static.test_len.TestLenWithTensorArray::test_len__sot_legacy_ir | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.dygraph_to_static.test_len.TestLenWithTensorArray::test_len__sot_mgs10_legacy_ir | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.dygraph_to_static.test_len.TestLenWithSelectedRows::test_len__ast_legacy_ir | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.dygraph_to_static.test_len.TestLenWithSelectedRows::test_len__sot_legacy_ir | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.dygraph_to_static.test_len.TestLenWithSelectedRows::test_len__sot_mgs10_legacy_ir | passed / passed | passed / passed | 静态初始化补齐后在Base/Gold双轮通过。 |
+| test.dygraph_to_static.test_len.TestLenWithSelectedRows::test_len__ast_legacy_ir | failed / failed | passed / passed | 同名测试切换到题目要修复的PIR条件后构成F2P；为补充诊断，不替代前面完整原范围。 |
+| test.dygraph_to_static.test_len.TestLenWithSelectedRows::test_len__sot_legacy_ir | failed / failed | passed / passed | 同名测试切换到题目要修复的PIR条件后构成F2P；为补充诊断，不替代前面完整原范围。 |
+| test.dygraph_to_static.test_len.TestLenWithSelectedRows::test_len__sot_mgs10_legacy_ir | failed / failed | passed / passed | 同名测试切换到题目要修复的PIR条件后构成F2P；为补充诊断，不替代前面完整原范围。 |
 
 <a id="task-59127"></a>
+
 ## #59127 · column_stack / row_stack / dstack / hstack / vstack APIs
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 未通过：测试崩溃（SIGSEGV），完整测试计数未闭合。
 
-stack 系列拼接接口测试已通过。
+最近完整测试崩溃；已确认此前 Python 模块与运行库接口混用。
 
-- 哪里有问题：stack 系列拼接接口测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 white_list（测试用的白名单），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 84 项修复前失败后通过、42 项修复前后都通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用与该时期 API 兼容的 CPU Paddle 运行库；本次沿用已核对的 Python 源码覆盖方式。
-- 有效 F2P / P2P：84 / 42。
+**原因：** 独立配套构建后的完整测试仍需执行，不能把接口诊断当作已通过。
 
-涉及的测试或文件：
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
 
-- `test/legacy_test/test_stack_op.py`
-- `test/legacy_test/test_stack_extension_api.py`
+**确认方法：** 当前 Oracle 实际观察：测试崩溃（SIGSEGV），完整测试计数未闭合；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-59127)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用与该时期 API 兼容的 CPU Paddle 运行库；本次沿用已核对的 Python 源码覆盖方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-10T02:27:25Z
+
+**已有 F2P/P2P 配对记录：** 84 / 42，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_0d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_0d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_1d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_1d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_2d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_2d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_3d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_4d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_4d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_mix_ndim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_0d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_0d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_1d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_1d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_2d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_2d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_3d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_4d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_4d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestDStack::test_mix_ndim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorColumnStack::test_1d_2d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorColumnStack::test_1d_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorColumnStack::test_2d_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorColumnStack::test_mix_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorColumnStack::test_vstack_0d_1d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorDStack::test_1d_2d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorDStack::test_1d_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorDStack::test_2d_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorDStack::test_mix_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorDStack::test_vstack_0d_1d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorHStack::test_1d_2d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorHStack::test_1d_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorHStack::test_2d_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorHStack::test_mix_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorRowStack::test_1d_2d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorRowStack::test_1d_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorRowStack::test_2d_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorRowStack::test_mix_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorRowStack::test_vstack_0d_1d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorVStack::test_1d_2d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorVStack::test_1d_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorVStack::test_2d_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorVStack::test_mix_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestErrorVStack::test_vstack_0d_1d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_0d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_0d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_1d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_1d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_2d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_2d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_3d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_4d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_4d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestHStack::test_mix_ndim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_0d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_0d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_1d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_1d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_2d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_2d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_3d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_4d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_4d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestRowStack::test_mix_ndim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_0d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_0d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_1d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_1d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_2d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_2d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_3d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_4d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_4d_more | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_extension_api.py::TestVStack::test_mix_ndim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_stack_op.py::API_DygraphTest::test_out | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::API_DygraphTest::test_single_tensor_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::API_test::test_out | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::API_test::test_pir_single_tensor_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::API_test::test_single_tensor_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackAPIWithLoDTensorArray::test_case | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackAPI_ZeroDim::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackBF16Op::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackBF16Op::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op1::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op1::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op2::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op2::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op3::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op3::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op4::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op4::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op5::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op5::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op6::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op6::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackFP16Op::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackListOfSingleTensor::test_list_single_tensor | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp1::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp1::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp2::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp2::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp3::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp3::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp4::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp4::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp5::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp5::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp6::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp6::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOpBase::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOpBase::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOpWithNegativeShape::test_out | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp_ZeroDim::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestStackOp_ZeroDim::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_stack_op.py::TestTensorStackAPIWithLoDTensorArray::test_case | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-59348"></a>
+
 ## #59348 · PIR sequence_mask
 
-**核心通过 · 任务包待修｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-15 个测试已通过；任务入口仍需补静态模式初始化。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：原入口中的 TestSequenceMaskOpError::test_errors 没在正确模式下执行，误报失败。
-- 为什么：测试文件把 paddle.enable_static() 放在直接运行文件的入口里，pytest 导入时跳过了它。 同一份测试、同一 Base/Gold 库，仅补上静态模式后，全部 15 项在修复后通过；其中 13 项验证目标修复，2 项验证原有行为。
-- 怎么处理：在 pytest 启动前调用 paddle.enable_static()，或采用保留此初始化的测试入口。
-- 怎么确认：同一份完整测试、同一版本运行库，仅补静态初始化，修复前后各两轮确认 13 条 F2P、2 条 P2P；修复后的 15 条全部通过。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：13 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test.sequence.test_sequence_mask.SequenceMaskTestBase::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest1::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest2::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest3::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest4::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest5::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest6::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTestBase_tensor_attr::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest1_tensor_attr::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest2_tensor_attr::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest3_tensor_attr::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest4_tensor_attr::test_check_output`
-- `test.sequence.test_sequence_mask.SequenceMaskTest5_tensor_attr::test_check_output`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-59348)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-08T17:32:30Z
+
+**已有 F2P/P2P 配对记录：** 13 / 2，确认日期 2026-09-11。
+
+配对结果来自补静态初始化后的完整 15 项；任务入口仍待修改。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.sequence.test_sequence_mask.SequenceMaskTestBase::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest1::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest2::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest3::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest4::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest5::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest6::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTestBase_tensor_attr::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest1_tensor_attr::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest2_tensor_attr::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest3_tensor_attr::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest4_tensor_attr::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.SequenceMaskTest5_tensor_attr::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.sequence.test_sequence_mask.TestSequenceMaskOpError::test_errors | passed / passed | passed / passed | 修复前后各两轮通过：P2P。 |
+| test.sequence.test_sequence_mask.TestSequenceMaskWithEmptyTensor::test_empty | passed / passed | passed / passed | 修复前后各两轮通过：P2P。 |
 
 <a id="task-59374"></a>
+
 ## #59374 · Tensor apply / apply_ API
 
-**验证未通过｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 5 通过 / 0 失败 / 0 错误 / 1 跳过。
 
-5 条缺陷测试通过，但没有选入独立的 P2P。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：TestTensorApplyAPI 的 test_dtype、test_dygraph、test_error、test_to_static，以及 TestDygraphTensorApplyInplace::test_inplace_api 都是 F2P。 唯一剩下的 test_on_gpu 在 CPU 机器上按题目设计跳过，不能充当 P2P。
-- 为什么：这些测试全部调用本题新加入的 apply/apply_，所以未修复版本本来就都会失败；测试清单没有覆盖一个不依赖新 API 的既有功能。 5 项在 Gold 上都通过，当前没有证据表明补丁或机器有问题。缺的是数据包的回归测试选择。
-- 怎么处理：补选至少一个与 Tensor 既有行为有关、修复前后都能执行并通过的 CPU 测试，加入 test.sh 后完整复验。
-- 怎么确认：核对原脚本选中的全部 6 个节点和双轮日志：5 个 CPU 测试修复前失败、修复后通过；1 个 GPU 测试按约定跳过，没有可计数的 P2P。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：5 / 0（仅已确认部分，不代表整题通过）。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test.legacy_test.test_apply.TestTensorApplyAPI::test_dtype`
-- `test.legacy_test.test_apply.TestTensorApplyAPI::test_dygraph`
-- `test.legacy_test.test_apply.TestTensorApplyAPI::test_error`
-- `test.legacy_test.test_apply.TestTensorApplyAPI::test_on_gpu`
-- `test.legacy_test.test_apply.TestTensorApplyAPI::test_to_static`
-- `test.legacy_test.test_inplace.TestDygraphTensorApplyInplace::test_inplace_api`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 5 通过 / 0 失败 / 0 错误 / 1 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-59374)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T03:11:02Z
+
+**已有 F2P/P2P 配对记录：** 5 / 0，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_apply.TestTensorApplyAPI::test_on_gpu | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test.legacy_test.test_apply.TestTensorApplyAPI::test_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_apply.TestTensorApplyAPI::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_apply.TestTensorApplyAPI::test_error | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_apply.TestTensorApplyAPI::test_to_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_inplace.TestDygraphTensorApplyInplace::test_inplace_api | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-59383"></a>
+
 ## #59383 · masked_scatter API
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 708 通过 / 0 失败 / 0 错误 / 16 跳过。
 
-masked_scatter 和原地操作测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：masked_scatter 和原地操作测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 white_list（测试用的白名单），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 28 项修复前失败后通过、680 项修复前后都通过。另有 16 项按测试自身条件在 CPU 上跳过，未计入通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用与该时期 API 兼容的 CPU Paddle 运行库；本次沿用已核对的 Python 源码覆盖方式。
-- 有效 F2P / P2P：28 / 680。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_masked_scatter.py`
-- `test/legacy_test/test_inplace.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 708 通过 / 0 失败 / 0 错误 / 16 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-59383)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用与该时期 API 兼容的 CPU Paddle 运行库；本次沿用已核对的 Python 源码覆盖方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T22:20:46Z
+
+**已有 F2P/P2P 配对记录：** 28 / 680，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_inplace.py::TestContinuouslyInplace::test_continuously_inplace | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceMultiply::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceMultiply::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceMultiply::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceMultiply::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceMultiply::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceMultiply::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceMultiply::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceMultiply::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceRenorm::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceRenorm::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceRenorm::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceRenorm::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceRenorm::test_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceRenorm::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceRenorm::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceRenorm::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceRenorm::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceT::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceT::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceT::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceT::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceT::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceT::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceT::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceT::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceTranspose::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceTranspose::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceTranspose::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceTranspose::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceTranspose::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceTranspose::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceTranspose::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygrapInplaceTranspose::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisNot::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisNot::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisNot::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisNot::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisNot::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisNot::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisNot::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisNot::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisOr::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisOr::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisOr::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisOr::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisOr::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisOr::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisOr::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisOr::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisXor::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisXor::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisXor::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisXor::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisXor::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisXor::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisXor::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwisXor::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwiseAnd::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwiseAnd::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwiseAnd::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwiseAnd::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwiseAnd::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwiseAnd::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwiseAnd::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacBitwiseAnd::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplace::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplace::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplace::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplace::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplace::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplace::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplace::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATan::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATan::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATan::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATan::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATan::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATan::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATan::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATan::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATanh::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATanh::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATanh::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATanh::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATanh::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATanh::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATanh::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceATanh::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAbs::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAbs::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAbs::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAbs::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAbs::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAbs::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAbs::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAbs::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcos::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcos::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcos::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcos::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcos::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcos::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcos::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcos::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcosh::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcosh::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcosh::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcosh::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcosh::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcosh::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcosh::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAcosh::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAdd::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAdd::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAdd::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAdd::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAdd::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAdd::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAdd::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAddMM::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAddMM::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAddMM::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAddMM::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAddMM::test_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAddMM::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAddMM::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAddMM::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAddMM::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsin::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsin::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsin::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsin::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsin::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsin::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsin::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsin::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsinh::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsinh::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsinh::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsinh::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsinh::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsinh::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsinh::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceAsinh::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCast::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCast::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCast::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCast::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCast::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCast::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCast::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCast::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCeil::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCeil::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCeil::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCeil::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCeil::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCeil::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCeil::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceClip::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceClip::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceClip::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceClip::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceClip::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceClip::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceClip::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCos::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCos::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCos::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCos::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCos::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCos::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCos::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCos::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCosh::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCosh::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCosh::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCosh::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCosh::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCosh::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCosh::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCosh::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumprod::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumprod::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumprod::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumprod::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumprod::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumprod::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumprod::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumsum::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumsum::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumsum::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumsum::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumsum::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumsum::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumsum::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceCumsum::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDigamma::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDigamma::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDigamma::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDigamma::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDigamma::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDigamma::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDigamma::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDigamma::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDivide::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDivide::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDivide::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDivide::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDivide::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDivide::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDivide::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceDivide::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceElu::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceElu::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceElu::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceElu::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceElu::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceElu::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceElu::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceEqual::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceEqual::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceEqual::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceEqual::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceEqual::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceEqual::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceEqual::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceEqual::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceExp::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceExp::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceExp::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceExp::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceExp::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceExp::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceExp::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFlatten::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFlatten::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFlatten::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFlatten::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFlatten::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFlatten::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFlatten::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloor::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloor::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloor::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloor::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloor::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloor::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloor::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloorDivide::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloorDivide::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloorDivide::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloorDivide::test_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloorDivide::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloorDivide::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloorDivide::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFloorDivide::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFrac::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFrac::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFrac::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFrac::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFrac::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFrac::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFrac::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceFrac::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGcd::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGcd::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGcd::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGcd::test_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGcd::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGcd::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGcd::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGcd::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterEqual::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterEqual::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterEqual::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterEqual::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterEqual::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterEqual::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterEqual::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterEqual::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterThan::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterThan::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterThan::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterThan::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterThan::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterThan::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterThan::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceGreaterThan::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHardTanh::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHardTanh::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHardTanh::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHardTanh::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHardTanh::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHardTanh::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHardTanh::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHardTanh::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHypot::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHypot::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHypot::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHypot::test_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHypot::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHypot::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHypot::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceHypot::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceI0::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceI0::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceI0::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceI0::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceI0::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceI0::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceI0::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceI0::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceIndexFill::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceIndexFill::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceIndexFill::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceIndexFill::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceIndexFill::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceIndexFill::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceIndexFill::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLcm::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLcm::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLcm::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLcm::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLcm::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLcm::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLcm::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLdexp::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLdexp::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLdexp::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLdexp::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLdexp::test_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLdexp::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLdexp::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLdexp::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLdexp::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLeakyRelu::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLeakyRelu::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLeakyRelu::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLeakyRelu::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLeakyRelu::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLeakyRelu::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLeakyRelu::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLeakyRelu::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessEqual::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessEqual::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessEqual::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessEqual::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessEqual::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessEqual::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessEqual::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessEqual::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessThan::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessThan::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessThan::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessThan::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessThan::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessThan::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessThan::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLessThan::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLgamma::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLgamma::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLgamma::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLgamma::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLgamma::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLgamma::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLgamma::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLgamma::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog10::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog10::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog10::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog10::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog10::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog10::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog10::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog10::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog1p::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog1p::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog1p::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog1p::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog1p::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog1p::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog1p::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog1p::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog2::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog2::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog2::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog2::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog2::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog2::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog2::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog2::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLog::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicAnd::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicAnd::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicAnd::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicAnd::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicAnd::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicAnd::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicAnd::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicAnd::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicNot::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicNot::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicNot::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicNot::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicNot::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicNot::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicNot::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicNot::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicOr::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicOr::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicOr::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicOr::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicOr::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicOr::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicOr::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicOr::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicXor::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicXor::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicXor::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicXor::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicXor::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicXor::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicXor::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogicXor::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogit::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogit::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogit::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogit::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogit::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogit::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogit::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceLogit::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill2::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill2::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill2::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill2::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill2::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill2::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill2::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedFill::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedScatter::test_backward_error | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedScatter::test_backward_success_1 | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedScatter::test_backward_success_2 | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedScatter::test_forward_result | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedScatter::test_forward_version | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedScatter::test_inplace_api | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMaskedScatter::test_leaf_inplace_var_error | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMutilgammaln::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMutilgammaln::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMutilgammaln::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMutilgammaln::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMutilgammaln::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMutilgammaln::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMutilgammaln::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceMutilgammaln::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNanToNum::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNanToNum::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNanToNum::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNanToNum::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNanToNum::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNanToNum::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNanToNum::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNeg::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNeg::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNeg::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNeg::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNeg::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNeg::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNeg::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNeg::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNotEqual::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNotEqual::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNotEqual::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNotEqual::test_broadcast_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNotEqual::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNotEqual::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNotEqual::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceNotEqual::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePolygamma::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePolygamma::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePolygamma::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePolygamma::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePolygamma::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePolygamma::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePolygamma::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePolygamma::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePowerScalar::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePowerScalar::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePowerScalar::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePowerScalar::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePowerScalar::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePowerScalar::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePowerScalar::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePowerScalar::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplacePowerScalar::test_type_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReciprocal::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReciprocal::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReciprocal::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReciprocal::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReciprocal::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReciprocal::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReciprocal::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRelu::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRelu::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRelu::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRelu::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRelu::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRelu::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRelu::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRemainder::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRemainder::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRemainder::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRemainder::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRemainder::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRemainder::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRemainder::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshape::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshape::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshape::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshape::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshape::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshape::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshape::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshapeTensor::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshapeTensor::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshapeTensor::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshapeTensor::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshapeTensor::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshapeTensor::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceReshapeTensor::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRound::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRound::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRound::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRound::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRound::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRound::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRound::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRsqrt::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRsqrt::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRsqrt::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRsqrt::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRsqrt::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRsqrt::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceRsqrt::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScale::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScale::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScale::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScale::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScale::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScale::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScale::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScatter::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScatter::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScatter::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScatter::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScatter::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScatter::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceScatter::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSinh::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSinh::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSinh::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSinh::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSinh::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSinh::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSinh::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSinh::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSoftmax::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSoftmax::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSoftmax::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSoftmax::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSoftmax::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSoftmax::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSoftmax::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSqrt::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSqrt::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSqrt::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSqrt::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSqrt::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSqrt::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSqrt::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSubtract::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSubtract::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSubtract::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSubtract::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSubtract::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSubtract::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceSubtract::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTan::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTan::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTan::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTan::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTan::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTan::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTan::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTan::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTanh::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTanh::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTanh::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTanh::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTanh::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTanh::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTanh::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceThresholdedRelu::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceThresholdedRelu::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceThresholdedRelu::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceThresholdedRelu::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceThresholdedRelu::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceThresholdedRelu::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceThresholdedRelu::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceThresholdedRelu::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTril::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTril::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTril::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTril::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTril::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTril::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTril::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTril::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTriu::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTriu::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTriu::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTriu::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTriu::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTriu::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTriu::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTriu::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTrunc::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTrunc::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTrunc::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTrunc::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTrunc::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTrunc::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTrunc::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceTrunc::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceUnsqueeze::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceUnsqueeze::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceUnsqueeze::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceUnsqueeze::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceUnsqueeze::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceUnsqueeze::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceUnsqueeze::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhere::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhere::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhere::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhere::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhere::test_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhere::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhere::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhere::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhere::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhereBroadcast::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhereBroadcast::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhereBroadcast::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhereBroadcast::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhereBroadcast::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhereBroadcast::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhereBroadcast::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWhereBroadcast::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWithContinuous::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWithContinuous::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWithContinuous::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWithContinuous::test_continuous_inplace_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWithContinuous::test_forward_result | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWithContinuous::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWithContinuous::test_inplace_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestDygraphInplaceWithContinuous::test_leaf_inplace_var_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestGetitemBeforeInplace::test_getitem_before_inplace | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestInplace::test_backward_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestInplace::test_backward_success_1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestInplace::test_backward_success_2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestInplace::test_forward_version | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_inplace.py::TestLossIsInplaceVar::test_loss_is_inplace_var | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPI1::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPI1::test_static_graph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPI2::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPI2::test_static_graph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPI3::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPI3::test_static_graph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPI::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPI::test_static_graph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPIBroadcast2::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPIBroadcast2::test_static_graph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPIBroadcast3::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPIBroadcast3::test_static_graph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPIBroadcast4::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPIBroadcast4::test_static_graph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPIBroadcast5::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPIBroadcast5::test_static_graph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPIBroadcast::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterAPIBroadcast::test_static_graph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterBF16::test_dygraph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterBF16::test_static_graph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterBF16APIBroadcast2::test_dygraph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterBF16APIBroadcast2::test_static_graph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterError::test_dtype_error | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterError::test_mask_error | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterError::test_numel_error | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16API1::test_dygraph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16API1::test_static_graph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16API2::test_dygraph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16API2::test_static_graph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16API3::test_dygraph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16API3::test_static_graph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16APIBroadcast2::test_dygraph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16APIBroadcast2::test_static_graph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16APIBroadcast3::test_dygraph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16APIBroadcast3::test_static_graph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16APIBroadcast::test_dygraph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_masked_scatter.py::TestMaskedScatterFP16APIBroadcast::test_static_graph | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
 
 <a id="task-59715"></a>
+
 ## #59715 · matrix_exp API
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 108 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 56 项、回归测试 52 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：56 / 52。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-59715)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 108 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-11T17:21:37Z
+
+**已有 F2P/P2P 配对记录：** 56 / 52，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase3D::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase3D::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase3D::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase3DFloat32::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase3DFloat32::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase3DFloat32::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase4D::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase4D::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase4D::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase4DFloat32::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase4DFloat32::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase4DFloat32::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCase::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseEmpty::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseEmpty::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseEmpty::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseEmptyFloat32::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseEmptyFloat32::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseEmptyFloat32::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseError::test_error_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseError::test_error_ndim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseFloat32::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseFloat32::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseFloat32::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat32L1norm0::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat32L1norm0::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat32L1norm0::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat32L1norm1::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat32L1norm1::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat32L1norm1::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat32L1norm2::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat32L1norm2::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat32L1norm2::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm0::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm0::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm0::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm1::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm1::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm1::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm2::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm2::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm2::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm3::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm3::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm3::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm4::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm4::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCasePrecisionFloat64L1norm4::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseScalar::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseScalar::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseScalar::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseScalarFloat32::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseScalarFloat32::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_matrix_exp.py::MatrixExpTestCaseScalarFloat32::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase1::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase1::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase1::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase2::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase2::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase2::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch1::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch1::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch1::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch2::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch2::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch2::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch3::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch3::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch3::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch4::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch4::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatch4::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatchBig::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatchBig::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseBatchBig::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseFP32::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseFP32::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseFP32::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian1::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian1::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian1::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian2::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian2::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian2::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian3::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian3::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian3::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian4::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian4::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian4::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian5::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian5::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian5::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian6::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian6::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian6::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitianFP32::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitianFP32::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitianFP32::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseRcond::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseRcond::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseRcond::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::TestDivByZero::test_div_by_zero | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-59847"></a>
+
 ## #59847 · FractionalMaxPool2D / 3D
 
-**环境不满足 · 未完成｜问题来源：机器环境**
+Oracle 已执行范围通过：两轮各 43 通过 / 0 失败 / 0 错误 / 32 跳过。
 
-CPU 部分已验证通过；机器没有题目必需的 CUDA 设备，所以 GPU 部分还没验证。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：fractional_max_pool2d/3d 的 32 个 FP16/BF16 测试被跳过，以及相同功能的 GPU 执行分支。
-- 为什么：题目明确要求 CPU + GPU。当前机器没有 NVIDIA 设备或驱动接口，无法运行这些 CUDA 核函数。 CPU 子集观察到 36 项目标修复、7 项回归通过，没有发现 Gold 的 CPU 测试失败。
-- 怎么处理：在符合题目要求的设备上，保持相同 Base、参考补丁和测试范围，各跑两轮；保留已完成的 CPU 结果。
-- 怎么确认：检查机器设备和任务硬件要求，并核对 CPU 双轮记录。CPU 已有通过结果，但当前没有 NVIDIA 设备，GPU 节点确实未执行。
-- 运行方式：CUDA设备与匹配的CUDA Paddle构建，FP16/BF16能力按节点要求确认
-- 有效 F2P / P2P：未完成配对。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1_BF16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1_BF16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1_FP16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1_FP16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase2_BF16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase2_BF16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase2_FP16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase2_FP16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase3_BF16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase3_BF16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase3_FP16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestCase3_FP16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestMaxPoolWithIndex_Op_BF16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestMaxPoolWithIndex_Op_BF16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestMaxPoolWithIndex_Op_FP16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool2d_op.py::TestMaxPoolWithIndex_Op_FP16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase1_BF16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase1_BF16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase1_FP16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase1_FP16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase2_BF16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase2_BF16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase2_FP16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase2_FP16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase3_BF16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase3_BF16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase3_FP16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestCase3_FP16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestMaxPoolWithIndex_Op_BF16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestMaxPoolWithIndex_Op_BF16OP::test_check_output`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestMaxPoolWithIndex_Op_FP16OP::test_check_grad`
-- `test/legacy_test/test_fractional_max_pool3d_op.py::TestMaxPoolWithIndex_Op_FP16OP::test_check_output`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 43 通过 / 0 失败 / 0 错误 / 32 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-59847)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** CUDA设备与匹配的CUDA Paddle构建，FP16/BF16能力按节点要求确认
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T06:26:48Z
+
+**已有 F2P/P2P 配对记录：** None / None，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_fractional_max_pool2d_api.py::TestFractionalMaxPool2DAPI::test_dynamic_graph | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_api.py::TestFractionalMaxPool2DAPI::test_static_graph | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_api.py::TestFractionalMaxPool2DAPI::test_static_graph_return_mask | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_api.py::TestFractionalMaxPool2DAPIDtype::test_dtypes | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_api.py::TestFractionalMaxPool2DAPIErrorOutputSize::test_error_output_size | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_api.py::TestFractionalMaxPool2DAPIRandomU::test_error_random_u | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_api.py::TestFractionalMaxPool2DAPIRandomU::test_none_random_u | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_api.py::TestFractionalMaxPool2DClassAPI::test_dynamic_graph | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_api.py::TestFractionalMaxPool2DClassAPI::test_static_graph | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_api.py::TestOutDtype::test_max_pool | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1::test_check_grad | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1::test_check_output | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1_BF16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1_BF16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1_FP16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1_FP16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase2::test_check_grad | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase2::test_check_output | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase2_BF16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase2_BF16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase2_FP16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase2_FP16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase3::test_check_grad | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase3::test_check_output | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase3_BF16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase3_BF16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase3_FP16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestCase3_FP16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestMaxPoolWithIndex_Op::test_check_grad | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestMaxPoolWithIndex_Op::test_check_output | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestMaxPoolWithIndex_Op_BF16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestMaxPoolWithIndex_Op_BF16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestMaxPoolWithIndex_Op_FP16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool2d_op.py::TestMaxPoolWithIndex_Op_FP16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_api.py::TestFractionalMaxPool3DAPI::test_dynamic_graph | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_api.py::TestFractionalMaxPool3DAPI::test_static_graph | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_api.py::TestFractionalMaxPool3DAPI::test_static_graph_return_mask | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_api.py::TestFractionalMaxPool3DAPIDtype::test_dtypes | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_api.py::TestFractionalMaxPool3DAPIErrorOutputSize::test_error_output_size | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_api.py::TestFractionalMaxPool3DAPIRandomU::test_error_random_u | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_api.py::TestFractionalMaxPool3DAPIRandomU::test_none_random_u | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_api.py::TestFractionalMaxPool3DClassAPI::test_dynamic_graph | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_api.py::TestFractionalMaxPool3DClassAPI::test_static_graph | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_api.py::TestOutDtype::test_max_pool | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase1::test_check_grad | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase1::test_check_output | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase1_BF16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase1_BF16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase1_FP16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase1_FP16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase2::test_check_grad | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase2::test_check_output | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase2_BF16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase2_BF16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase2_FP16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase2_FP16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase3::test_check_grad | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase3::test_check_output | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase3_BF16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase3_BF16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase3_FP16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestCase3_FP16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestMaxPoolWithIndex_Op::test_check_grad | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestMaxPoolWithIndex_Op::test_check_output | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestMaxPoolWithIndex_Op_BF16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestMaxPoolWithIndex_Op_BF16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestMaxPoolWithIndex_Op_FP16OP::test_check_grad | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_fractional_max_pool3d_op.py::TestMaxPoolWithIndex_Op_FP16OP::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_pool2d_api.py::TestPool2DError_API::test_error_api | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_pool2d_api.py::TestPool2D_API::test_pool2d | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_pool2d_api.py::TestPool2D_API::test_pool2d_static | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_pool3d_api.py::TestPool3DError_API::test_error_api | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_pool3d_api.py::TestPool3D_API::test_pool3d | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_pool3d_api.py::TestPool3D_API::test_static_bf16_gpu | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_pool3d_api.py::TestPool3D_API::test_static_fp16_gpu | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
 
 <a id="task-59909"></a>
+
 ## #59909 · Parallel mode selection under sharding
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 2 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：1 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-59909)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:12:13Z
+
+**已有 F2P/P2P 配对记录：** 1 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_hybrid_parallel_mode_selection.py::test_existing_data_and_pure_sharding_modes | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_hybrid_parallel_mode_selection.py::test_sharding_with_data_parallel_uses_sharding_mode | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_hybrid_parallel_mode_selection.py::test_tensor_and_pipeline_modes_take_precedence | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+
+<a id="task-59910"></a>
+
+## #59910 · 【PIR API adaptor No.31】Migrate paddle.distribution.Normal into pir
+
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
+
+所注明入口的两轮完整结果已记录。
+
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
+
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 遵循该任务的运行入口、测试范围及设备条件。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:49:15Z
 
 <a id="task-59973"></a>
+
 ## #59973 · slice_scatter API
 
-**核心通过 · 任务包待修｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 74 通过 / 0 失败 / 0 错误 / 29 跳过。
 
-两个静态测试漏了初始化；补齐后，完整范围通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：TestScatterAPI::test_static 和 TestScatterInplaceAPI::test_static 在创建输入时就报错。
-- 为什么：脚本用 pytest 启动，不会执行文件末尾的静态模式初始化；两个测试自己也没打开静态模式，因此还没测试 scatter 就失败了。
-- 怎么处理：在这两个测试类的准备步骤中调用 paddle.enable_static()，不要依赖文件末尾的启动代码。
-- 怎么确认：只补静态模式准备，不改断言或测试范围；修复前后各跑两轮，确认 47 条 F2P、25 条有效 P2P。另 2 条在 CPU 上直接返回、29 条跳过，均不计数。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：47 / 25。
+**原因：** 原 pytest 入口遗漏初始化或运行模式；已按注明的入口执行完整原测试，保留原失败记录。
 
-涉及的测试或文件：
+**处理：** 将已验证的入口和必要运行设置纳入任务说明；不改测试断言。
 
-- `test/legacy_test/test_scatter_op.py::TestScatterAPI::test_static`
-- `test/legacy_test/test_scatter_op.py::TestScatterInplaceAPI::test_static`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 74 通过 / 0 失败 / 0 错误 / 29 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-59973)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** python 直接运行原测试文件（执行 __main__ 初始化）
+
+**Oracle 确认时间：** 2026-10-11T14:54:31Z
+
+**已有 F2P/P2P 配对记录：** 47 / 25，确认日期 2026-09-11。
+
+上述 F2P/P2P 来自修正测试准备后的完整范围对照；任务包仍需正式修改。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_scatter_op.py::TestScatterAPI::test_dygraph | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterAPI::test_large_data | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterAPI::test_static | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op0::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op0::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op1::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op1::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op2::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op2::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op3::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op3::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op4::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op4::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op5::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op5::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op6::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op6::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterBF16Op::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterError::test_scatter_index | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op0::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op0::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op1::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op1::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op2::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op2::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op3::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op3::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op4::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op4::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op5::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op5::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op6::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op6::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterFP16Op::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterInplaceAPI::test_dygraph | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterInplaceAPI::test_large_data | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterInplaceAPI::test_static | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp0::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp0::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp1::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp1::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp2::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp2::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp3::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp3::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp4::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp4::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp5::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp5::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp6::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp6::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOp::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P 回归测试。 |
+| test/legacy_test/test_scatter_op.py::TestScatterOpFp16::test_scatter_fp16 | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi3D::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi3D::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi3DFloat32::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi3DFloat32::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi4D::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi4D::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi4DAxis3::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi4DAxis3::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi4DAxis3Float32::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi4DAxis3Float32::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi4DFloat32::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi4DFloat32::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApi::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBfloat16::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBfloat16::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBool::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBool::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBroadcase2D::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBroadcase2D::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBroadcase2DFloat32::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBroadcase2DFloat32::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBroadcase3D::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBroadcase3D::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBroadcase3DFloat32::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiBroadcase3DFloat32::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiError::test_error_index | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiError::test_error_ndim | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiFloat16::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiFloat16::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiFloat32::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiFloat32::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiInt16::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiInt16::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiInt32::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiInt32::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiInt64::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiInt64::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiInt8::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiInt8::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiIntComplex128::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiIntComplex128::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiIntComplex64::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiIntComplex64::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiUint8::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterApiUint8::test_api_static | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+| test/legacy_test/test_slice_scatter.py::TestSliceScatterTensorApi::test_tensor | failed / failed | passed / passed | 修复前两轮失败，修复后两轮通过：有效 F2P。 |
+
+<a id="task-60346"></a>
+
+## #60346 · 【PIR API adaptor No.272】Migrate LookAhead to pir
+
+Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。
+
+所注明入口的两轮完整结果已记录。
+
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
+
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 遵循该任务的运行入口、测试范围及设备条件。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:18:11Z
 
 <a id="task-60417"></a>
+
 ## #60417 · Auto-tuner resume from CSV history
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：3 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-60417)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:46:03Z
+
+**已有 F2P/P2P 配对记录：** 3 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_test/test_auto_tuner_resume.py::test_existing_search_and_history_flow_is_unchanged | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_test/test_auto_tuner_resume.py::test_launch_reuses_history_without_starting_training | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_test/test_auto_tuner_resume.py::test_resume_history_loads_values_and_preserves_a_copy | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_test/test_auto_tuner_resume.py::test_resume_lookup_returns_first_matching_configuration | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-60808"></a>
+
 ## #60808 · broadcast_to with zero dimensions
 
-**核心通过 · 任务包待修｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-测试通过；环境说明把一条回归测试错写成了缺陷测试。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：没有修复后仍失败的测试。问题是 environment/README.md 说有两条 F2P，实际只有一条。
-- 为什么：一维 shape Tensor 的 expand 测试在修复前就已通过，它检查的是原有功能，应算 P2P。任务主 README 的分类是正确的，但环境说明与它矛盾。
-- 怎么处理：把 environment/README.md 的运行步骤和预期表改为 1 条 F2P、2 条 P2P；不需要改代码、测试断言或机器配置。
-- 怎么确认：核对原脚本的修复前后各两轮结果：零维 shape 测试由失败变通过，另外两条始终通过，修复后完整脚本两轮都成功。
-- 运行方式：使用记录中的精确 Base/Gold CPU 运行时；测试加载选定版本的 broadcast_to/expand 函数，任务也允许免重编译的验证路线。
-- 有效 F2P / P2P：1 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_broadcast_to_zero_dim_shape.py::test_expand_accepts_multi_element_1d_shape_tensor`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-60808)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 使用记录中的精确 Base/Gold CPU 运行时；测试加载选定版本的 broadcast_to/expand 函数，任务也允许免重编译的验证路线。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T19:02:36Z
+
+**已有 F2P/P2P 配对记录：** 1 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_broadcast_to_zero_dim_shape::test_integer_list_shape_regression | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_broadcast_to_zero_dim_shape::test_broadcast_to_accepts_zero_dim_tensor_shape_element | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_broadcast_to_zero_dim_shape::test_expand_accepts_multi_element_1d_shape_tensor | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+
+<a id="task-62012"></a>
+
+## #62012 · [SOT] rewrite resume function generation
+
+Oracle 已执行范围通过：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过。
+
+所注明入口的两轮完整结果已记录。
+
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
+
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-11T20:53:51Z
 
 <a id="task-64320"></a>
+
 ## #64320 · sparse.mask_as API
 
-**环境不满足 · 未完成｜问题来源：机器环境**
+Oracle 已执行范围通过：两轮各 33 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-CPU 的稀疏张量测试已通过；机器缺少题目要求的 CUDA 设备，GPU 分支还没跑。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：sparse.mask_as 的 COO 1d/2d/3d/4d、CSR 2d/3d 及相关稀疏运算的 GPU 分支。
-- 为什么：原题要求 CPU + GPU。当前只能运行 CPU 路径，GPU 条件分支没有执行。 6 项 CPU 目标测试已由失败变为通过；27 项表面 P2P 中有 GPU 条件空返回，不能把这些空返回当成有效回归覆盖。
-- 怎么处理：在符合题目要求的设备上，保持相同 Base、参考补丁和测试范围，各跑两轮；保留已完成的 CPU 结果。
-- 怎么确认：核对任务要求、设备清单和 CPU 双轮日志。6 个 CPU 缺陷测试由失败变通过；部分设备条件分支直接返回，不能据此声称 GPU 通过。
-- 运行方式：CUDA设备与匹配的CUDA Paddle构建
-- 有效 F2P / P2P：未完成配对。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_sparse_mask_as_op.py::TestMaskAsCoo`
-- `test/legacy_test/test_sparse_mask_as_op.py::TestMaskAsCsr`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 33 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-64320)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** CUDA设备与匹配的CUDA Paddle构建
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T16:39:13Z
+
+**已有 F2P/P2P 配对记录：** None / None，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_sparse_mask_as_op.py::TestMaskAsCoo::test_1d | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_sparse_mask_as_op.py::TestMaskAsCoo::test_2d | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_sparse_mask_as_op.py::TestMaskAsCoo::test_3d | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_sparse_mask_as_op.py::TestMaskAsCoo::test_4d | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_sparse_mask_as_op.py::TestMaskAsCsr::test_2d | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_sparse_mask_as_op.py::TestMaskAsCsr::test_3d | failed / failed | passed / passed | CPU 子集观察到 Base 两轮失败、Gold 两轮通过；任务所需设备分支尚未验证。 |
+| test/legacy_test/test_sparse_mask_as_op.py::TestMaskAsCsr::test_error_dimension | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCooError::test_indices_dtype | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCooError::test_same_dimensions | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCooError::test_same_nnz | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCooError::test_small_shape | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCsrError::test_crows_first_value | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCsrError::test_dimension1 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCsrError::test_dimension2 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCsrError::test_dtype | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCsrError::test_same_shape1 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCsrError::test_same_shape2 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestCsrError::test_same_shape3 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseConvert::test_batch_csr | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseConvert::test_coo_to_dense | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseConvert::test_coo_values_grad | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseConvert::test_sparse_coo_tensor_grad | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseConvert::test_sparse_coo_tensor_sorted | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseConvert::test_to_sparse_coo | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseConvert::test_to_sparse_csr | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseConvert::test_zero_nnz | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseCreate::test_create_coo_by_np | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseCreate::test_create_coo_by_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseCreate::test_create_coo_no_shape | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseCreate::test_create_csr_by_np | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseCreate::test_create_csr_by_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseCreate::test_dtype | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_sparse_utils_op.py::TestSparseCreate::test_place | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
 
 <a id="task-64519"></a>
+
 ## #64519 · cholesky_inverse API
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 27 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 16 项、回归测试 9 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：16 / 9。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-64519)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 27 通过 / 0 失败 / 0 错误 / 0 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** python 直接运行原测试文件（执行 __main__ 初始化）
+
+**Oracle 确认时间：** 2026-10-11T22:45:08Z
+
+**已有 F2P/P2P 配对记录：** 16 / 9，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_cholesky_op.py::test_with_pir_api | missing / missing | missing / missing | 此项不构成有效测试配对，不计入 F2P/P2P。 |
+| test/legacy_test/test_cholesky_op.py::TestCholeskyOp2D::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cholesky_op.py::TestCholeskyOp2D::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cholesky_op.py::TestCholeskyOp::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cholesky_op.py::TestCholeskyOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cholesky_op.py::TestCholeskyOpLower::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cholesky_op.py::TestCholeskyOpLower::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cholesky_op.py::TestCholeskySingularAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cholesky_op.py::TestCholeskySingularAPI::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cholesky_op.py::TestDygraph::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestCholeskyDecompositionData::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestCholeskyDecompositionData::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestCholeskyDecompositionData::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestCholeskyInverse::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestCholeskyInverse::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestCholeskyInverse::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestErrorDimension::test_0d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestErrorDimension::test_1d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestErrorDimension::test_3d | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestErrorDimension::test_asymmetric_matrix | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestErrorDtype::test_bfloat16 | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestErrorDtype::test_float16 | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestFloat32::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestFloat32::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestFloat32::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestUpperTriangularMatrix::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestUpperTriangularMatrix::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_cholesky_inverse.py::TestUpperTriangularMatrix::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-64881"></a>
+
 ## #64881 · FeatureAlphaDropout API
 
-**验证未通过｜问题来源：任务数据**
+Oracle 未通过：两轮各 123 通过 / 1 失败 / 6 错误 / 4 跳过。
 
-测试范围包含 7 项原本就坏的 dropout 功能，整题仍未通过。
+完整直接入口仍有 1 项失败、6 项错误、4 项跳过。
 
-- 哪里有问题：6 项检查发现随机掩码的形状不对；另 1 项设了相同随机种子却得到不同结果。
-- 为什么：丢弃比例为 100% 时，旧代码给出一个零值，测试要的是与输入一样大的掩码。随机种子测试则没有把指定种子传进实际运算。这些问题在修复前已存在，也不在本题补丁修改范围内。
-- 怎么处理：明确任务应覆盖的功能，将无关旧缺陷另行处理；这些失败项不能算 P2P，也不能直接删掉后宣称原完整测试通过。
-- 怎么确认：用精确版本重跑完整两个测试文件，并检查运行开关；7 项在修复前后仍失败。小数组单独实验也复现掩码变成标量、指定种子未传入，排除了验证器强开模式或缺 GPU 的解释。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：6 / 92（仅已确认部分，不代表整题通过）。
+**原因：** 6 项错误涉及 dropout 掩码的维度，另 1 项失败涉及指定随机种子的传递。
 
-涉及的测试或文件：
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
 
-- `test/legacy_test/test_dropout_op.py::TestBF16DropoutOp::test_check_grad_normal`
-- `test/legacy_test/test_dropout_op.py::TestBF16DropoutOp::test_check_output`
-- `test/legacy_test/test_dropout_op.py::TestDropoutOp2::test_check_output`
-- `test/legacy_test/test_dropout_op.py::TestDropoutOp6::test_check_output`
-- `test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_6_p_1_0_test_False::test_static_comp`
-- `test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_7_p_1_0_test_False_dtype_bfp16::test_static_comp`
-- `test/legacy_test/test_dropout_op.py::TestDropoutWithDeterminateSeedGenerator::test_static`
-- `tests/test.sh`
+**确认方法：** 当前 Oracle 实际观察：两轮各 123 通过 / 1 失败 / 6 错误 / 4 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-64881)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** python 直接运行原测试文件（执行 __main__ 初始化）
+
+**Oracle 确认时间：** 2026-10-12T01:22:54Z
+
+**已有 F2P/P2P 配对记录：** 6 / 92，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_alpha_dropout.py::TestAlphaDropoutClassAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_alpha_dropout.py::TestAlphaDropoutClassAPI::test_dygraph_bfp16 | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestAlphaDropoutClassAPI::test_static_bfp16_gpu | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestAlphaDropoutClassAPI::test_static_fp16_gpu | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestAlphaDropoutFunctionAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_alpha_dropout.py::TestAlphaDropoutFunctionAPI::test_dygraph_bfp16 | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestAlphaDropoutFunctionAPI::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_alpha_dropout.py::TestAlphaDropoutFunctionAPIError::test_input_dtype_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_alpha_dropout.py::TestAlphaDropoutFunctionAPIError::test_input_type_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_alpha_dropout.py::TestFeatureAlphaDropoutClassAPI::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestFeatureAlphaDropoutClassAPI::test_dygraph_bfp16 | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestFeatureAlphaDropoutClassAPI::test_static_bfp16_gpu | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestFeatureAlphaDropoutClassAPI::test_static_fp16_gpu | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestFeatureAlphaDropoutFunctionAPI::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestFeatureAlphaDropoutFunctionAPI::test_dygraph_bfp16 | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestFeatureAlphaDropoutFunctionAPI::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestFeatureAlphaDropoutFunctionAPIError::test_input_dtype_errors | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestFeatureAlphaDropoutFunctionAPIError::test_input_ndim_errors | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_alpha_dropout.py::TestFeatureAlphaDropoutFunctionAPIError::test_input_type_errors | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_dropout_op.py::TestAlphaDropoutCAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestAlphaDropoutCAPI::test_static_fp16_gpu | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestAlphaDropoutFAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestAlphaDropoutFAPI::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestAlphaDropoutFAPIError::test_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestAlphaDropoutFAPIError::test_errors2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestBF16DropoutOp::test_check_grad_normal | failed / failed | failed / failed | 丢弃比例为100%时，旧dropout代码返回一个零值作为mask；测试要求mask和输入数组同样大小，因此6项报形状不符。Base和参考补丁均未修复这个旧问题。 |
+| test/legacy_test/test_dropout_op.py::TestBF16DropoutOp::test_check_output | failed / failed | failed / failed | 丢弃比例为100%时，旧dropout代码返回一个零值作为mask；测试要求mask和输入数组同样大小，因此6项报形状不符。Base和参考补丁均未修复这个旧问题。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_0_fp32::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_0_fp32::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_0_fp32::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_10_downgrade_train::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_10_downgrade_train::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_10_downgrade_train::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_11_downgrade_train_dtype_bfp16::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_11_downgrade_train_dtype_bfp16::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_11_downgrade_train_dtype_bfp16::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_12_fp32_cpu::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_12_fp32_cpu::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_12_fp32_cpu::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_13_fp64_cpu::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_13_fp64_cpu::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_13_fp64_cpu::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_14_downgrade_train_cpu::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_14_downgrade_train_cpu::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_14_downgrade_train_cpu::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_1_bfp16::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_1_bfp16::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_1_bfp16::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_2_fp64::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_2_fp64::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_2_fp64::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_3_is_test_True::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_3_is_test_True::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_3_is_test_True::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_4_p_1_0::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_4_p_1_0::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_4_p_1_0::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_5_p_1_0_dtype_bfp16::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_5_p_1_0_dtype_bfp16::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_5_p_1_0_dtype_bfp16::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_6_p_1_0_test_False::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_6_p_1_0_test_False::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_6_p_1_0_test_False::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_7_p_1_0_test_False_dtype_bfp16::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_7_p_1_0_test_False_dtype_bfp16::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_7_p_1_0_test_False_dtype_bfp16::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_8_p_0_0::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_8_p_0_0::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_8_p_0_0::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_9_p_0_0_dtype_bfp16::test_jit_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_9_p_0_0_dtype_bfp16::test_jit_comp_with_cinn | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestCompositeDropout_9_p_0_0_dtype_bfp16::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropOut2DWithProbTensor::test_p_tensor | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropOut3DWithProbTensor::test_p_tensor | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropOutWithProbTensor::test_p_tensor | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropout2DCAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropout2DCAPI::test_static_fp16_with_gpu | passed / passed | passed / passed | 此机器条件下直接返回，没有执行实际检查，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestDropout2DFAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropout2DFAPI::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropout2DFAPIError::test_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropout3DCAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropout3DFAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropout3DFAPI::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropout3DFAPIError::test_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutCAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutFAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutFAPI::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutFAPIError::test_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutFAPIError::test_errors2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp2::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp2::test_check_output | failed / failed | failed / failed | 丢弃比例为100%时，旧dropout代码返回一个零值作为mask；测试要求mask和输入数组同样大小，因此6项报形状不符。Base和参考补丁均未修复这个旧问题。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp2_ZeroDim::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp2_ZeroDim::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp3::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp3::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp4::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp5::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp6::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp6::test_check_output | failed / failed | failed / failed | 丢弃比例为100%时，旧dropout代码返回一个零值作为mask；测试要求mask和输入数组同样大小，因此6项报形状不符。Base和参考补丁均未修复这个旧问题。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp7::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp7::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp8::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp9::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOpError::test_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOpInput1d::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOpInput1d::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOpWithSeed::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOpWithSeed::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOpWithSeedOnCPUPlace::test_seed_cpu_place | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp_ZeroDim::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutOp_ZeroDim::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestDropoutWithDeterminateSeedGenerator::test_static | failed / failed | failed / failed | 测试给两次dropout指定相同随机种子，但旧实现没有把指定种子传到运算中，实际仍随机生成，所以两次输出不同。 |
+| test/legacy_test/test_dropout_op.py::TestFP16DropoutOp2::test_check_grad_normal | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestFP16DropoutOp2::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestFP16DropoutOp::test_check_grad_normal | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestFP16DropoutOp::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_0_fp32::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_10_downgrade_train::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_11_downgrade_train_dtype_bfp16::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_12_fp32_cpu::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_13_fp64_cpu::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_14_downgrade_train_cpu::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_1_bfp16::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_2_fp64::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_3_is_test_True::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_4_p_1_0::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_5_p_1_0_dtype_bfp16::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_6_p_1_0_test_False::test_static_comp | failed / failed | failed / failed | 丢弃比例为100%时，旧dropout代码返回一个零值作为mask；测试要求mask和输入数组同样大小，因此6项报形状不符。Base和参考补丁均未修复这个旧问题。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_7_p_1_0_test_False_dtype_bfp16::test_static_comp | failed / failed | failed / failed | 丢弃比例为100%时，旧dropout代码返回一个零值作为mask；测试要求mask和输入数组同样大小，因此6项报形状不符。Base和参考补丁均未修复这个旧问题。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_8_p_0_0::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestPirCompositeDropout_9_p_0_0_dtype_bfp16::test_static_comp | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dropout_op.py::TestRandomValue::test_fixed_random_number | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-65724"></a>
+
 ## #65724 · DataLoader persistent_workers
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-65724)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:28:36Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_dataloader_persistent_workers_structure.py::test_existing_fifo_structure_handoff | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_dataloader_persistent_workers_structure.py::test_persistent_worker_reset_preserves_shared_metadata_channel | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_dataloader_persistent_workers_structure.py::test_structure_metadata_supports_thread_handoff | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-67195"></a>
+
 ## #67195 · Pipeline NaN checker
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-67195)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:13:35Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_pp_nan_checker_before_send.py::test_finite_send_and_receive_only_behavior | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_pp_nan_checker_before_send.py::test_invalid_send_is_rejected_before_communication | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_pp_nan_checker_before_send.py::test_mixed_batch_is_not_launched_when_outgoing_tensor_is_invalid | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-68432"></a>
+
 ## #68432 · Sparse complex multiply / divide
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 11 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：2 / 11。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-68432)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T21:07:07Z
+
+**已有 F2P/P2P 配对记录：** 2 / 11，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseAddStaticAPI::test_coo | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseAddStaticAPI::test_coo_dense | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseDivStaticAPI::test_coo | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseElementWiseAPI::test_add_bias | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseElementWiseAPI::test_add_same_indices | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseElementWiseAPI::test_support_dtypes_coo | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseElementWiseAPI::test_support_dtypes_csr | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseElementWiseAPIComplex::test_add_bias | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseElementWiseAPIComplex::test_add_same_indices | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseElementWiseAPIComplex::test_support_dtypes_coo | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseElementWiseAPIComplex::test_support_dtypes_csr | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseMulStaticAPI::test_coo | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_sparse_elementwise_op.TestSparseSubStaticAPI::test_coo | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-70469"></a>
+
 ## #70469 · Fused dropout-add fallback
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-70469)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:27:55Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_fused_dropout_add_fallback.py::test_inference_fallback_warns_once_and_preserves_arguments | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_fused_dropout_add_fallback.py::test_training_uses_reference_dropout_add_semantics | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_fused_dropout_add_fallback.py::test_zero_probability_result_remains_valid | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-72800"></a>
+
 ## #72800 · cummin / cummax zero-size Tensor
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-cummin/cummax 的空张量测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：cummin/cummax 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 4 项修复前失败后通过、4 项修复前后都通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
-- 有效 F2P / P2P：4 / 4。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_cummax_op.py`
-- `test/legacy_test/test_cummin_op.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-72800)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-11T21:45:54Z
+
+**已有 F2P/P2P 配对记录：** 4 / 4，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_cummax_op.py::TestCummaxOp::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cummax_op.py::TestCummaxOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cummin_op.py::TestCumminOp::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cummin_op.py::TestCumminOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_cummax_op.py::TestCummaxOp_ZeroSize::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_cummax_op.py::TestCummaxOp_ZeroSize::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_cummin_op.py::TestCumminOp_ZeroSize::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_cummin_op.py::TestCumminOp_ZeroSize::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73122"></a>
+
 ## #73122 · multi_dot zero-size Tensor
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-固定为任务默认的 MKL 数学库后，完整原脚本通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：OpenBLAS 构建下，TestMultiDotOp_ZeroSize1::test_check_output 在修复前就通过，掩盖了缺陷。 采用题目默认 MKL 后，原 test.sh 的全部 3 项已完成双轮验证，没有剩余失败项。
-- 为什么：README 的构建命令在本机默认开启 MKL；原验证却关闭 MKL，改用 OpenBLAS。两套库处理空矩阵时的行为不同。 Base 把零尺寸矩阵直接传给数学库。MKL 拒绝其中为零的矩阵步长并留下未初始化输出，OpenBLAS 则直接填零。参考补丁提前处理空矩阵，避免了这个非法调用。 控制实验保持 Base/Gold 原生库、测试脚本、所有 3 个测试和断言不变，只将实际 BLAS 调用绑定到源代码指定系列的 MKL 2019.0.5；两轮均得到 Base 1 失败/2 通过，Gold 3 通过。
-- 怎么处理：验证环境固定为 MKL，并记录数学库版本；不需要修改本题测试断言或参考补丁。
-- 怎么确认：完整原 test.sh 和 3 个测试均未修改，只把数学运算绑定到 MKL 2019.0.5；修复前两轮 1 失败、2 通过，修复后两轮 3 个全通过。已检查实际函数绑定到 MKL。
-- 运行方式：复用精确 Base/Gold Paddle 库，将数学运算绑定到 MKL 2019.0.5。结论限此运行组合，没有重新编译完整 MKL 版 Paddle。
-- 有效 F2P / P2P：1 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test.legacy_test.test_multi_dot_op.TestMultiDotOp_ZeroSize1::test_check_output`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73122)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 复用精确 Base/Gold Paddle 库，将数学运算绑定到 MKL 2019.0.5。结论限此运行组合，没有重新编译完整 MKL 版 Paddle。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:41:54Z
+
+**已有 F2P/P2P 配对记录：** 1 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_multi_dot_op.TestMultiDotOp_ZeroSize1::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过：F2P。 |
+| test.legacy_test.test_multi_dot_op.TestMultiDotOp::test_check_grad | passed / passed | passed / passed | 修复前后各两轮通过：P2P。 |
+| test.legacy_test.test_multi_dot_op.TestMultiDotOp::test_check_output | passed / passed | passed / passed | 修复前后各两轮通过：P2P。 |
 
 <a id="task-73125"></a>
+
 ## #73125 · det / slogdet zero-size Tensor
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-det/slogdet 的空张量测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：det/slogdet 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。未修复版本在空张量梯度计算时中途退出，这是该题要修的原始问题。将后续输出测试单独拆出来又会触发“本组没有做梯度检查”的收尾检查，因此不能把这两项算成已确认 P2P，也不能说参考补丁仍失败。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 2 项修复前失败后通过、4 项修复前后都通过。完整参考补丁运行 8 项均通过；新跑未修复版本的完整原脚本两轮都在空张量梯度测试中退出（返回 136）。后续两项输出测试无法取得完整结束记录，暂不计入 F/P。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
-- 有效 F2P / P2P：2 / 4。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_determinant_op.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73125)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:27:32Z
+
+**已有 F2P/P2P 配对记录：** 2 / 4，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_determinant_op.py::TestDeterminantOp::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_determinant_op.py::TestDeterminantOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_determinant_op.py::TestSlogDeterminantOp::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_determinant_op.py::TestSlogDeterminantOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_determinant_op.py::TestDeterminantOp_ZeroSize2::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_determinant_op.py::TestDeterminantOp_ZeroSize2::test_check_output | teardown_error / teardown_error | passed / passed | 测试主体之后的清理未正常完成，不能只按主体结果计通过。 |
+| test/legacy_test/test_determinant_op.py::TestSlogDeterminantOp_ZeroSize2::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_determinant_op.py::TestSlogDeterminantOp_ZeroSize2::test_check_output | teardown_error / teardown_error | passed / passed | 测试主体之后的清理未正常完成，不能只按主体结果计通过。 |
 
 <a id="task-73385"></a>
+
 ## #73385 · svdvals / eigvals zero-size Tensor
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-eigvals/svdvals 的空张量测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：eigvals/svdvals 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 4 项修复前失败后通过、4 项修复前后都通过。Base 的一项空张量特征值测试会中途退出且返回 0；必须核对测试结束记录，不能只看进程返回值。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
-- 有效 F2P / P2P：4 / 4。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_eigvals_op.py`
-- `test/legacy_test/test_svdvals_op.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73385)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:50:52Z
+
+**已有 F2P/P2P 配对记录：** 4 / 4，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_eigvals_op.py::TestEigvalsOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_svdvals_op.py::TestSvdvalsOp::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_svdvals_op.py::TestSvdvalsOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_svdvals_op.py::TestSvdvalsOp::test_svdvals_forward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_eigvals_op.py::TestEigvalsOp_ZeroSize::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_eigvals_op.py::TestEigvalsOp_ZeroSize2::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_svdvals_op.py::TestSvdvalsOp_ZeroSize::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_svdvals_op.py::TestSvdvalsOp_ZeroSize::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73387"></a>
+
 ## #73387 · gather_tree zero-size Tensor
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-gather_tree 的空张量测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：gather_tree 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 2 项修复前失败后通过、1 项修复前后都通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_gather_tree_op.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73387)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:58:21Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_gather_tree_op.py::TestGatherTreeOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_gather_tree_op.py::TestGatherTreeOp_ZeroSize::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_gather_tree_op.py::TestGatherTreeOp_ZeroSize2::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73535"></a>
+
 ## #73535 · conv1d CPU FP16 accuracy
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：1 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73535)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:21:59Z
+
+**已有 F2P/P2P 配对记录：** 1 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_functional_conv1d.py::TestFunctionalConv1DError::test_exception | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_functional_conv1d.py::TestFunctionalConv1D_CPU_FP16::test_cpu_fp16 | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73569"></a>
+
 ## #73569 · matmul 1-D transpose gradient
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-matmul 矩阵乘法的空张量测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：matmul 矩阵乘法的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 1 项修复前失败后通过、2 项修复前后都通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
-- 有效 F2P / P2P：1 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_matmul_v2_op.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73569)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:48:18Z
+
+**已有 F2P/P2P 配对记录：** 1 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_matmul_v2_op.py::TestMatMulV2Op::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_matmul_v2_op.py::TestMatMulV2Op::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_matmul_v2_op.py::TestMatMulOp_trans_y::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73570"></a>
+
 ## #73570 · masked_fill zero-size Tensor
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 4 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：3 / 4。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73570)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-10T03:06:12Z
+
+**已有 F2P/P2P 配对记录：** 3 / 4，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_diag_v2.TestDiagV2Op::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_diag_v2.TestDiagV2Op::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_diag_v2.TestDiagV2Op_ZeroSize::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_diag_v2.TestDiagV2Op_ZeroSize::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_masked_fill.TestMaskedFillAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_masked_fill.TestMaskedFillAPI::test_static_graph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_masked_fill.TestMaskedFillAPI_ZeroSize2::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73582"></a>
+
 ## #73582 · squeeze / full zero-size Tensor
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 3 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：2 / 3。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73582)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:32:55Z
+
+**已有 F2P/P2P 配对记录：** 2 / 3，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_fill_constant_op.py::TestFillConstantOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_fill_constant_op.py::TestFillConstantOp_ZeroSize::test_shape | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_squeeze2_op.py::TestSqueezeAPI::test_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_squeeze2_op.py::TestSqueezeAPI::test_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_squeeze2_op.py::TestSqueezeAPI_ZeroSize::test_api | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73691"></a>
+
 ## #73691 · conv1d / conv2d / conv3d zero-size Tensor
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 3 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：3 / 3。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73691)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-10T03:07:11Z
+
+**已有 F2P/P2P 配对记录：** 3 / 3，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_functional_conv1d.TestFunctionalConv1DError::test_exception | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_functional_conv1d.TestFunctionalConv1D_ZeroSize::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_functional_conv2d.TestFunctionalConv2DError::test_exception | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_functional_conv2d.TestFunctionalConv2D_ZeroSize::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_functional_conv3d.TestFunctionalConv3DError::test_exception | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_functional_conv3d.TestFunctionalConv3D_ZeroSize2::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73702"></a>
+
 ## #73702 · gather_nd zero-size Tensor
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 2 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：1 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73702)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:46:32Z
+
+**已有 F2P/P2P 配对记录：** 1 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_gather_nd_op.TestGatherNdOpWithEmptyIndex::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_gather_nd_op.TestGatherNdOpWithEmptyIndex::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_gather_nd_op.TestGatherNdOp_ZeroSize::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73776"></a>
+
 ## #73776 · svd_lowrank zero-size Tensor
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 2 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：1 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73776)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-11T22:43:12Z
+
+**已有 F2P/P2P 配对记录：** 1 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_svd_lowrank.py::TestSvdLowRankAPI_ZeroSize::test_dygraph_api | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_svd_lowrank.py::TestSvdLowrankAPI::test_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_svd_lowrank.py::TestSvdLowrankAPI::test_forward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-73821"></a>
+
 ## #73821 · pad zero-size Tensor
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 2 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：3 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73821)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-12T02:22:17Z
+
+**已有 F2P/P2P 配对记录：** 3 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_pad3d_op.TestPad3dOp_ZeroSize_Circular::test_circular_0size | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_pad3d_op.TestPad3dOp_ZeroSize_Replicate::test_replicate_0size | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_pad_op.TestPadOp::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pad_op.TestPadOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pad_op.TestPadOp_ZeroSize2::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73850"></a>
+
 ## #73850 · triangular_solve zero-size Tensor
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 3 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：1 / 3。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73850)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:35:10Z
+
+**已有 F2P/P2P 配对记录：** 1 / 3，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_triangular_solve_op.TestTriangularSolveOp::test_check_grad_normal | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_triangular_solve_op.TestTriangularSolveOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_triangular_solve_op.TestTriangularSolveOp_ZeroSize::test_check_grad_normal | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_triangular_solve_op.TestTriangularSolveOp_ZeroSize::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-73854"></a>
+
 ## #73854 · instance_norm zero-size Tensor
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 3 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：2 / 3。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73854)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:43:35Z
+
+**已有 F2P/P2P 配对记录：** 2 / 3，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_instance_norm_op_v2.TestInstanceNorm::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_instance_norm_op_v2.TestInstanceNorm::test_error | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_instance_norm_op_v2.TestInstanceNorm::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_instance_norm_op_v2.TestInstanceNormOp_ZeroSize::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_instance_norm_op_v2.TestInstanceNormOp_ZeroSize::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73855"></a>
+
 ## #73855 · dice_loss zero-size Tensor
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：1 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73855)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-10T21:26:23Z
+
+**已有 F2P/P2P 配对记录：** 1 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_nn_dice_loss.py::TestDiceLossOpApi::test_api_with_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_nn_dice_loss.py::TestDiceLossOpApi_ZeroSize::test_api_with_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-73880"></a>
+
 ## #73880 · softmax_with_cross_entropy zero-size Tensor
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 4 项、回归测试 2 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：4 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-73880)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:21:19Z
+
+**已有 F2P/P2P 配对记录：** 4 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_softmax_with_cross_entropy_op.TestSoftmaxWithCrossEntropyOp::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_softmax_with_cross_entropy_op.TestSoftmaxWithCrossEntropyOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_softmax_with_cross_entropy_op.TestSoftmaxWithCrossEntropyOp_ZeroSize2::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_softmax_with_cross_entropy_op.TestSoftmaxWithCrossEntropyOp_ZeroSize2::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_softmax_with_cross_entropy_op.TestSoftmaxWithCrossEntropyOp_ZeroSize::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_softmax_with_cross_entropy_op.TestSoftmaxWithCrossEntropyOp_ZeroSize::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-74184"></a>
+
 ## #74184 · pinv zero-size Tensor
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-pinv 的空张量测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：pinv 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 2 项修复前失败后通过、5 项修复前后都通过。非 Hermitian 的两个空张量用例在 Base 就能通过，实际属于 P2P。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。
-- 有效 F2P / P2P：2 / 5。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_linalg_pinv_op.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-74184)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-10T22:56:04Z
+
+**已有 F2P/P2P 配对记录：** 2 / 5，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase_ZeroSize::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCase_ZeroSize::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian_ZeroSize::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_linalg_pinv_op.py::LinalgPinvTestCaseHermitian_ZeroSize::test_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-74212"></a>
+
 ## #74212 · multiplex zero-size Tensor
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-multiplex 的空张量测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：multiplex 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 2 项修复前失败后通过、5 项修复前后都通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
-- 有效 F2P / P2P：2 / 5。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_multiplex_op.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-74212)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:28:44Z
+
+**已有 F2P/P2P 配对记录：** 2 / 5，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_multiplex_op.py::TestMultiplexOp_ZeroSize::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_multiplex_op.py::TestMultiplexOp_ZeroSize::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_multiplex_op.py::TestMultiplexOp::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_multiplex_op.py::TestMultiplexOp::test_check_grad_ignore_x1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_multiplex_op.py::TestMultiplexOp::test_check_grad_ignore_x1_x2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_multiplex_op.py::TestMultiplexOp::test_check_grad_ignore_x3 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_multiplex_op.py::TestMultiplexOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-74221"></a>
+
 ## #74221 · fold zero-size Tensor
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-fold 的输入检查测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：fold 的输入检查测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 1 项修复前失败后通过、2 项修复前后都通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。
-- 有效 F2P / P2P：1 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_fold_op.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-74221)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-12T00:34:37Z
+
+**已有 F2P/P2P 配对记录：** 1 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_fold_op.py::TestFoldOpError::test_errors | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_fold_op.py::TestFoldOp::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_fold_op.py::TestFoldOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-74305"></a>
+
 ## #74305 · unique zero-size Tensor
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-unique 的空张量测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：unique 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 1 项修复前失败后通过、1 项修复前后都通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。
-- 有效 F2P / P2P：1 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_unique.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-74305)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-12T04:30:27Z
+
+**已有 F2P/P2P 配对记录：** 1 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_unique.py::TestUniqueAPI_ZeroSize::test_dygraph_api_out | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_unique.py::TestUniqueOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-74421"></a>
+
 ## #74421 · msort API compatibility
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-74421)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T17:55:01Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr74421_msort.py::test_existing_sort_dynamic_path_remains_compatible | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr74421_msort.py::test_msort_is_reexported_from_public_namespaces | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr74421_msort.py::test_msort_sorts_multidimensional_input_along_axis_zero | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-74439"></a>
+
 ## #74439 · ravel API compatibility
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-74439)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-12T06:17:41Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr74439_ravel.py::test_existing_flatten_dynamic_path_remains_compatible | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr74439_ravel.py::test_ravel_flattens_scalar_multidimensional_and_empty_inputs | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr74439_ravel.py::test_ravel_is_reexported_from_public_namespaces | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-74444"></a>
+
 ## #74444 · dropout1d API compatibility
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-74444)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。独立正常 CPU 补测另有两轮各 6 项通过，不合并到原 3 项中。
+
+**运行条件：** 已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-12T03:17:35Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr74444_dropout1d.py::test_dropout1d_is_public_and_preserves_2d_3d_channel_semantics | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr74444_dropout1d.py::test_dropout1d_rejects_invalid_inputs_and_warns_for_inplace | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr74444_dropout1d.py::test_existing_dropout2d_channel_axis_behavior_remains_compatible | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-74491"></a>
+
 ## #74491 · Tensor.requires_grad compatibility
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-74491)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-12T05:23:23Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr74491_requires_grad.py::test_existing_dim_metadata_behavior_remains_compatible | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr74491_requires_grad.py::test_requires_grad_rejects_non_boolean_assignments | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr74491_requires_grad.py::test_requires_grad_tracks_stop_gradient_across_tensor_modes | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-74586"></a>
+
 ## #74586 · scatter_add API compatibility
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-74586)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:17:03Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr74586_scatter_add.py::test_existing_index_add_dynamic_path_remains_compatible | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr74586_scatter_add.py::test_scatter_add_accumulates_repeated_indices_along_requested_dim | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr74586_scatter_add.py::test_scatter_add_is_reexported_from_public_namespaces | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-74594"></a>
+
 ## #74594 · broadcast_shapes API compatibility
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-74594)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T17:58:18Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr74594_broadcast_shapes.py::test_broadcast_shapes_combines_multiple_shapes_and_rejects_mismatch | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr74594_broadcast_shapes.py::test_broadcast_shapes_supports_empty_and_single_shape_inputs | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr74594_broadcast_shapes.py::test_existing_broadcast_shape_delegation_remains_compatible | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-75274"></a>
+
 ## #75274 · Normal distribution unittest fix
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-75274)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T17:25:02Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_normal_benchmark::test_dygraph_path_preserves_output_shape | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_normal_benchmark::test_scalar_static_path_is_independent_of_initial_mode | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_normal_benchmark::test_tensor_static_path_is_independent_of_initial_mode | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-76259"></a>
+
 ## #76259 · Windows UTF-8 inference paths
 
-**验证未通过｜问题来源：任务数据**
+Oracle 尚未完成：完整测试结果尚未确认。
 
-参考补丁对不上题目指定的代码版本，测试还没有开始。
+目前没有完整 Oracle 执行记录。
 
-- 哪里有问题：solution/code.patch 无法修改 paddle/fluid/inference/api/helper.h 的开头。
-- 为什么：补丁要求文件开头按 algorithm、fstream、iostream 的顺序排列；指定 Base 实际是 glog、sys/stat、fstream 等另一套内容，补丁找不到要替换的位置。 先打测试补丁或先打参考补丁都失败；这是数据包的版本与补丁不匹配，换 CPU/GPU 或 Python 都不会修好。
-- 怎么处理：基于 README 声明的 Base 重新生成参考补丁，并确保所需前置改动齐全；两种状态构建成功后再跑 F2P/P2P。
-- 怎么确认：在指定 Base 上单独检查两种补丁应用顺序，均在同一文件失败；对照文件内容确认上下文不匹配。测试尚未启动。
-- 运行方式：先修正补丁；随后按任务要求用 Windows CPU / MSVC x64 构建验证，Linux 测试不能替代。
-- 有效 F2P / P2P：未完成配对。
+**原因：** 需要补齐可执行任务及完整测试记录。
 
-涉及的测试或文件：
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
 
-- `solution/code.patch`
-- `paddle/fluid/inference/api/helper.h`
+**确认方法：** 当前 Oracle 实际观察：完整测试结果尚未确认；入口：尚未执行完整测试。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-76259)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 先修正补丁；随后按任务要求用 Windows CPU / MSVC x64 构建验证，Linux 测试不能替代。
+
+**Oracle 入口：** 尚未执行完整测试
+
+**Oracle 确认时间：** 尚未确认
 
 <a id="task-76522"></a>
+
 ## #76522 · Torch proxy compat override registration
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-76522)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:26:11Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr76522_torch_proxy_compat_overrides.py::test_enable_torch_proxy_auto_registers_public_compat_exports | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr76522_torch_proxy_compat_overrides.py::test_existing_proxy_module_falls_back_to_original_attribute | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr76522_torch_proxy_compat_overrides.py::test_nested_override_is_visible_through_parent_proxy | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-76736"></a>
+
 ## #76736 · atan2 C++ sinking
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 10 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 7 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：3 / 7。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-76736)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 10 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-08T17:46:29Z
+
+**已有 F2P/P2P 配对记录：** 3 / 7，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_api_compatibility.TestAtan2API_Compatibility::test_dygraph_Compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility.TestAtan2API_Compatibility::test_static_Compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility.TestAtan2API_Compatibility::test_tensor_method | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_atan2_op.TestAtan2API::test_dygraph_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_atan2_op.TestAtan2API::test_static_api | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_atan2_op.TestAtan2Broadcasting::test_api_with_dygraph_empty_tensor_input | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_atan2_op.TestAtan2Broadcasting::test_dygraph_broadcast_gradient_values | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_atan2_op.TestAtan2EmptyTensorInput::test_api_with_dygraph_empty_tensor_input | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_atan2_op.TestAtan2_int32::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_atan2_op.TestAtan2_int64::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-76873"></a>
+
 ## #76873 · Activation APIs inplace support
 
-**环境不满足 · 未完成｜问题来源：多处原因**
+Oracle 尚未完成：完整测试结果尚未确认。
 
-环境缺 CINN，另有数值比较和测试导入问题；完整验证未完成。
+完整 CINN 测试尚未完成；已有独立补测出现失败。
 
-- 哪里有问题：7 项符号形状测试读不到形状信息；1 项 SELU 测试在接近零的数值上超过比较阈值。任务入口还把两组同名辅助模块混在一起导入。
-- 为什么：当前 Paddle 没编入 CINN，生成形状信息的代码根本不执行。SELU 的 CPU 结果与测试参考值有舍入差异，但相同输入下修复前后完全一致，尚不能归为补丁错误。两组测试各有一个 utils 文件，需要隔离导入。
-- 怎么处理：准备带 CINN 的同版本构建，把两组测试分进程运行；核定 SELU 在零附近的数值参考和精度要求，再跑完整范围。不能直接放宽误差阈值算通过。
-- 怎么确认：31 个节点按原范围分组各跑两轮，确认 7 项缺 CINN、1 项数值差异。另用 5 组固定输入对照，普通/原地 SELU 和修复前后输出均相同；已定位差异来自零附近的浮点计算。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：9 / 14（仅已确认部分，不代表整题通过）。
+**原因：** 还需正确隔离同名 utils，并匹配 CINN 构建和设备；已有局部通过不能代替整题。
 
-涉及的测试或文件：
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
 
-- `test.ir.pir.cinn.symbolic.test_infer_sym_shape_multinary_op.CELUOpInferSymbolicShapeTest::test_eval_symbolic`
-- `test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.HardSigmoidInferSymbolicShapeTest::test_eval_symbolic`
-- `test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.MishOpInferSymbolicShapeTest::test_eval_symbolic`
-- `test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.RRELUOpInferSymbolicShapeTest::test_eval_symbolic`
-- `test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.SELUOpInferSymbolicShapeTest::test_eval_symbolic`
-- `test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.SwishOpInferSymbolicShapeTest::test_eval_symbolic`
-- `test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.SumOpInferSymbolicShapeTest::test_eval_symbolic`
-- `test.legacy_test.test_selu_op.TestSELUOpClass_Inplace::test_cases`
-- `tests/test.sh`
+**确认方法：** 当前 Oracle 实际观察：完整测试结果尚未确认；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-76873)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-11T11:41:32Z
+
+**已有 F2P/P2P 配对记录：** 9 / 14，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.ir.pir.cinn.symbolic.test_infer_sym_shape_multinary_op.CELUOpInferSymbolicShapeTest::test_eval_symbolic | failed / failed | failed / failed | 当前Paddle编译包不带CINN。生成测试所需形状说明的那段C++代码在无CINN时直接不执行，因此7项读取形状说明时报错，尚未测到补丁对不对。 |
+| test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.HardSigmoidInferSymbolicShapeTest::test_eval_symbolic | failed / failed | failed / failed | 当前Paddle编译包不带CINN。生成测试所需形状说明的那段C++代码在无CINN时直接不执行，因此7项读取形状说明时报错，尚未测到补丁对不对。 |
+| test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.MishOpInferSymbolicShapeTest::test_eval_symbolic | failed / failed | failed / failed | 当前Paddle编译包不带CINN。生成测试所需形状说明的那段C++代码在无CINN时直接不执行，因此7项读取形状说明时报错，尚未测到补丁对不对。 |
+| test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.RRELUOpInferSymbolicShapeTest::test_eval_symbolic | failed / failed | failed / failed | 当前Paddle编译包不带CINN。生成测试所需形状说明的那段C++代码在无CINN时直接不执行，因此7项读取形状说明时报错，尚未测到补丁对不对。 |
+| test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.SELUOpInferSymbolicShapeTest::test_eval_symbolic | failed / failed | failed / failed | 当前Paddle编译包不带CINN。生成测试所需形状说明的那段C++代码在无CINN时直接不执行，因此7项读取形状说明时报错，尚未测到补丁对不对。 |
+| test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.SwishOpInferSymbolicShapeTest::test_eval_symbolic | failed / failed | failed / failed | 当前Paddle编译包不带CINN。生成测试所需形状说明的那段C++代码在无CINN时直接不执行，因此7项读取形状说明时报错，尚未测到补丁对不对。 |
+| test.legacy_test.test_celu_op.TestCELUAPI::test_api_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_celu_op.TestCELUAPI::test_api_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_celu_op.TestCELUOpClass_Inplace::test_cases | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_celu_op.TestCELUParamDecorator::test_all | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_hardsigmoid_op.TestHardSigmoidAPI::test_api_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_hardsigmoid_op.TestHardSigmoidAPI::test_api_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_hardsigmoid_op.TestHardSigmoidOpClass_Inplace::test_cases | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_imperative_layers.TestLayerPrint::test_layer_str | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_mish_op.TestMishAPI::test_api_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_mish_op.TestMishAPI::test_api_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_mish_op.TestMishOpClass_Inplace::test_case | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_rrelu_op.TestRRELUAPI::test_api_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_rrelu_op.TestRRELUAPI::test_api_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_rrelu_op.TestRRELUOpClass_Inplace::test_case | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_selu_op.TestSELUAPI::test_api_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_selu_op.TestSELUAPI::test_api_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_selu_op.TestSELUOpClass_Inplace::test_cases | failed / failed | failed / failed | 750个数中有1个很接近0，CPU结果与NumPy参考值的舍入差异超过测试阈值。相同输入下，普通SELU和原地SELU完全一致，修复前后也完全一致；没有发现本题补丁引入数值变化。 |
+| test.legacy_test.test_swish_op.TestSwishAPI::test_api_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_swish_op.TestSwishAPI::test_api_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_swish_op.TestSwishOpClass_Inplace::test_cases | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.SumOpInferSymbolicShapeTest::test_eval_symbolic | failed / failed | failed / failed | 当前Paddle编译包不带CINN。生成测试所需形状说明的那段C++代码在无CINN时直接不执行，因此7项读取形状说明时报错，尚未测到补丁对不对。 |
+| test.legacy_test.test_rrelu_op.RReluTest::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_rrelu_op.RReluTest::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_selu_op.SeluTest::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_selu_op.SeluTest::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-77064"></a>
+
 ## #77064 · allclose C++ sinking
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 23 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-allclose 参数别名和返回类型测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：allclose 参数别名和返回类型测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 4 项修复前失败后通过、19 项修复前后都通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
-- 有效 F2P / P2P：4 / 19。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_allclose_op.py`
-- `test/legacy_test/test_compat_allclose.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 23 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-77064)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T04:48:39Z
+
+**已有 F2P/P2P 配对记录：** 4 / 19，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpException::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpSmallNum::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpNanFalse::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpNanTrue::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseDygraph::test_api_case | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseError::test_input_dtype | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpFp16::test_fp16 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpFloat16::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpFloat32::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpFloat64::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpBool::test_close_False | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpBool::test_close_True | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpInt32::test_close_False | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpInt32::test_close_True | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpInt64::test_close_False | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpInt64::test_close_True | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOpLargeDimInput::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseOp_ZeroSize::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseAlias::test_alias | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_allclose_op.py::TestAllcloseAlias::test_tensor_method_alias | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_compat_allclose.py::TestCompatAllclose::test_allclose_args | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_compat_allclose.py::TestCompatAllclose::test_allclose_return_bool | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-77078"></a>
+
 ## #77078 · inverse C++ sinking
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 未通过：两轮各 32 通过 / 0 失败 / 4 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 33 项均有稳定配对，原入口可运行。
+测试仍有失败或错误。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：3 / 33。
+**原因：** 保留失败结果，继续逐项诊断。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-77078)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
+
+**确认方法：** 当前 Oracle 实际观察：两轮各 32 通过 / 0 失败 / 4 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-08T20:28:36Z
+
+**已有 F2P/P2P 配对记录：** 3 / 33，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_inverse_op.TestInverseAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseAPI::test_dygraph_with_name | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseAPI::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseAPI::test_static_with_name | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseAPICompatibility::test_dimension_validation | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseAPICompatibility::test_dygraph_compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_inverse_op.TestInverseAPICompatibility::test_edge_cases | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseAPICompatibility::test_parameter_aliases | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_inverse_op.TestInverseAPICompatibility::test_static_compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_inverse_op.TestInverseAPICompatibility::test_tensor_method_compatibility | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseAPIError::test_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseAPI_ZeroSize::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOp::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpBatched::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpBatched::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpBatchedComplex::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpBatchedComplex::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpBatchedFP32::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpBatchedFP32::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpBatchedZeroSize::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpBatchedZeroSize::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpComplex128::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpComplex128::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpComplex64::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpComplex64::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpFP32::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpFP32::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpLarge::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpLarge::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpLargeFP32::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpLargeFP32::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpZeroSize::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseOpZeroSize::test_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseSingularAPI::test_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_inverse_op.TestInverseSingularAPI::test_static | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-77150"></a>
+
 ## #77150 · PyLayer grad-node attribute copy
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：1 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-77150)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-08T19:05:32Z
+
+**已有 F2P/P2P 配对记录：** 1 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_pylayer_op.TestPyLayer::test_pylayer_with_partial_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_pylayer_op.TestPyLayer::test_simple_pylayer_multiple_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-77495"></a>
+
 ## #77495 · MaxPool dilation option
 
-**验证未通过｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-参考补丁来自另一套池化接口，套不到题目指定的代码版本；测试还没有开始。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：python/paddle/nn/functional/pooling.py、python/paddle/nn/layer/pooling.py 的补丁不匹配。 补丁要修改的 test/legacy_test/test_max_pool_dilation.py 在指定 Base 中不存在。
-- 为什么：补丁假定 max_pool 系列接口已经有 dilation 参数，指定 Base 却还没有这个参数；它还依赖一个 Base 中不存在的测试文件。 两种补丁应用顺序都失败，证明不是打补丁顺序或机器环境造成的。
-- 怎么处理：基于 README 声明的 Base 重新生成参考补丁，并确保所需前置改动齐全；两种状态构建成功后再跑 F2P/P2P。
-- 怎么确认：在指定 Base 上尝试两种补丁应用顺序，均失败；逐段对照池化接口，确认缺少前置参数和测试文件。测试尚未启动。
-- 运行方式：必须先成功应用补丁，再编译和运行测试。
-- 有效 F2P / P2P：未完成配对。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `solution/code.patch`
-- `python/paddle/nn/functional/pooling.py`
-- `python/paddle/nn/layer/pooling.py`
-- `test/legacy_test/test_max_pool_dilation.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-77495)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 必须先成功应用补丁，再编译和运行测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-10T18:00:15Z
 
 <a id="task-77749"></a>
+
 ## #77749 · pad_sequence / unpad_sequence
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 22 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 21 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：21 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-77749)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 22 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-10T00:37:46Z
+
+**已有 F2P/P2P 配对记录：** 21 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_rnn_cell_api.py::TestRnnUtil::test_case | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_0d_trailing_dims | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_basic_batch_first_false | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_basic_batch_first_true | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_custom_padding_value | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_equal_length_sequences | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_error_invalid_padding_side | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_error_not_list | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_integer_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_multidimensional_sequences | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_padding_side_left | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_padding_side_left_with_value | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadSequence::test_single_sequence | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadUnpadIntegration::test_left_pad_unpad_roundtrip | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestPadUnpadIntegration::test_various_dtypes | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestUnpadSequence::test_basic_batch_first_false | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestUnpadSequence::test_basic_batch_first_true | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestUnpadSequence::test_equal_length | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestUnpadSequence::test_multidimensional | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestUnpadSequence::test_roundtrip | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestUnpadSequence::test_roundtrip_batch_first_false | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_rnn_utils.py::TestUnpadSequence::test_single_sequence | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-78048"></a>
+
 ## #78048 · dsplit / hsplit / vsplit parameter aliases
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 3 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：3 / 3。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78048)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-12T01:29:38Z
+
+**已有 F2P/P2P 配对记录：** 3 / 3，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_api_compatibility.py::TestDsplitAPI::test_dygraph_Compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_api_compatibility.py::TestHsplitAPI::test_dygraph_Compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_api_compatibility.py::TestVsplitAPI::test_dygraph_Compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr78048_p2p.py::test_p2p_dsplit_original_parameters | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr78048_p2p.py::test_p2p_hsplit_original_parameters | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr78048_p2p.py::test_p2p_vsplit_original_parameters | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-78082"></a>
+
 ## #78082 · ParameterDict pop / values / keys
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 32 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 9 项、回归测试 23 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：9 / 23。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78082)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 32 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T16:08:52Z
+
+**已有 F2P/P2P 配对记录：** 9 / 23，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestImperativeContainerParameterDict::test_parameter_dict | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictAccess::test_getitem | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictAccess::test_len_iter_contains | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictAccess::test_setitem | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictAccess::test_setitem_non_parameter_raises | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictForwardBackward::test_float64_params | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictForwardBackward::test_forward_and_backward | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictForwardBackward::test_replace_param_changes_output_shape | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictInit::test_init_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictInit::test_init_preserves_order | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictInit::test_init_types | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictInit::test_init_with_parameter_dict | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictInit::test_init_with_values_alias | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictPopKeysValues::test_keys_after_update | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictPopKeysValues::test_keys_returns_all_in_order | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictPopKeysValues::test_pop_all_items_leaves_empty | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictPopKeysValues::test_pop_missing_key_raises | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictPopKeysValues::test_pop_reduces_values | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictPopKeysValues::test_pop_returns_correct_param | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictPopKeysValues::test_values_are_parameters | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictPopKeysValues::test_values_count_matches_len | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictPopKeysValues::test_values_shapes | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictRegistration::test_dynamic_setitem_and_update_registered | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictRegistration::test_gradient_flows | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictRegistration::test_registered_in_parameters_named_state_dict | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictStateDictRoundtrip::test_output_matches_after_load | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictStateDictRoundtrip::test_state_dict_keys_present | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictStateDictRoundtrip::test_state_dict_roundtrip_values | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictUpdate::test_update_errors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictUpdate::test_update_from_parameter_dict | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictUpdate::test_update_input_types | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_imperative_container_parameterdict.py::TestParameterDictUpdate::test_update_overwrites | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+
+<a id="task-78085"></a>
+
+## #78085 · fix: Implement RestrictedUnpickler to prevent RCE via pickle deserialization (CWE-502)
+
+Oracle 已执行范围通过：两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过。
+
+所注明入口的两轮完整结果已记录。
+
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。独立正常保存、加载兼容性补测曾有 12 项通过、3 项失败，不能由原 20 项通过推定全部兼容性通过。
+
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 遵循该任务的运行入口、测试范围及设备条件。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T22:00:49Z
 
 <a id="task-78104"></a>
+
 ## #78104 · CUDA device conversion from Tensor place
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：1 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78104)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:29:38Z
+
+**已有 F2P/P2P 配对记录：** 1 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_device_place_conversion_contract.py::test_existing_string_and_concrete_place_behavior_remains_valid | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_device_place_conversion_contract.py::test_generic_place_preserves_device_type_and_id | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-78138"></a>
+
 ## #78138 · pixel_shuffle C++ sinking
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 17 通过 / 0 失败 / 0 错误 / 2 跳过。
 
-缺陷测试 2 项、回归测试 15 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：2 / 15。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78138)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 17 通过 / 0 失败 / 0 错误 / 2 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:29:45Z
+
+**已有 F2P/P2P 配对记录：** 2 / 15，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleBF16Op::test_check_grad | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleBF16Op::test_check_output | skipped / skipped | skipped / skipped | 按测试自身的运行条件跳过，不计有效 F2P/P2P。 |
+| test.legacy_test.test_api_compatibility.TestPixelShuffleAPI_Compatibility::test_dygraph_Compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility.TestPixelShuffleAPI_Compatibility::test_static_Compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_pixel_shuffle_op.TestChannelLast::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestChannelLast::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleAPI::test_api_fp16 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleAPI::test_dygraph1 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleAPI::test_dygraph2 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleAPI::test_static_graph_functional | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleAPI::test_static_graph_layer | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleError::test_error_functional | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleError::test_error_layer | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleFP16Op::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleFP16Op::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleOp::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleOp::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleOp_ZeroSize::test_check_grad | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_pixel_shuffle_op.TestPixelShuffleOp_ZeroSize::test_check_output | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-78238"></a>
+
 ## #78238 · put_along_axis zero-size indices
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78238)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:52:02Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_put_along_axis_zero_size.py::TestPutAlongAxisZeroSize::test_non_empty_indices_existing_behavior | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_put_along_axis_zero_size.py::TestPutAlongAxisZeroSize::test_zero_size_indices_in_place | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_put_along_axis_zero_size.py::TestPutAlongAxisZeroSize::test_zero_size_indices_out_of_place | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-78301"></a>
+
 ## #78301 · Layer.to / Tensor.to compatibility
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 34 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 13 项、回归测试 21 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：13 / 21。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78301)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 34 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T21:03:09Z
+
+**已有 F2P/P2P 配对记录：** 13 / 21，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_blocking_non_blocking_conflict_raises | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_invalid_first_arg | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_cast_all_with_keyword_dtype | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_cast_all_with_positional_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_cast_all_with_tensor | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_keyword_blocking | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_keyword_device | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_keyword_device_and_dtype | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_keyword_dtype | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_keyword_non_blocking | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_no_args | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_positional_device_and_dtype | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_positional_device_string | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_positional_dtype_float16 | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_positional_dtype_string | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_positional_paddle_dtype | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_positional_tensor | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_returns_self | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_sequential_to_calls | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_layer_sublayers_cast | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_tensor_blocking_non_blocking_conflict_raises | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_tensor_keyword_device | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_tensor_keyword_dtype | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_tensor_keyword_non_blocking | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_tensor_no_args | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_tensor_positional_device | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_tensor_positional_device_and_dtype | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_tensor_positional_dtype | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_tensor_positional_dtype_string | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_tensor_positional_other | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_too_many_args | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestLayerAndTensorToAPI::test_unexpected_keyword | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_api_compatibility_part3.TestTensorToCopyCompatibility::test_copy_as_positional_argument | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_base_layer.TestLayerTo::test_main | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-78342"></a>
+
 ## #78342 · paddle._assert API
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 31 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 7 项、回归测试 24 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：7 / 24。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78342)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 31 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:38:30Z
+
+**已有 F2P/P2P 配对记录：** 7 / 24，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_api_compatibility_part2.py::TestAssertAPI::test_dygraph_compatibility_with_torch | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_api_compatibility_part2.py::TestAssertAPI::test_dygraph_default_message | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_api_compatibility_part2.py::TestAssertAPI::test_dygraph_non_tensor_fail | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_api_compatibility_part2.py::TestAssertAPI::test_dygraph_non_tensor_pass | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_api_compatibility_part2.py::TestAssertAPI::test_dygraph_tensor_fail | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_api_compatibility_part2.py::TestAssertAPI::test_dygraph_tensor_pass | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_api_compatibility_part2.py::TestAssertAPI::test_static_tensor_condition | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_complex_numbers | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_mappings | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_msg_callable | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_msg_override | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_nan_handling | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_nested_structure_error_msg | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_numpy_scalars | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_object_pair_broken_eq | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_pair_repr_and_extra_repr | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_scalars_exact_match | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_scalars_mismatch | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_scalars_tolerances | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_sequences | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_static_graph_variable | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_tensor_device_check | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_tensor_dtype_check | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_tensor_exact_match | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_tensor_mismatch_msg_details | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_tensor_shape_mismatch | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_tensor_tolerances | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_tolerance_validation_logic | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_type_promotion_logic | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_unsupported_types | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_assert_close.py::TestAssertClose::test_zero_dim_tensor_mismatch | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-78440"></a>
+
 ## #78440 · cdist zero-size Tensor handling
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78440)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-10T01:26:47Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_cdist.TestCdistZeroSizeBatch4D::test_dygraph_api | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_cdist.TestCdistZeroSizeGrad::test_stop_gradient_false | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_cdist.TestCdistZeroSizeGrad::test_stop_gradient_true | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-78441"></a>
+
 ## #78441 · aminmax operator
 
-**核心通过 · 任务包待修｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 30 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-修复后完整脚本通过；其中一条“梯度测试”是空的，不能算有效 F2P。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：TestAminmaxOpFloat32::test_check_grad 的测试内容只有 pass，没有检查任何结果。
-- 为什么：这条测试在修复前因为 aminmax API 不存在而准备失败；修复后只是执行了空函数。这个“先失败再通过”不能证明梯度正确。其他梯度测试有实际检查。
-- 怎么处理：给这条测试补上可靠的梯度断言，或明确标成跳过并从 F2P 数量中去掉；同时把说明改为 26 条有效 F2P、4 条 P2P。
-- 怎么确认：逐行核对测试补丁并用 Python 语法树确认空函数；完整 31 个节点在修复后两轮都通过，去掉空测试后有 26 条有效 F2P、4 条 P2P。
-- 运行方式：精确源码构建的 CPU Paddle，启用 CINN；任务脚本已包含所需测试路径和运行开关。
-- 有效 F2P / P2P：26 / 4。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_aminmax_op.py::TestAminmaxOpFloat32::test_check_grad`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 30 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78441)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 精确源码构建的 CPU Paddle，启用 CINN；任务脚本已包含所需测试路径和运行开关。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T10:51:37Z
+
+**已有 F2P/P2P 配对记录：** 26 / 4，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOp::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOp::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpAxis0::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpAxis0::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpAxis1::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpAxis1::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpAxisNeg::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpAxisNeg::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpKeepdim::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpKeepdim::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpFloat32::test_check_grad | failed / failed | passed / passed | 测试函数只有 pass，无有效断言，不计入有效 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpFloat32::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpZeroDim::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpZeroDim::test_check_output | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxOpEmptyTensor::test_empty_tensor_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxAPI::test_dygraph | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxAPI::test_dygraph_gradient | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxAPI::test_dygraph_gradient_duplicate_values | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxAPI::test_dygraph_gradient_with_axis | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxAPI::test_dygraph_out | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxAPI::test_dygraph_out_with_axis | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxAPI::test_static | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxAPI_Compatibility::test_dygraph_Compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxAPI_Compatibility::test_static_Compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxDynamicShape::test_all_dynamic | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_aminmax_op.py::TestAminmaxInferSymbolicShapePass::test_infer_symbolic_shape_pass | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/ir/pir/cinn/symbolic/test_infer_sym_shape_unary_op.py::AminmaxOpInferSymbolicShapeTest::test_eval_symbolic | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_max_min_amax_amin_op.py::TestAmaxAPI_Compatibility::test_dygraph_Compatibility | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_max_min_amax_amin_op.py::TestAminAPI_Compatibility::test_dygraph_Compatibility | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_max_min_amax_amin_op.py::TestAmaxAminOutAPI::test_amax_out_in_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_max_min_amax_amin_op.py::TestAmaxAminOutAPI::test_amin_out_in_dygraph | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-78452"></a>
+
 ## #78452 · paddle.load dataclass objects
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 43 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 16 项、回归测试 27 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：16 / 27。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78452)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 43 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T22:08:44Z
+
+**已有 F2P/P2P 配对记录：** 16 / 27，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_restricted_unpickler.py::TestDataclassInParseEveryObject::test_dataclass_in_list | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestDataclassInParseEveryObject::test_dataclass_in_ordered_dict | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestDataclassInParseEveryObject::test_dataclass_in_tuple | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestDataclassInParseEveryObject::test_dataclass_passthrough | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestDataclassInParseEveryObject::test_nested_dataclass_in_dict | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_reject_builtin_function | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_reject_builtin_method | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_reject_class_with_getstate | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_reject_class_with_reduce | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_reject_class_with_reduce_ex | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_reject_class_with_setstate | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_reject_module_type | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_reject_non_class | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_safe_class_with_nested_attributes | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_safe_class_with_regular_methods | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_safe_dataclass | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestIsSafeClass::test_safe_user_defined_class | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestPickleLoadsMac::test_pickle_loads_mac_basic | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestPickleLoadsMac::test_pickle_loads_mac_state_dict | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestReconstructDenseTensorData::test_reconstruct_returns_data_unchanged | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestReconstructDenseTensorData::test_reconstruct_with_multidim_array | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerAllowedTypes::test_dict_with_numpy | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerAllowedTypes::test_list_of_arrays | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerAllowedTypes::test_nested_dict | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerAllowedTypes::test_numpy_float64 | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerAllowedTypes::test_numpy_ndarray | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerAllowedTypes::test_ordered_dict | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerAllowedTypes::test_safe_loads_pickle | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerBlocked::test_block_arbitrary_module | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerBlocked::test_block_eval | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerBlocked::test_block_exec | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerBlocked::test_block_open | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerBlocked::test_block_os_popen | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerBlocked::test_block_os_system | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerBlocked::test_block_subprocess | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerWithFile::test_malicious_model_file | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestRestrictedUnpicklerWithFile::test_safe_model_file | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestSafeUserDefinedClassLoading::test_config_class_like_arguments | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestSafeUserDefinedClassLoading::test_load_dict_with_safe_classes | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestSafeUserDefinedClassLoading::test_load_safe_dataclass | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestSafeUserDefinedClassLoading::test_load_safe_user_defined_class | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler.py::TestSafeUserDefinedClassLoading::test_reject_class_with_reduce_ex | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler.py::TestSafeUserDefinedClassLoading::test_reject_mixed_safe_and_unsafe_classes | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-78522"></a>
+
 ## #78522 · distributed launch os.kill
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：3 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78522)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T19:00:26Z
+
+**已有 F2P/P2P 配对记录：** 3 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_launch_coverage.py::TestCoverage::test_find_free_ports | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_launch_main_kill.py::TestLaunchMainProcessCleanup::test_filter_pids | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_launch_main_kill.py::TestLaunchMainProcessCleanup::test_terminate_processes_permission_error | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_launch_main_kill.py::TestLaunchMainProcessCleanup::test_terminate_processes_process_lookup | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-78570"></a>
+
 ## #78570 · Optimizer.step closure compatibility
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 9 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 6 项、回归测试 3 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：6 / 3。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78570)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 9 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:49:49Z
+
+**已有 F2P/P2P 配对记录：** 6 / 3，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad[Adam-path1] | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad[AdamW-path2] | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad[Optimizer-path0] | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_optimizer_steps_accept_closure_and_return_loss[Adam-path1] | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_optimizer_steps_accept_closure_and_return_loss[AdamW-path2] | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_optimizer_steps_accept_closure_and_return_loss[Optimizer-path0] | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_p2p_step_without_closure_keeps_existing_update_path[Adam-path1] | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_p2p_step_without_closure_keeps_existing_update_path[AdamW-path2] | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_p2p_step_without_closure_keeps_existing_update_path[Optimizer-path0] | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+
+<a id="task-78728"></a>
+
+## #78728 · support to detect the recompute context
+
+Oracle 已执行范围通过：两轮各 14 通过 / 0 失败 / 0 错误 / 0 跳过。
+
+所注明入口的两轮完整结果已记录。
+
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
+
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 14 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-12T07:12:40Z
 
 <a id="task-78823"></a>
+
 ## #78823 · pin_memory support for random APIs
 
-**环境不满足 · 未完成｜问题来源：机器环境**
+Oracle 尚未完成：完整测试结果尚未确认。
 
-CPU 能检查的部分已通过；真正的锁页内存分配需要 CUDA 或 XPU，当前机器没有这些设备。
+此前导入遇到跨版本接口不匹配，新的配套构建尚无完整通过结果。
 
-- 哪里有问题：TestToPinnedPlace::test_already_cuda_pinned_returns_same_object、test_cpu_place_on_cuda_build、test_cuda_place_to_cuda_pinned 均未执行。 还缺实际设备上的 pinned 分配、CPU 到 pinned 内存转换和设备地址转换结果。
-- 为什么：CPU构建没有这类设备锁页内存分配器；通过CPU异常分支或模拟分支不能证明实际设备分配正确。 Base缺少本题新增的 _to_pinned_place，整个模块在导入时失败；因此不能把Gold新增4项CPU通过直接写成4个逐测试F2P。
-- 怎么处理：在符合题目要求的设备上，保持相同 Base、参考补丁和测试范围，各跑两轮；保留已完成的 CPU 结果。
-- 怎么确认：检查任务对 CUDA/XPU 的要求、当前设备和测试条件分支。当前只有 CPU 运行结果，3 个 CUDA 锁页内存测试明确跳过，真实设备分配尚未执行。
-- 运行方式：至少一张CUDA或XPU设备和匹配的Paddle构建；按实际后端允许另一后端条件跳过
-- 有效 F2P / P2P：未完成配对。
+**原因：** 最近完整原测试结果尚未闭合，不能把构建进行中或局部 CPU 结果当成通过。
 
-涉及的测试或文件：
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
 
-- `test/legacy_test/test_randperm_op.py::TestRandpermBF16Op::test_check_output`
-- `test/legacy_test/test_to_pinned_place.py::TestToPinnedPlace::test_already_cuda_pinned_returns_same_object`
-- `test/legacy_test/test_to_pinned_place.py::TestToPinnedPlace::test_cpu_place_on_cuda_build`
-- `test/legacy_test/test_to_pinned_place.py::TestToPinnedPlace::test_cuda_place_to_cuda_pinned`
+**确认方法：** 当前 Oracle 实际观察：完整测试结果尚未确认；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78823)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 至少一张CUDA或XPU设备和匹配的Paddle构建；按实际后端允许另一后端条件跳过
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-11T06:10:53Z
+
+**已有 F2P/P2P 配对记录：** None / None，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_eager_tensor.py::TestDenseTensorToTensor::test_same_place_data_ptr_consistency | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test___cuda_array_interface__ | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_backward | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_deep_copy | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_deep_copy_0size_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_detach | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_dlpack_device | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_element_size | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_gradient | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_if | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_itemsize | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_leaf_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_list_to_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_print_tensor_dtype | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_set_value | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_slice | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor__format__ | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_and_to_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_as_np | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_dtype_compare | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_dtype_hash | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_dtype_singleton_pir | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_eq_unsupported_type | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_method_or_module | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_module | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_pin_memory_and_device | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str2 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str3 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str_bf16 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str_complex128 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str_complex64 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str_fp8_e4m3fn | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str_fp8_e5m2 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str_linewidth | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str_linewidth2 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str_scaler | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_str_shape_with_zero | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_to_np | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tensor_to_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_to_string | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_to_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_to_tensor_attributes | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_to_tensor_change_place | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_to_tensor_from___cuda_array_interface__ | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_to_tensor_not_change_input_stop_gradient | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_to_tensor_with_densetensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_tuple_to_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensor::test_write_property | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorClear::test_clear | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorCopyGradientFrom::test_copy_gradient_from | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorGradNameValue::test_eager_tensor_grad_name_value | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorIndex::test__index__with_0size_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorIndex::test__index__with_non_scalar_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorInitEagerTensorFromTensorWithDevice::test_tensor_init | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorInplaceVersion::test_bump_inplace_version | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorInplaceVersion::test_setitem | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorIsCudaIsCpu::test_dynamic_is_cuda_is_cpu | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorIsCudaIsCpu::test_static_is_cuda_is_cpu | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorNelement::test_nelement | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorNumel::test_numel_normal | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorNumel::test_numel_without_holder | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorOffset::test_offset | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitem::test_value_int | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitem::test_value_numpy | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitem::test_value_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemBoolIndex::test_value_int | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemBoolIndex::test_value_numpy | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemBoolIndex::test_value_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemFp32::test_value_float | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemFp32::test_value_int | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemFp32::test_value_numpy | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemFp32::test_value_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemFp64::test_value_int | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemFp64::test_value_numpy | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemFp64::test_value_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemInt64::test_value_int | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemInt64::test_value_numpy | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSetitemInt64::test_value_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorShareBufferTo::test_share_buffer_To | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorSlice::test_slice | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorStride::test_stride_different_dtypes | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorStride::test_stride_dim_none_equiv | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorStride::test_stride_invalid_type | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorStride::test_stride_negative_dim | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorStride::test_stride_no_dim | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorStride::test_stride_out_of_bounds | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorStride::test_stride_various_shapes | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorStride::test_stride_with_dim | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorStride::test_stride_zero_size_contiguous_view_reshape_and_slice | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestEagerTensorTo::test_to_api | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestListToTensor::test_list_to_tensor_bfloat16 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestListToTensor::test_list_to_tensor_bfloat16_float32 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestListToTensor::test_list_to_tensor_float16 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestListToTensor::test_list_to_tensor_float16_float32 | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestSetDynamicAttributeToEagerTensorInstance::test_set_dynamic_attribute_to_eager_tensor_instance_create_via_constructor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_eager_tensor.py::TestSetDynamicAttributeToEagerTensorInstance::test_set_dynamic_attribute_to_eager_tensor_instance_create_via_to_pyobject | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_rand.py::TestCreationOut::test_rand | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_rand.py::TestTensorCreation::test_pin_memory_cpu_device | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_rand.py::TestTensorCreation::test_rand | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintAPI::test_api | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintAPI_ZeroDim::test_dygraph | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintAPI_ZeroDim::test_static | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintAliasAndOut::test_alias_and_out | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintAliasAndOut::test_out_static_mode | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintAliasAndOut::test_size_alias_static_mode | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintDeviceRequiresGradPinMemory::test_device_and_requires_grad | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintDeviceRequiresGradPinMemory::test_device_cpu | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintDeviceRequiresGradPinMemory::test_pin_memory_cpu | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintDeviceRequiresGradPinMemory::test_pin_memory_cpu_xpu_branch | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintDeviceRequiresGradPinMemory::test_pin_memory_cuda | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintDeviceRequiresGradPinMemory::test_requires_grad | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintDeviceRequiresGradPinMemory::test_requires_grad_false | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintHighAsList::test_high_is_list | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintHighAsList::test_high_is_tuple | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintImperative::test_case | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintOldStaticMode::test_out_none_old_static_mode | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintOldStaticMode::test_size_alias_old_static_mode | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintOp::test_check_output | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintOpError::test_errors | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandintOp_attr_tensorlist::test_check_output | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandint_attr_tensor::test_check_output | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randint_op.py::TestRandomValue::test_fixed_random_number | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandomValue::test_fixed_random_number | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermAPI::test_out | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermBF16Op::test_check_output | skipped / skipped | skipped / skipped | 此节点有跳过结果；当前 CPU 构建未执行所需的设备分支，跳过不算通过。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermEager::test_out | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermFP16Op::test_check_output | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermImperative::test_out | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermNewParams::test_device_parameter | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermNewParams::test_out_parameter | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermNewParams::test_out_parameter_dtype_consistency | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermNewParams::test_out_parameter_shape_mismatch | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermNewParams::test_parameter_combinations | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermNewParams::test_pin_memory_cpu_device | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermNewParams::test_pin_memory_parameter | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermNewParams::test_requires_grad_parameter | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermOp::test_check_output | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermOpFloat32::test_check_output | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermOpFloat64::test_check_output | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermOpInt32::test_check_output | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandpermOpN::test_check_output | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandperm_compatible::test_large_n_cpu | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_randperm_op.py::TestRandperm_compatible::test_small_n_cpu | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+| test/legacy_test/test_to_pinned_place.py::TestToPinnedPlace::test_already_cuda_pinned_returns_same_object | missing / missing | skipped / skipped | 完整结果尚未通过，具体原因见本题说明。 |
+| test/legacy_test/test_to_pinned_place.py::TestToPinnedPlace::test_cpu_place_on_cuda_build | missing / missing | skipped / skipped | 完整结果尚未通过，具体原因见本题说明。 |
+| test/legacy_test/test_to_pinned_place.py::TestToPinnedPlace::test_cpu_place_on_pure_cpu_build_raises | missing / missing | passed / passed | 修复后通过；修复前存在缺失、跳过或未配对结果，不能计为有效 F2P/P2P。 |
+| test/legacy_test/test_to_pinned_place.py::TestToPinnedPlace::test_cpu_place_on_xpu_compiled_branch | missing / missing | passed / passed | 修复后通过；修复前存在缺失、跳过或未配对结果，不能计为有效 F2P/P2P。 |
+| test/legacy_test/test_to_pinned_place.py::TestToPinnedPlace::test_cuda_place_to_cuda_pinned | missing / missing | skipped / skipped | 完整结果尚未通过，具体原因见本题说明。 |
+| test/legacy_test/test_to_pinned_place.py::TestToPinnedPlace::test_unsupported_place_raises | missing / missing | passed / passed | 修复后通过；修复前存在缺失、跳过或未配对结果，不能计为有效 F2P/P2P。 |
+| test/legacy_test/test_to_pinned_place.py::TestToPinnedPlace::test_xpu_place_branch | missing / missing | passed / passed | 修复后通过；修复前存在缺失、跳过或未配对结果，不能计为有效 F2P/P2P。 |
 
 <a id="task-78911"></a>
+
 ## #78911 · Recompute context detection
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78911)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T21:04:53Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_recompute_context_detection.TestRecomputeContext::test_context_active_with_rng_state | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_recompute_context_detection.TestRecomputeContext::test_context_active_without_rng_state | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_recompute_context_detection.TestRecomputeContext::test_gradient_and_context_cleanup | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-78922"></a>
+
 ## #78922 · Flex checkpoint flatten_state_dict lifetime
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：1 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78922)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:41:14Z
+
+**已有 F2P/P2P 配对记录：** 1 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_flatten_state_dict_lifetime.TestFlattenStateDict::test_nested_state_dict_round_trip | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_flatten_state_dict_lifetime.TestFlattenStateDict::test_tensor_reference_released_without_cycle_gc | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-78932"></a>
+
 ## #78932 · TensorDataset varargs and alias
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 3 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：3 / 3。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-78932)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:57:56Z
+
+**已有 F2P/P2P 配对记录：** 3 / 3，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/ai_edited_test/test_ai_dataloader.py::TestTensorDataset::test_tensor_dataset_1d | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/ai_edited_test/test_ai_dataloader.py::TestTensorDataset::test_tensor_dataset_basic | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/ai_edited_test/test_ai_dataloader.py::TestTensorDataset::test_tensor_dataset_iter | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/ai_edited_test/test_ai_dataloader.py::TestTensorDataset::test_tensor_dataset_varargs | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/ai_edited_test/test_ai_dataloader.py::TestTensorDataset::test_tensor_dataset_varargs_single | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_paddle_utils_data.py::TestAlias::test_compatibility | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-79035"></a>
+
 ## #79035 · Optimizer LR scheduler aliases
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79035)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T17:27:57Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr79035_lr_scheduler_alias.py::test_f2p_lr_scheduler_aliases_match_existing_schedulers | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79035_lr_scheduler_alias.py::test_f2p_paddle_optim_initialization_exposes_lr_scheduler_namespace | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79035_lr_scheduler_alias.py::test_p2p_legacy_step_decay_keeps_initial_learning_rate | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-79057"></a>
+
 ## #79057 · RestrictedUnpickler MRO security
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79057)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:47:31Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_restricted_unpickler_mro.py::TestRestrictedUnpicklerMRO::test_existing_safe_class_policy | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_restricted_unpickler_mro.py::TestRestrictedUnpicklerMRO::test_inherited_dangerous_methods_are_rejected | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_restricted_unpickler_mro.py::TestRestrictedUnpicklerMRO::test_inherited_setstate_payload_is_blocked | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-79161"></a>
+
 ## #79161 · set_rng_state parameter alias
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79161)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T17:59:53Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr79161_set_rng_state_alias.py::test_existing_state_list_calls_remain_valid | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr79161_set_rng_state_alias.py::test_new_state_alias_sets_the_same_generator_state | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79161_set_rng_state_alias.py::test_state_list_and_new_state_conflict_is_rejected | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-79167"></a>
+
 ## #79167 · random.initial_seed alias
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79167)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:01:00Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr79167_initial_seed_alias.py::test_existing_seed_exports_remain_unchanged | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr79167_initial_seed_alias.py::test_initial_seed_is_exported_at_top_level | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79167_initial_seed_alias.py::test_initial_seed_is_in_public_all | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-79197"></a>
+
 ## #79197 · LR scheduler optimizer argument
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-学习率调度器接收优化器参数测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：学习率调度器接收优化器参数测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 6 项修复前失败后通过、1 项修复前后都通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。
-- 有效 F2P / P2P：6 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_lr_scheduler.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79197)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:56:59Z
+
+**已有 F2P/P2P 配对记录：** 6 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_lr_scheduler.py::TestCosineAnnealingWarmRestarts::test_CosineRestartsLR | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_lr_scheduler.py::TestLRSchedulerWithOptimizerArg::test_cosine_annealing_decay | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_lr_scheduler.py::TestLRSchedulerWithOptimizerArg::test_cosine_annealing_warm_restarts | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_lr_scheduler.py::TestLRSchedulerWithOptimizerArg::test_exponential_decay | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_lr_scheduler.py::TestLRSchedulerWithOptimizerArg::test_multi_step_decay | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_lr_scheduler.py::TestLRSchedulerWithOptimizerArg::test_reduce_on_plateau | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_lr_scheduler.py::TestLRSchedulerWithOptimizerArg::test_step_decay | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-79268"></a>
+
 ## #79268 · DistributedSampler alias
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79268)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T15:44:28Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr79268_distributed_sampler.py::test_distributed_batch_sampler_seed_controls_shuffle | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79268_distributed_sampler.py::test_distributed_sampler_is_public_and_forwards_arguments | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79268_distributed_sampler.py::test_existing_distributed_batch_sampler_behavior_remains_valid | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-79275"></a>
+
 ## #79275 · flex_attention or_masks / and_masks
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 3 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：3 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79275)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T17:06:18Z
+
+**已有 F2P/P2P 配对记录：** 3 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr79275_flex_attention_masks.py::test_existing_attention_exports_remain_available | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr79275_flex_attention_masks.py::test_non_callable_mask_inputs_are_rejected | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79275_flex_attention_masks.py::test_or_and_masks_combine_results_and_forward_arguments | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79275_flex_attention_masks.py::test_single_and_empty_mask_combinations_have_identity_behavior | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-79276"></a>
+
 ## #79276 · add_n zero-size shape validation
 
-**通过 · 原包可用｜问题来源：验证程序配置**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-add_n 混合空张量输入测试已通过。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：add_n 混合空张量输入测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。
-- 为什么：验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。
-- 怎么处理：在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。
-- 怎么确认：相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 1 项修复前失败后通过、2 项修复前后都通过。
-- 运行方式：从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
-- 有效 F2P / P2P：1 / 2。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_add_n_op.py`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79276)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T02:10:33Z
+
+**已有 F2P/P2P 配对记录：** 1 / 2，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_add_n_op.py::TestAddnOpZeroSizeAndNonZeroSize::test_add_n_zero_size_and_non_zero_size | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_add_n_op.py::TestAddnOpZeroSizeAndNonZeroSize::test_add_n_compatible_zero_size_tensors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_add_n_op.py::TestAddnOpZeroSizeAndNonZeroSize::test_add_n_compatible_ordinary_tensors | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
 <a id="task-79310"></a>
+
 ## #79310 · nn.init.sparse_
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 4 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
-- 有效 F2P / P2P：4 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79310)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T16:58:52Z
+
+**已有 F2P/P2P 配对记录：** 4 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/swe_paddle/test_pr79310_sparse_initializer.py::test_dygraph_inplace_initializer_helpers_return_input_tensor | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79310_sparse_initializer.py::test_existing_normal_non_dygraph_path_keeps_initializer_return_value | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/swe_paddle/test_pr79310_sparse_initializer.py::test_eye_dygraph_returns_input_tensor_after_inplace_share | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79310_sparse_initializer.py::test_sparse_initializer_rejects_non_2d_tensor | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/swe_paddle/test_pr79310_sparse_initializer.py::test_sparse_initializer_zeros_ceil_fraction_in_every_column | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-79321"></a>
+
 ## #79321 · Layer.set_state_dict named return fields
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：1 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79321)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T18:58:43Z
+
+**已有 F2P/P2P 配对记录：** 1 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_state_dict_convert.py::TestStateDictReturn::test_missing_keys_and_unexpected_keys | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test/legacy_test/test_state_dict_convert.py::TestStateDictReturn::test_missing_keys_and_unexpected_keys_attr | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-79353"></a>
+
 ## #79353 · P2P local_var bug
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79353)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:42:06Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_p2p_overlap_boundary.TestP2pOverlapBoundary::test_non_overlap_boundary_behavior | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_p2p_overlap_boundary.TestP2pOverlapBoundary::test_recv_forward_overlap_at_first_stage | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test.legacy_test.test_p2p_overlap_boundary.TestP2pOverlapBoundary::test_send_backward_overlap_at_first_stage | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-79369"></a>
+
 ## #79369 · check_memory_usage logging
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 未通过：两轮各 0 通过 / 2 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。
+测试仍有失败或错误。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：1 / 1。
+**原因：** 保留失败结果，继续逐项诊断。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79369)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
+
+**确认方法：** 当前 Oracle 实际观察：两轮各 0 通过 / 2 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T20:39:36Z
+
+**已有 F2P/P2P 配对记录：** 1 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_check_memory_usage.TestCheckMemoryUsage::test_existing_memory_logging | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+| test.legacy_test.test_check_memory_usage.TestCheckMemoryUsage::test_unsupported_cpu_allocator_api | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 
 <a id="task-79386"></a>
+
 ## #79386 · iinfo uint64 maximum boundary
 
-**验证未通过｜问题来源：任务数据**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-指定版本在当前 Linux 环境已能算对，未复现目标缺陷。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：TestIInfoUInt64Boundary::test_uint64_max_preserves_unsigned_boundary 修复前已通过；另两项回归也通过。
-- 为什么：指定 Base 的 iinfo.max 本来就是 uint64_t；实际编译使用的 pybind 会按无符号整数把它传给 Python，不会变成 -1。 同一份当前测试、分别对应 Base/Gold 的原生库各跑两轮，3 项全部通过；实际值都是 18446744073709551615。没有发生导入失败、跳过或机器异常。
-- 怎么处理：提供确实会返回错误值的 Base 或明确可复现的平台/依赖组合，再固定成任务环境；不能为了制造失败改断言。
-- 怎么确认：精确 Base/Gold 库配合完整 3 个测试各跑两轮，全部通过；核对无符号整数类型和 Python 转换代码，确认两边都返回 18446744073709551615。
-- 运行方式：使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
-- 有效 F2P / P2P：0 / 3（仅已确认部分，不代表整题通过）。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-涉及的测试或文件：
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
 
-- `test/legacy_test/test_iinfo_and_finfo.py::TestIInfoUInt64Boundary::test_uint64_max_preserves_unsigned_boundary`
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79386)。逐项双轮结果可在网页任务详情中展开查看。
+**运行条件：** 使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-10T00:11:07Z
+
+**已有 F2P/P2P 配对记录：** 0 / 3，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test.legacy_test.test_iinfo_and_finfo.TestIInfoUInt64Boundary::test_int64_signed_boundaries_remain_unchanged | passed / passed | passed / passed | Base、Gold 各两轮都通过。可作 P2P 回归观察；并无 Gold 失败。 |
+| test.legacy_test.test_iinfo_and_finfo.TestIInfoUInt64Boundary::test_neighboring_unsigned_metadata_remains_unchanged | passed / passed | passed / passed | Base、Gold 各两轮都通过。可作 P2P 回归观察；并无 Gold 失败。 |
+| test.legacy_test.test_iinfo_and_finfo.TestIInfoUInt64Boundary::test_uint64_max_preserves_unsigned_boundary | passed / passed | passed / passed | Base、Gold 各两轮都通过。该预期 F2P 节点在修复前已通过，未复现目标缺陷。 |
 
 <a id="task-79633"></a>
+
 ## #79633 · Distributed launch KV server concurrency
 
-**通过 · 原包可用｜问题来源：未发现问题**
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
 
-缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。
+所注明入口的两轮完整结果已记录。
 
-- 哪里有问题：所选测试的 F2P/P2P 配对成立，任务脚本可运行。
-- 为什么：缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。
-- 怎么处理：按任务说明与下列运行方式使用。
-- 怎么确认：核对原始测试日志和逐项配对结果，修复前后各有两轮记录。
-- 运行方式：选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
-- 有效 F2P / P2P：2 / 1。
+**原因：** 通过记录按题号去重保留；未执行的硬件分支不计为通过。
 
-[查看任务文件](https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-79633)。逐项双轮结果可在网页任务详情中展开查看。
+**处理：** 使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。
+
+**确认方法：** 完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。
+
+**运行条件：** 选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。
+
+**Oracle 入口：** 原 tests/test.sh
+
+**Oracle 确认时间：** 2026-10-09T21:01:10Z
+
+**已有 F2P/P2P 配对记录：** 2 / 1，确认日期 2026-09-11。
+
+只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
+| 测试 | Base 两轮 | Gold 两轮 | 说明 |
+| --- | --- | --- | --- |
+| test/legacy_test/test_kv_server.py::TestKVServerConcurrent::test_concurrent_put_get_prefix | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_kv_server.py::TestKVServerRequestTimeout::test_half_open_connection_is_released_after_timeout | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
+| test/legacy_test/test_kv_server.py::TestKVServerStop::test_stop_is_clean_and_idempotent_state | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
+
+<a id="task-79657"></a>
+
+## #79657 · [Operator Mechanism] Fix paddle.compat.min/max gradient indexing
+
+Oracle 尚未完成：完整测试结果尚未确认。
+
+CUDA 梯度索引的目标测试尚未完成。
+
+**原因：** 目标缺陷需要匹配的 CUDA 编译包和 NVIDIA 设备；CPU 补测不代表目标 GPU 通过。
+
+**处理：** 继续处理该题失败或缺失条件，再运行完整 Oracle。
+
+**确认方法：** 当前 Oracle 实际观察：完整测试结果尚未确认；入口：尚未执行完整测试。
+
+**运行条件：** 遵循该任务的运行入口、测试范围及设备条件。
+
+**Oracle 入口：** 尚未执行完整测试
+
+**Oracle 确认时间：** 尚未确认

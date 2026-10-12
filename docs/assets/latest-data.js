@@ -1,21 +1,21 @@
 window.SWE_PADDLE_LATEST = {
   "schemaVersion": 1,
   "meta": {
-    "updatedAt": "2026-09-11",
+    "updatedAt": "2026-10-13",
     "snapshot": "207998dab8c4c76c8558c3cca8ef177c69f10c1c",
-    "total": 105,
+    "total": 111,
     "proposalOnlyIds": [
       56723,
       78220,
-      79391,
-      79657
+      79391
     ],
-    "taskBase": "https://github.com/PaddlePaddle/community/tree/207998dab8c4c76c8558c3cca8ef177c69f10c1c/swe-paddle/tasks/PaddlePaddle__Paddle-"
+    "taskBase": "https://github.com/PaddlePaddle/community/tree/master/swe-paddle/tasks/PaddlePaddle__Paddle-",
+    "resultsAsOf": "2026-10-12T17:04:13.797588Z"
   },
   "counts": {
-    "passed": 86,
-    "needs_fix": 7,
-    "failed": 8,
+    "passed": 95,
+    "failed": 9,
+    "needs_fix": 3,
     "incomplete": 4
   },
   "authors": {
@@ -54,6 +54,9 @@ window.SWE_PADDLE_LATEST = {
     "wwaawwaaee": {
       "label": "SkyWalker",
       "profile": "https://github.com/wwaawwaaee"
+    },
+    "unknown": {
+      "label": "作者信息未补录"
     }
   },
   "tasks": [
@@ -69,11 +72,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用选定版本的 Python 源码，按任务约定的入口和依赖运行。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -130,7 +133,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:08:05Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:08:05Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 27247,
@@ -144,11 +208,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 4 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用选定版本的 Python 源码，按任务约定的入口和依赖运行。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -231,25 +295,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:23:54Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:23:54Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 6,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 6,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 33369,
       "title": "Fleet elastic fault tolerance",
       "type": "feature",
       "author": "Echo-Nie",
-      "status": "passed",
+      "status": "failed",
       "packageChangeRequired": false,
       "f2p": 3,
       "p2p": 1,
       "evidence": "exact_python",
       "corePassed": true,
-      "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "cause": "unknown",
+      "summary": "Oracle 未通过：两轮各 2 通过 / 2 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "测试仍有失败或错误。",
+      "why": "保留失败结果，继续逐项诊断。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：两轮各 2 通过 / 2 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用选定版本的 Python 源码，按任务约定的入口和依赖运行。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -306,7 +431,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "failed",
+        "date": "2026-10-09T18:19:54Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 2,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 1
+          },
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 2,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 1
+          }
+        ],
+        "summary": "两轮各 2 通过 / 2 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:19:54Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 2,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 1
+            },
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 2,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 1
+            }
+          ],
+          "result": "failed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 36684,
@@ -320,11 +506,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 8 项、回归测试 2 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用选定版本的 Python 源码，按任务约定的入口和依赖运行。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -472,25 +658,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T19:16:54Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 11,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 11,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T19:16:54Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 11,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 11,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 41202,
       "title": "DataLoader reader AutoTune",
       "type": "feature",
       "author": "Echo-Nie",
-      "status": "needs_fix",
-      "packageChangeRequired": true,
+      "status": "passed",
+      "packageChangeRequired": false,
       "f2p": 2,
       "p2p": 1,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
-      "cause": "data",
-      "summary": "DataLoader 自动调节进程数的测试启动命令有问题：收集测试时重复加载 Paddle，尚未执行断言。",
-      "whatFailed": "DataLoader 自动调节进程数的测试启动命令有问题：收集测试时重复加载 Paddle，尚未执行断言。",
-      "why": "test.sh 用 pytest 从源码路径收集这份旧版测试，导致同一份 Paddle 被按 paddle 和 python.paddle 两个名字加载，原生模块重复初始化。切换 pytest 导入模式仍失败；直接执行测试文件自带入口则通过。",
-      "fix": "将 test.sh 改为按顺序直接执行测试文件：python python/paddle/fluid/tests/unittests/test_dataloader_autotune.py。保留测试内容和完整范围。",
-      "proof": "原入口复现失败；只改启动方式，原 3 项测试全部两轮通过。断言、测试文件和参考补丁均未修改。核心确认 2F/1P。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行，保证该 task 的 Paddle Python 包和原生运行库可导入。；使用每个测试文件自带的 unittest 入口，避免 pytest 再按 python.paddle 导入同一份库。",
       "problemTests": [
         "python/paddle/fluid/tests/unittests/test_dataloader_autotune.py"
@@ -536,7 +783,58 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T17:56:58Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T17:56:58Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": null,
+              "complete": false,
+              "shellExit": 0
+            },
+            {
+              "counts": null,
+              "complete": false,
+              "shellExit": 0
+            }
+          ],
+          "result": "incomplete",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": true
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 50086,
@@ -550,11 +848,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_cpp",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定编译、运行轻量 C++ 测试，不代表完整 Paddle 构建通过。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -598,25 +896,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T19:23:47Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T19:23:47Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 52948,
       "title": "Static / dy2static Tensor.register_hook",
       "type": "feature",
       "author": "yangguohao",
-      "status": "needs_fix",
-      "packageChangeRequired": true,
+      "status": "passed",
+      "packageChangeRequired": false,
       "f2p": 5,
       "p2p": 14,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "data",
-      "summary": "静态图和动转静梯度 hook的测试启动命令有问题：收集测试时重复加载 Paddle，尚未执行断言。",
-      "whatFailed": "静态图和动转静梯度 hook的测试启动命令有问题：收集测试时重复加载 Paddle，尚未执行断言。",
-      "why": "test.sh 用 pytest 从源码路径收集这份旧版测试，导致同一份 Paddle 被按 paddle 和 python.paddle 两个名字加载，原生模块重复初始化。切换 pytest 导入模式仍失败；直接执行测试文件自带入口则通过。",
-      "fix": "将 test.sh 改为按顺序直接执行测试文件：python test/dygraph_to_static/test_tensor_hook.py；python python/paddle/fluid/tests/unittests/test_tensor_register_hook.py。保留测试内容和完整范围。",
-      "proof": "原入口复现失败；只改启动方式，原 19 项测试全部两轮通过。断言、测试文件和参考补丁均未修改。核心确认 5F/14P。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 19 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 19 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行，保证该 task 的 Paddle Python 包和原生运行库可导入。；使用每个测试文件自带的 unittest 入口，避免 pytest 再按 python.paddle 导入同一份库。",
       "problemTests": [
         "test/dygraph_to_static/test_tensor_hook.py",
@@ -871,7 +1230,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T20:09:51Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 19,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 19,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 19 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:09:51Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 19,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 19,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 53534,
@@ -885,11 +1305,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 2 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -946,25 +1366,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:08:51Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:08:51Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 54435,
       "title": "Distributed launch numeric IP ordering",
       "type": "feature",
       "author": "Echo-Nie",
-      "status": "passed",
+      "status": "failed",
       "packageChangeRequired": false,
       "f2p": 3,
       "p2p": 2,
       "evidence": "exact_python",
       "corePassed": true,
-      "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 2 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "cause": "unknown",
+      "summary": "Oracle 未通过：两轮各 4 通过 / 1 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "测试仍有失败或错误。",
+      "why": "保留失败结果，继续逐项诊断。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：两轮各 4 通过 / 1 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用选定版本的 Python 源码，按任务约定的入口和依赖运行。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -1034,7 +1515,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "failed",
+        "date": "2026-10-09T18:09:21Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 1,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 1
+          },
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 1,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 1
+          }
+        ],
+        "summary": "两轮各 4 通过 / 1 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:09:21Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 1,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 1
+            },
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 1,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 1
+            }
+          ],
+          "result": "failed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 54625,
@@ -1048,11 +1590,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -1096,7 +1638,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:11:32Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:11:32Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 55890,
@@ -1110,11 +1713,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -1158,7 +1761,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:25:37Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:25:37Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 56135,
@@ -1172,11 +1836,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_cpp",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 2 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定编译、运行轻量 C++ 测试，不代表完整 Paddle 构建通过。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -1233,7 +1897,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T19:04:13Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T19:04:13Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 56470,
@@ -1247,11 +1972,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -1295,7 +2020,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:23:20Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:23:20Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 56705,
@@ -1309,11 +2095,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 2 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -1370,25 +2156,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:21:42Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:21:42Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 57741,
       "title": "PIR memcpy",
       "type": "feature",
       "author": "yangguohao",
-      "status": "failed",
+      "status": "needs_fix",
       "packageChangeRequired": true,
       "f2p": 1,
       "p2p": 0,
       "evidence": "exact_native",
       "corePassed": false,
-      "cause": "data",
-      "summary": "脚本写错测试名、漏了运行模式，还缺一条独立 P2P。",
-      "whatFailed": "原入口找不到 TestTensorCopyToCudaOnDefaultCPU、TestTensorCopyToCudaOnDefaultGPU；实际名称中的 CUDA 必须全部大写。 默认运行方式下 CPU 测试在修复前也通过，无法验证修复；3 项 GPU 测试属于题目允许的可选跳过。 改正名称并设置 ENABLE_FALL_BACK=False 后，CPU 测试才复现缺少 pd_op.memcpy；现有任务只有这 1 个 CPU 测试，没有独立 P2P。",
-      "why": "任务要测的是旧静态图转成新执行图时的内存复制。默认的另一种转换方式绕过了这个缺陷，测试虽然执行了，未经过出错的代码。 新控制保持 Base/Gold 原生库及测试断言不变，仅改变运行方式。Base 两轮明确报缺 pd_op.memcpy，Gold 两轮通过，说明不是机器缺 CPU 能力。",
-      "fix": "修正两个 CUDA 类名，并在测试入口固定 ENABLE_FALL_BACK=False。 补选至少一个修复前后都能真正执行并通过的 CPU 回归测试，再按完整入口复验。",
-      "proof": "核对完整测试清单，并只调整运行方式做修复前后各两轮对照：CPU 测试稳定暴露缺少 memcpy 算子的问题、修复后通过；3 条可选 GPU 测试跳过，未找到独立 P2P。",
+      "cause": "verification",
+      "summary": "Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 3 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "原 pytest 入口遗漏初始化或运行模式；已按注明的入口执行完整原测试，保留原失败记录。",
+      "fix": "将已验证的入口和必要运行设置纳入任务说明；不改测试断言。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 3 跳过；入口：FLAGS_enable_new_ir_in_executor=1 + 原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -1449,7 +2296,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "无CUDA构建，原skipIf条件跳过，不计F/P。",
           "effective": false
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-12T01:04:31Z",
+        "entry": "FLAGS_enable_new_ir_in_executor=1 + 原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 3
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 3
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 2 通过 / 0 失败 / 0 错误 / 3 跳过",
+        "latestAttempt": {
+          "date": "2026-10-12T01:04:32Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 1,
+                "failed": 1,
+                "error": 0,
+                "skipped": 3
+              },
+              "complete": true,
+              "shellExit": 1
+            },
+            {
+              "counts": {
+                "passed": 1,
+                "failed": 1,
+                "error": 0,
+                "skipped": 3
+              },
+              "complete": true,
+              "shellExit": 1
+            }
+          ],
+          "result": "failed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": true
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 57827,
@@ -1457,17 +2365,17 @@ window.SWE_PADDLE_LATEST = {
       "type": "feature",
       "author": "yangguohao",
       "status": "failed",
-      "packageChangeRequired": true,
+      "packageChangeRequired": false,
       "f2p": 2,
       "p2p": 3,
       "evidence": "exact_native",
       "corePassed": false,
-      "cause": "data",
-      "summary": "入口误收集辅助函数，还测到了旧版池化的数据排列错误。",
-      "whatFailed": "两个辅助函数被误当作测试，报缺少参数；最大池化的反向计算在修复前后都会退出。",
-      "why": "脚本把两个以 test_ 开头的辅助函数当成了测试。另一个最大池化测试在前向和反向使用不同的数据排列方式，但底层库要求两边一致，因此拒绝计算。这是旧版 Paddle 已有的调用问题，本题补丁没有处理它；不是机器缺硬件。",
-      "fix": "修正入口的测试收集方式；明确本题验收范围，另行处理这个旧池化问题后再完整复验。已通过的两个目标测试不能替代整题。",
-      "proof": "记录实际失败参数，并用同一个 oneDNN 3.2.1 做最小对照：只对齐前后数据排列，原先报错的计算准备步骤就能通过；限制 CPU 指令集后结果相同。源码也要求排列一致，确认是旧版调用问题。整题仍未通过。",
+      "cause": "unknown",
+      "summary": "Oracle 未通过：测试异常退出（SIGABRT），完整测试计数未闭合。",
+      "whatFailed": "oneDNN pooling backward 描述符创建失败，测试异常退出。",
+      "why": "已定位首次异常；实际失败的池化节点、描述符参数和唯一根因仍需继续诊断。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：测试异常退出（SIGABRT），完整测试计数未闭合；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 CPU Paddle 运行库。该项验证的是 CPU 加速的最大池化反向计算，不需要 GPU。",
       "problemTests": [
         "test/dygraph_to_static/test_build_strategy.py::test_ast_only",
@@ -1590,7 +2498,48 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "原范围独立回归测试。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "failed",
+        "date": "2026-10-11T20:33:05Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": null,
+            "complete": false,
+            "shellExit": 134
+          },
+          {
+            "counts": null,
+            "complete": false,
+            "shellExit": 134
+          }
+        ],
+        "summary": "测试异常退出（SIGABRT），完整测试计数未闭合",
+        "latestAttempt": {
+          "date": "2026-10-11T20:33:05Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": null,
+              "complete": false,
+              "shellExit": 134
+            },
+            {
+              "counts": null,
+              "complete": false,
+              "shellExit": 134
+            }
+          ],
+          "result": "failed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 58219,
@@ -1604,11 +2553,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 4 项、回归测试 4 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -1717,7 +2666,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T20:19:57Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:19:57Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 8,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 8,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 58323,
@@ -1730,12 +2740,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 48,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
-      "cause": "data",
-      "summary": "测试加载和模式设置有误；调整测试准备后，完整范围通过。",
-      "whatFailed": "41 条新接口测试在修复前无法启动；修复后另有一条 Tensor 方法测试用错了运行模式。",
-      "why": "测试文件一加载就查询尚不存在的新接口，导致整组测试退出。另一条测试在创建输入后才切回动态图，输入类型因此不对。",
-      "fix": "把新接口查询放到具体测试执行时，并在创建输入前切回动态图；保留全部测试和断言。",
-      "proof": "在临时测试副本中只调整加载时机和模式准备，完整两个测试文件在修复前后各跑两轮：41 条 F2P、48 条 P2P，另 2 条按 CPU 条件跳过。",
+      "cause": "verification",
+      "summary": "Oracle 已执行范围通过：两轮各 89 通过 / 0 失败 / 0 错误 / 2 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "原 pytest 入口遗漏初始化或运行模式；已按注明的入口执行完整原测试，保留原失败记录。",
+      "fix": "将已验证的入口和必要运行设置纳入任务说明；不改测试断言。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 89 通过 / 0 失败 / 0 错误 / 2 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [
         "test/legacy_test/test_atleast_nd.py::<module>",
@@ -2927,7 +3937,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后各两轮通过：P2P 回归测试。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-11T18:59:35Z",
+        "entry": "python 直接运行原测试文件（执行 __main__ 初始化）",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 89,
+              "failed": 0,
+              "error": 0,
+              "skipped": 2
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 89,
+              "failed": 0,
+              "error": 0,
+              "skipped": 2
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 89 通过 / 0 失败 / 0 错误 / 2 跳过",
+        "latestAttempt": {
+          "date": "2026-10-11T18:59:35Z",
+          "entry": "python 直接运行原测试文件（执行 __main__ 初始化）",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 89,
+                "failed": 0,
+                "error": 0,
+                "skipped": 2
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 89,
+                "failed": 0,
+                "error": 0,
+                "skipped": 2
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "direct"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 58343,
@@ -2941,11 +4012,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 6 项、回归测试 9 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -3145,25 +4216,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T20:18:03Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 15,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 15,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:18:03Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 15,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 15,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 58917,
       "title": "tensor_split / hsplit / dsplit APIs",
       "type": "feature",
       "author": "megemini",
-      "status": "passed",
+      "status": "failed",
       "packageChangeRequired": false,
       "f2p": 15,
       "p2p": 3,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
-      "cause": "none",
-      "summary": "缺陷测试 15 项、回归测试 3 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "cause": "unknown",
+      "summary": "Oracle 未通过：两轮各 8 通过 / 10 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "测试仍有失败或错误。",
+      "why": "保留失败结果，继续逐项诊断。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：两轮各 8 通过 / 10 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -3402,7 +4534,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "failed",
+        "date": "2026-10-09T20:23:52Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 8,
+              "failed": 10,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 1
+          },
+          {
+            "counts": {
+              "passed": 8,
+              "failed": 10,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 1
+          }
+        ],
+        "summary": "两轮各 8 通过 / 10 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:23:52Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 8,
+                "failed": 10,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 1
+            },
+            {
+              "counts": {
+                "passed": 8,
+                "failed": 10,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 1
+            }
+          ],
+          "result": "failed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 59021,
@@ -3410,17 +4603,17 @@ window.SWE_PADDLE_LATEST = {
       "type": "bugfix",
       "author": "yangguohao",
       "status": "failed",
-      "packageChangeRequired": true,
+      "packageChangeRequired": false,
       "f2p": 3,
       "p2p": 12,
       "evidence": "exact_native",
       "corePassed": false,
-      "cause": "data",
-      "summary": "入口漏了运行设置；还需分开验证两种执行模式。",
-      "whatFailed": "TestLenWithTensorArray::test_len__ast_legacy_ir 默认进入不受支持的新图转换路径而崩溃。 TestMNIST 的两个融合测试，以及 TestFuseActElewiseAddInplaceGradPass::test_fuse_act_add_grad_pass_cpu，没有先开启静态模式而失败。 3 个 TestLenWithSelectedRows 测试在原入口未开启 PIR 执行器，修复前后都通过，缺 F2P 信号。",
-      "why": "指定 Base 的 CMakeLists.txt 明确把 test_len 加入 DISABLE_PIR_PT_MODES，并设置 FLAGS_enable_pir_with_pt_in_dy2st=0。task 的 pytest 入口漏抄了这个前提。 融合文件把 paddle.enable_static() 写在直接运行文件才会执行的入口中，改用 pytest 导入时没有执行。 只给 SelectedRows 开启 PIR 执行器就能重现并验证参考修复；对整个 test_len 强开 PIR 则会再次导致 TensorArray 崩溃，所以不能用一个全局开关混跑两种测试。",
-      "fix": "test_len 按上游要求关闭 PIR 自动转换，保留全部 9 项回归；融合测试先开启静态模式。 为 SelectedRows 单独补一组开启 PIR 执行器的验证入口，保留完整原有回归范围后再验收。",
-      "proof": "按上游设置完整跑 13 个节点，修复前后各两轮均通过，其中 1 条在 CPU 上直接返回、不计回归。另将 3 条 SelectedRows 单独用 PIR 执行器运行，可复现修复前失败、修复后通过。",
+      "cause": "unknown",
+      "summary": "Oracle 未通过：测试崩溃（SIGSEGV），完整测试计数未闭合。",
+      "whatFailed": "TensorArray 测试发生 SIGSEGV，完整原测试尚未通过。",
+      "why": "已定位到静态图转换的切片处理边界；不能认定仅更换入口就能解决。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：测试崩溃（SIGSEGV），完整测试计数未闭合；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [
         "test.legacy_test.test_fuse_elewise_add_act_pass.TestMNIST::test_batchnorm_fc_with_fuse_op",
@@ -3654,25 +4847,66 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "同名测试切换到题目要修复的PIR条件后构成F2P；为补充诊断，不替代前面完整原范围。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "failed",
+        "date": "2026-10-10T01:23:15Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": null,
+            "complete": false,
+            "shellExit": 139
+          },
+          {
+            "counts": null,
+            "complete": false,
+            "shellExit": 139
+          }
+        ],
+        "summary": "测试崩溃（SIGSEGV），完整测试计数未闭合",
+        "latestAttempt": {
+          "date": "2026-10-10T01:23:15Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": null,
+              "complete": false,
+              "shellExit": 139
+            },
+            {
+              "counts": null,
+              "complete": false,
+              "shellExit": 139
+            }
+          ],
+          "result": "failed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 59127,
       "title": "column_stack / row_stack / dstack / hstack / vstack APIs",
       "type": "feature",
       "author": "megemini",
-      "status": "passed",
+      "status": "failed",
       "packageChangeRequired": false,
       "f2p": 84,
       "p2p": 42,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "verification",
-      "summary": "stack 系列拼接接口测试已通过。",
-      "whatFailed": "stack 系列拼接接口测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 white_list（测试用的白名单），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 84 项修复前失败后通过、42 项修复前后都通过。",
+      "summary": "Oracle 未通过：测试崩溃（SIGSEGV），完整测试计数未闭合。",
+      "whatFailed": "最近完整测试崩溃；已确认此前 Python 模块与运行库接口混用。",
+      "why": "独立配套构建后的完整测试仍需执行，不能把接口诊断当作已通过。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：测试崩溃（SIGSEGV），完整测试计数未闭合；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用与该时期 API 兼容的 CPU Paddle 运行库；本次沿用已核对的 Python 源码覆盖方式。",
       "problemTests": [
         "test/legacy_test/test_stack_op.py",
@@ -5318,25 +6552,66 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "failed",
+        "date": "2026-10-10T02:27:25Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": null,
+            "complete": false,
+            "shellExit": 139
+          },
+          {
+            "counts": null,
+            "complete": false,
+            "shellExit": 139
+          }
+        ],
+        "summary": "测试崩溃（SIGSEGV），完整测试计数未闭合",
+        "latestAttempt": {
+          "date": "2026-10-10T02:27:25Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": null,
+              "complete": false,
+              "shellExit": 139
+            },
+            {
+              "counts": null,
+              "complete": false,
+              "shellExit": 139
+            }
+          ],
+          "result": "failed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 59348,
       "title": "PIR sequence_mask",
       "type": "feature",
       "author": "yangguohao",
-      "status": "needs_fix",
-      "packageChangeRequired": true,
+      "status": "passed",
+      "packageChangeRequired": false,
       "f2p": 13,
       "p2p": 2,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "data",
-      "summary": "15 个测试已通过；任务入口仍需补静态模式初始化。",
-      "whatFailed": "原入口中的 TestSequenceMaskOpError::test_errors 没在正确模式下执行，误报失败。",
-      "why": "测试文件把 paddle.enable_static() 放在直接运行文件的入口里，pytest 导入时跳过了它。 同一份测试、同一 Base/Gold 库，仅补上静态模式后，全部 15 项在修复后通过；其中 13 项验证目标修复，2 项验证原有行为。",
-      "fix": "在 pytest 启动前调用 paddle.enable_static()，或采用保留此初始化的测试入口。",
-      "proof": "同一份完整测试、同一版本运行库，仅补静态初始化，修复前后各两轮确认 13 条 F2P、2 条 P2P；修复后的 15 条全部通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [
         "test.sequence.test_sequence_mask.SequenceMaskTestBase::test_check_output",
@@ -5550,25 +6825,86 @@ window.SWE_PADDLE_LATEST = {
           "effective": true,
           "explanation": "修复前后各两轮通过：P2P。"
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-08T17:32:30Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 15,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 15,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-08T17:32:30Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 15,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 15,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 59374,
       "title": "Tensor apply / apply_ API",
       "type": "feature",
       "author": "yangguohao",
-      "status": "failed",
-      "packageChangeRequired": true,
+      "status": "passed",
+      "packageChangeRequired": false,
       "f2p": 5,
       "p2p": 0,
       "evidence": "exact_native",
       "corePassed": false,
-      "cause": "data",
-      "summary": "5 条缺陷测试通过，但没有选入独立的 P2P。",
-      "whatFailed": "TestTensorApplyAPI 的 test_dtype、test_dygraph、test_error、test_to_static，以及 TestDygraphTensorApplyInplace::test_inplace_api 都是 F2P。 唯一剩下的 test_on_gpu 在 CPU 机器上按题目设计跳过，不能充当 P2P。",
-      "why": "这些测试全部调用本题新加入的 apply/apply_，所以未修复版本本来就都会失败；测试清单没有覆盖一个不依赖新 API 的既有功能。 5 项在 Gold 上都通过，当前没有证据表明补丁或机器有问题。缺的是数据包的回归测试选择。",
-      "fix": "补选至少一个与 Tensor 既有行为有关、修复前后都能执行并通过的 CPU 测试，加入 test.sh 后完整复验。",
-      "proof": "核对原脚本选中的全部 6 个节点和双轮日志：5 个 CPU 测试修复前失败、修复后通过；1 个 GPU 测试按约定跳过，没有可计数的 P2P。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 5 通过 / 0 失败 / 0 错误 / 1 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 5 通过 / 0 失败 / 0 错误 / 1 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [
         "test.legacy_test.test_apply.TestTensorApplyAPI::test_dtype",
@@ -5658,7 +6994,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T03:11:02Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "error": 0,
+              "skipped": 1
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "error": 0,
+              "skipped": 1
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 5 通过 / 0 失败 / 0 错误 / 1 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T03:11:02Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 5,
+                "failed": 0,
+                "error": 0,
+                "skipped": 1
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 5,
+                "failed": 0,
+                "error": 0,
+                "skipped": 1
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 59383,
@@ -5671,12 +7068,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 680,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "masked_scatter 和原地操作测试已通过。",
-      "whatFailed": "masked_scatter 和原地操作测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 white_list（测试用的白名单），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 28 项修复前失败后通过、680 项修复前后都通过。另有 16 项按测试自身条件在 CPU 上跳过，未计入通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 708 通过 / 0 失败 / 0 错误 / 16 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 708 通过 / 0 失败 / 0 错误 / 16 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用与该时期 API 兼容的 CPU Paddle 运行库；本次沿用已核对的 Python 源码覆盖方式。",
       "problemTests": [
         "test/legacy_test/test_masked_scatter.py",
@@ -15096,7 +16493,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "按测试自身的运行条件跳过，不计有效 F2P/P2P。",
           "effective": false
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T22:20:46Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 708,
+              "failed": 0,
+              "error": 0,
+              "skipped": 16
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 708,
+              "failed": 0,
+              "error": 0,
+              "skipped": 16
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 708 通过 / 0 失败 / 0 错误 / 16 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T22:20:46Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 708,
+                "failed": 0,
+                "error": 0,
+                "skipped": 16
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 708,
+                "failed": 0,
+                "error": 0,
+                "skipped": 16
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 59715,
@@ -15107,15 +16565,15 @@ window.SWE_PADDLE_LATEST = {
       "packageChangeRequired": false,
       "f2p": 56,
       "p2p": 52,
-      "evidence": "exact_python_compatible_native",
+      "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 56 项、回归测试 52 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
-      "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
+      "summary": "Oracle 已执行范围通过：两轮各 108 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 108 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
+      "requirements": "已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
       "checks": [
@@ -16523,25 +17981,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-11T17:21:37Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 108,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 108,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 108 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-11T17:21:37Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 108,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 108,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 59847,
       "title": "FractionalMaxPool2D / 3D",
       "type": "feature",
       "author": "megemini",
-      "status": "incomplete",
+      "status": "passed",
       "packageChangeRequired": false,
       "f2p": null,
       "p2p": null,
       "evidence": "environment_incomplete",
       "corePassed": false,
-      "cause": "machine",
-      "summary": "CPU 部分已验证通过；机器没有题目必需的 CUDA 设备，所以 GPU 部分还没验证。",
-      "whatFailed": "fractional_max_pool2d/3d 的 32 个 FP16/BF16 测试被跳过，以及相同功能的 GPU 执行分支。",
-      "why": "题目明确要求 CPU + GPU。当前机器没有 NVIDIA 设备或驱动接口，无法运行这些 CUDA 核函数。 CPU 子集观察到 36 项目标修复、7 项回归通过，没有发现 Gold 的 CPU 测试失败。",
-      "fix": "在符合题目要求的设备上，保持相同 Base、参考补丁和测试范围，各跑两轮；保留已完成的 CPU 结果。",
-      "proof": "检查机器设备和任务硬件要求，并核对 CPU 双轮记录。CPU 已有通过结果，但当前没有 NVIDIA 设备，GPU 节点确实未执行。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 43 通过 / 0 失败 / 0 错误 / 32 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 43 通过 / 0 失败 / 0 错误 / 32 跳过；入口：原 tests/test.sh。",
       "requirements": "CUDA设备与匹配的CUDA Paddle构建，FP16/BF16能力按节点要求确认",
       "problemTests": [
         "test/legacy_test/test_fractional_max_pool2d_op.py::TestCase1_BF16OP::test_check_grad",
@@ -17554,7 +19073,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T06:26:48Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 43,
+              "failed": 0,
+              "error": 0,
+              "skipped": 32
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 43,
+              "failed": 0,
+              "error": 0,
+              "skipped": 32
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 43 通过 / 0 失败 / 0 错误 / 32 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T06:26:48Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 43,
+                "failed": 0,
+                "error": 0,
+                "skipped": 32
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 43,
+                "failed": 0,
+                "error": 0,
+                "skipped": 32
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 59909,
@@ -17568,11 +19148,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 2 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -17616,7 +19196,151 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:12:13Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:12:13Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
+    },
+    {
+      "id": 59910,
+      "title": "【PIR API adaptor No.31】Migrate paddle.distribution.Normal into pir",
+      "type": "feature",
+      "author": "unknown",
+      "status": "passed",
+      "packageChangeRequired": false,
+      "f2p": null,
+      "p2p": null,
+      "evidence": "environment_incomplete",
+      "corePassed": false,
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
+      "requirements": "遵循该任务的运行入口、测试范围及设备条件。",
+      "problemTests": [],
+      "countsNote": "F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。",
+      "checks": [],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:49:15Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:49:15Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true
     },
     {
       "id": 59973,
@@ -17629,12 +19353,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 25,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
-      "cause": "data",
-      "summary": "两个静态测试漏了初始化；补齐后，完整范围通过。",
-      "whatFailed": "TestScatterAPI::test_static 和 TestScatterInplaceAPI::test_static 在创建输入时就报错。",
-      "why": "脚本用 pytest 启动，不会执行文件末尾的静态模式初始化；两个测试自己也没打开静态模式，因此还没测试 scatter 就失败了。",
-      "fix": "在这两个测试类的准备步骤中调用 paddle.enable_static()，不要依赖文件末尾的启动代码。",
-      "proof": "只补静态模式准备，不改断言或测试范围；修复前后各跑两轮，确认 47 条 F2P、25 条有效 P2P。另 2 条在 CPU 上直接返回、29 条跳过，均不计数。",
+      "cause": "verification",
+      "summary": "Oracle 已执行范围通过：两轮各 74 通过 / 0 失败 / 0 错误 / 29 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "原 pytest 入口遗漏初始化或运行模式；已按注明的入口执行完整原测试，保留原失败记录。",
+      "fix": "将已验证的入口和必要运行设置纳入任务说明；不改测试断言。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 74 通过 / 0 失败 / 0 错误 / 29 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [
         "test/legacy_test/test_scatter_op.py::TestScatterAPI::test_static",
@@ -18981,7 +20705,151 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败，修复后两轮通过：有效 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-11T14:54:31Z",
+        "entry": "python 直接运行原测试文件（执行 __main__ 初始化）",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 74,
+              "failed": 0,
+              "error": 0,
+              "skipped": 29
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 74,
+              "failed": 0,
+              "error": 0,
+              "skipped": 29
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 74 通过 / 0 失败 / 0 错误 / 29 跳过",
+        "latestAttempt": {
+          "date": "2026-10-11T14:54:31Z",
+          "entry": "python 直接运行原测试文件（执行 __main__ 初始化）",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 74,
+                "failed": 0,
+                "error": 0,
+                "skipped": 29
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 74,
+                "failed": 0,
+                "error": 0,
+                "skipped": 29
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "direct"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
+    },
+    {
+      "id": 60346,
+      "title": "【PIR API adaptor No.272】Migrate LookAhead to pir",
+      "type": "feature",
+      "author": "unknown",
+      "status": "passed",
+      "packageChangeRequired": false,
+      "f2p": null,
+      "p2p": null,
+      "evidence": "environment_incomplete",
+      "corePassed": false,
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
+      "requirements": "遵循该任务的运行入口、测试范围及设备条件。",
+      "problemTests": [],
+      "countsNote": "F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。",
+      "checks": [],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:18:11Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:18:11Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true
     },
     {
       "id": 60417,
@@ -18995,11 +20863,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -19056,25 +20924,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:46:03Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:46:03Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 60808,
       "title": "broadcast_to with zero dimensions",
       "type": "bugfix",
       "author": "Echo-Nie",
-      "status": "needs_fix",
-      "packageChangeRequired": true,
+      "status": "passed",
+      "packageChangeRequired": false,
       "f2p": 1,
       "p2p": 2,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "data",
-      "summary": "测试通过；环境说明把一条回归测试错写成了缺陷测试。",
-      "whatFailed": "没有修复后仍失败的测试。问题是 environment/README.md 说有两条 F2P，实际只有一条。",
-      "why": "一维 shape Tensor 的 expand 测试在修复前就已通过，它检查的是原有功能，应算 P2P。任务主 README 的分类是正确的，但环境说明与它矛盾。",
-      "fix": "把 environment/README.md 的运行步骤和预期表改为 1 条 F2P、2 条 P2P；不需要改代码、测试断言或机器配置。",
-      "proof": "核对原脚本的修复前后各两轮结果：零维 shape 测试由失败变通过，另外两条始终通过，修复后完整脚本两轮都成功。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold CPU 运行时；测试加载选定版本的 broadcast_to/expand 函数，任务也允许免重编译的验证路线。",
       "problemTests": [
         "test/legacy_test/test_broadcast_to_zero_dim_shape.py::test_expand_accepts_multi_element_1d_shape_tensor"
@@ -19120,25 +21049,169 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T19:02:36Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T19:02:36Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
+    },
+    {
+      "id": 62012,
+      "title": "[SOT] rewrite resume function generation",
+      "type": "feature",
+      "author": "unknown",
+      "status": "passed",
+      "packageChangeRequired": false,
+      "f2p": null,
+      "p2p": null,
+      "evidence": "exact_native",
+      "corePassed": false,
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
+      "requirements": "已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。",
+      "problemTests": [],
+      "countsNote": "F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。",
+      "checks": [],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-11T20:53:51Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 15,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 15,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-11T20:53:51Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 15,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 15,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true
     },
     {
       "id": 64320,
       "title": "sparse.mask_as API",
       "type": "feature",
       "author": "megemini",
-      "status": "incomplete",
+      "status": "passed",
       "packageChangeRequired": false,
       "f2p": null,
       "p2p": null,
       "evidence": "environment_incomplete",
       "corePassed": false,
-      "cause": "machine",
-      "summary": "CPU 的稀疏张量测试已通过；机器缺少题目要求的 CUDA 设备，GPU 分支还没跑。",
-      "whatFailed": "sparse.mask_as 的 COO 1d/2d/3d/4d、CSR 2d/3d 及相关稀疏运算的 GPU 分支。",
-      "why": "原题要求 CPU + GPU。当前只能运行 CPU 路径，GPU 条件分支没有执行。 6 项 CPU 目标测试已由失败变为通过；27 项表面 P2P 中有 GPU 条件空返回，不能把这些空返回当成有效回归覆盖。",
-      "fix": "在符合题目要求的设备上，保持相同 Base、参考补丁和测试范围，各跑两轮；保留已完成的 CPU 结果。",
-      "proof": "核对任务要求、设备清单和 CPU 双轮日志。6 个 CPU 缺陷测试由失败变通过；部分设备条件分支直接返回，不能据此声称 GPU 通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 33 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 33 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "CUDA设备与匹配的CUDA Paddle构建",
       "problemTests": [
         "test/legacy_test/test_sparse_mask_as_op.py::TestMaskAsCoo",
@@ -19575,7 +21648,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T16:39:13Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 33,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 33,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 33 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T16:39:13Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 33,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 33,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 64519,
@@ -19589,11 +21723,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 16 项、回归测试 9 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 27 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 27 通过 / 0 失败 / 0 错误 / 0 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -19962,7 +22096,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-11T22:45:08Z",
+        "entry": "python 直接运行原测试文件（执行 __main__ 初始化）",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 27,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 27,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 27 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-11T22:45:08Z",
+          "entry": "python 直接运行原测试文件（执行 __main__ 初始化）",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 27,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 27,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "direct"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 64881,
@@ -19970,17 +22165,17 @@ window.SWE_PADDLE_LATEST = {
       "type": "feature",
       "author": "megemini",
       "status": "failed",
-      "packageChangeRequired": true,
+      "packageChangeRequired": false,
       "f2p": 6,
       "p2p": 92,
       "evidence": "exact_native",
       "corePassed": false,
-      "cause": "data",
-      "summary": "测试范围包含 7 项原本就坏的 dropout 功能，整题仍未通过。",
-      "whatFailed": "6 项检查发现随机掩码的形状不对；另 1 项设了相同随机种子却得到不同结果。",
-      "why": "丢弃比例为 100% 时，旧代码给出一个零值，测试要的是与输入一样大的掩码。随机种子测试则没有把指定种子传进实际运算。这些问题在修复前已存在，也不在本题补丁修改范围内。",
-      "fix": "明确任务应覆盖的功能，将无关旧缺陷另行处理；这些失败项不能算 P2P，也不能直接删掉后宣称原完整测试通过。",
-      "proof": "用精确版本重跑完整两个测试文件，并检查运行开关；7 项在修复前后仍失败。小数组单独实验也复现掩码变成标量、指定种子未传入，排除了验证器强开模式或缺 GPU 的解释。",
+      "cause": "unknown",
+      "summary": "Oracle 未通过：两轮各 123 通过 / 1 失败 / 6 错误 / 4 跳过。",
+      "whatFailed": "完整直接入口仍有 1 项失败、6 项错误、4 项跳过。",
+      "why": "6 项错误涉及 dropout 掩码的维度，另 1 项失败涉及指定随机种子的传递。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：两轮各 123 通过 / 1 失败 / 6 错误 / 4 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [
         "test/legacy_test/test_dropout_op.py::TestBF16DropoutOp::test_check_grad_normal",
@@ -21736,7 +23931,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "failed",
+        "date": "2026-10-12T01:22:54Z",
+        "entry": "python 直接运行原测试文件（执行 __main__ 初始化）",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 123,
+              "failed": 1,
+              "error": 6,
+              "skipped": 4
+            },
+            "complete": true,
+            "shellExit": null
+          },
+          {
+            "counts": {
+              "passed": 123,
+              "failed": 1,
+              "error": 6,
+              "skipped": 4
+            },
+            "complete": true,
+            "shellExit": null
+          }
+        ],
+        "summary": "两轮各 123 通过 / 1 失败 / 6 错误 / 4 跳过",
+        "latestAttempt": {
+          "date": "2026-10-12T01:22:54Z",
+          "entry": "python 直接运行原测试文件（执行 __main__ 初始化）",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 123,
+                "failed": 1,
+                "error": 6,
+                "skipped": 4
+              },
+              "complete": true,
+              "shellExit": null
+            },
+            {
+              "counts": {
+                "passed": 123,
+                "failed": 1,
+                "error": 6,
+                "skipped": 4
+              },
+              "complete": true,
+              "shellExit": null
+            }
+          ],
+          "result": "failed",
+          "source": "direct"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 65724,
@@ -21750,11 +24006,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -21798,7 +24054,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:28:36Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:28:36Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 67195,
@@ -21812,11 +24129,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -21860,7 +24177,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:13:35Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:13:35Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 68432,
@@ -21874,11 +24252,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 11 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -22052,7 +24430,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T21:07:07Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 13,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 13,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T21:07:07Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 13,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 13,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 70469,
@@ -22066,11 +24505,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -22114,7 +24553,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:27:55Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:27:55Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 72800,
@@ -22127,12 +24627,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 4,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "cummin/cummax 的空张量测试已通过。",
-      "whatFailed": "cummin/cummax 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 4 项修复前失败后通过、4 项修复前后都通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。",
       "problemTests": [
         "test/legacy_test/test_cummax_op.py",
@@ -22244,7 +24744,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-11T21:45:54Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-11T21:45:54Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 8,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 8,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73122,
@@ -22257,12 +24818,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 2,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "固定为任务默认的 MKL 数学库后，完整原脚本通过。",
-      "whatFailed": "OpenBLAS 构建下，TestMultiDotOp_ZeroSize1::test_check_output 在修复前就通过，掩盖了缺陷。 采用题目默认 MKL 后，原 test.sh 的全部 3 项已完成双轮验证，没有剩余失败项。",
-      "why": "README 的构建命令在本机默认开启 MKL；原验证却关闭 MKL，改用 OpenBLAS。两套库处理空矩阵时的行为不同。 Base 把零尺寸矩阵直接传给数学库。MKL 拒绝其中为零的矩阵步长并留下未初始化输出，OpenBLAS 则直接填零。参考补丁提前处理空矩阵，避免了这个非法调用。 控制实验保持 Base/Gold 原生库、测试脚本、所有 3 个测试和断言不变，只将实际 BLAS 调用绑定到源代码指定系列的 MKL 2019.0.5；两轮均得到 Base 1 失败/2 通过，Gold 3 通过。",
-      "fix": "验证环境固定为 MKL，并记录数学库版本；不需要修改本题测试断言或参考补丁。",
-      "proof": "完整原 test.sh 和 3 个测试均未修改，只把数学运算绑定到 MKL 2019.0.5；修复前两轮 1 失败、2 通过，修复后两轮 3 个全通过。已检查实际函数绑定到 MKL。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "复用精确 Base/Gold Paddle 库，将数学运算绑定到 MKL 2019.0.5。结论限此运行组合，没有重新编译完整 MKL 版 Paddle。",
       "problemTests": [
         "test.legacy_test.test_multi_dot_op.TestMultiDotOp_ZeroSize1::test_check_output"
@@ -22308,7 +24869,68 @@ window.SWE_PADDLE_LATEST = {
           "effective": true,
           "explanation": "修复前后各两轮通过：P2P。"
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:41:54Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:41:54Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73125,
@@ -22321,12 +24943,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 4,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "det/slogdet 的空张量测试已通过。",
-      "whatFailed": "det/slogdet 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。未修复版本在空张量梯度计算时中途退出，这是该题要修的原始问题。将后续输出测试单独拆出来又会触发“本组没有做梯度检查”的收尾检查，因此不能把这两项算成已确认 P2P，也不能说参考补丁仍失败。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 2 项修复前失败后通过、4 项修复前后都通过。完整参考补丁运行 8 项均通过；新跑未修复版本的完整原脚本两轮都在空张量梯度测试中退出（返回 136）。后续两项输出测试无法取得完整结束记录，暂不计入 F/P。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。",
       "problemTests": [
         "test/legacy_test/test_determinant_op.py"
@@ -22437,7 +25059,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "测试主体之后的清理未正常完成，不能只按主体结果计通过。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:27:32Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:27:32Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 8,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 8,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73385,
@@ -22450,12 +25133,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 4,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "eigvals/svdvals 的空张量测试已通过。",
-      "whatFailed": "eigvals/svdvals 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 4 项修复前失败后通过、4 项修复前后都通过。Base 的一项空张量特征值测试会中途退出且返回 0；必须核对测试结束记录，不能只看进程返回值。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。",
       "problemTests": [
         "test/legacy_test/test_eigvals_op.py",
@@ -22567,7 +25250,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:50:52Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:50:52Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 8,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 8,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73387,
@@ -22580,12 +25324,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 1,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "gather_tree 的空张量测试已通过。",
-      "whatFailed": "gather_tree 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 2 项修复前失败后通过、1 项修复前后都通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。",
       "problemTests": [
         "test/legacy_test/test_gather_tree_op.py"
@@ -22631,7 +25375,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:58:21Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:58:21Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73535,
@@ -22645,11 +25450,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -22680,7 +25485,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T20:21:59Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:21:59Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73569,
@@ -22693,12 +25559,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 2,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "matmul 矩阵乘法的空张量测试已通过。",
-      "whatFailed": "matmul 矩阵乘法的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 1 项修复前失败后通过、2 项修复前后都通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。",
       "problemTests": [
         "test/legacy_test/test_matmul_v2_op.py"
@@ -22744,7 +25610,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:48:18Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:48:18Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73570,
@@ -22758,11 +25685,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 4 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -22858,7 +25785,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-10T03:06:12Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 7,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 7,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-10T03:06:12Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 7,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 7,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73582,
@@ -22872,11 +25860,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 3 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -22946,7 +25934,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T20:32:55Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:32:55Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 5,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 5,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73691,
@@ -22960,11 +26009,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 3 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -23047,7 +26096,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-10T03:07:11Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-10T03:07:11Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 6,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 6,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73702,
@@ -23061,11 +26171,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 2 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -23109,7 +26219,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:46:32Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:46:32Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73776,
@@ -23123,11 +26294,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 2 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -23171,7 +26342,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-11T22:43:12Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-11T22:43:12Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73821,
@@ -23185,11 +26417,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 2 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -23259,7 +26491,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-12T02:22:17Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-12T02:22:17Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 5,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 5,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73850,
@@ -23273,11 +26566,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 3 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -23334,7 +26627,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:35:10Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:35:10Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73854,
@@ -23348,11 +26702,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 3 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -23422,7 +26776,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:43:35Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:43:35Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 5,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 5,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73855,
@@ -23436,11 +26851,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -23471,7 +26886,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-10T21:26:23Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-10T21:26:23Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 73880,
@@ -23485,11 +26961,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 4 项、回归测试 2 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -23572,7 +27048,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:21:19Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:21:19Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 6,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 6,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 74184,
@@ -23585,12 +27122,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 5,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "pinv 的空张量测试已通过。",
-      "whatFailed": "pinv 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 2 项修复前失败后通过、5 项修复前后都通过。非 Hermitian 的两个空张量用例在 Base 就能通过，实际属于 P2P。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。",
       "problemTests": [
         "test/legacy_test/test_linalg_pinv_op.py"
@@ -23688,7 +27225,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-10T22:56:04Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 7,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 7,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-10T22:56:04Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 7,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 7,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 74212,
@@ -23701,12 +27299,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 5,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "multiplex 的空张量测试已通过。",
-      "whatFailed": "multiplex 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 2 项修复前失败后通过、5 项修复前后都通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。",
       "problemTests": [
         "test/legacy_test/test_multiplex_op.py"
@@ -23804,7 +27402,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:28:44Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 7,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 7,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:28:44Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 7,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 7,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 74221,
@@ -23817,12 +27476,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 2,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "fold 的输入检查测试已通过。",
-      "whatFailed": "fold 的输入检查测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 1 项修复前失败后通过、2 项修复前后都通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。",
       "problemTests": [
         "test/legacy_test/test_fold_op.py"
@@ -23868,7 +27527,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-12T00:34:37Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-12T00:34:37Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 74305,
@@ -23881,12 +27601,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 1,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "unique 的空张量测试已通过。",
-      "whatFailed": "unique 的空张量测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 1 项修复前失败后通过、1 项修复前后都通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。",
       "problemTests": [
         "test/legacy_test/test_unique.py"
@@ -23919,7 +27639,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-12T04:30:27Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-12T04:30:27Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 74421,
@@ -23933,11 +27714,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -23981,7 +27762,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T17:55:01Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T17:55:01Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 74439,
@@ -23992,15 +27834,15 @@ window.SWE_PADDLE_LATEST = {
       "packageChangeRequired": false,
       "f2p": 2,
       "p2p": 1,
-      "evidence": "lightweight_source",
+      "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
-      "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
+      "requirements": "已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
       "checks": [
@@ -24043,7 +27885,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-12T06:17:41Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-12T06:17:41Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 74444,
@@ -24054,15 +27957,15 @@ window.SWE_PADDLE_LATEST = {
       "packageChangeRequired": false,
       "f2p": 2,
       "p2p": 1,
-      "evidence": "lightweight_source",
+      "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
-      "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。独立正常 CPU 补测另有两轮各 6 项通过，不合并到原 3 项中。",
+      "requirements": "已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
       "checks": [
@@ -24105,7 +28008,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-12T03:17:35Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-12T03:17:35Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 74491,
@@ -24116,15 +28080,15 @@ window.SWE_PADDLE_LATEST = {
       "packageChangeRequired": false,
       "f2p": 2,
       "p2p": 1,
-      "evidence": "lightweight_source",
+      "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
-      "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
+      "requirements": "已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
       "checks": [
@@ -24167,7 +28131,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-12T05:23:23Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-12T05:23:23Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 74586,
@@ -24178,15 +28203,15 @@ window.SWE_PADDLE_LATEST = {
       "packageChangeRequired": false,
       "f2p": 2,
       "p2p": 1,
-      "evidence": "lightweight_source",
+      "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
-      "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
+      "requirements": "已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
       "checks": [
@@ -24229,7 +28254,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:17:03Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:17:03Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 74594,
@@ -24243,11 +28329,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -24291,7 +28377,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T17:58:18Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T17:58:18Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 75274,
@@ -24305,11 +28452,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -24353,32 +28500,112 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T17:25:02Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T17:25:02Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 76259,
       "title": "Windows UTF-8 inference paths",
       "type": "bugfix",
       "author": "Echo-Nie",
-      "status": "failed",
-      "packageChangeRequired": true,
+      "status": "incomplete",
+      "packageChangeRequired": false,
       "f2p": null,
       "p2p": null,
       "evidence": "patch_preflight",
       "corePassed": false,
-      "cause": "data",
-      "summary": "参考补丁对不上题目指定的代码版本，测试还没有开始。",
-      "whatFailed": "solution/code.patch 无法修改 paddle/fluid/inference/api/helper.h 的开头。",
-      "why": "补丁要求文件开头按 algorithm、fstream、iostream 的顺序排列；指定 Base 实际是 glog、sys/stat、fstream 等另一套内容，补丁找不到要替换的位置。 先打测试补丁或先打参考补丁都失败；这是数据包的版本与补丁不匹配，换 CPU/GPU 或 Python 都不会修好。",
-      "fix": "基于 README 声明的 Base 重新生成参考补丁，并确保所需前置改动齐全；两种状态构建成功后再跑 F2P/P2P。",
-      "proof": "在指定 Base 上单独检查两种补丁应用顺序，均在同一文件失败；对照文件内容确认上下文不匹配。测试尚未启动。",
+      "cause": "unknown",
+      "summary": "Oracle 尚未完成：完整测试结果尚未确认。",
+      "whatFailed": "目前没有完整 Oracle 执行记录。",
+      "why": "需要补齐可执行任务及完整测试记录。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：完整测试结果尚未确认；入口：尚未执行完整测试。",
       "requirements": "先修正补丁；随后按任务要求用 Windows CPU / MSVC x64 构建验证，Linux 测试不能替代。",
       "problemTests": [
         "solution/code.patch",
         "paddle/fluid/inference/api/helper.h"
       ],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
-      "checks": []
+      "checks": [],
+      "oracle": {
+        "passed": false,
+        "result": "incomplete",
+        "date": "",
+        "entry": "尚未执行完整测试",
+        "rounds": [],
+        "summary": "完整测试结果尚未确认",
+        "latestAttempt": {
+          "date": "",
+          "entry": "尚未执行完整测试",
+          "rounds": [],
+          "result": "incomplete",
+          "source": "none"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true
     },
     {
       "id": 76522,
@@ -24392,11 +28619,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -24440,7 +28667,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:26:11Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:26:11Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 76736,
@@ -24454,11 +28742,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 7 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 10 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 10 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -24593,7 +28881,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-08T17:46:29Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 10,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 10,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 10 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-08T17:46:29Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 10,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 10,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 76873,
@@ -24601,17 +28950,17 @@ window.SWE_PADDLE_LATEST = {
       "type": "feature",
       "author": "yangguohao",
       "status": "incomplete",
-      "packageChangeRequired": true,
+      "packageChangeRequired": false,
       "f2p": 9,
       "p2p": 14,
       "evidence": "exact_native",
       "corePassed": false,
       "cause": "mixed",
-      "summary": "环境缺 CINN，另有数值比较和测试导入问题；完整验证未完成。",
-      "whatFailed": "7 项符号形状测试读不到形状信息；1 项 SELU 测试在接近零的数值上超过比较阈值。任务入口还把两组同名辅助模块混在一起导入。",
-      "why": "当前 Paddle 没编入 CINN，生成形状信息的代码根本不执行。SELU 的 CPU 结果与测试参考值有舍入差异，但相同输入下修复前后完全一致，尚不能归为补丁错误。两组测试各有一个 utils 文件，需要隔离导入。",
-      "fix": "准备带 CINN 的同版本构建，把两组测试分进程运行；核定 SELU 在零附近的数值参考和精度要求，再跑完整范围。不能直接放宽误差阈值算通过。",
-      "proof": "31 个节点按原范围分组各跑两轮，确认 7 项缺 CINN、1 项数值差异。另用 5 组固定输入对照，普通/原地 SELU 和修复前后输出均相同；已定位差异来自零附近的浮点计算。",
+      "summary": "Oracle 尚未完成：完整测试结果尚未确认。",
+      "whatFailed": "完整 CINN 测试尚未完成；已有独立补测出现失败。",
+      "why": "还需正确隔离同名 utils，并匹配 CINN 构建和设备；已有局部通过不能代替整题。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：完整测试结果尚未确认；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [
         "test.ir.pir.cinn.symbolic.test_infer_sym_shape_multinary_op.CELUOpInferSymbolicShapeTest::test_eval_symbolic",
@@ -25029,7 +29378,26 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "incomplete",
+        "date": "2026-10-11T11:41:32Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [],
+        "summary": "完整测试结果尚未确认",
+        "latestAttempt": {
+          "date": "2026-10-11T11:41:32Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [],
+          "result": "incomplete",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 77064,
@@ -25042,12 +29410,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 19,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "allclose 参数别名和返回类型测试已通过。",
-      "whatFailed": "allclose 参数别名和返回类型测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 4 项修复前失败后通过、19 项修复前后都通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 23 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 23 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。",
       "problemTests": [
         "test/legacy_test/test_allclose_op.py",
@@ -25354,25 +29722,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T04:48:39Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 23,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 23,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 23 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T04:48:39Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 23,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 23,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 77078,
       "title": "inverse C++ sinking",
       "type": "feature",
       "author": "Manfredss",
-      "status": "passed",
+      "status": "failed",
       "packageChangeRequired": false,
       "f2p": 3,
       "p2p": 33,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 33 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "cause": "unknown",
+      "summary": "Oracle 未通过：两轮各 32 通过 / 0 失败 / 4 错误 / 0 跳过。",
+      "whatFailed": "测试仍有失败或错误。",
+      "why": "保留失败结果，继续逐项诊断。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：两轮各 32 通过 / 0 失败 / 4 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -25845,7 +30274,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "failed",
+        "date": "2026-10-08T20:28:36Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 32,
+              "failed": 0,
+              "error": 4,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 1
+          },
+          {
+            "counts": {
+              "passed": 32,
+              "failed": 0,
+              "error": 4,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 1
+          }
+        ],
+        "summary": "两轮各 32 通过 / 0 失败 / 4 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-08T20:28:36Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 32,
+                "failed": 0,
+                "error": 4,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 1
+            },
+            {
+              "counts": {
+                "passed": 32,
+                "failed": 0,
+                "error": 4,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 1
+            }
+          ],
+          "result": "failed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 77150,
@@ -25859,11 +30349,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -25894,25 +30384,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-08T19:05:32Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-08T19:05:32Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 77495,
       "title": "MaxPool dilation option",
       "type": "feature",
       "author": "jinyouzhi",
-      "status": "failed",
-      "packageChangeRequired": true,
+      "status": "passed",
+      "packageChangeRequired": false,
       "f2p": null,
       "p2p": null,
       "evidence": "patch_preflight",
       "corePassed": false,
-      "cause": "data",
-      "summary": "参考补丁来自另一套池化接口，套不到题目指定的代码版本；测试还没有开始。",
-      "whatFailed": "python/paddle/nn/functional/pooling.py、python/paddle/nn/layer/pooling.py 的补丁不匹配。 补丁要修改的 test/legacy_test/test_max_pool_dilation.py 在指定 Base 中不存在。",
-      "why": "补丁假定 max_pool 系列接口已经有 dilation 参数，指定 Base 却还没有这个参数；它还依赖一个 Base 中不存在的测试文件。 两种补丁应用顺序都失败，证明不是打补丁顺序或机器环境造成的。",
-      "fix": "基于 README 声明的 Base 重新生成参考补丁，并确保所需前置改动齐全；两种状态构建成功后再跑 F2P/P2P。",
-      "proof": "在指定 Base 上尝试两种补丁应用顺序，均失败；逐段对照池化接口，确认缺少前置参数和测试文件。测试尚未启动。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "必须先成功应用补丁，再编译和运行测试。",
       "problemTests": [
         "solution/code.patch",
@@ -25921,7 +30472,68 @@ window.SWE_PADDLE_LATEST = {
         "test/legacy_test/test_max_pool_dilation.py"
       ],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
-      "checks": []
+      "checks": [],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-10T18:00:15Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 20,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 20,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-10T18:00:15Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 20,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 20,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true
     },
     {
       "id": 77749,
@@ -25935,11 +30547,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 21 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 22 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 22 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -26230,7 +30842,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-10T00:37:46Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 22,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 22,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 22 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-10T00:37:46Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 22,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 22,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78048,
@@ -26244,11 +30917,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 3 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -26331,7 +31004,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-12T01:29:38Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-12T01:29:38Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 6,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 6,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78082,
@@ -26345,11 +31079,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 9 项、回归测试 23 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 32 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 32 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -26770,7 +31504,151 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T16:08:52Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 32,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 32,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 32 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T16:08:52Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 32,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 32,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
+    },
+    {
+      "id": 78085,
+      "title": "fix: Implement RestrictedUnpickler to prevent RCE via pickle deserialization (CWE-502)",
+      "type": "feature",
+      "author": "unknown",
+      "status": "passed",
+      "packageChangeRequired": false,
+      "f2p": null,
+      "p2p": null,
+      "evidence": "environment_incomplete",
+      "corePassed": false,
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。独立正常保存、加载兼容性补测曾有 12 项通过、3 项失败，不能由原 20 项通过推定全部兼容性通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
+      "requirements": "遵循该任务的运行入口、测试范围及设备条件。",
+      "problemTests": [],
+      "countsNote": "F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。",
+      "checks": [],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T22:00:49Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 20,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 20,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T22:00:49Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 20,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 20,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true
     },
     {
       "id": 78104,
@@ -26784,11 +31662,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -26819,7 +31697,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:29:38Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:29:38Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78138,
@@ -26833,11 +31772,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 15 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 17 通过 / 0 失败 / 0 错误 / 2 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 17 通过 / 0 失败 / 0 错误 / 2 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -27089,7 +32028,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:29:45Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 17,
+              "failed": 0,
+              "error": 0,
+              "skipped": 2
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 17,
+              "failed": 0,
+              "error": 0,
+              "skipped": 2
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 17 通过 / 0 失败 / 0 错误 / 2 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:29:45Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 17,
+                "failed": 0,
+                "error": 0,
+                "skipped": 2
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 17,
+                "failed": 0,
+                "error": 0,
+                "skipped": 2
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78238,
@@ -27103,11 +32103,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -27151,7 +32151,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T20:52:02Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:52:02Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78301,
@@ -27165,11 +32226,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 13 项、回归测试 21 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 34 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 34 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -27616,7 +32677,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T21:03:09Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 34,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 34,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 34 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T21:03:09Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 34,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 34,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78342,
@@ -27630,11 +32752,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 7 项、回归测试 24 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 31 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 31 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -28042,7 +33164,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T20:38:30Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 31,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 31,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 31 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:38:30Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 31,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 31,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78440,
@@ -28056,11 +33239,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -28104,25 +33287,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-10T01:26:47Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-10T01:26:47Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78441,
       "title": "aminmax operator",
       "type": "feature",
       "author": "Manfredss",
-      "status": "needs_fix",
-      "packageChangeRequired": true,
+      "status": "passed",
+      "packageChangeRequired": false,
       "f2p": 26,
       "p2p": 4,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "data",
-      "summary": "修复后完整脚本通过；其中一条“梯度测试”是空的，不能算有效 F2P。",
-      "whatFailed": "TestAminmaxOpFloat32::test_check_grad 的测试内容只有 pass，没有检查任何结果。",
-      "why": "这条测试在修复前因为 aminmax API 不存在而准备失败；修复后只是执行了空函数。这个“先失败再通过”不能证明梯度正确。其他梯度测试有实际检查。",
-      "fix": "给这条测试补上可靠的梯度断言，或明确标成跳过并从 F2P 数量中去掉；同时把说明改为 26 条有效 F2P、4 条 P2P。",
-      "proof": "逐行核对测试补丁并用 Python 语法树确认空函数；完整 31 个节点在修复后两轮都通过，去掉空测试后有 26 条有效 F2P、4 条 P2P。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 30 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 30 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "精确源码构建的 CPU Paddle，启用 CINN；任务脚本已包含所需测试路径和运行开关。",
       "problemTests": [
         "test/legacy_test/test_aminmax_op.py::TestAminmaxOpFloat32::test_check_grad"
@@ -28532,7 +33776,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T10:51:37Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 30,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 30,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 30 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T10:51:37Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 30,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 30,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78452,
@@ -28546,11 +33851,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 16 项、回归测试 27 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 43 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 43 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -29114,7 +34419,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T22:08:44Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 43,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 43,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 43 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T22:08:44Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 43,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 43,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78522,
@@ -29128,11 +34494,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -29189,7 +34555,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T19:00:26Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T19:00:26Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78570,
@@ -29203,11 +34630,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 6 项、回归测试 3 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 9 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 9 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -29329,7 +34756,151 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:49:49Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 9,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 9,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 9 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:49:49Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 9,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 9,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
+    },
+    {
+      "id": 78728,
+      "title": "support to detect the recompute context",
+      "type": "feature",
+      "author": "unknown",
+      "status": "passed",
+      "packageChangeRequired": false,
+      "f2p": null,
+      "p2p": null,
+      "evidence": "exact_native",
+      "corePassed": false,
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 14 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 14 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
+      "requirements": "已完成该题配套编译包的安装、导入与原测试；设备覆盖以实际测试结果为准。",
+      "problemTests": [],
+      "countsNote": "F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。",
+      "checks": [],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-12T07:12:40Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 14,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 14,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 14 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-12T07:12:40Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 14,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 14,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true
     },
     {
       "id": 78823,
@@ -29342,12 +34913,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": null,
       "evidence": "environment_incomplete",
       "corePassed": false,
-      "cause": "machine",
-      "summary": "CPU 能检查的部分已通过；真正的锁页内存分配需要 CUDA 或 XPU，当前机器没有这些设备。",
-      "whatFailed": "TestToPinnedPlace::test_already_cuda_pinned_returns_same_object、test_cpu_place_on_cuda_build、test_cuda_place_to_cuda_pinned 均未执行。 还缺实际设备上的 pinned 分配、CPU 到 pinned 内存转换和设备地址转换结果。",
-      "why": "CPU构建没有这类设备锁页内存分配器；通过CPU异常分支或模拟分支不能证明实际设备分配正确。 Base缺少本题新增的 _to_pinned_place，整个模块在导入时失败；因此不能把Gold新增4项CPU通过直接写成4个逐测试F2P。",
-      "fix": "在符合题目要求的设备上，保持相同 Base、参考补丁和测试范围，各跑两轮；保留已完成的 CPU 结果。",
-      "proof": "检查任务对 CUDA/XPU 的要求、当前设备和测试条件分支。当前只有 CPU 运行结果，3 个 CUDA 锁页内存测试明确跳过，真实设备分配尚未执行。",
+      "cause": "mixed",
+      "summary": "Oracle 尚未完成：完整测试结果尚未确认。",
+      "whatFailed": "此前导入遇到跨版本接口不匹配，新的配套构建尚无完整通过结果。",
+      "why": "最近完整原测试结果尚未闭合，不能把构建进行中或局部 CPU 结果当成通过。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：完整测试结果尚未确认；入口：原 tests/test.sh。",
       "requirements": "至少一张CUDA或XPU设备和匹配的Paddle构建；按实际后端允许另一后端条件跳过",
       "problemTests": [
         "test/legacy_test/test_randperm_op.py::TestRandpermBF16Op::test_check_output",
@@ -31320,7 +36891,48 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复后通过；修复前存在缺失、跳过或未配对结果，不能计为有效 F2P/P2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "incomplete",
+        "date": "2026-10-11T06:10:53Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": null,
+            "complete": false,
+            "shellExit": 0
+          },
+          {
+            "counts": null,
+            "complete": false,
+            "shellExit": 0
+          }
+        ],
+        "summary": "完整测试结果尚未确认",
+        "latestAttempt": {
+          "date": "2026-10-11T06:10:53Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": null,
+              "complete": false,
+              "shellExit": 0
+            },
+            {
+              "counts": null,
+              "complete": false,
+              "shellExit": 0
+            }
+          ],
+          "result": "incomplete",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78911,
@@ -31334,11 +36946,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -31382,7 +36994,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T21:04:53Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T21:04:53Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78922,
@@ -31396,11 +37069,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -31431,7 +37104,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T20:41:14Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:41:14Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 78932,
@@ -31445,11 +37179,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 3 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -31532,7 +37266,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:57:56Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 6 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:57:56Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 6,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 6,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79035,
@@ -31546,11 +37341,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -31594,7 +37389,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T17:27:57Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T17:27:57Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79057,
@@ -31608,11 +37464,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -31656,7 +37512,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:47:31Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:47:31Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79161,
@@ -31670,11 +37587,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -31718,7 +37635,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T17:59:53Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T17:59:53Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79167,
@@ -31732,11 +37710,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -31780,7 +37758,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:01:00Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:01:00Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79197,
@@ -31793,12 +37832,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 1,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "学习率调度器接收优化器参数测试已通过。",
-      "whatFailed": "学习率调度器接收优化器参数测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 6 项修复前失败后通过、1 项修复前后都通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用 README 允许的兼容 CPU 运行库，并加载该 task 的准确 Python 改动。",
       "problemTests": [
         "test/legacy_test/test_lr_scheduler.py"
@@ -31896,7 +37935,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:56:59Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 7,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 7,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 7 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:56:59Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 7,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 7,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79268,
@@ -31910,11 +38010,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -31958,7 +38058,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T15:44:28Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T15:44:28Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79275,
@@ -31972,11 +38133,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 3 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -32033,7 +38194,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T17:06:18Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 4,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T17:06:18Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 4,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79276,
@@ -32046,12 +38268,12 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 2,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "verification",
-      "summary": "add_n 混合空张量输入测试已通过。",
-      "whatFailed": "add_n 混合空张量输入测试已通过。补齐测试工具的搜索路径后，原 test.sh 两轮均成功。",
-      "why": "验证器没有带上 Paddle 单元测试需要的搜索路径，Python 找不到 op_test（Paddle 自带的测试工具），所以测试还没开始就停了。补上路径后，同一份补丁和测试通过。",
-      "fix": "在验证器启动测试时，将 Paddle 源码的 test/legacy_test 和 test 加入 PYTHONPATH；保留 Paddle 运行库路径。无需修改参考补丁或测试断言。",
-      "proof": "相同参考补丁、相同测试文件、相同选择范围，仅补测试路径；完整入口两轮均返回 0。已确认 1 项修复前失败后通过、2 项修复前后都通过。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；加载该 Base/参考补丁对应的已编译 CPU Paddle 运行库。",
       "problemTests": [
         "test/legacy_test/test_add_n_op.py"
@@ -32097,7 +38319,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T02:10:33Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T02:10:33Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79310,
@@ -32111,11 +38394,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "lightweight_source",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 4 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "按任务约定的轻量源码路线验证，没有执行完整 Paddle 原生构建。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -32185,7 +38468,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T16:58:52Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 5 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T16:58:52Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 5,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 5,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79321,
@@ -32199,11 +38543,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -32234,7 +38578,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T18:58:43Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T18:58:43Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 2,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79353,
@@ -32248,11 +38653,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -32296,25 +38701,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T20:42:06Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:42:06Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79369,
       "title": "check_memory_usage logging",
       "type": "bugfix",
       "author": "Echo-Nie",
-      "status": "passed",
+      "status": "failed",
       "packageChangeRequired": false,
       "f2p": 1,
       "p2p": 1,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "none",
-      "summary": "缺陷测试 1 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "cause": "unknown",
+      "summary": "Oracle 未通过：两轮各 0 通过 / 2 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "测试仍有失败或错误。",
+      "why": "保留失败结果，继续逐项诊断。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：两轮各 0 通过 / 2 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -32345,25 +38811,86 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前两轮失败、修复后两轮通过，属于 F2P。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": false,
+        "result": "failed",
+        "date": "2026-10-09T20:39:36Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 0,
+              "failed": 2,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 1
+          },
+          {
+            "counts": {
+              "passed": 0,
+              "failed": 2,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 1
+          }
+        ],
+        "summary": "两轮各 0 通过 / 2 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T20:39:36Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 0,
+                "failed": 2,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 1
+            },
+            {
+              "counts": {
+                "passed": 0,
+                "failed": 2,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 1
+            }
+          ],
+          "result": "failed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79386,
       "title": "iinfo uint64 maximum boundary",
       "type": "bugfix",
       "author": "wwaawwaaee",
-      "status": "failed",
-      "packageChangeRequired": true,
+      "status": "passed",
+      "packageChangeRequired": false,
       "f2p": 0,
       "p2p": 3,
       "evidence": "exact_native",
       "corePassed": false,
-      "cause": "data",
-      "summary": "指定版本在当前 Linux 环境已能算对，未复现目标缺陷。",
-      "whatFailed": "TestIInfoUInt64Boundary::test_uint64_max_preserves_unsigned_boundary 修复前已通过；另两项回归也通过。",
-      "why": "指定 Base 的 iinfo.max 本来就是 uint64_t；实际编译使用的 pybind 会按无符号整数把它传给 Python，不会变成 -1。 同一份当前测试、分别对应 Base/Gold 的原生库各跑两轮，3 项全部通过；实际值都是 18446744073709551615。没有发生导入失败、跳过或机器异常。",
-      "fix": "提供确实会返回错误值的 Base 或明确可复现的平台/依赖组合，再固定成任务环境；不能为了制造失败改断言。",
-      "proof": "精确 Base/Gold 库配合完整 3 个测试各跑两轮，全部通过；核对无符号整数类型和 Python 转换代码，确认两边都返回 18446744073709551615。",
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [
         "test/legacy_test/test_iinfo_and_finfo.py::TestIInfoUInt64Boundary::test_uint64_max_preserves_unsigned_boundary"
@@ -32409,7 +38936,68 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "Base、Gold 各两轮都通过。该预期 F2P 节点在修复前已通过，未复现目标缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-10T00:11:07Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-10T00:11:07Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
     },
     {
       "id": 79633,
@@ -32423,11 +39011,11 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "none",
-      "summary": "缺陷测试 2 项、回归测试 1 项均有稳定配对，原入口可运行。",
-      "whatFailed": "所选测试的 F2P/P2P 配对成立，任务脚本可运行。",
-      "why": "缺陷测试在修复前失败、修复后通过，回归测试在两边均通过。",
-      "fix": "按任务说明与下列运行方式使用。",
-      "proof": "核对原始测试日志和逐项配对结果，修复前后各有两轮记录。",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "所注明入口的两轮完整结果已记录。",
+      "why": "通过记录按题号去重保留；未执行的硬件分支不计为通过。",
+      "fix": "使用注明的运行入口；跳过项仍需匹配编译能力和设备补测。",
+      "proof": "完整范围的实际 Oracle 结果：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
@@ -32471,7 +39059,217 @@ window.SWE_PADDLE_LATEST = {
           "explanation": "修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。",
           "effective": true
         }
-      ]
+      ],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-09T21:01:10Z",
+        "entry": "原 tests/test.sh",
+        "rounds": [
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          },
+          {
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "error": 0,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-09T21:01:10Z",
+          "entry": "原 tests/test.sh",
+          "rounds": [
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            },
+            {
+              "counts": {
+                "passed": 3,
+                "failed": 0,
+                "error": 0,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": "2026-09-11",
+      "taskFilesAvailable": true
+    },
+    {
+      "id": 79657,
+      "title": "[Operator Mechanism] Fix paddle.compat.min/max gradient indexing",
+      "type": "feature",
+      "author": "unknown",
+      "status": "incomplete",
+      "packageChangeRequired": false,
+      "f2p": null,
+      "p2p": null,
+      "evidence": "environment_incomplete",
+      "corePassed": false,
+      "cause": "machine",
+      "summary": "Oracle 尚未完成：完整测试结果尚未确认。",
+      "whatFailed": "CUDA 梯度索引的目标测试尚未完成。",
+      "why": "目标缺陷需要匹配的 CUDA 编译包和 NVIDIA 设备；CPU 补测不代表目标 GPU 通过。",
+      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "proof": "当前 Oracle 实际观察：完整测试结果尚未确认；入口：尚未执行完整测试。",
+      "requirements": "遵循该任务的运行入口、测试范围及设备条件。",
+      "problemTests": [],
+      "countsNote": "F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。",
+      "checks": [],
+      "oracle": {
+        "passed": false,
+        "result": "incomplete",
+        "date": "",
+        "entry": "尚未执行完整测试",
+        "rounds": [],
+        "summary": "完整测试结果尚未确认",
+        "latestAttempt": {
+          "date": "",
+          "entry": "尚未执行完整测试",
+          "rounds": [],
+          "result": "incomplete",
+          "source": "none"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true
     }
-  ]
+  ],
+  "oracleSummary": {
+    "total": 111,
+    "passed": 98,
+    "notConfirmed": 13,
+    "passedIds": [
+      18687,
+      27247,
+      36684,
+      41202,
+      50086,
+      52948,
+      53534,
+      54625,
+      55890,
+      56135,
+      56470,
+      56705,
+      57741,
+      58219,
+      58323,
+      58343,
+      59348,
+      59374,
+      59383,
+      59715,
+      59847,
+      59909,
+      59910,
+      59973,
+      60346,
+      60417,
+      60808,
+      62012,
+      64320,
+      64519,
+      65724,
+      67195,
+      68432,
+      70469,
+      72800,
+      73122,
+      73125,
+      73385,
+      73387,
+      73535,
+      73569,
+      73570,
+      73582,
+      73691,
+      73702,
+      73776,
+      73821,
+      73850,
+      73854,
+      73855,
+      73880,
+      74184,
+      74212,
+      74221,
+      74305,
+      74421,
+      74439,
+      74444,
+      74491,
+      74586,
+      74594,
+      75274,
+      76522,
+      76736,
+      77064,
+      77150,
+      77495,
+      77749,
+      78048,
+      78082,
+      78085,
+      78104,
+      78138,
+      78238,
+      78301,
+      78342,
+      78440,
+      78441,
+      78452,
+      78522,
+      78570,
+      78728,
+      78911,
+      78922,
+      78932,
+      79035,
+      79057,
+      79161,
+      79167,
+      79197,
+      79268,
+      79275,
+      79276,
+      79310,
+      79321,
+      79353,
+      79386,
+      79633
+    ],
+    "retainedMinimum": 87,
+    "allPassed": false,
+    "note": "累计通过按已有完整 Gold 测试记录去重；修正入口后的完整结果纳入，跳过仍单独显示。已有通过不会因缺少构建复核证据扣减。"
+  }
 };

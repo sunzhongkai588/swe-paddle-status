@@ -15,8 +15,8 @@ async function main(){
  const context=await browser.newContext({viewport:{width:1440,height:1000},locale:'zh-CN'});const page=await context.newPage();
  page.on('pageerror',e=>report.errors.push(e.message));page.on('console',m=>{if(m.type()==='error')report.errors.push(m.text());});page.on('requestfailed',r=>report.errors.push(r.url()+' '+r.failure()?.errorText));page.on('response',r=>{if(r.status()>=400)report.errors.push(r.url()+' '+r.status());});
  await page.goto(url,{waitUntil:'networkidle'});
- await check('all 105 current task rows, summary counts and no result history',async()=>{
-  assert.equal(await page.locator('#task-table-body tr').count(),105);
+ await check('all current task rows, summary counts and no result history',async()=>{
+  assert.equal(await page.locator('#task-table-body tr').count(),data.meta.total);
   assert.deepEqual(await page.evaluate(()=>window.SWE_PADDLE_LATEST.counts),data.counts);
   assert.equal(await page.locator('#issue-grid .issue-card').count(),data.tasks.filter(t=>t.status!=='passed').length);
   assert.doesNotMatch(await page.locator('body').innerText(),/历史|上一版|更新记录|原验收|封存/);
@@ -27,7 +27,7 @@ async function main(){
    for(const value of new Set(data.tasks.map(t=>t[key]))){await page.selectOption(`#${key}-filter`,value);const ids=await page.locator('#task-table-body tr').evaluateAll(rs=>rs.map(r=>Number(r.dataset.rowId)));assert.deepEqual(ids,data.tasks.filter(t=>t[key]===value).map(t=>t.id));}
    await page.selectOption(`#${key}-filter`,'all');
   }
-  await page.fill('#search-input','no-such-task-xyz');assert.equal(await page.locator('#visible-count').innerText(),'0');assert.equal(await page.locator('#empty-state').isVisible(),true);await page.click('#clear-filters');assert.equal(await page.locator('#task-table-body tr').count(),105);
+  await page.fill('#search-input','no-such-task-xyz');assert.equal(await page.locator('#visible-count').innerText(),'0');assert.equal(await page.locator('#empty-state').isVisible(),true);await page.click('#clear-filters');assert.equal(await page.locator('#task-table-body tr').count(),data.meta.total);
  });
  await check('every task detail displays latest cause, action and exact test states',async()=>{
   for(const t of data.tasks){
