@@ -82,11 +82,89 @@ def new_task(number, root):
         problemTests=[], countsNote='F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。', checks=[])
 
 
+def apply_progress_notes(data):
+    notes, _ = load(SITE / 'scripts/validation-progress-notes.json')
+    for task in data['tasks']:
+        task.pop('validationProgress', None)
+        note = notes.get(str(task['id']))
+        if not note or task['status'] != note['status'] or task['oracle']['date'] != note['resultDate']:
+            continue
+        task['validationProgress'] = {key: note[key] for key in ('meaning', 'completed', 'problem', 'remaining')}
+        task['validationProgress']['resultDate'] = note['resultDate']
+        task['summary'] = ('Oracle 已通过：' if task['oracle']['passed'] else 'Oracle 尚未通过：') + note['meaning'] + '。'
+        task['whatFailed'] = note['problem']
+        task['why'] = note['why']
+        task['fix'] = note['remaining']
+        task['cause'] = note['cause']
+        if note.get('requirements'):
+            task['requirements'] = note['requirements']
+        task['problemTests'] = list(dict.fromkeys(task['problemTests'] + note.get('tests', [])))
+    data['meta']['explanationsReviewedAt'] = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime('%Y-%m-%d')
+
+
+def write_public(data):
+    serialized = json.dumps(data, ensure_ascii=False, indent=2) + ';\n'
+    assert not any(s in serialized for s in ('/home/', '/data/home/', 'container_id', 'LIBINFER_', 'ugate', 'candidate.patch'))
+    (SITE / 'docs/assets/latest-data.js').write_text('window.SWE_PADDLE_LATEST = ' + serialized)
+    passed = data['oracleSummary']['passed']
+    labels = dict(passed='Oracle 通过', needs_fix='Oracle 已通过，运行说明待同步', failed='Oracle 测试失败', incomplete='完整验证未完成')
+    lines = ['# SWE-Paddle 最新验证情况', '', '结果截至：' + data['meta']['resultsAsOf'] + '。', '',
+        '**Oracle 累计通过 %d / 111 题（%.1f%%）；其余 %d 题尚未确认通过。**' % (passed, 100.0*passed/111, 111-passed), '',
+        data['oracleSummary']['note'], '',
+        'Oracle 指官方参考补丁（Gold）的测试结果。“运行说明待同步”表示正确入口已经完整通过，只需同步运行说明，已计入累计通过。“完整验证未完成”表示缺少完整可确认结果，可能已尝试、做过补测或遇到环境阻断，不等于从未验证。', '',
+        'Oracle 通过适用于各题注明的测试范围；硬件跳过不代表该分支通过。Gold 通过不自动证明 F2P/P2P 配对。已有配对明细保留其确认日期。', '',
+        '## 尚未通过题的实际进展', '', '| 任务 | 实际含义 | 已做验证 | 遇到的问题 | 还需完成 |', '| --- | --- | --- | --- | --- |']
+    for task in data['tasks']:
+        if task['oracle']['passed']:
+            continue
+        progress = task.get('validationProgress')
+        values = ([progress[key] for key in ('meaning', 'completed', 'problem', 'remaining')] if progress else
+            [task['summary'], task['proof'], task['whatFailed'], task['fix']])
+        lines.append('| #%d | %s |' % (task['id'], ' | '.join(value.replace('|', '\\|') for value in values)))
+    lines.extend(['', '## 全部任务的 Oracle 结果', '', '| 任务 | Oracle 状态 | 两轮结果 |', '| --- | --- | --- |'])
+    for task in data['tasks']:
+        lines.append('| #%d | %s | %s |' % (task['id'], labels[task['status']], task['oracle']['summary']))
+    for task in data['tasks']:
+        lines.extend(['', '<a id="task-%d"></a>' % task['id'], '', '## #%d · %s' % (task['id'], task['title']), '', task['summary']])
+        if task.get('validationProgress'):
+            progress = task['validationProgress']
+            lines.extend(['', '**已做验证：** ' + progress['completed'], '', '**遇到的问题：** ' + progress['problem'], '',
+                '**还需完成：** ' + progress['remaining']])
+        lines.extend(['', task['whatFailed'], '', '**原因：** ' + task['why'], '', '**处理：** ' + task['fix'], '',
+            '**确认方法：** ' + task['proof'], '', '**运行条件：** ' + task['requirements'], '',
+            '**Oracle 入口：** ' + task['oracle']['entry'], '', '**Oracle 确认时间：** ' + (task['oracle']['date'] or '尚未确认')])
+        if task['oracle']['activity']:
+            lines.extend(['', '**当前任务：** ' + task['oracle']['activity']])
+        if task['checks']:
+            lines.extend(['', '**已有 F2P/P2P 配对记录：** %s / %s，确认日期 %s。' % (task['f2p'], task['p2p'], task['pairedResultDate']), '',
+                task['countsNote'], '', '| 测试 | Base 两轮 | Gold 两轮 | 说明 |', '| --- | --- | --- | --- |'])
+            for check in task['checks']:
+                lines.append('| %s | %s | %s | %s |' % (check['name'].replace('|', '\\|'),
+                    ' / '.join(check['base']), ' / '.join(check['gold']), check['explanation'].replace('|', '\\|')))
+    (SITE / 'docs/latest-report.md').write_text('\n'.join(lines) + '\n')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--eval-root', type=Path, required=True)
-    parser.add_argument('--audit', type=Path, required=True)
+    parser.add_argument('--eval-root', type=Path)
+    parser.add_argument('--audit', type=Path)
+    parser.add_argument('--notes-only', action='store_true', help='Update explanations from existing public results without reading or running evaluation jobs')
     args = parser.parse_args()
+    if args.notes_only:
+        data = json.loads((SITE / 'docs/assets/latest-data.js').read_text().split('=', 1)[1].strip().rstrip(';'))
+        def outcome_projection():
+            return json.dumps(dict(oracleSummary=data['oracleSummary'], counts=data['counts'], resultsAsOf=data['meta']['resultsAsOf'],
+                tasks=[{key: task[key] for key in ('id', 'status', 'oracle', 'checks', 'f2p', 'p2p', 'corePassed')} for task in data['tasks']]), sort_keys=True)
+        before = outcome_projection()
+        apply_progress_notes(data)
+        assert outcome_projection() == before, 'Explanation update changed recorded outcomes'
+        assert all(task.get('validationProgress') for task in data['tasks'] if task['status'] != 'passed'), 'Unmatched result date; review the changed observations first'
+        write_public(data)
+        print(json.dumps(dict(explanations=sum(bool(t.get('validationProgress')) for t in data['tasks']),
+            oracle_passed=data['oracleSummary']['passed'], evaluation_jobs_started=False)))
+        return
+    if args.eval_root is None or args.audit is None:
+        parser.error('--eval-root and --audit are required unless --notes-only is used')
     root = args.eval_root.resolve()
     args.audit.mkdir(parents=True, exist_ok=True)
     native, native_ref = load(root / 'reports/native-full-build-current-v1.json')
@@ -230,31 +308,8 @@ def main():
         passedIds=passed_ids, retainedMinimum=87, allPassed=len(passed_ids)==111,
         note='累计通过按已有完整 Gold 测试记录去重；修正入口后的完整结果纳入，跳过仍单独显示。已有通过不会因缺少构建复核证据扣减。')
     data['authors']['unknown'] = dict(label='作者信息未补录')
-    serialized = json.dumps(data, ensure_ascii=False, indent=2) + ';\n'
-    assert not any(s in serialized for s in ('/home/', '/data/home/', 'container_id', 'LIBINFER_', 'ugate', 'candidate.patch'))
-    (SITE / 'docs/assets/latest-data.js').write_text('window.SWE_PADDLE_LATEST = ' + serialized)
-    labels = dict(passed='Oracle 通过', needs_fix='Oracle 通过，使用修正入口', failed='Oracle 未通过', incomplete='Oracle 尚未完成')
-    lines = ['# SWE-Paddle 最新验证情况', '', '结果截至：' + data['meta']['resultsAsOf'] + '。', '',
-        '**Oracle 累计通过 %d / 111 题（%.1f%%）；其余 %d 题尚未确认通过。**' % (len(passed_ids), 100.0*len(passed_ids)/111, 111-len(passed_ids)), '',
-        data['oracleSummary']['note'], '', 'Oracle 通过适用于各题注明的测试范围；硬件跳过不代表该分支通过。Gold 通过不自动证明 F2P/P2P 配对。已有配对明细保留其确认日期。', '',
-        '| 任务 | Oracle 状态 | 两轮结果 |', '| --- | --- | --- |']
-    for task in data['tasks']:
-        lines.append('| #%d | %s | %s |' % (task['id'], labels[task['status']], task['oracle']['summary']))
-    for task in data['tasks']:
-        lines.extend(['', '<a id="task-%d"></a>' % task['id'], '', '## #%d · %s' % (task['id'], task['title']), '',
-            task['summary'], '', task['whatFailed'], '', '**原因：** ' + task['why'], '',
-            '**处理：** ' + task['fix'], '', '**确认方法：** ' + task['proof'], '',
-            '**运行条件：** ' + task['requirements'], '', '**Oracle 入口：** ' + task['oracle']['entry'], '',
-            '**Oracle 确认时间：** ' + (task['oracle']['date'] or '尚未确认')])
-        if task['oracle']['activity']:
-            lines.extend(['', '**当前任务：** ' + task['oracle']['activity']])
-        if task['checks']:
-            lines.extend(['', '**已有 F2P/P2P 配对记录：** %s / %s，确认日期 %s。' % (task['f2p'], task['p2p'], task['pairedResultDate']), '',
-                task['countsNote'], '', '| 测试 | Base 两轮 | Gold 两轮 | 说明 |', '| --- | --- | --- | --- |'])
-            for check in task['checks']:
-                lines.append('| %s | %s | %s | %s |' % (check['name'].replace('|', '\\|'),
-                    ' / '.join(check['base']), ' / '.join(check['gold']), check['explanation'].replace('|', '\\|')))
-    (SITE / 'docs/latest-report.md').write_text('\n'.join(lines) + '\n')
+    apply_progress_notes(data)
+    write_public(data)
     audit = dict(at_utc=now, source_entries=[native_ref, canonical_ref, direct_ref, flag_ref, dispatch_ref],
         passed_ids=passed_ids, counts=data['counts'], oracle_summary=data['oracleSummary'],
         original_public_pair_records_preserved=True, new_evaluation_jobs_started=False,

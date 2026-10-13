@@ -13,3 +13,5 @@
 
 .diagnosis h3{overflow-wrap:anywhere}
 .table-wrap{position:relative}
+.validation-progress{margin:23px 0 0;display:grid;gap:14px}.validation-progress>div{min-width:0}.validation-progress dt{font-size:12px;font-weight:700;color:#264e7b;margin-bottom:4px}.validation-progress dd{margin:0;font-size:13px;color:#53667e;line-height:1.9;overflow-wrap:anywhere}.card-progress{margin:0 0 18px;gap:11px}.card-progress dt{font-size:10px}.card-progress dd{font-size:12px;line-height:1.85}
+@media(max-width:760px){.card-progress dd{font-size:13px}.dialog-title-row .status-badge{white-space:normal;overflow-wrap:anywhere}}

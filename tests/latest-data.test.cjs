@@ -93,6 +93,24 @@ test('Oracle counts deduplicate whole two-round passes and preserve skipped bran
  assert.equal(byId(57741).oracle.rounds[0].counts.skipped,3);
  assert.match(byId(78085).why,/3 项失败/);
 });
+test('unfinished tasks explain actual work, blockers and missing validation',()=>{
+ const unfinished=data.tasks.filter(t=>!t.oracle.passed);
+ assert.equal(unfinished.length,13);
+ for(const t of data.tasks.filter(t=>t.status!=='passed')){
+  const p=t.validationProgress;assert.ok(p,t.id);
+  for(const key of ['meaning','completed','problem','remaining'])assert.ok(typeof p[key]==='string'&&p[key].length>5,`${t.id} ${key}`);
+  assert.equal(p.resultDate,t.oracle.date,t.id);
+ }
+ assert.match(byId(33369).validationProgress.problem,/six.*ModuleNotFoundError/);
+ assert.match(byId(54435).validationProgress.problem,/整数 1.*is True/);
+ assert.match(byId(58917).validationProgress.problem,/OpResult/);
+ assert.match(byId(77078).validationProgress.problem,/Value.*None/);
+ assert.match(byId(79369).validationProgress.problem,/cpu.*AttributeError/);
+ assert.match(byId(76259).validationProgress.completed,/前置|核对/);
+ assert.match(byId(76873).validationProgress.completed,/补测/);
+ assert.match(byId(78823).validationProgress.completed,/退出 0.*不能据此判通过/);
+ assert.match(byId(79657).validationProgress.problem,/CUDA.*CPU/);
+});
 test('report has one current section for every task',()=>{
  const report=fs.readFileSync(path.join(docs,'latest-report.md'),'utf8');
  const ids=[...report.matchAll(/<a id="task-(\d+)"><\/a>/g)].map(m=>Number(m[1]));

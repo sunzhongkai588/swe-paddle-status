@@ -10,7 +10,8 @@ window.SWE_PADDLE_LATEST = {
       79391
     ],
     "taskBase": "https://github.com/PaddlePaddle/community/tree/master/swe-paddle/tasks/PaddlePaddle__Paddle-",
-    "resultsAsOf": "2026-10-12T17:04:13.797588Z"
+    "resultsAsOf": "2026-10-12T17:04:13.797588Z",
+    "explanationsReviewedAt": "2026-10-13"
   },
   "counts": {
     "passed": 95,
@@ -369,14 +370,17 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 1,
       "evidence": "exact_python",
       "corePassed": true,
-      "cause": "unknown",
-      "summary": "Oracle 未通过：两轮各 2 通过 / 2 失败 / 0 错误 / 0 跳过。",
-      "whatFailed": "测试仍有失败或错误。",
-      "why": "保留失败结果，继续逐项诊断。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "cause": "verification",
+      "summary": "Oracle 尚未通过：已执行两轮，2 项因缺少依赖失败。",
+      "whatFailed": "弹性训练重启和成员变更测试导入 elastic 模块时缺少 six，报 ModuleNotFoundError；这两项尚未进入目标行为。",
+      "why": "日志明确定位到 import six；当前失败首先是验证依赖缺失，不能直接据此判定 Gold 的容错逻辑错误。",
+      "fix": "在该次验证的独立 Python 环境补齐 six，重新执行完整 4 项测试，确认目标行为实际运行。",
       "proof": "当前 Oracle 实际观察：两轮各 2 通过 / 2 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用选定版本的 Python 源码，按任务约定的入口和依赖运行。",
-      "problemTests": [],
+      "problemTests": [
+        "test_failed_training_requests_an_elastic_restart",
+        "test_membership_change_holds_the_current_training_group"
+      ],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
       "checks": [
         {
@@ -492,7 +496,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已执行两轮，2 项因缺少依赖失败",
+        "completed": "原 4 项测试两轮执行完整，每轮 2 项通过、2 项失败。",
+        "problem": "弹性训练重启和成员变更测试导入 elastic 模块时缺少 six，报 ModuleNotFoundError；这两项尚未进入目标行为。",
+        "remaining": "在该次验证的独立 Python 环境补齐 six，重新执行完整 4 项测试，确认目标行为实际运行。",
+        "resultDate": "2026-10-09T18:19:54Z"
+      }
     },
     {
       "id": 36684,
@@ -1440,14 +1451,16 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 2,
       "evidence": "exact_python",
       "corePassed": true,
-      "cause": "unknown",
-      "summary": "Oracle 未通过：两轮各 4 通过 / 1 失败 / 0 错误 / 0 跳过。",
-      "whatFailed": "测试仍有失败或错误。",
-      "why": "保留失败结果，继续逐项诊断。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "cause": "data",
+      "summary": "Oracle 尚未通过：已执行两轮，1 项类型断言不匹配。",
+      "whatFailed": "sort_ip 选项解析得到整数 1，测试却使用 args.sort_ip is True 要求布尔对象 True，导致断言失败。",
+      "why": "整数 1 与布尔 True 的值可相等，但不是同一对象。失败发生在类型身份断言，不能由此推断 IP 数字排序本身失败，也尚不能直接改断言宣告通过。",
+      "fix": "核对选项及环境变量的类型约定，区分解析结果错误与测试判据过严；确认后再执行完整 5 项测试。",
       "proof": "当前 Oracle 实际观察：两轮各 4 通过 / 1 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用选定版本的 Python 源码，按任务约定的入口和依赖运行。",
-      "problemTests": [],
+      "problemTests": [
+        "test_sort_ip_option_and_environment_mapping"
+      ],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
       "checks": [
         {
@@ -1576,7 +1589,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已执行两轮，1 项类型断言不匹配",
+        "completed": "原 5 项测试两轮执行完整，每轮 4 项通过、1 项失败。",
+        "problem": "sort_ip 选项解析得到整数 1，测试却使用 args.sort_ip is True 要求布尔对象 True，导致断言失败。",
+        "remaining": "核对选项及环境变量的类型约定，区分解析结果错误与测试判据过严；确认后再执行完整 5 项测试。",
+        "resultDate": "2026-10-09T18:09:21Z"
+      }
     },
     {
       "id": 54625,
@@ -2231,10 +2251,10 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": false,
       "cause": "verification",
-      "summary": "Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 3 跳过。",
-      "whatFailed": "所注明入口的两轮完整结果已记录。",
-      "why": "原 pytest 入口遗漏初始化或运行模式；已按注明的入口执行完整原测试，保留原失败记录。",
-      "fix": "将已验证的入口和必要运行设置纳入任务说明；不改测试断言。",
+      "summary": "Oracle 已通过：已通过，运行模式说明待同步。",
+      "whatFailed": "未设置该运行模式的原入口仍出现失败；GPU 跳过项没有通过结论。",
+      "why": "通过范围已有完整结果，待同步的是如何复现该结果的运行说明；这不是尚未做验证。",
+      "fix": "将已验证的环境变量和入口写入任务运行说明；3 项 CUDA 分支另需匹配编译包与设备补测。",
       "proof": "完整范围的实际 Oracle 结果：两轮各 2 通过 / 0 失败 / 0 错误 / 3 跳过；入口：FLAGS_enable_new_ir_in_executor=1 + 原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [],
@@ -2357,7 +2377,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": true
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已通过，运行模式说明待同步",
+        "completed": "设置 FLAGS_enable_new_ir_in_executor=1 后，完整原 5 项测试两轮各 2 项通过、3 项 CUDA 条件跳过；已计入累计通过。",
+        "problem": "未设置该运行模式的原入口仍出现失败；GPU 跳过项没有通过结论。",
+        "remaining": "将已验证的环境变量和入口写入任务运行说明；3 项 CUDA 分支另需匹配编译包与设备补测。",
+        "resultDate": "2026-10-12T01:04:31Z"
+      }
     },
     {
       "id": 57827,
@@ -2371,10 +2398,10 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": false,
       "cause": "unknown",
-      "summary": "Oracle 未通过：测试异常退出（SIGABRT），完整测试计数未闭合。",
-      "whatFailed": "oneDNN pooling backward 描述符创建失败，测试异常退出。",
-      "why": "已定位首次异常；实际失败的池化节点、描述符参数和唯一根因仍需继续诊断。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "summary": "Oracle 尚未通过：已执行，oneDNN 反向池化异常退出。",
+      "whatFailed": "首次真实异常发生在 oneDNN pooling backward 描述符创建，返回 unimplemented 后退出；完整测试没有通过。",
+      "why": "已确认底层异常位置，但实际失败的是哪个池化节点、具体参数为何被拒绝尚未闭合；独立尾部通过不能拼成整题通过。",
+      "fix": "取得失败池化节点的真实形状、内存描述符及前向提示参数，定位根因后再执行完整原测试。",
       "proof": "当前 Oracle 实际观察：测试异常退出（SIGABRT），完整测试计数未闭合；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 CPU Paddle 运行库。该项验证的是 CPU 加速的最大池化反向计算，不需要 GPU。",
       "problemTests": [
@@ -2539,7 +2566,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已执行，oneDNN 反向池化异常退出",
+        "completed": "已用该题独立构建的 Gold 包执行原测试；两轮均 SIGABRT，完整 8 项结果未收齐。另有独立测试尾部记录。",
+        "problem": "首次真实异常发生在 oneDNN pooling backward 描述符创建，返回 unimplemented 后退出；完整测试没有通过。",
+        "remaining": "取得失败池化节点的真实形状、内存描述符及前向提示参数，定位根因后再执行完整原测试。",
+        "resultDate": "2026-10-11T20:33:05Z"
+      }
     },
     {
       "id": 58219,
@@ -2741,10 +2775,10 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "verification",
-      "summary": "Oracle 已执行范围通过：两轮各 89 通过 / 0 失败 / 0 错误 / 2 跳过。",
-      "whatFailed": "所注明入口的两轮完整结果已记录。",
-      "why": "原 pytest 入口遗漏初始化或运行模式；已按注明的入口执行完整原测试，保留原失败记录。",
-      "fix": "将已验证的入口和必要运行设置纳入任务说明；不改测试断言。",
+      "summary": "Oracle 已通过：已通过，直接执行脚本的说明待同步。",
+      "whatFailed": "pytest 入口没有执行 __main__ 中所需的初始化；已验证的直接执行方式尚需写清楚。",
+      "why": "入口修正后的完整结果已经通过；需要同步的是任务说明，不是等待首次验证。",
+      "fix": "将 python 直接执行原脚本的入口写入任务说明；跳过分支按其编译和设备条件补测。",
       "proof": "完整范围的实际 Oracle 结果：两轮各 89 通过 / 0 失败 / 0 错误 / 2 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [
@@ -3998,7 +4032,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已通过，直接执行脚本的说明待同步",
+        "completed": "直接执行原 Python 测试脚本，两轮各 89 项通过、2 项条件跳过；已计入累计通过。",
+        "problem": "pytest 入口没有执行 __main__ 中所需的初始化；已验证的直接执行方式尚需写清楚。",
+        "remaining": "将 python 直接执行原脚本的入口写入任务说明；跳过分支按其编译和设备条件补测。",
+        "resultDate": "2026-10-11T18:59:35Z"
+      }
     },
     {
       "id": 58343,
@@ -4290,11 +4331,11 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 3,
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
-      "cause": "unknown",
-      "summary": "Oracle 未通过：两轮各 8 通过 / 10 失败 / 0 错误 / 0 跳过。",
-      "whatFailed": "测试仍有失败或错误。",
-      "why": "保留失败结果，继续逐项诊断。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "cause": "verification",
+      "summary": "Oracle 尚未通过：已执行两轮，10 项因 PIR 接口不匹配失败。",
+      "whatFailed": "10 项均报 paddle.pir 缺少 OpResult；原 Python 源码与借用运行库的接口不匹配。",
+      "why": "失败轨迹明确落在接口缺失，不能把版本混用导致的异常当作 tensor_split、hsplit、dsplit 数值功能已被验证失败。",
+      "fix": "使用该题配套源码与独立编译包，核对 PIR 接口，再执行完整注明的测试范围。",
       "proof": "当前 Oracle 实际观察：两轮各 8 通过 / 10 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [],
@@ -4595,7 +4636,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已执行两轮，10 项因 PIR 接口不匹配失败",
+        "completed": "原 splits API 范围两轮各 8 项通过、10 项失败，原命令排除了 test_with_pir_api。",
+        "problem": "10 项均报 paddle.pir 缺少 OpResult；原 Python 源码与借用运行库的接口不匹配。",
+        "remaining": "使用该题配套源码与独立编译包，核对 PIR 接口，再执行完整注明的测试范围。",
+        "resultDate": "2026-10-09T20:23:52Z"
+      }
     },
     {
       "id": 59021,
@@ -4609,10 +4657,10 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": false,
       "cause": "unknown",
-      "summary": "Oracle 未通过：测试崩溃（SIGSEGV），完整测试计数未闭合。",
-      "whatFailed": "TensorArray 测试发生 SIGSEGV，完整原测试尚未通过。",
-      "why": "已定位到静态图转换的切片处理边界；不能认定仅更换入口就能解决。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "summary": "Oracle 尚未通过：已执行，TensorArray 静态图转换崩溃。",
+      "whatFailed": "TensorArray 的 len 测试在静态图转换的切片处理边界崩溃。",
+      "why": "已定位 InsertSliceTarget 到输入和 ProgramTranslator 的调用边界，但真实参数与唯一根因未确认；更换入口并未被证明能解决。",
+      "fix": "检查配套构建下的实际切片操作、输入向量、索引和指针，定位崩溃原因后重跑完整原测试。",
       "proof": "当前 Oracle 实际观察：测试崩溃（SIGSEGV），完整测试计数未闭合；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [
@@ -4888,7 +4936,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已执行，TensorArray 静态图转换崩溃",
+        "completed": "原测试已实际运行，两轮均 SIGSEGV；崩溃前和独立补测的局部结果保留，整题计数未收齐。",
+        "problem": "TensorArray 的 len 测试在静态图转换的切片处理边界崩溃。",
+        "remaining": "检查配套构建下的实际切片操作、输入向量、索引和指针，定位崩溃原因后重跑完整原测试。",
+        "resultDate": "2026-10-10T01:23:15Z"
+      }
     },
     {
       "id": 59127,
@@ -4902,12 +4957,12 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "verification",
-      "summary": "Oracle 未通过：测试崩溃（SIGSEGV），完整测试计数未闭合。",
-      "whatFailed": "最近完整测试崩溃；已确认此前 Python 模块与运行库接口混用。",
-      "why": "独立配套构建后的完整测试仍需执行，不能把接口诊断当作已通过。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "summary": "Oracle 尚未通过：已执行并崩溃，配套运行库复测未完成。",
+      "whatFailed": "此前 overlay 与借用包缺少测试所需的 pir.OpResult 接口；接口不匹配已确认，但崩溃的唯一根因仍未确认。",
+      "why": "接口诊断只能解释已观察的部分失败；尚无配套构建下完整通过结果，不能由补齐接口推定崩溃已修复。",
+      "fix": "用该题独立配套编译包执行完整原测试，确认接口一致，并继续诊断仍然发生的崩溃。",
       "proof": "当前 Oracle 实际观察：测试崩溃（SIGSEGV），完整测试计数未闭合；入口：原 tests/test.sh。",
-      "requirements": "从 Paddle 源码根目录运行原 tests/test.sh。；PYTHONPATH 加入 <Paddle源码>/test/legacy_test 和 <Paddle源码>/test；这里提供 op_test.py 和 white_list 包。；使用与该时期 API 兼容的 CPU Paddle 运行库；本次沿用已核对的 Python 源码覆盖方式。",
+      "requirements": "使用该题配套的 Python 源码与独立编译包；核对原测试需要的 legacy_test 辅助模块及 PIR 类型接口。",
       "problemTests": [
         "test/legacy_test/test_stack_op.py",
         "test/legacy_test/test_stack_extension_api.py"
@@ -6593,7 +6648,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已执行并崩溃，配套运行库复测未完成",
+        "completed": "原测试两轮出现 SIGSEGV；另已核对 Python 源码与底层运行库的接口，确认有版本混用。",
+        "problem": "此前 overlay 与借用包缺少测试所需的 pir.OpResult 接口；接口不匹配已确认，但崩溃的唯一根因仍未确认。",
+        "remaining": "用该题独立配套编译包执行完整原测试，确认接口一致，并继续诊断仍然发生的崩溃。",
+        "resultDate": "2026-10-10T02:27:25Z"
+      }
     },
     {
       "id": 59348,
@@ -19354,10 +19416,10 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_python_compatible_native",
       "corePassed": true,
       "cause": "verification",
-      "summary": "Oracle 已执行范围通过：两轮各 74 通过 / 0 失败 / 0 错误 / 29 跳过。",
-      "whatFailed": "所注明入口的两轮完整结果已记录。",
-      "why": "原 pytest 入口遗漏初始化或运行模式；已按注明的入口执行完整原测试，保留原失败记录。",
-      "fix": "将已验证的入口和必要运行设置纳入任务说明；不改测试断言。",
+      "summary": "Oracle 已通过：已通过，直接执行脚本的说明待同步。",
+      "whatFailed": "pytest 不执行 __main__ 中的静态图初始化；29 项硬件条件跳过仍没有通过结论。",
+      "why": "已修正入口并取得完整两轮通过结果；待同步的是如何运行该题的说明，不是等待首次验证。",
+      "fix": "将 python 直接执行原脚本的入口写入任务说明；29 项跳过分支另需匹配编译能力和设备补测。",
       "proof": "完整范围的实际 Oracle 结果：两轮各 74 通过 / 0 失败 / 0 错误 / 29 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。",
       "requirements": "选定版本的 Python 源码配合兼容的 Paddle 底层运行时；结论限此运行方式。",
       "problemTests": [
@@ -20766,7 +20828,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已通过，直接执行脚本的说明待同步",
+        "completed": "直接执行原 Python 测试脚本，两轮各 74 项通过、29 项硬件条件跳过；已计入累计通过。",
+        "problem": "pytest 不执行 __main__ 中的静态图初始化；29 项硬件条件跳过仍没有通过结论。",
+        "remaining": "将 python 直接执行原脚本的入口写入任务说明；29 项跳过分支另需匹配编译能力和设备补测。",
+        "resultDate": "2026-10-11T14:54:31Z"
+      }
     },
     {
       "id": 60346,
@@ -22171,10 +22240,10 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": false,
       "cause": "unknown",
-      "summary": "Oracle 未通过：两轮各 123 通过 / 1 失败 / 6 错误 / 4 跳过。",
-      "whatFailed": "完整直接入口仍有 1 项失败、6 项错误、4 项跳过。",
-      "why": "6 项错误涉及 dropout 掩码的维度，另 1 项失败涉及指定随机种子的传递。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "summary": "Oracle 尚未通过：已完整验证，仍有 1 项失败和 6 项错误。",
+      "whatFailed": "6 项错误涉及 dropout 比例为 1 时的掩码维度；另 1 项失败涉及命名随机种子的传递及两次输出不一致。",
+      "why": "入口修正已经执行，失败仍可复现。掩码与种子相关源码已定位，但还需验证因果关系，不能假定入口修正足以解决。",
+      "fix": "核对 dropout 掩码形状和随机种子在实际运算中的传递，确认修复边界后再跑完整原脚本；跳过项另按条件补测。",
       "proof": "当前 Oracle 实际观察：两轮各 123 通过 / 1 失败 / 6 错误 / 4 跳过；入口：python 直接运行原测试文件（执行 __main__ 初始化）。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
       "problemTests": [
@@ -23992,7 +24061,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已完整验证，仍有 1 项失败和 6 项错误",
+        "completed": "已独立从零编译 Gold，并直接执行原脚本的 __main__ 初始化；两轮各 123 项通过、1 项失败、6 项错误、4 项跳过。",
+        "problem": "6 项错误涉及 dropout 比例为 1 时的掩码维度；另 1 项失败涉及命名随机种子的传递及两次输出不一致。",
+        "remaining": "核对 dropout 掩码形状和随机种子在实际运算中的传递，确认修复边界后再跑完整原脚本；跳过项另按条件补测。",
+        "resultDate": "2026-10-12T01:22:54Z"
+      }
     },
     {
       "id": 65724,
@@ -28574,13 +28650,13 @@ window.SWE_PADDLE_LATEST = {
       "p2p": null,
       "evidence": "patch_preflight",
       "corePassed": false,
-      "cause": "unknown",
-      "summary": "Oracle 尚未完成：完整测试结果尚未确认。",
-      "whatFailed": "目前没有完整 Oracle 执行记录。",
-      "why": "需要补齐可执行任务及完整测试记录。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "cause": "mixed",
+      "summary": "Oracle 尚未通过：已做前置核查，Windows 目标测试未执行完整。",
+      "whatFailed": "原 Gold 补丁存在上下文不匹配；已有机器核查为 Linux，缺少该题要求的 Windows 与 MSVC 环境。",
+      "why": "目前做的是补丁和平台前置核查，不是目标测试通过；Linux 检查不能替代 Windows 的路径编码行为。",
+      "fix": "先解决原补丁应用问题，再在 Windows / MSVC x64 环境编译并执行 UTF-8 推理路径的目标测试。",
       "proof": "当前 Oracle 实际观察：完整测试结果尚未确认；入口：尚未执行完整测试。",
-      "requirements": "先修正补丁；随后按任务要求用 Windows CPU / MSVC x64 构建验证，Linux 测试不能替代。",
+      "requirements": "Windows CPU、MSVC x64，以及能够正确应用原补丁的精确源码。",
       "problemTests": [
         "solution/code.patch",
         "paddle/fluid/inference/api/helper.h"
@@ -28605,7 +28681,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": null,
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已做前置核查，Windows 目标测试未执行完整",
+        "completed": "已核对原补丁应用和运行平台；尚无 Windows 目标测试的完整执行记录。",
+        "problem": "原 Gold 补丁存在上下文不匹配；已有机器核查为 Linux，缺少该题要求的 Windows 与 MSVC 环境。",
+        "remaining": "先解决原补丁应用问题，再在 Windows / MSVC x64 环境编译并执行 UTF-8 推理路径的目标测试。",
+        "resultDate": ""
+      }
     },
     {
       "id": 76522,
@@ -28956,12 +29039,12 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": false,
       "cause": "mixed",
-      "summary": "Oracle 尚未完成：完整测试结果尚未确认。",
-      "whatFailed": "完整 CINN 测试尚未完成；已有独立补测出现失败。",
-      "why": "还需正确隔离同名 utils，并匹配 CINN 构建和设备；已有局部通过不能代替整题。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "summary": "Oracle 尚未通过：已尝试和补测，完整 CINN 验证未完成。",
+      "whatFailed": "pytest 曾导入错误的同名 utils，找不到 apply_to_static；无 CINN 的包不能提供符号形状测试所需信息，另有 SELU 数值阈值失败。",
+      "why": "已有验证尝试，但入口、编译能力及数值问题尚未全部解决；不能把无 CINN 时的报错直接当作模型或 Gold 的实现错误。",
+      "fix": "隔离正确的 utils，用具有所需 CINN / GPU 能力的配套编译包和设备执行完整测试，并单独复核 SELU 的数值差异。",
       "proof": "当前 Oracle 实际观察：完整测试结果尚未确认；入口：原 tests/test.sh。",
-      "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
+      "requirements": "正确的测试辅助模块搜索路径、启用 CINN 的配套构建，以及目标测试要求的 GPU 设备。",
       "problemTests": [
         "test.ir.pir.cinn.symbolic.test_infer_sym_shape_multinary_op.CELUOpInferSymbolicShapeTest::test_eval_symbolic",
         "test.ir.pir.cinn.symbolic.test_infer_sym_shape_unary_op.HardSigmoidInferSymbolicShapeTest::test_eval_symbolic",
@@ -29397,7 +29480,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已尝试和补测，完整 CINN 验证未完成",
+        "completed": "已有原入口尝试及独立 CPU、符号形状补测；补测记录中存在失败，完整原测试仍未收齐。",
+        "problem": "pytest 曾导入错误的同名 utils，找不到 apply_to_static；无 CINN 的包不能提供符号形状测试所需信息，另有 SELU 数值阈值失败。",
+        "remaining": "隔离正确的 utils，用具有所需 CINN / GPU 能力的配套编译包和设备执行完整测试，并单独复核 SELU 的数值差异。",
+        "resultDate": "2026-10-11T11:41:32Z"
+      }
     },
     {
       "id": 77064,
@@ -29797,13 +29887,18 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "exact_native",
       "corePassed": true,
       "cause": "unknown",
-      "summary": "Oracle 未通过：两轮各 32 通过 / 0 失败 / 4 错误 / 0 跳过。",
-      "whatFailed": "测试仍有失败或错误。",
-      "why": "保留失败结果，继续逐项诊断。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "summary": "Oracle 尚未通过：已完整执行，4 项静态 inverse 调用报错。",
+      "whatFailed": "4 项静态模式测试调用 paddle.inverse 时，底层要求 Value 参数却收到 None；报错经过 generated_tensor_methods_patch 的 inverse 调用。",
+      "why": "报错位置已从实际日志确认；Python 路由、运行模式和底层实现之间的唯一根因尚未定位，不能仅凭换入口认定解决。",
+      "fix": "核对静态模式初始化、inverse 的 Python 接口绑定和配套构建，查明 None 的来源，再执行完整 36 项测试。",
       "proof": "当前 Oracle 实际观察：两轮各 32 通过 / 0 失败 / 4 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
-      "problemTests": [],
+      "problemTests": [
+        "TestInverseAPI::test_static",
+        "TestInverseAPI::test_static_with_name",
+        "TestInverseAPICompatibility::test_static_compatibility",
+        "TestInverseSingularAPI::test_static"
+      ],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
       "checks": [
         {
@@ -30335,7 +30430,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已完整执行，4 项静态 inverse 调用报错",
+        "completed": "原 inverse 测试两轮各 32 项通过、4 项错误，原脚本均退出 1。",
+        "problem": "4 项静态模式测试调用 paddle.inverse 时，底层要求 Value 参数却收到 None；报错经过 generated_tensor_methods_patch 的 inverse 调用。",
+        "remaining": "核对静态模式初始化、inverse 的 Python 接口绑定和配套构建，查明 None 的来源，再执行完整 36 项测试。",
+        "resultDate": "2026-10-08T20:28:36Z"
+      }
     },
     {
       "id": 77150,
@@ -34914,10 +35016,10 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "environment_incomplete",
       "corePassed": false,
       "cause": "mixed",
-      "summary": "Oracle 尚未完成：完整测试结果尚未确认。",
-      "whatFailed": "此前导入遇到跨版本接口不匹配，新的配套构建尚无完整通过结果。",
-      "why": "最近完整原测试结果尚未闭合，不能把构建进行中或局部 CPU 结果当成通过。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "summary": "Oracle 尚未通过：已尝试，导入受阻且完整目标结果缺失。",
+      "whatFailed": "混用 Python 模块时缺少 convert_to_vartype；该题还涉及 pin_memory，目标覆盖需要匹配的 CUDA 或 XPU 编译包与设备。",
+      "why": "导入失败和记录不完整都已有证据；构建准备、局部 CPU 检查或脚本退出 0 均不能代替 pin_memory 目标分支的完整结果。",
+      "fix": "使用该题配套源码独立编译，解决导入接口不匹配，在所需设备上执行完整目标测试并收齐节点结果。",
       "proof": "当前 Oracle 实际观察：完整测试结果尚未确认；入口：原 tests/test.sh。",
       "requirements": "至少一张CUDA或XPU设备和匹配的Paddle构建；按实际后端允许另一后端条件跳过",
       "problemTests": [
@@ -36932,7 +37034,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已尝试，导入受阻且完整目标结果缺失",
+        "completed": "已有运行尝试与接口核查；记录中的两次脚本退出 0，但没有完整测试节点计数，不能据此判通过。",
+        "problem": "混用 Python 模块时缺少 convert_to_vartype；该题还涉及 pin_memory，目标覆盖需要匹配的 CUDA 或 XPU 编译包与设备。",
+        "remaining": "使用该题配套源码独立编译，解决导入接口不匹配，在所需设备上执行完整目标测试并收齐节点结果。",
+        "resultDate": "2026-10-11T06:10:53Z"
+      }
     },
     {
       "id": 78911,
@@ -38775,14 +38884,17 @@ window.SWE_PADDLE_LATEST = {
       "p2p": 1,
       "evidence": "exact_native",
       "corePassed": true,
-      "cause": "unknown",
-      "summary": "Oracle 未通过：两轮各 0 通过 / 2 失败 / 0 错误 / 0 跳过。",
-      "whatFailed": "测试仍有失败或错误。",
-      "why": "保留失败结果，继续逐项诊断。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "cause": "verification",
+      "summary": "Oracle 尚未通过：已执行两轮，2 项因 CPU 模块绑定缺失失败。",
+      "whatFailed": "当前 paddle.device 没有 cpu 属性，两项均报 AttributeError；将 cpu.py 放到目录中并未使父模块自动导出该属性。",
+      "why": "实际日志确认的是模块属性缺失，尚未测到这次 Gold 的目标日志行为；原测试模拟内存 API、logger 和系统命令，其通过范围仍须注明。",
+      "fix": "用该题独立配套编译包核对 paddle.device.cpu 的加载与导出，再执行内存日志及不支持 CPU allocator 的原测试。",
       "proof": "当前 Oracle 实际观察：两轮各 0 通过 / 2 失败 / 0 错误 / 0 跳过；入口：原 tests/test.sh。",
       "requirements": "使用记录中的精确 Base/Gold 源码构建的 Paddle，按任务要求选择 CPU 或设备测试。",
-      "problemTests": [],
+      "problemTests": [
+        "TestCheckMemoryUsage::test_existing_memory_logging",
+        "TestCheckMemoryUsage::test_unsupported_cpu_allocator_api"
+      ],
       "countsNote": "只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。",
       "checks": [
         {
@@ -38872,7 +38984,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": "2026-09-11",
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "已执行两轮，2 项因 CPU 模块绑定缺失失败",
+        "completed": "原内存日志测试两轮各 0 项通过、2 项失败；失败发生在测试访问或设置 CPU 内存 API 时。",
+        "problem": "当前 paddle.device 没有 cpu 属性，两项均报 AttributeError；将 cpu.py 放到目录中并未使父模块自动导出该属性。",
+        "remaining": "用该题独立配套编译包核对 paddle.device.cpu 的加载与导出，再执行内存日志及不支持 CPU allocator 的原测试。",
+        "resultDate": "2026-10-09T20:39:36Z"
+      }
     },
     {
       "id": 79386,
@@ -39134,12 +39253,12 @@ window.SWE_PADDLE_LATEST = {
       "evidence": "environment_incomplete",
       "corePassed": false,
       "cause": "machine",
-      "summary": "Oracle 尚未完成：完整测试结果尚未确认。",
-      "whatFailed": "CUDA 梯度索引的目标测试尚未完成。",
-      "why": "目标缺陷需要匹配的 CUDA 编译包和 NVIDIA 设备；CPU 补测不代表目标 GPU 通过。",
-      "fix": "继续处理该题失败或缺失条件，再运行完整 Oracle。",
+      "summary": "Oracle 尚未通过：目标 CUDA 梯度测试尚未完成。",
+      "whatFailed": "缺少已确认的匹配 CUDA 编译包和 NVIDIA 设备测试结果；CPU 检查无法覆盖目标 min/max 梯度索引缺陷。",
+      "why": "待确认的是目标 GPU 行为，不等于所有检查从未开展；独立 CPU 结果不能计为 CUDA 目标分支通过。",
+      "fix": "准备配套 CUDA 编译包，在 NVIDIA 设备上运行原 min/max 梯度索引测试并确认两轮完整结果。",
       "proof": "当前 Oracle 实际观察：完整测试结果尚未确认；入口：尚未执行完整测试。",
-      "requirements": "遵循该任务的运行入口、测试范围及设备条件。",
+      "requirements": "匹配任务源码的 CUDA 编译包、NVIDIA 设备，以及原梯度索引测试入口。",
       "problemTests": [],
       "countsNote": "F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。",
       "checks": [],
@@ -39161,7 +39280,14 @@ window.SWE_PADDLE_LATEST = {
         "baselinePassPreserved": false
       },
       "pairedResultDate": null,
-      "taskFilesAvailable": true
+      "taskFilesAvailable": true,
+      "validationProgress": {
+        "meaning": "目标 CUDA 梯度测试尚未完成",
+        "completed": "已核对原入口要求 CUDA，也有独立 CPU 检查记录；目标 GPU 原测试没有完整两轮结果。",
+        "problem": "缺少已确认的匹配 CUDA 编译包和 NVIDIA 设备测试结果；CPU 检查无法覆盖目标 min/max 梯度索引缺陷。",
+        "remaining": "准备配套 CUDA 编译包，在 NVIDIA 设备上运行原 min/max 梯度索引测试并确认两轮完整结果。",
+        "resultDate": ""
+      }
     }
   ],
   "oracleSummary": {

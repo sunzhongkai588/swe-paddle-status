@@ -5,13 +5,15 @@
   const tasks = data.tasks;
   const $ = (id) => document.getElementById(id);
   const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const statusLabels = {passed:'Oracle 已通过',needs_fix:'Oracle 通过 · 入口需同步',failed:'Oracle 未通过',incomplete:'尚未完成'};
+  const statusLabels = {passed:'Oracle 已通过',needs_fix:'已通过 · 运行说明待同步',failed:'Oracle 测试失败',incomplete:'完整验证未完成'};
   const causeLabels = {none:'未发现问题',data:'任务数据',verification:'验证程序配置',machine:'机器环境',mixed:'多处原因',unknown:'原因待定位'};
   const evidenceLabels = {exact_native:'精确源码构建',exact_python:'精确 Python 源码',exact_python_compatible_native:'精确 Python + 兼容运行时',lightweight_source:'任务约定的轻量源码验证',lightweight_cpp:'任务约定的轻量 C++ 验证',patch_preflight:'补丁应用检查',environment_incomplete:'所需环境不可用'};
   const stateLabels = {passed:'通过',failed:'失败',error:'报错',skipped:'跳过',not_run:'未执行',missing:'无记录',not_collected:'未收集',absent:'无记录',unpaired:'未配对',crashed:'崩溃',timeout:'超时',unknown:'未确认',setup_error:'准备时报错',teardown_error:'结束时报错',collection_error:'收集时报错',aborted:'异常退出',target_sigabrt:'目标缺陷导致退出',target_abort:'目标缺陷导致退出',native_abort:'底层运算退出',empty_return:'未执行主体'};
   const counts = Object.fromEntries(Object.keys(statusLabels).map(s => [s,tasks.filter(t=>t.status===s).length]));
   const core = data.oracleSummary.passed;
   const problems = tasks.filter(t=>t.status!=='passed');
+  const unpassed = tasks.filter(t=>!t.oracle.passed);
+  const instructionUpdates = tasks.filter(t=>t.status==='needs_fix');
   const authorLabel = (t) => data.authors[t.author]?.label || t.author;
   const badge = (t) => `<span class="status-badge ${esc(t.status)}">${esc(statusLabels[t.status])}</span>`;
   const matrix = (t) => t.f2p == null || t.p2p == null ? 'F2P/P2P 未确认' : `${t.f2p} / ${t.p2p}${t.corePassed ? '' : '（已确认部分）'}`;
@@ -25,10 +27,11 @@
   $('progress-ring').style.setProperty('--progress',`${rate}%`);
   $('progress-ring').setAttribute('aria-label',`Oracle 累计通过 ${core} / ${tasks.length}，${rate}%`);
   $('hero-numbers').innerHTML=Object.entries(counts).map(([s,n])=>`<div><span class="number-dot ${esc(s)}"></span><span>${esc(statusLabels[s])}</span><strong>${n}</strong></div>`).join('');
-  $('metrics').innerHTML=Object.entries(counts).map(([s,n])=>`<a class="metric-card ${esc(s)}" href="?status=${esc(s)}#all-tasks"><strong>${n}</strong><span>${esc(statusLabels[s])}</span><small>${esc({passed:'已有完整 Gold 测试通过记录',needs_fix:'修正入口后完整通过，需同步任务说明',failed:'实际出现失败、错误或测试崩溃',incomplete:'完整结果未闭合，继续验证'}[s])}</small></a>`).join('');
-  $('issues-title').textContent=`${problems.length} 条任务需要处理`;
+  $('metrics').innerHTML=Object.entries(counts).map(([s,n])=>`<a class="metric-card ${esc(s)}" href="?status=${esc(s)}#all-tasks"><strong>${n}</strong><span>${esc(statusLabels[s])}</span><small>${esc({passed:'已有完整 Gold 测试通过记录',needs_fix:'已计入通过，只待同步已验证的运行方式',failed:'已实际执行，出现失败、报错或崩溃',incomplete:'可能已尝试或补测，完整目标结果仍缺失'}[s])}</small></a>`).join('');
+  $('issues-title').textContent=`${unpassed.length} 条尚未通过，${instructionUpdates.length} 条运行说明待同步`;
+  $('issues-description').textContent='逐题查看已做验证、遇到的问题和还需完成的检查。运行说明待同步的题已计入通过。';
   $('cause-summary').innerHTML=['data','verification','machine','mixed','unknown'].map(c=>{const n=problems.filter(t=>t.cause===c).length;return n?`<span>${esc(causeLabels[c])} <b>${n}</b></span>`:'';}).join('');
-  $('issue-grid').innerHTML=problems.map(t=>`<button class="issue-card ${esc(t.status)}" type="button" data-task-id="${t.id}"><span class="issue-top"><strong>#${t.id}</strong><span class="cause-badge">${esc(causeLabels[t.cause])}</span></span>${badge(t)}<h3>${esc(t.summary)}</h3><p>${esc(t.why)}</p><span class="issue-action"><b>怎么处理</b>${esc(t.fix)}</span><span class="issue-footer">查看具体测试与确认依据 <span>↗</span></span></button>`).join('');
+  $('issue-grid').innerHTML=problems.map(t=>`<button class="issue-card ${esc(t.status)}" type="button" data-task-id="${t.id}"><span class="issue-top"><strong>#${t.id}</strong><span class="cause-badge">${esc(causeLabels[t.cause])}</span></span>${badge(t)}<h3>${esc(t.validationProgress?.meaning||t.summary)}</h3>${t.validationProgress?progressHtml(t,true):`<p>${esc(t.why)}</p>`}<span class="issue-action"><b>还需完成</b>${esc(t.fix)}</span><span class="issue-footer">查看具体测试与确认依据 <span>↗</span></span></button>`).join('');
   const addOptions=(id,options)=>{$(id).insertAdjacentHTML('beforeend',options.map(([v,l])=>`<option value="${esc(v)}">${esc(l)}</option>`).join(''));};
   addOptions('status-filter',Object.entries(statusLabels).map(([s,l])=>[s,`${l}（${counts[s]}）`]));
   addOptions('cause-filter',Object.entries(causeLabels));
@@ -36,7 +39,7 @@
   addOptions('author-filter',[...new Set(tasks.map(t=>t.author))].sort().map(a=>[a,data.authors[a]?.label||a]));
   const inputs={q:$('search-input'),status:$('status-filter'),cause:$('cause-filter'),evidence:$('evidence-filter'),author:$('author-filter')};
   let activeTask=null;
-  const searchText=new Map(tasks.map(t=>[t.id,[t.id,t.title,t.author,authorLabel(t),t.summary,t.why,t.whatFailed,t.fix,t.oracle.entry,t.oracle.summary,...t.checks.map(c=>c.name),...(t.problemTests||[])].join(' ').toLowerCase()]));
+  const searchText=new Map(tasks.map(t=>[t.id,[t.id,t.title,t.author,authorLabel(t),t.summary,t.why,t.whatFailed,t.fix,t.oracle.entry,t.oracle.summary,...Object.values(t.validationProgress||{}),...t.checks.map(c=>c.name),...(t.problemTests||[])].join(' ').toLowerCase()]));
   function renderTable(updateUrl=true){
     const q=inputs.q.value.trim().toLowerCase();
     const shown=tasks.filter(t=>(!q||searchText.get(t.id).includes(q))&&Object.entries(inputs).every(([k,e])=>k==='q'||e.value==='all'||t[k]===e.value));
@@ -55,10 +58,15 @@
     const retained=item.baselinePassPreserved?`<p>另一次原入口观察：${esc(item.latestAttempt.entry)}；${esc(item.latestAttempt.result==='failed'?'仍有失败或异常退出':'完整结果未确认')}。已通过的入口和范围记录继续保留。</p>`:'';
     return `<div class="dialog-section"><h3>Oracle 实际结果</h3><p>${esc(item.summary)}</p><p>运行入口：${esc(item.entry)}</p><p>确认时间：${esc(item.date||'尚未确认')}</p>${item.activity?`<p>当前任务：${esc(item.activity)}</p>`:''}${retained}</div>`;
   }
+  function progressHtml(t,card=false){
+    const progress=t.validationProgress;if(!progress)return '';
+    const fields=card?[['completed','已做验证'],['problem','遇到的问题']]:[['completed','已做验证'],['problem','遇到的问题'],['remaining','还需完成']];
+    return `<dl class="validation-progress${card?' card-progress':''}">${fields.map(([key,label])=>`<div><dt>${label}</dt><dd>${esc(progress[key])}</dd></div>`).join('')}</dl>`;
+  }
   function openTask(id){
     const t=tasks.find(t=>t.id===Number(id));if(!t)return;
     activeTask=t.id;
-    $('dialog-content').innerHTML=`<p class="dialog-eyebrow">TASK DETAIL · ${esc(authorLabel(t))}</p><div class="dialog-title-row"><h2 id="dialog-title">#${t.id}</h2>${badge(t)}</div><p class="dialog-topic">${esc(t.title)}</p>${oracleDetail(t)}<div class="diagnosis ${esc(t.status)}"><span class="cause-badge">问题来源：${esc(causeLabels[t.cause])}</span><h3>${esc(t.summary)}</h3><p>${esc(t.whatFailed)}</p></div><div class="dialog-section"><h3>为什么</h3><p>${esc(t.why)}</p></div><div class="dialog-section action-box"><h3>怎么处理</h3><p>${esc(t.fix)}</p></div><div class="dialog-section"><h3>怎么确认的</h3><p>${esc(t.proof)}</p></div>${t.problemTests?.length?`<details class="problem-test-details"><summary>涉及的具体测试 / 文件（${t.problemTests.length} 项）</summary><ul>${t.problemTests.map(n=>`<li><code>${esc(n)}</code></li>`).join('')}</ul></details>`:''}<div class="matrix-panel"><div><small>已有有效 F2P / P2P</small><strong>${esc(matrix(t))}</strong></div><div><small>运行方式</small><strong>${esc(evidenceLabels[t.evidence]||t.evidence)}</strong></div><p>${esc(t.requirements)}</p>${t.countsNote?`<p>${esc(t.countsNote)}</p>`:''}</div>${checksHtml(t)}<div class="dialog-links">${t.taskFilesAvailable?`<a href="${esc(data.meta.taskBase+t.id)}" target="_blank" rel="noreferrer">查看任务文件 ↗</a>`:''}<a href="https://github.com/PaddlePaddle/Paddle/pull/${t.id}" target="_blank" rel="noreferrer">来源 PR ↗</a><a href="latest-report.md#task-${t.id}">逐题报告 ↗</a></div>`;
+    $('dialog-content').innerHTML=`<p class="dialog-eyebrow">TASK DETAIL · ${esc(authorLabel(t))}</p><div class="dialog-title-row"><h2 id="dialog-title">#${t.id}</h2>${badge(t)}</div><p class="dialog-topic">${esc(t.title)}</p>${oracleDetail(t)}<div class="diagnosis ${esc(t.status)}"><span class="cause-badge">问题来源：${esc(causeLabels[t.cause])}</span><h3>${esc(t.summary)}</h3><p>${esc(t.whatFailed)}</p></div>${progressHtml(t)}<div class="dialog-section"><h3>原因与判断边界</h3><p>${esc(t.why)}</p></div>${t.validationProgress?'':`<div class="dialog-section action-box"><h3>怎么处理</h3><p>${esc(t.fix)}</p></div>`}<div class="dialog-section"><h3>怎么确认的</h3><p>${esc(t.proof)}</p></div>${t.problemTests?.length?`<details class="problem-test-details"><summary>涉及的具体测试 / 文件（${t.problemTests.length} 项）</summary><ul>${t.problemTests.map(n=>`<li><code>${esc(n)}</code></li>`).join('')}</ul></details>`:''}<div class="matrix-panel"><div><small>已有有效 F2P / P2P</small><strong>${esc(matrix(t))}</strong></div><div><small>运行方式</small><strong>${esc(evidenceLabels[t.evidence]||t.evidence)}</strong></div><p>${esc(t.requirements)}</p>${t.countsNote?`<p>${esc(t.countsNote)}</p>`:''}</div>${checksHtml(t)}<div class="dialog-links">${t.taskFilesAvailable?`<a href="${esc(data.meta.taskBase+t.id)}" target="_blank" rel="noreferrer">查看任务文件 ↗</a>`:''}<a href="https://github.com/PaddlePaddle/Paddle/pull/${t.id}" target="_blank" rel="noreferrer">来源 PR ↗</a><a href="latest-report.md#task-${t.id}">逐题报告 ↗</a></div>`;
     if(!$('task-dialog').open)$('task-dialog').showModal();
     $('task-dialog').scrollTop=0;
     const u=new URL(location.href);u.searchParams.set('task',t.id);history.replaceState(null,'',u);
