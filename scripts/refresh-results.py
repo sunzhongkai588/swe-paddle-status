@@ -107,9 +107,10 @@ def write_public(data):
     assert not any(s in serialized for s in ('/home/', '/data/home/', 'container_id', 'LIBINFER_', 'ugate', 'candidate.patch'))
     (SITE / 'docs/assets/latest-data.js').write_text('window.SWE_PADDLE_LATEST = ' + serialized)
     passed = data['oracleSummary']['passed']
+    total = data['meta']['total']
     labels = dict(passed='Oracle 通过', needs_fix='Oracle 已通过，运行说明待同步', failed='Oracle 测试失败', incomplete='完整验证未完成')
     lines = ['# SWE-Paddle 最新验证情况', '', '结果截至：' + data['meta']['resultsAsOf'] + '。', '',
-        '**Oracle 累计通过 %d / 111 题（%.1f%%）；其余 %d 题尚未确认通过。**' % (passed, 100.0*passed/111, 111-passed), '',
+        '**Oracle 累计通过 %d / %d 题（%.1f%%）；其余 %d 题尚未确认通过。**' % (passed, total, 100.0*passed/total, total-passed), '',
         data['oracleSummary']['note'], '',
         'Oracle 指官方参考补丁（Gold）的测试结果。“运行说明待同步”表示正确入口已经完整通过，只需同步运行说明，已计入累计通过。“完整验证未完成”表示缺少完整可确认结果，可能已尝试、做过补测或遇到环境阻断，不等于从未验证。', '',
         'Oracle 通过适用于各题注明的测试范围；硬件跳过不代表该分支通过。Gold 通过不自动证明 F2P/P2P 配对。已有配对明细保留其确认日期。', '',
@@ -135,6 +136,8 @@ def write_public(data):
             '**Oracle 入口：** ' + task['oracle']['entry'], '', '**Oracle 确认时间：** ' + (task['oracle']['date'] or '尚未确认')])
         if task['oracle']['activity']:
             lines.extend(['', '**当前任务：** ' + task['oracle']['activity']])
+        if not task['checks'] and task.get('countsNote'):
+            lines.extend(['', '**计数说明：** ' + task['countsNote']])
         if task['checks']:
             lines.extend(['', '**已有 F2P/P2P 配对记录：** %s / %s，确认日期 %s。' % (task['f2p'], task['p2p'], task['pairedResultDate']), '',
                 task['countsNote'], '', '| 测试 | Base 两轮 | Gold 两轮 | 说明 |', '| --- | --- | --- | --- |'])
@@ -178,7 +181,10 @@ def main():
     tasks = {t['id']: t for t in data['tasks']}
     original_public_ids = {t['id'] for t in data['tasks'] if t.get('taskFilesAvailable', True)}
     ids = {int(t['number']) for t in canonical['tasks']}
-    assert len(ids) == 111 and set(tasks) <= ids
+    assert len(ids) == 111
+    # The canonical input covers the original cohort. Keep later published tasks
+    # with their own frozen source and observations outside that input's scope.
+    assert all(tasks[number].get('sourceSnapshot') for number in set(tasks) - ids)
     records = {number: [] for number in ids}
     private = []
     for item in canonical['tasks']:
@@ -258,6 +264,8 @@ def main():
             number = int(item['task'].rsplit('-', 1)[-1])
             active[number] = '编译进行中' if item['state'] == 'waiting_for_original_terminal' else '测试进行中'
     for number, task in tasks.items():
+        if number not in records:
+            continue
         entries = records[number]
         entries.sort(key=lambda z: (z['date'], z['source'] != 'canonical', z['entry'] != '原 tests/test.sh'))
         passed = [z for z in entries if z['result'] == 'passed']
@@ -294,7 +302,7 @@ def main():
         else:
             task['cause'] = 'machine' if number == 79657 else 'mixed' if number in (76873, 78823) else 'verification' if number == 59127 else 'unknown'
         task['packageChangeRequired'] = adjusted
-    data['tasks'] = [tasks[number] for number in sorted(ids)]
+    data['tasks'] = [tasks[number] for number in sorted(tasks)]
     data['counts'] = dict(Counter(t['status'] for t in data['tasks']))
     for key in ('passed', 'needs_fix', 'failed', 'incomplete'):
         data['counts'].setdefault(key, 0)
@@ -302,10 +310,11 @@ def main():
     assert len(passed_ids) >= 87
     now = datetime.datetime.utcnow().isoformat() + 'Z'
     checked_local_date = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime('%Y-%m-%d')
-    data['meta'].update(total=111, updatedAt=checked_local_date, resultsAsOf=native['task_check_policy_observed_at_utc'],
-        proposalOnlyIds=[56723, 78220, 79391])
-    data['oracleSummary'] = dict(total=111, passed=len(passed_ids), notConfirmed=111-len(passed_ids),
-        passedIds=passed_ids, retainedMinimum=87, allPassed=len(passed_ids)==111,
+    total = len(data['tasks'])
+    data['meta'].update(total=total, updatedAt=checked_local_date,
+        resultsAsOf=max(data['meta']['resultsAsOf'], native['task_check_policy_observed_at_utc']))
+    data['oracleSummary'] = dict(total=total, passed=len(passed_ids), notConfirmed=total-len(passed_ids),
+        passedIds=passed_ids, retainedMinimum=87, allPassed=len(passed_ids)==total,
         note='累计通过按已有完整 Gold 测试记录去重；修正入口后的完整结果纳入，跳过仍单独显示。已有通过不会因缺少构建复核证据扣减。')
     data['authors']['unknown'] = dict(label='作者信息未补录')
     apply_progress_notes(data)

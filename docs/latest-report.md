@@ -1,8 +1,8 @@
 # SWE-Paddle 最新验证情况
 
-结果截至：2026-10-12T17:04:13.797588Z。
+结果截至：2026-10-14T02:03:48.157951Z。
 
-**Oracle 累计通过 98 / 111 题（88.3%）；其余 13 题尚未确认通过。**
+**Oracle 累计通过 102 / 115 题（88.7%）；其余 13 题尚未确认通过。**
 
 累计通过按已有完整 Gold 测试记录去重；修正入口后的完整结果纳入，跳过仍单独显示。已有通过不会因缺少构建复核证据扣减。
 
@@ -67,15 +67,19 @@ Oracle 通过适用于各题注明的测试范围；硬件跳过不代表该分�
 | #60808 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #62012 | Oracle 通过 | 两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #64320 | Oracle 通过 | 两轮各 33 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #64323 | Oracle 通过 | 两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #64519 | Oracle 通过 | 两轮各 27 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #64881 | Oracle 测试失败 | 两轮各 123 通过 / 1 失败 / 6 错误 / 4 跳过 |
 | #65724 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #67195 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #68432 | Oracle 通过 | 两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #70469 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #71525 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #71747 | Oracle 通过 | 两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #72800 | Oracle 通过 | 两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #73122 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #73125 | Oracle 通过 | 两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过 |
+| #73329 | Oracle 通过 | 两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #73385 | Oracle 通过 | 两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #73387 | Oracle 通过 | 两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过 |
 | #73535 | Oracle 通过 | 两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过 |
@@ -2261,6 +2265,8 @@ Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳�
 
 **Oracle 确认时间：** 2026-10-09T18:49:15Z
 
+**计数说明：** F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。
+
 <a id="task-59973"></a>
 
 ## #59973 · slice_scatter API
@@ -2417,6 +2423,8 @@ Oracle 已执行范围通过：两轮各 4 通过 / 0 失败 / 0 错误 / 0 跳�
 
 **Oracle 确认时间：** 2026-10-09T18:18:11Z
 
+**计数说明：** F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。
+
 <a id="task-60417"></a>
 
 ## #60417 · Auto-tuner resume from CSV history
@@ -2498,6 +2506,8 @@ Oracle 已执行范围通过：两轮各 15 通过 / 0 失败 / 0 错误 / 0 跳
 
 **Oracle 确认时间：** 2026-10-11T20:53:51Z
 
+**计数说明：** F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。
+
 <a id="task-64320"></a>
 
 ## #64320 · sparse.mask_as API
@@ -2557,6 +2567,28 @@ Oracle 已执行范围通过：两轮各 33 通过 / 0 失败 / 0 错误 / 0 跳
 | test/legacy_test/test_sparse_utils_op.py::TestSparseCreate::test_create_csr_by_tensor | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
 | test/legacy_test/test_sparse_utils_op.py::TestSparseCreate::test_dtype | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
 | test/legacy_test/test_sparse_utils_op.py::TestSparseCreate::test_place | passed / passed | passed / passed | CPU 子集四轮观察为通过；设备分支未验证，条件空返回不代表执行了设备断言。 |
+
+<a id="task-64323"></a>
+
+## #64323 · [SOT][dynamic shape] Support dynamic int input
+
+Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。
+
+原测试两轮均无失败、错误或跳过；Base 对照尚未执行。
+
+**原因：** 逐题独立从零编译 Gold，并安装该题实际产生的 wheel；两轮完整运行原测试入口。Gold 结果按题号计入累计通过。
+
+**处理：** 保留已通过的原测试入口和环境设置；另行执行独立 Base 对照，确认 F2P/P2P。
+
+**确认方法：** 独立空构建目录完成配置、ALL 编译与安装，退出码均为 0；该题 wheel 安装、依赖检查和原生库导入通过。两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过，两轮原脚本退出码均为 0。生成输入来源检查仍待确认，未记为通过。
+
+**运行条件：** CPU，Python 3.10，STRICT_MODE=1，MIN_GRAPH_SIZE=0；CCACHE_DISABLE=1，独立从零构建，无借包或 Python overlay。编译包 paddlepaddle-0.0.0-cp310-cp310-linux_x86_64.whl（119233611 字节）保存在磁盘，构建输出和归档目录各有一份。
+
+**Oracle 入口：** 原 tests/test.sh：python -m pytest test/sot/test_dynamic_shape.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）
+
+**Oracle 确认时间：** 2026-10-13T11:22:58.966619Z
+
+**计数说明：** Base 对照尚未执行，F2P/P2P 配对未确认；Gold 完整通过不自动证明配对。每轮 2 项通过中，目标测试 1 项、导入的辅助测试 1 项；辅助项不计入目标覆盖。
 
 <a id="task-64519"></a>
 
@@ -2910,6 +2942,50 @@ Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳�
 | test/legacy_test/test_fused_dropout_add_fallback.py::test_training_uses_reference_dropout_add_semantics | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 | test/legacy_test/test_fused_dropout_add_fallback.py::test_zero_probability_result_remains_valid | passed / passed | passed / passed | 修复前后均通过，属于回归测试 P2P，不能证明复现了待修缺陷。 |
 
+<a id="task-71525"></a>
+
+## #71525 · [SOT] Add JSON dumping and Base64 encoding for log output
+
+Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。
+
+原测试两轮均无失败、错误或跳过；Base 对照尚未执行。
+
+**原因：** 逐题独立从零编译 Gold，并安装该题实际产生的 wheel；两轮完整运行原测试入口。Gold 结果按题号计入累计通过。
+
+**处理：** 保留已通过的原测试入口和环境设置；另行执行独立 Base 对照，确认 F2P/P2P。
+
+**确认方法：** 独立空构建目录完成配置、ALL 编译与安装，退出码均为 0；该题 wheel 安装、依赖检查和原生库导入通过。两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过，两轮原脚本退出码均为 0。生成输入来源检查仍待确认，未记为通过。
+
+**运行条件：** CPU，Python 3.11，STRICT_MODE=1，MIN_GRAPH_SIZE=0；CCACHE_DISABLE=1，独立从零构建，无借包或 Python overlay。编译包 paddlepaddle-0.0.0-cp311-cp311-linux_x86_64.whl（129856218 字节）保存在磁盘，构建输出和归档目录各有一份。
+
+**Oracle 入口：** 原 tests/test.sh：python -m pytest test/sot/test_info_collect.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）
+
+**Oracle 确认时间：** 2026-10-13T09:29:42.228070Z
+
+**计数说明：** Base 对照尚未执行，F2P/P2P 配对未确认；Gold 完整通过不自动证明配对。
+
+<a id="task-71747"></a>
+
+## #71747 · [SOT] Support reduce-like operation for all iterables
+
+Oracle 已执行范围通过：两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过。
+
+原测试两轮均无失败、错误或跳过；Base 对照尚未执行。
+
+**原因：** 逐题独立从零编译 Gold，并安装该题实际产生的 wheel；两轮完整运行原测试入口。Gold 结果按题号计入累计通过。
+
+**处理：** 保留已通过的原测试入口和环境设置；另行执行独立 Base 对照，确认 F2P/P2P。
+
+**确认方法：** 独立空构建目录完成配置、ALL 编译与安装，退出码均为 0；该题 wheel 安装、依赖检查和原生库导入通过。两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过，两轮原脚本退出码均为 0。生成输入来源检查仍待确认，未记为通过。
+
+**运行条件：** CPU，Python 3.11，STRICT_MODE=1，MIN_GRAPH_SIZE=0；CCACHE_DISABLE=1，独立从零构建，无借包或 Python overlay。编译包 paddlepaddle-0.0.0-cp311-cp311-linux_x86_64.whl（129942491 字节）保存在磁盘，构建输出和归档目录各有一份。
+
+**Oracle 入口：** 原 tests/test.sh：python -m pytest test/sot/test_22_generator.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）
+
+**Oracle 确认时间：** 2026-10-13T10:28:15.942259Z
+
+**计数说明：** Base 对照尚未执行，F2P/P2P 配对未确认；Gold 完整通过不自动证明配对。
+
 <a id="task-72800"></a>
 
 ## #72800 · cummin / cummax zero-size Tensor
@@ -3009,6 +3085,28 @@ Oracle 已执行范围通过：两轮各 8 通过 / 0 失败 / 0 错误 / 0 跳�
 | test/legacy_test/test_determinant_op.py::TestDeterminantOp_ZeroSize2::test_check_output | teardown_error / teardown_error | passed / passed | 测试主体之后的清理未正常完成，不能只按主体结果计通过。 |
 | test/legacy_test/test_determinant_op.py::TestSlogDeterminantOp_ZeroSize2::test_check_grad | failed / failed | passed / passed | 修复前两轮失败、修复后两轮通过，属于 F2P。 |
 | test/legacy_test/test_determinant_op.py::TestSlogDeterminantOp_ZeroSize2::test_check_output | teardown_error / teardown_error | passed / passed | 测试主体之后的清理未正常完成，不能只按主体结果计通过。 |
+
+<a id="task-73329"></a>
+
+## #73329 · [SOT] Support `dataclass` construction and basic access
+
+Oracle 已执行范围通过：两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过。
+
+原测试两轮均无失败、错误或跳过；Base 对照尚未执行。
+
+**原因：** 逐题独立从零编译 Gold，并安装该题实际产生的 wheel；两轮完整运行原测试入口。Gold 结果按题号计入累计通过。
+
+**处理：** 保留已通过的原测试入口和环境设置；另行执行独立 Base 对照，确认 F2P/P2P。
+
+**确认方法：** 独立空构建目录完成配置、ALL 编译与安装，退出码均为 0；该题 wheel 安装、依赖检查和原生库导入通过。两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过，两轮原脚本退出码均为 0。生成输入来源检查仍待确认，未记为通过。
+
+**运行条件：** CPU，Python 3.11，STRICT_MODE=1，MIN_GRAPH_SIZE=0；CCACHE_DISABLE=1，独立从零构建，无借包或 Python overlay。编译包 paddlepaddle-0.0.0-cp311-cp311-linux_x86_64.whl（131360479 字节）保存在磁盘，构建输出和归档目录各有一份。
+
+**Oracle 入口：** 原 tests/test.sh：python -m pytest test/sot/test_dataclass.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）
+
+**Oracle 确认时间：** 2026-10-13T09:29:43.211919Z
+
+**计数说明：** Base 对照尚未执行，F2P/P2P 配对未确认；Gold 完整通过不自动证明配对。
 
 <a id="task-73385"></a>
 
@@ -3813,6 +3911,8 @@ Oracle 尚未通过：已做前置核查，Windows 目标测试未执行完整�
 
 **Oracle 确认时间：** 尚未确认
 
+**计数说明：** 只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
 <a id="task-76522"></a>
 
 ## #76522 · Torch proxy compat override registration
@@ -4112,6 +4212,8 @@ Oracle 已执行范围通过：两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳
 
 **Oracle 确认时间：** 2026-10-10T18:00:15Z
 
+**计数说明：** 只统计实际执行且有效的测试；跳过、空检查及未配对项不计入。
+
 <a id="task-77749"></a>
 
 ## #77749 · pad_sequence / unpad_sequence
@@ -4272,6 +4374,8 @@ Oracle 已执行范围通过：两轮各 20 通过 / 0 失败 / 0 错误 / 0 跳
 **Oracle 入口：** 原 tests/test.sh
 
 **Oracle 确认时间：** 2026-10-09T22:00:49Z
+
+**计数说明：** F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。
 
 <a id="task-78104"></a>
 
@@ -4741,6 +4845,8 @@ Oracle 已执行范围通过：两轮各 14 通过 / 0 失败 / 0 错误 / 0 跳
 **Oracle 入口：** 原 tests/test.sh
 
 **Oracle 确认时间：** 2026-10-12T07:12:40Z
+
+**计数说明：** F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。
 
 <a id="task-78823"></a>
 
@@ -5474,3 +5580,5 @@ Oracle 尚未通过：目标 CUDA 梯度测试尚未完成。
 **Oracle 入口：** 尚未执行完整测试
 
 **Oracle 确认时间：** 尚未确认
+
+**计数说明：** F2P/P2P 需独立的 Base/Gold 配对；Gold 通过不能代替配对。

@@ -1,20 +1,25 @@
 window.SWE_PADDLE_LATEST = {
   "schemaVersion": 1,
   "meta": {
-    "updatedAt": "2026-10-13",
-    "snapshot": "207998dab8c4c76c8558c3cca8ef177c69f10c1c",
-    "total": 111,
+    "updatedAt": "2026-10-14",
+    "snapshot": "276ec3d1a779c3feac8a3aaa67faefd55c8f5a3e",
+    "total": 115,
     "proposalOnlyIds": [
       56723,
       78220,
-      79391
+      79391,
+      79497,
+      79510,
+      79612,
+      79654
     ],
     "taskBase": "https://github.com/PaddlePaddle/community/tree/master/swe-paddle/tasks/PaddlePaddle__Paddle-",
-    "resultsAsOf": "2026-10-12T17:04:13.797588Z",
-    "explanationsReviewedAt": "2026-10-13"
+    "resultsAsOf": "2026-10-14T02:03:48.157951Z",
+    "explanationsReviewedAt": "2026-10-13",
+    "baselineSnapshot": "207998dab8c4c76c8558c3cca8ef177c69f10c1c"
   },
   "counts": {
-    "passed": 95,
+    "passed": 99,
     "failed": 9,
     "needs_fix": 3,
     "incomplete": 4
@@ -21781,6 +21786,128 @@ window.SWE_PADDLE_LATEST = {
       "taskFilesAvailable": true
     },
     {
+      "id": 64323,
+      "title": "[SOT][dynamic shape] Support dynamic int input",
+      "type": "feature",
+      "author": "unknown",
+      "status": "passed",
+      "packageChangeRequired": false,
+      "f2p": null,
+      "p2p": null,
+      "evidence": "exact_native",
+      "corePassed": false,
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "原测试两轮均无失败、错误或跳过；Base 对照尚未执行。",
+      "why": "逐题独立从零编译 Gold，并安装该题实际产生的 wheel；两轮完整运行原测试入口。Gold 结果按题号计入累计通过。",
+      "fix": "保留已通过的原测试入口和环境设置；另行执行独立 Base 对照，确认 F2P/P2P。",
+      "proof": "独立空构建目录完成配置、ALL 编译与安装，退出码均为 0；该题 wheel 安装、依赖检查和原生库导入通过。两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过，两轮原脚本退出码均为 0。生成输入来源检查仍待确认，未记为通过。",
+      "requirements": "CPU，Python 3.10，STRICT_MODE=1，MIN_GRAPH_SIZE=0；CCACHE_DISABLE=1，独立从零构建，无借包或 Python overlay。编译包 paddlepaddle-0.0.0-cp310-cp310-linux_x86_64.whl（119233611 字节）保存在磁盘，构建输出和归档目录各有一份。",
+      "problemTests": [
+        "test/sot/test_dynamic_shape.py::TestOpcodeExecutorDynamicShapeCache::test_dynamic_int_input_cache_hit"
+      ],
+      "countsNote": "Base 对照尚未执行，F2P/P2P 配对未确认；Gold 完整通过不自动证明配对。每轮 2 项通过中，目标测试 1 项、导入的辅助测试 1 项；辅助项不计入目标覆盖。",
+      "checks": [],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-13T11:22:58.966619Z",
+        "entry": "原 tests/test.sh：python -m pytest test/sot/test_dynamic_shape.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）",
+        "rounds": [
+          {
+            "counts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 2,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0,
+            "targetCounts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            }
+          },
+          {
+            "counts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 2,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0,
+            "targetCounts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 1,
+              "skipped": 0
+            }
+          }
+        ],
+        "summary": "两轮各 2 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-13T11:22:58.966619Z",
+          "entry": "原 tests/test.sh：python -m pytest test/sot/test_dynamic_shape.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）",
+          "rounds": [
+            {
+              "counts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 2,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0,
+              "targetCounts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 1,
+                "skipped": 0
+              }
+            },
+            {
+              "counts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 2,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0,
+              "targetCounts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 1,
+                "skipped": 0
+              }
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true,
+      "sourceSnapshot": "276ec3d1a779c3feac8a3aaa67faefd55c8f5a3e",
+      "baseCommit": "34577c4c9a14a808fd6abec145f796b30ec93c60",
+      "taskUrl": "https://github.com/PaddlePaddle/community/tree/276ec3d1a779c3feac8a3aaa67faefd55c8f5a3e/swe-paddle/tasks/PaddlePaddle__Paddle-64323",
+      "build": {
+        "fromZero": true,
+        "python": "3.10",
+        "wheelFilename": "paddlepaddle-0.0.0-cp310-cp310-linux_x86_64.whl",
+        "wheelBytes": 119233611,
+        "diskCopies": 2
+      },
+      "pendingChecks": [
+        "generated_input_provenance"
+      ]
+    },
+    {
       "id": 64519,
       "title": "cholesky_inverse API",
       "type": "feature",
@@ -24693,6 +24820,264 @@ window.SWE_PADDLE_LATEST = {
       "taskFilesAvailable": true
     },
     {
+      "id": 71525,
+      "title": "[SOT] Add JSON dumping and Base64 encoding for log output",
+      "type": "feature",
+      "author": "unknown",
+      "status": "passed",
+      "packageChangeRequired": false,
+      "f2p": null,
+      "p2p": null,
+      "evidence": "exact_native",
+      "corePassed": false,
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "原测试两轮均无失败、错误或跳过；Base 对照尚未执行。",
+      "why": "逐题独立从零编译 Gold，并安装该题实际产生的 wheel；两轮完整运行原测试入口。Gold 结果按题号计入累计通过。",
+      "fix": "保留已通过的原测试入口和环境设置；另行执行独立 Base 对照，确认 F2P/P2P。",
+      "proof": "独立空构建目录完成配置、ALL 编译与安装，退出码均为 0；该题 wheel 安装、依赖检查和原生库导入通过。两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过，两轮原脚本退出码均为 0。生成输入来源检查仍待确认，未记为通过。",
+      "requirements": "CPU，Python 3.11，STRICT_MODE=1，MIN_GRAPH_SIZE=0；CCACHE_DISABLE=1，独立从零构建，无借包或 Python overlay。编译包 paddlepaddle-0.0.0-cp311-cp311-linux_x86_64.whl（129856218 字节）保存在磁盘，构建输出和归档目录各有一份。",
+      "problemTests": [
+        "test/sot/test_info_collect.py::TestSerialize::test_case",
+        "test/sot/test_info_collect.py::TestBreakGraphReasonInfo::test_case",
+        "test/sot/test_info_collect.py::TestSubGraphInfo::test_case"
+      ],
+      "countsNote": "Base 对照尚未执行，F2P/P2P 配对未确认；Gold 完整通过不自动证明配对。",
+      "checks": [],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-13T09:29:42.228070Z",
+        "entry": "原 tests/test.sh：python -m pytest test/sot/test_info_collect.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）",
+        "rounds": [
+          {
+            "counts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 3,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0,
+            "targetCounts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 3,
+              "skipped": 0
+            }
+          },
+          {
+            "counts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 3,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0,
+            "targetCounts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 3,
+              "skipped": 0
+            }
+          }
+        ],
+        "summary": "两轮各 3 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-13T09:29:42.228070Z",
+          "entry": "原 tests/test.sh：python -m pytest test/sot/test_info_collect.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）",
+          "rounds": [
+            {
+              "counts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 3,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0,
+              "targetCounts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 3,
+                "skipped": 0
+              }
+            },
+            {
+              "counts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 3,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0,
+              "targetCounts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 3,
+                "skipped": 0
+              }
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true,
+      "sourceSnapshot": "276ec3d1a779c3feac8a3aaa67faefd55c8f5a3e",
+      "baseCommit": "2ab13a83ce55baea53d856bf3a89cc6e490c35d6",
+      "taskUrl": "https://github.com/PaddlePaddle/community/tree/276ec3d1a779c3feac8a3aaa67faefd55c8f5a3e/swe-paddle/tasks/PaddlePaddle__Paddle-71525",
+      "build": {
+        "fromZero": true,
+        "python": "3.11",
+        "wheelFilename": "paddlepaddle-0.0.0-cp311-cp311-linux_x86_64.whl",
+        "wheelBytes": 129856218,
+        "diskCopies": 2
+      },
+      "pendingChecks": [
+        "generated_input_provenance"
+      ]
+    },
+    {
+      "id": 71747,
+      "title": "[SOT] Support reduce-like operation for all iterables",
+      "type": "feature",
+      "author": "unknown",
+      "status": "passed",
+      "packageChangeRequired": false,
+      "f2p": null,
+      "p2p": null,
+      "evidence": "exact_native",
+      "corePassed": false,
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "原测试两轮均无失败、错误或跳过；Base 对照尚未执行。",
+      "why": "逐题独立从零编译 Gold，并安装该题实际产生的 wheel；两轮完整运行原测试入口。Gold 结果按题号计入累计通过。",
+      "fix": "保留已通过的原测试入口和环境设置；另行执行独立 Base 对照，确认 F2P/P2P。",
+      "proof": "独立空构建目录完成配置、ALL 编译与安装，退出码均为 0；该题 wheel 安装、依赖检查和原生库导入通过。两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过，两轮原脚本退出码均为 0。生成输入来源检查仍待确认，未记为通过。",
+      "requirements": "CPU，Python 3.11，STRICT_MODE=1，MIN_GRAPH_SIZE=0；CCACHE_DISABLE=1，独立从零构建，无借包或 Python overlay。编译包 paddlepaddle-0.0.0-cp311-cp311-linux_x86_64.whl（129942491 字节）保存在磁盘，构建输出和归档目录各有一份。",
+      "problemTests": [
+        "test/sot/test_22_generator.py::TestGeneratorCommon::test_for_iterate_generator",
+        "test/sot/test_22_generator.py::TestGeneratorCommon::test_generator_send",
+        "test/sot/test_22_generator.py::TestGeneratorCommon::test_generator_simple",
+        "test/sot/test_22_generator.py::TestGeneratorCommon::test_generator_simple_with_breakgraph",
+        "test/sot/test_22_generator.py::TestGeneratorCommon::test_generator_simple_with_outer_breakgraph",
+        "test/sot/test_22_generator.py::TestGeneratorCommon::test_generator_yield_from_generator",
+        "test/sot/test_22_generator.py::TestGeneratorCommon::test_generator_yield_from_iterable",
+        "test/sot/test_22_generator.py::TestGeneratorCommon::test_genexpr",
+        "test/sot/test_22_generator.py::TestGeneratorDispatch::test_generator_map",
+        "test/sot/test_22_generator.py::TestGeneratorDispatch::test_generator_max",
+        "test/sot/test_22_generator.py::TestGeneratorDispatch::test_generator_min",
+        "test/sot/test_22_generator.py::TestGeneratorDispatch::test_generator_reduce",
+        "test/sot/test_22_generator.py::TestGeneratorDispatch::test_generator_sum"
+      ],
+      "countsNote": "Base 对照尚未执行，F2P/P2P 配对未确认；Gold 完整通过不自动证明配对。",
+      "checks": [],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-13T10:28:15.942259Z",
+        "entry": "原 tests/test.sh：python -m pytest test/sot/test_22_generator.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）",
+        "rounds": [
+          {
+            "counts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 13,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0,
+            "targetCounts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 13,
+              "skipped": 0
+            }
+          },
+          {
+            "counts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 13,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0,
+            "targetCounts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 13,
+              "skipped": 0
+            }
+          }
+        ],
+        "summary": "两轮各 13 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-13T10:28:15.942259Z",
+          "entry": "原 tests/test.sh：python -m pytest test/sot/test_22_generator.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）",
+          "rounds": [
+            {
+              "counts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 13,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0,
+              "targetCounts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 13,
+                "skipped": 0
+              }
+            },
+            {
+              "counts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 13,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0,
+              "targetCounts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 13,
+                "skipped": 0
+              }
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true,
+      "sourceSnapshot": "276ec3d1a779c3feac8a3aaa67faefd55c8f5a3e",
+      "baseCommit": "243bad9d6a79d843b4db400c9f935a6d19ed48d0",
+      "taskUrl": "https://github.com/PaddlePaddle/community/tree/276ec3d1a779c3feac8a3aaa67faefd55c8f5a3e/swe-paddle/tasks/PaddlePaddle__Paddle-71747",
+      "build": {
+        "fromZero": true,
+        "python": "3.11",
+        "wheelFilename": "paddlepaddle-0.0.0-cp311-cp311-linux_x86_64.whl",
+        "wheelBytes": 129942491,
+        "diskCopies": 2
+      },
+      "pendingChecks": [
+        "generated_input_provenance"
+      ]
+    },
+    {
       "id": 72800,
       "title": "cummin / cummax zero-size Tensor",
       "type": "bugfix",
@@ -25197,6 +25582,138 @@ window.SWE_PADDLE_LATEST = {
       },
       "pairedResultDate": "2026-09-11",
       "taskFilesAvailable": true
+    },
+    {
+      "id": 73329,
+      "title": "[SOT] Support `dataclass` construction and basic access",
+      "type": "feature",
+      "author": "unknown",
+      "status": "passed",
+      "packageChangeRequired": false,
+      "f2p": null,
+      "p2p": null,
+      "evidence": "exact_native",
+      "corePassed": false,
+      "cause": "none",
+      "summary": "Oracle 已执行范围通过：两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过。",
+      "whatFailed": "原测试两轮均无失败、错误或跳过；Base 对照尚未执行。",
+      "why": "逐题独立从零编译 Gold，并安装该题实际产生的 wheel；两轮完整运行原测试入口。Gold 结果按题号计入累计通过。",
+      "fix": "保留已通过的原测试入口和环境设置；另行执行独立 Base 对照，确认 F2P/P2P。",
+      "proof": "独立空构建目录完成配置、ALL 编译与安装，退出码均为 0；该题 wheel 安装、依赖检查和原生库导入通过。两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过，两轮原脚本退出码均为 0。生成输入来源检查仍待确认，未记为通过。",
+      "requirements": "CPU，Python 3.11，STRICT_MODE=1，MIN_GRAPH_SIZE=0；CCACHE_DISABLE=1，独立从零构建，无借包或 Python overlay。编译包 paddlepaddle-0.0.0-cp311-cp311-linux_x86_64.whl（131360479 字节）保存在磁盘，构建输出和归档目录各有一份。",
+      "problemTests": [
+        "test/sot/test_dataclass.py::TestDataclassBasic::test_dtype_reconstruct",
+        "test/sot/test_dataclass.py::TestDataclassBasic::test_dtype_reconstruct_with_post_init",
+        "test/sot/test_dataclass.py::TestDataClassInstance::test_eq_diff_dataclass",
+        "test/sot/test_dataclass.py::TestDataClassInstance::test_eq_int",
+        "test/sot/test_dataclass.py::TestDataClassInstance::test_eq_tensor",
+        "test/sot/test_dataclass.py::TestDataClassInstance::test_get_attr",
+        "test/sot/test_dataclass.py::TestDataClassInstance::test_set_attr",
+        "test/sot/test_dataclass.py::TestDataClassConstruction::test_create_dataclass_with_a",
+        "test/sot/test_dataclass.py::TestDataClassConstruction::test_create_dataclass_with_a_b_c",
+        "test/sot/test_dataclass.py::TestDataClassConstruction::test_create_dataclass_with_kwarg_a",
+        "test/sot/test_dataclass.py::TestDataClassConstruction::test_create_dataclass_with_kwarg_a_b_c"
+      ],
+      "countsNote": "Base 对照尚未执行，F2P/P2P 配对未确认；Gold 完整通过不自动证明配对。",
+      "checks": [],
+      "oracle": {
+        "passed": true,
+        "result": "passed",
+        "date": "2026-10-13T09:29:43.211919Z",
+        "entry": "原 tests/test.sh：python -m pytest test/sot/test_dataclass.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）",
+        "rounds": [
+          {
+            "counts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 11,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0,
+            "targetCounts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 11,
+              "skipped": 0
+            }
+          },
+          {
+            "counts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 11,
+              "skipped": 0
+            },
+            "complete": true,
+            "shellExit": 0,
+            "targetCounts": {
+              "error": 0,
+              "failed": 0,
+              "passed": 11,
+              "skipped": 0
+            }
+          }
+        ],
+        "summary": "两轮各 11 通过 / 0 失败 / 0 错误 / 0 跳过",
+        "latestAttempt": {
+          "date": "2026-10-13T09:29:43.211919Z",
+          "entry": "原 tests/test.sh：python -m pytest test/sot/test_dataclass.py -q（CPU，STRICT_MODE=1，MIN_GRAPH_SIZE=0）",
+          "rounds": [
+            {
+              "counts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 11,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0,
+              "targetCounts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 11,
+                "skipped": 0
+              }
+            },
+            {
+              "counts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 11,
+                "skipped": 0
+              },
+              "complete": true,
+              "shellExit": 0,
+              "targetCounts": {
+                "error": 0,
+                "failed": 0,
+                "passed": 11,
+                "skipped": 0
+              }
+            }
+          ],
+          "result": "passed",
+          "source": "runtime"
+        },
+        "activity": null,
+        "baselinePassPreserved": false
+      },
+      "pairedResultDate": null,
+      "taskFilesAvailable": true,
+      "sourceSnapshot": "276ec3d1a779c3feac8a3aaa67faefd55c8f5a3e",
+      "baseCommit": "eb9af7cf69977981198f41ae79eebabd0e3e036f",
+      "taskUrl": "https://github.com/PaddlePaddle/community/tree/276ec3d1a779c3feac8a3aaa67faefd55c8f5a3e/swe-paddle/tasks/PaddlePaddle__Paddle-73329",
+      "build": {
+        "fromZero": true,
+        "python": "3.11",
+        "wheelFilename": "paddlepaddle-0.0.0-cp311-cp311-linux_x86_64.whl",
+        "wheelBytes": 131360479,
+        "diskCopies": 2
+      },
+      "pendingChecks": [
+        "generated_input_provenance"
+      ]
     },
     {
       "id": 73385,
@@ -39291,8 +39808,8 @@ window.SWE_PADDLE_LATEST = {
     }
   ],
   "oracleSummary": {
-    "total": 111,
-    "passed": 98,
+    "total": 115,
+    "passed": 102,
     "notConfirmed": 13,
     "passedIds": [
       18687,
@@ -39324,14 +39841,18 @@ window.SWE_PADDLE_LATEST = {
       60808,
       62012,
       64320,
+      64323,
       64519,
       65724,
       67195,
       68432,
       70469,
+      71525,
+      71747,
       72800,
       73122,
       73125,
+      73329,
       73385,
       73387,
       73535,

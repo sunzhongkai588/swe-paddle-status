@@ -34,9 +34,9 @@ def main():
             page = browser.new_page(viewport=dict(width=1440, height=1000))
             page.on('pageerror', lambda error: errors.append(str(error)))
             page.goto(url, wait_until='networkidle')
-            assert page.locator('#task-table-body tr').count() == 111
-            assert page.locator('#core-count').inner_text() == '%d / 111 条' % data['oracleSummary']['passed']
-            assert page.locator('#pass-rate').inner_text() == '%.1f%%' % (100.0 * data['oracleSummary']['passed'] / 111)
+            assert page.locator('#task-table-body tr').count() == data['meta']['total']
+            assert page.locator('#core-count').inner_text() == '%d / %d 条' % (data['oracleSummary']['passed'], data['meta']['total'])
+            assert page.locator('#pass-rate').inner_text() == '%.1f%%' % (100.0 * data['oracleSummary']['passed'] / data['meta']['total'])
             assert page.locator('#issue-grid .issue-card').count() == sum(t['status'] != 'passed' for t in data['tasks'])
             assert page.locator('#issues-title').inner_text() == '%d 条尚未通过，%d 条运行说明待同步' % (
                 data['oracleSummary']['notConfirmed'], sum(t['status'] == 'needs_fix' for t in data['tasks']))
@@ -46,7 +46,7 @@ def main():
                     for key in ('meaning', 'completed', 'problem', 'remaining'):
                         assert task['validationProgress'][key] in card, (task['id'], key)
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
-            checks.append('111 task rows, actual Oracle counts and desktop layout')
+            checks.append('%d task rows, actual Oracle counts and desktop layout' % data['meta']['total'])
             page.screenshot(path=str(OUT / 'desktop.png'))
             for field in ('status', 'cause', 'evidence', 'author'):
                 for value in sorted({t[field] for t in data['tasks']}):
@@ -69,7 +69,7 @@ def main():
                     page.locator('.check-details > summary').click()
                     assert page.locator('.check-table tbody tr').count() == len(task['checks'])
                 page.locator('.dialog-close').click()
-            checks.append('all 111 task dialogs and dated paired test details')
+            checks.append('all %d task dialogs and dated paired test details' % data['meta']['total'])
             page.fill('#search-input', '62012')
             assert page.locator('#task-table-body tr').count() == 1
             page.locator('#task-table-body [data-task-id="62012"]').first.click()
@@ -99,6 +99,17 @@ def main():
                 if number == 76873:
                     page.screenshot(path=str(OUT / '76873-mobile.png'))
                 page.locator('.dialog-close').click()
+            for number in (64323, 71525, 71747, 73329):
+                task = next(t for t in data['tasks'] if t['id'] == number)
+                page.locator('#task-table-body [data-task-id="%d"]' % number).first.click()
+                contents = page.locator('#dialog-content').inner_text()
+                assert task['requirements'] in contents and task['countsNote'] in contents, number
+                assert 'Base 对照尚未执行' in contents, number
+                assert page.locator('#task-dialog').evaluate('(e) => e.scrollWidth <= e.clientWidth + 1'), number
+                if number == 64323:
+                    page.screenshot(path=str(OUT / '64323-mobile.png'))
+                page.locator('.dialog-close').click()
+            checks.append('four added Gold results, wheel details and unconfirmed Base pairs on mobile')
             checks.append('mobile overview and failed Oracle detail')
             response = page.request.get(url + 'latest-report.md')
             assert response.status == 200 and '# SWE-Paddle 最新验证情况' in response.text()

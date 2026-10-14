@@ -6,9 +6,10 @@ const data=JSON.parse(JSON.stringify(context.window.SWE_PADDLE_LATEST));
 const byId=id=>data.tasks.find(t=>t.id===id);
 const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);
 test('published root contains a single current dataset and current report',()=>{
- assert.equal(data.tasks.length,111);assert.equal(new Set(data.tasks.map(t=>t.id)).size,111);
- assert.equal(data.meta.snapshot,'207998dab8c4c76c8558c3cca8ef177c69f10c1c');
- assert.deepEqual(data.meta.proposalOnlyIds,[56723,78220,79391]);
+ assert.equal(data.tasks.length,115);assert.equal(new Set(data.tasks.map(t=>t.id)).size,115);
+ assert.equal(data.meta.total,115);
+ assert.equal(data.meta.snapshot,'276ec3d1a779c3feac8a3aaa67faefd55c8f5a3e');
+ assert.deepEqual(data.meta.proposalOnlyIds,[56723,78220,79391,79497,79510,79612,79654]);
  const files=walk(docs).map(p=>path.relative(docs,p)).sort();
  assert.ok(files.includes('deepseek-v4-flash/results.json'));
  assert.ok(files.includes('assets/latest-data.js'));
@@ -76,7 +77,7 @@ test('Oracle counts deduplicate whole two-round passes and preserve skipped bran
  const ids=data.tasks.filter(t=>t.oracle.passed).map(t=>t.id);
  assert.deepEqual(ids,data.oracleSummary.passedIds);
  assert.equal(ids.length,data.oracleSummary.passed);
- assert.equal(data.oracleSummary.notConfirmed,111-ids.length);
+ assert.equal(data.oracleSummary.notConfirmed,data.meta.total-ids.length);
  assert.ok(ids.length>=87);
  assert.equal(data.oracleSummary.allPassed,false);
  for(const t of data.tasks.filter(t=>t.oracle.passed)){
@@ -92,6 +93,19 @@ test('Oracle counts deduplicate whole two-round passes and preserve skipped bran
  assert.equal(byId(57741).oracle.rounds[0].counts.passed,2);
  assert.equal(byId(57741).oracle.rounds[0].counts.skipped,3);
  assert.match(byId(78085).why,/3 项失败/);
+});
+test('four added tasks retain actual Gold rounds without inventing Base/Gold pairs',()=>{
+ assert.equal(data.oracleSummary.passed,102);
+ for(const [id,whole,target,python,bytes] of [[64323,2,1,'3.10',119233611],[71525,3,3,'3.11',129856218],[71747,13,13,'3.11',129942491],[73329,11,11,'3.11',131360479]]){
+  const t=byId(id);assert.equal(t.status,'passed',id);assert.equal(t.f2p,null,id);assert.equal(t.p2p,null,id);assert.equal(t.corePassed,false,id);assert.deepEqual(t.checks,[],id);
+  assert.equal(t.sourceSnapshot,data.meta.snapshot,id);assert.ok(t.taskUrl.includes(t.sourceSnapshot),id);
+  assert.equal(t.build.fromZero,true,id);assert.equal(t.build.python,python,id);assert.equal(t.build.wheelBytes,bytes,id);assert.equal(t.build.diskCopies,2,id);
+  assert.deepEqual(t.pendingChecks,['generated_input_provenance'],id);
+  assert.equal(t.problemTests.length,target,id);
+  for(const r of t.oracle.rounds){assert.deepEqual(r.counts,{passed:whole,failed:0,error:0,skipped:0},id);assert.deepEqual(r.targetCounts,{passed:target,failed:0,error:0,skipped:0},id);}
+  assert.match(t.countsNote,/Base.*未执行/,id);
+ }
+ assert.match(byId(64323).countsNote,/辅助.*不计入/,64323);
 });
 test('unfinished tasks explain actual work, blockers and missing validation',()=>{
  const unfinished=data.tasks.filter(t=>!t.oracle.passed);
